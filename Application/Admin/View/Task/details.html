@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <TITLE> Case</TITLE>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="ZTREEBASE/css/demo.css" type="text/css">
+    <link rel="stylesheet" href="ZTREEBASE/css/awesomeStyle/awesome.css" type="text/css">
+    <script type="text/javascript" src="ASSETS/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="ZTREEBASE/js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="ZTREEBASE/js/jquery.ztree.excheck.js"></script>
+    <script type="text/javascript" src="ZTREEBASE/js/jquery.ztree.exedit.js"></script>
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="ASSETS/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="ASSETS/i/app-icon72x72@2x.png">
+    <link rel="stylesheet" href="ASSETS/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="ASSETS/css/admin.css">
+    <style>
+        .am-form-group{
+            display: block;
+            margin: 5px auto 0 auto;
+            border-radius: 0;
+            padding: 5px;
+            line-height: 1.8rem;
+            width: 80%;
+            border: 1px solid #dedede;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -ms-appearance: none;
+            appearance: none;
+        }
+        div#rMenu {position:absolute; visibility:hidden; top:0;text-align: left;padding: 2px;}
+        div#rMenu ul li{
+            margin: 1px 0;
+            padding: 0 5px;
+            cursor: pointer;
+            list-style: none outside none;
+            background-color: #DFDFDF;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="am-cf admin-main am-padding-top-0">
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="am-cf am-padding am-padding-bottom-0" id="content-body">
+            <div class="am-g">
+                <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Task</strong> / {$task_info[name]}</div><br/>
+            </div>
+        </div>
+        <br/>
+          <!--details-->
+        <div class="am-g" style="padding-left:10%;" id="details">
+            <div class="am-u-md-9 am-u-md-pull-1">
+                <div class="container" id="edit_page" >
+                    <div class="am-g" style="width:800px;">
+                      <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                            <tr>
+                                <th class="table-title"><a href="javascript:reorder('name');">TaskName</a></th>
+                                <th class="table-title"><a href="javascript:reorder('pid');">Project</a></th>
+                                <th class="table-title"><a href="javascript:reorder('suit');">Board</a></th>
+                                <th class="table-title"><a href="javascript:reorder('platform');">Progress</a></th>
+                                <th class="table-title"><a href="javascript:reorder('owner');">Pass</a></th>
+                                <th class="table-title"><a href="javascript:reorder('start_time desc');">Fail</a></th>
+                                <th class="table-title"><a href="javascript:reorder('end_time desc');">N/A</a></th>
+                                <th class="table-title">Not Run</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>11</td>
+                                <td>pr01</td>
+                                <td>host1</td>
+                                <td>100%</td>
+                                <td>11</td>
+                                <td>34</td>
+                                <td>N</td>
+                                <td>s</td>
+                            </tr>
+                            <tr>
+                                <td>34</td>
+                                <td>pro3</td>
+                                <td>host3</td>
+                                <td>80%</td>
+                                <td>14</td>
+                                <td>34t</td>
+                                <td>A</td>
+                                <td>d</td>
+                            </tr>
+                            <tr>
+                                <td>39</td>
+                                <td>pro7</td>
+                                <td>host2</td>
+                                <td>50%</td>
+                                <td>64</td>
+                                <td>30</td>
+                                <td>A</td>
+                                <td>d</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--tab-->
+         <div class="am-u-md-12" id="edit_table" style="height:500px;width:1000px;">
+            <div class="am-tabs am-margin" data-am-tabs style="height:500px;">
+                <ul class="am-tabs-nav am-nav am-nav-tabs">
+                        <li><a href="#">11</a></li>
+                        <li><a href="<?php echo '#'.$v; ?>">34</a></li>
+                        <li><a href="<?php echo '#'.$v; ?>">39</a></li>
+                </ul>
+                <div class="am-tabs-bd" style="height:480px;">
+                    <!--<div class="am-tab-panel am-fade am-in am-active" style="height:450px;">
+                      <label>Case Name:</label>
+                      <input type="text" class="am-modal-prompt-input" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+                      <label style="margin-left:36px;">Driver:</label>
+                      <input type="text" class="am-modal-prompt-input" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/> 
+                      <label style="margin-left:36px;">Status:</label>
+                      <div class="am-form-group-inline" style="width:71.5%;display:inline;">
+
+                          <select data-am-selected="{btnWidth: '300px', btnStyle: 'secondary'}"   class="am-fr" placeholder="Please select...">
+                                <option>Waiting</option>
+                                <option>Runing</option>
+                                <option>Finished</option>
+                          </select>
+                      </div><br/><br/>  
+                      <label style="margin-left:36px;">Result:</label>
+                      <div class="am-form-group-inline" style="width:71.5%;display:inline;">
+                          <select data-am-selected="{btnWidth: '300px', btnStyle: 'secondary'}"   class="am-fr" placeholder="Please select...">
+                                <option>Fail</option>
+                                <option>Pass</option>
+                                <option>Format</option>
+                                <option>N/A</option>
+                          </select>
+                      </div><br/><br/> 
+                      <label style="margin-left:36px;">BugId:</label>
+                      <input type="text" class="am-modal-prompt-input" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>                  
+                      <label style="margin-left:0px;">Comments:</label>
+                      <input type="text" class="am-modal-prompt-input" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/> 
+                      <label style="margin-left:52px;">Log:</label> 
+                      <button type="button" class="am-btn am-btn-default am-btn-md am-text-secondary" style="margin-left:2px;"><span class="am-icon-arrow-circle-right"></span>  Log</button>                
+                    </div>-->
+                    <table class="am-table am-table-striped am-table-hover table-main" >
+                        <thead>
+                        <tr>
+                            <th class="table-title"><a href="#">CaseName</a></th>
+
+                            <th class="table-title"><a href="#">Result</a></th>
+                            <th class="table-title"><a href="#">Driver</a></th>
+                            <th class="table-title"><a href="#">Status</a></th>
+                            <th class="table-title"><a href="#">BugId</a></th>
+                            <th class="table-title"><a href="#">Comments</a></th>
+                            <th class="table-author am-hide-sm-only">Log</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>
+                                <div class="am-btn-toolbar">
+                                  <button type="button" class="am-btn am-btn-default am-btn-md am-text-secondary" style="margin-left:2px;"><span class="am-icon-arrow-circle-right"></span>  Log</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>7</td>
+                            <td>
+                                <div class="am-btn-toolbar">
+                                  <button type="button" class="am-btn am-btn-default am-btn-md am-text-secondary" style="margin-left:2px;"><span class="am-icon-arrow-circle-right"></span>  Log</button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- content end -->
+
+<script src="ASSETS/js/amazeui.min.js"></script>
+
+
+</body>
+</htmlL>

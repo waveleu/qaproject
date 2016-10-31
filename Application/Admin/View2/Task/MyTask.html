@@ -1,0 +1,161 @@
+{include file="header" /}
+<div class="admin-content">
+    <div class="am-cf am-padding am-padding-bottom-0" id="content-body">
+        <div class="am-g">
+            <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg"> Task List </strong></div><br/>
+        </div>
+
+    </div>
+    <div class="am-g">
+        <div class="container" id="edit_page">
+            <div class="am-g">
+                <div class="am-u-md-12">
+                    <table class="am-table am-table-striped am-table-hover table-main">
+                        <thead>
+                        <tr>
+                            <th class="table-title"><a href="javascript:reorder('name');">Name</a></th>
+                            <th class="table-title"><a href="javascript:reorder('pid');">Project</a></th>
+                            <th class="table-title"><a href="javascript:reorder('suit');">Suit</a></th>
+                            <th class="table-title"><a href="javascript:reorder('platform');">Board</a></th>
+                            <th class="table-title"><a href="javascript:reorder('owner');">Owner</a></th>
+                            <th class="table-title"><a href="javascript:reorder('start_time desc');">Start Date</a></th>
+                            <th class="table-title"><a href="javascript:reorder('end_time desc');">End Date</a></th>
+                            <th class="table-title">Progress</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach name="list" item="v"}
+                        <tr>
+                            <td><a href="javascript:toTaskCase('{$v[id]}','{$v[pid]}');">{$v[name]}</a></td>
+                            <td>{$v[project_name]}</td>
+                            <td>{$v[suit]}</td>
+                            <td>{$v[platform_name]}</td>
+                            <td>{$v[owner]}</td>
+                            <td>{$v[start_time]}</td>
+                            <td>{$v[end_time]}</td>
+                            <td>{$v[progress]}</td>
+                           <!-- <td>
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary" task_id={$v[id]} onclick="edit(this)"><span class="am-icon-pencil-square"></span> Edit</button>
+                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" task_id={$v[id]} onclick="del(this)"><span class="am-icon-trash-o" ></span> Delete</button>
+                                    </div>
+                                </div>
+                            </td>-->
+                        </tr>
+                        <div class="am-modal am-modal-confirm" id={$v[id]} >
+                            <div class="am-modal-dialog">
+                                <div class="am-modal-hd">New Task</div>
+                                <div class="am-modal-bd">
+                                    Name<input type="text" class="am-modal-prompt-input" id="add_name">
+                                    Test Run
+                                    <div class="am-form-group-inline  am-cf" >
+                                        <select data-am-selected="{searchBox: 1}"  class="am-u-md-3" placeholder="Please select..."  id="add_pid">
+                                            <option value=""></option>
+                                            {foreach name="run_list" item="vc" key="k"}
+                                            <option value={$k}>{$vc}</option>
+                                            {/foreach}
+                                        </select>
+                                    </div>
+                                    Platform
+                                    <div class="am-form-group-inline  am-cf" >
+                                        <select data-am-selected="{searchBox: 1,btnWidth:'60%'}"  class="am-u-sm-offset-3" placeholder="Board/BSP/OS_Version"  id="add_platform">
+                                            <option value=""></option>
+                                            {foreach name="platform_list" item="vc"}
+                                            <option value={$vc['id']}>{$vc[Board]}/{$vc[BSP]}/{$vc[OS]}{$vc[Version]}</option>
+                                            {/foreach}
+                                        </select>
+                                    </div>
+                                    Suit
+                                    <div class="am-form-group-inline  am-cf" >
+                                        <select data-am-selected="{searchBox: 1,btnWidth:'60%'}"  class="am-u-sm-offset-3" placeholder="Please choose..." id="add_suit" >
+                                            <option value=""></option>
+                                            {foreach name="suit_list" item="vc"}
+                                            <option value="{$vc}">{$vc}</option>
+                                            {/foreach}
+                                        </select>
+                                    </div>
+                                    Owner
+                                    <div class="am-form-group-inline  am-cf" >
+                                        <select data-am-selected="{searchBox: 1}"  class="am-u-md-3" placeholder="Please select..." id="add_owner" >
+                                            <option value=""></option>
+                                            {foreach name="user_list" item="vc" key="k"}
+                                            <option value="{$vc[username]}">{$vc[username]}</option>
+                                            {/foreach}
+                                        </select>
+                                    </div>
+                                    start_time<input type="text" class="am-modal-prompt-input" data-am-datepicker id="add_start_time">
+                                    end_time<input type="text" class="am-modal-prompt-input" data-am-datepicker id="add_end_time">
+                                </div>
+
+                                <div class="am-modal-footer">
+                                    <span class="am-modal-btn" data-am-modal-confirm style="width: 50%">OK</span>
+                                    <span class="am-modal-btn" data-am-modal-cancel style="width: 50%">Cancel</span>
+                                </div>
+                            </div>
+                        </div>
+                        <?php $tmp_list=json_encode($v);?>
+                        <script language="JavaScript">
+                            var tmp={$tmp_list};
+                            $.each(tmp,function (k,v) {
+                                $("#"+tmp.id+" #add_"+k).val(v);
+                            })
+                        </script>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    {$page}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content end -->
+
+
+<script>
+    function del(obj) {
+        var id=$(obj).attr('task_id');
+        if(confirm('Do you want delete this Task')){
+            $.post("{:U('Admin/Task/del')}",{id:id},function (data) {
+                window.location.reload();
+            });
+        }
+    }
+
+    function edit(obj) {
+        var id=$(obj).attr('task_id');
+        var str="#"+id+" #add_";
+        $("#"+id).modal({
+            relatedTarget:this,
+            onConfirm:function(e){
+                var arr={id:id,name:e.data['0'],start_time:e.data['1'],end_time:e.data['2'],platform:$(str+"platform").val(),owner:$(str+"owner").val()};
+                $.post("{:U('Admin/Task/add')}",arr,function (data) {
+                    window.location.reload();
+                });
+            },
+            onCancel:function (e) {
+                $("#add_suit").show();
+                e.close()
+            }
+        });
+
+
+    }
+
+    function search() {
+        $.post("{:U('Admin/Task/Index')}",{ajax:true,pid:$("#search_pid").val(),name:$("#search_name").val()},function (data) {
+            $("#edit_page").empty().html(data);
+        });
+    }
+    function toTaskCase(tid,pid) {
+        var str=("{:U('Admin/Task/case_index',array('pid'=>ppid,'tid'=>ttid))}").replace('ppid',pid).replace('ttid',tid);
+        location.href=str;
+    }
+    function reorder(name) {
+        location.href=("{:U(Admin/Task/mytask,array('sort'=>sort_rule))}").replace('sort_rule',name);
+    }
+
+</script>
+{include file="footer" /}
+

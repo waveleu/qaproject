@@ -1,0 +1,318 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Amaze UI Admin table Examples</title>
+    <meta name="description" content="这是一个 table 页面">
+    <meta name="keywords" content="table">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="ASSETS/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="ASSETS/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="ASSETS/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="ASSETS/css/admin.css">
+    <style>
+        .am-form-group{
+            display: block;
+            margin: 5px auto 0 auto;
+            border-radius: 0;
+            padding: 5px;
+            line-height: 1.8rem;
+            width: 80%;
+            border: 1px solid #dedede;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -ms-appearance: none;
+            appearance: none;
+        }
+    </style>
+</head>
+<body>
+
+
+<!-- content start -->
+<div class="admin-content">
+    <div class="admin-content-body">
+        <div class="am-cf am-padding am-padding-bottom-0">
+            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">Board List</strong></div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-sm-12">
+                <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger am-fr"  onclick="add()"><span class="am-icon-pencil-square-o"></span>new Board</button>
+                <table class="am-table am-table-striped am-table-hover table-main">
+                    <thead>
+                    <tr>
+                        <th class="table-title">Host</th>
+                        <th class="table-title">Platform</th>
+                   <!-- <th class="table-title">2D Core</th>
+                        <th class="table-title">3D Core</th>
+                        <th class="table-title">Customer</th>
+                        <th class="table-title">OS</th>
+                        <th class="table-title">BSP</th> -->
+                        <th class="table-title">Owner</th>
+                        <th class="table-author am-hide-sm-only am-fr">Operation</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach name="data" item="v"}
+                    <tr>
+                        <td>{$v[host]}</td>
+                        <td>{$v[info][name]}</td>
+                   <!-- <td>{$v[info]['2D_Core']}</td>
+                        <td>{$v[info]['3D_Core']}</td>
+                        <td>{$v[info][Customer]}</td>
+                        <td>{$v[OS]}</td>
+                        <td>{$v[BSP]}</td> -->
+                        <td>{$v[owner]}</td>
+                        <td>
+                            <div class="am-btn-toolbar am-fr">
+                                <div class="am-btn-group am-btn-group-xs">
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" board_id="{$v[id]}" onclick="edit(this)"><span class="am-icon-pencil-square"></span> Edit</button>
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" board_id="{$v[id]}" onclick="del(this)"><span class="am-icon-trash-o" ></span> Delete</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <div class="am-modal am-modal-confirm" tabindex={$v[id]}  >
+                        <div class="am-modal-dialog">
+                            <div class="am-modal-hd">Edit Board</div>
+                            <div class="am-modal-bd">
+                                host<input type="text" class="am-modal-prompt-input" value={$v[host]}>
+                                Platform
+                                <div class="am-form-group-inline am-cf" >
+                                    <select data-am-selected   class="am-fr" placeholder="Please select..." id="a_board">
+                                        <option value=""></option>
+                                   <!--  {foreach name="board_info" item="vc" key="k"}
+                                            {if condition="$k==$v[board_id]"}
+                                                <option value={$k} selected>{$vc}</option>
+                                            {else/}
+                                                <option value={$k}>{$vc}</option>
+                                            {/if}
+                                        {/foreach} -->
+                                        {foreach name="platform_info" item="vc" key="k"}
+                                            {if condition="$k==$v[board_id]"}
+                                                <option value={$k} selected>{$vc}</option>
+                                            {else/}
+                                                <option value={$k}>{$vc}</option>
+                                            {/if}
+                                        {/foreach}
+                                    </select>
+                                </div>
+                           <!-- OS
+                                <div class="am-form-group-inline am-cf" >
+                                    <select data-am-selected   class="am-fr" placeholder="Please select..." id="a_os">
+                                        <option value=""></option>
+                                        {foreach name="os_list" item="vc" }
+                                            {if condition="$vc==$v[OS]"}
+                                                <option value={$vc} selected>{$vc}</option>
+                                            {else/}
+                                                <option value={$vc}>{$vc}</option>
+                                            {/if}
+                                        {/foreach}
+                                    </select>
+                                </div>
+                                BSP
+                                <div class="am-form-group-inline am-cf" >
+                                    <select data-am-selected   class="am-fr" placeholder="Please select..." id="a_bsp">
+                                        <option value=""></option>
+                                        {foreach name="bsp_list" item="vc" key="k"}
+                                            {if condition="$vc==$v[BSP]"}
+                                            <option value={$vc} selected>{$vc}</option>
+                                            {else/}
+                                            <option value={$vc}>{$vc}</option>
+                                            {/if}
+                                        {/foreach}
+                                    </select>
+                                </div> -->
+                                Owner
+                                <div class="am-form-group-inline am-cf" >
+                                    <select data-am-selected   class="am-fr" placeholder="Please select..." id="a_owner">
+                                        <option value=""></option>
+                                        {foreach name="owner_list" item="vc" key="k"}
+                                            {if condition="$vc[username]==$v[owner]"}
+                                            <option value={$vc[username]} selected>{$vc[username]}</option>
+                                            {else/}
+                                            <option value={$vc[username]}>{$vc[username]}</option>
+                                            {/if}
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="am-modal-footer">
+                                <span class="am-modal-btn" data-am-modal-confirm style="width: 50%">OK</span>
+                                <span class="am-modal-btn" data-am-modal-cancel style="width: 50%">Cancel</span>
+                            </div>
+                        </div>
+                    </div>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content end -->
+
+
+<div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_board_modal" >
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">New Board</div>
+        <div class="am-modal-bd">
+            host<input type="text" class="am-modal-prompt-input" id="Name">
+            Platform
+            <div class="am-form-group-inline am-cf" >
+                <select data-am-selected   class="am-fr" placeholder="Please select..." id="e_board">
+                    <option value=""></option>
+                    {foreach name="platform_info" item="vc" key="k"}
+                    <option value={$k}>{$vc}</option>
+                    {/foreach}
+                </select>
+            </div>
+        <!-- OS
+            <div class="am-form-group-inline am-cf" >
+                <select data-am-selected   class="am-fr" placeholder="Please select..." id="e_os">
+                    <option value=""></option>
+                    {foreach name="os_list" item="vc" key="k"}
+                    <option value={$vc}>{$vc}</option>
+                    {/foreach}
+                </select>
+            </div>
+            BSP
+            <div class="am-form-group-inline am-cf" >
+                <select data-am-selected   class="am-fr" placeholder="Please select..." id="e_bsp">
+                    <option value=""></option>
+                    {foreach name="bsp_list" item="vc" key="k"}
+                    <option value={$vc}>{$vc}</option>
+                    {/foreach}
+                </select>
+            </div> -->
+            Owner
+            <div class="am-form-group-inline am-cf" >
+                <select data-am-selected   class="am-fr" placeholder="Please select..." id="e_owner">
+                    <option value=""></option>
+                    {foreach name="owner_list" item="vc" key="k"}
+                    <option value={$vc[username]}>{$vc[username]}</option>
+                    {/foreach}
+                </select>
+            </div>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-confirm style="width: 50%">OK</span>
+            <span class="am-modal-btn" data-am-modal-cancel style="width: 50%">Cancel</span>
+        </div>
+    </div>
+</div>
+
+<div class="am-modal am-modal-confirm" tabindex="del_class" id="del_modal">
+    <div class="am-modal-dialog">
+        <div class="am-modal-bd">
+            Delete This Board?
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-confirm style="width: 50%">OK</span>
+            <span class="am-modal-btn" data-am-modal-cancel style="width: 50%">Cancel</span>
+        </div>
+    </div>
+</div>
+
+
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="ASSETS/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="ASSETS/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="ASSETS/js/amazeui.min.js"></script>
+<script src="ASSETS/js/app.js"></script>
+<script>
+    function edit(obj) {
+        var id=$(obj).attr('board_id');
+        var str=(".am-modal[tabindex='id']").replace("id",id);
+        $(str).modal({
+            relatedTarget: this,
+            onConfirm:function (e) {
+                var board_id=$(str+' #a_board').val();
+                var OS=$(str+' #a_os').val();
+                var BSP=$(str+' #a_bsp').val();
+                var owner=$(str+' #a_owner').val();
+                $.post("{:U('Admin/Boardlist/edit')}",
+                        //{id:id,host:e.data,board_id:board_id,OS:OS,BSP:BSP,owner:owner},
+                        {id:id,host:e.data,board_id:board_id,owner:owner},
+                        function (data) {
+                            location.reload();
+                        });
+            },
+            onCancel:function (e) {
+                e.close();
+            }
+        });
+
+    }
+    function del(obj) {
+        var id=$(obj).attr('board_id');
+        $("#del_modal").modal({
+            relatedTarget:this,
+            onConfirm:function (e) {
+                $.post("{:U('Admin/Boardlist/del')}",{id:id},function (data) {
+                    window.location.reload();
+                })
+            },
+            onCancel:function (e) {
+                e.close();
+            }
+        });
+
+    }
+    function add() {
+        $('#add_board_modal').modal({
+            relatedTarget: this,
+            onConfirm:function (e) {
+                var board_id=$('#add_board_modal #e_board').val();
+                //var OS=$('#add_board_modal #e_os').val();
+                //var BSP=$('#add_board_modal #e_bsp').val();
+                var owner=$('#add_board_modal #e_owner').val();
+                $.post("{:U('Admin/Boardlist/add')}",
+                        //{host:e.data,board_id:board_id,OS:OS,BSP:BSP,owner:owner},
+                        {host:e.data,board_id:board_id,owner:owner},
+                        function (data) {
+                            location.reload();
+                        });
+            },
+            onCancel:function (e) {
+                e.close();
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>').val();
+                //var OS=$('#add_board_modal #e_os').val();
+                //var BSP=$('#add_board_modal #e_bsp').val();
+                var owner=$('#add_board_modal #e_owner').val();
+                $.post("{:U('Admin/Boardlist/add')}",
+                        //{host:e.data,board_id:board_id,OS:OS,BSP:BSP,owner:owner},
+                        {host:e.data,board_id:board_id,owner:owner},
+                        function (data) {
+                            location.reload();
+                        });
+            },
+            onCancel:function (e) {
+                e.close();
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>

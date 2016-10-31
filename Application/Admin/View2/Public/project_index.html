@@ -1,0 +1,230 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Amaze UI Admin table Examples</title>
+    <meta name="description" content="这是一个 table 页面">
+    <meta name="keywords" content="table">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="ASSETS/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="ASSETS/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="ASSETS/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="ASSETS/css/admin.css">
+    <style>
+        .am-form-group{
+            display: block;
+            margin: 5px auto 0 auto;
+            border-radius: 0;
+            padding: 5px;
+            line-height: 1.8rem;
+            width: 80%;
+            border: 1px solid #dedede;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -ms-appearance: none;
+            appearance: none;
+        }
+    </style>
+</head>
+<body>
+
+
+<!-- content start -->
+<div class="admin-content">
+    <div class="admin-content-body">
+        <div class="am-cf am-padding am-padding-bottom-0">
+            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">Project</strong> </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-sm-12">
+                <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger am-fr"  onclick="add()"><span class="am-icon-pencil-square-o"></span>new Project</button>
+                <table class="am-table am-table-striped am-table-hover table-main">
+                    <thead>
+                    <tr>
+                        <th class="table-title"><a href="javascript:reorder('name');">Name</a></th>
+                        <th class="table-title"><a href="javascript:reorder('Version');">Version</a></th>
+                        <th class="table-title"><a href="javascript:reorder('Branch');">Branch</a></th>
+                        <th class="table-title"><a href="javascript:reorder('Build_Location');">Build_Location</a></th>
+                        <th class="table-title"><a href="javascript:reorder('First_Build_No');">First_Build_No</a></th>
+                        <th class="table-title"><a href="javascript:reorder('Release_Build_No');">Release_Build_No</a></th>
+                        <th class="table-title"><a href="javascript:reorder('start_time desc');">Start Date</a></th>
+                        <th class="table-title"><a href="javascript:reorder('end_time desc');">End Date</a></th>
+                        <th class="table-title"><a href="javascript:reorder('status');">Status</a></th>
+                        <th class="table-author am-hide-sm-only am-fr">Operation</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach name="project_list" item="v"}
+                    <tr>
+                        <td><a href="javascript:editTask('{$v[id]}');">{$v[name]}</a></td>
+                        <td>{$v[Version]}</td>
+                        <td>{$v[Branch]}</td>
+                        <td>{$v[Build_Location]}</td>
+                        <td>{$v[First_Build_No]}</td>
+                        <td>{$v[Release_Build_No]}</td>
+                        <td>{$v[start_time]}</td>
+                        <td>{$v[end_time]}</td>
+                        <td>{$v[Status]}</td>
+                        <td>
+                            <div class="am-btn-toolbar am-fr">
+                                <div class="am-btn-group am-btn-group-xs">
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" project_id="{$v[id]}" onclick="edit(this)"><span class="am-icon-pencil-square"></span> Edit</button>
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" project_id="{$v[id]}" onclick="del(this)"><span class="am-icon-trash-o" ></span> Delete</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content end -->
+
+
+//add new project
+<div class="am-modal am-modal-confirm" tabindex="add_project_modal" id="add_project_modal" >
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">New Project</div>
+        <div class="am-modal-bd">
+            name<input type="text" class="am-modal-prompt-input" id="add_name">
+            Version
+            <div class="am-form-group-inline am-cf" >
+                <select data-am-selected   class="am-fr" placeholder="Please select..." id="add_version">
+                    <option value=""></option>
+                    {foreach name="version_list" item="vc"}
+                        <option value="{$vc}">{$vc}</option>
+                    {/foreach}
+                </select>
+            </div>
+            Branch
+            <div class="am-form-group-inline am-cf" >
+                <select data-am-selected   class="am-fr" placeholder="Please select..." id="add_branch">
+                    <option value=""></option>
+                    {foreach name="branch_list" item="vc"}
+                    <option value="{$vc}">{$vc}</option>
+                    {/foreach}
+                </select>
+            </div>
+            Build_Location<input type="text" class="am-modal-prompt-input" id="add_build">
+            First_Build_No<input type="text" class="am-modal-prompt-input" id="add_firstb">
+            Release_Build_No<input type="text" class="am-modal-prompt-input" id="add_release">
+            Start Date<input type="text" class="am-modal-prompt-input" data-am-datepicker  id="add_start">
+            End Date<input type="text" class="am-modal-prompt-input" data-am-datepicker id="add_end">
+            Status<div><select data-am-selected placeholder="Please Select" id="add_status" >
+                                    <option value=""></option>           
+                                    <option value="Ongoing" >Ongoing</option>
+                                    <option value="Finished">Finished</option>
+                  </select></div>            
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-confirm style="width: 50%">OK</span>
+            <span class="am-modal-btn" data-am-modal-cancel style="width: 50%">Cancel</span>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="ASSETS/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="ASSETS/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="ASSETS/js/amazeui.min.js"></script>
+<script src="ASSETS/js/app.js"></script>
+<script>
+
+    function edit(obj) {
+        var id=$(obj).attr('project_id');
+        var project_info=eval('<?php echo json_encode($project_list); ?>');
+        $.each(project_info,function (k,v) {
+            if(v.id==id){
+                $("#add_name").val(v.name);
+                //$("#add_version").val(v.Version);
+                $("#add_version").find('option[value="'+v.Version+'"]').attr('selected',true);
+                $("#add_branch").find('option[value="'+v.Branch+'"]').attr('selected',true);
+                $("#add_branch").val(v.Branch);
+                $("#add_status").val(v['Status']);
+                $("#add_build").val(v.Build_Location);
+                $("#add_firstb").val(v.First_Build_No);
+                $("#add_release").val(v.Release_Build_No);
+                $("#add_start").attr({value:v.start_time});
+                $("#add_end").attr({value:v.end_time});
+            }
+        });
+        $("#add_project_modal").modal({
+            relatedTarget: this,
+            onConfirm:function (e) {
+                $.post("{:U('Admin/Project/edit')}",
+                        {id:id,name:e.data[0],Version:$("#add_version").val(),Branch:$("#add_branch").val(),Status:$("#add_status").val(),Build_Location:e.data[1],First_Build_No:e.data[2],Release_Build_No:e.data[3],start_time:e.data[4],end_time:e.data[5]},
+                        function () {
+                            location.href="{:U('Admin/Project/index')}";
+                            window.location.reload();
+                        });
+            },
+            onCancel:function (e) {
+                e.close();
+            }
+        });
+
+    }
+    function del(obj) {
+        var id=$(obj).attr('project_id');
+        if(confirm('Delete This Project？')){
+            $.post("{:U('Admin/project/del')}",{id:id},function (data) {
+                window.location.href="{:U('Admin/Project/index')}";
+            })
+        }
+    }
+    function add() {
+        $("#add_name").val("");
+        $("#add_version").val("");
+        $("#add_branch").val("");
+        $("#add_status").val("");
+        $("#add_build").val("");
+        $("#add_firstb").val("");
+        $("#add_release").val("");
+        $("#add_start").attr({value:""});
+        $("#add_end").attr({value:""});
+        $('#add_project_modal').modal({
+
+            relatedTarget: this,
+            onConfirm:function (e) {
+                var branch=$('#add_project_modal option:selected').val();
+                $.post("{:U('Admin/Project/add')}",
+                        {name:e.data[0],Version:$("#add_version").val(),Branch:$("#add_branch").val(),Status:$("#add_status").val(),Build_Location:e.data[1],First_Build_No:e.data[2],Release_Build_No:e.data[3],start_time:e.data[4],end_time:e.data[5]},
+                        function (data) {
+                            location.href="{:U('Admin/Project/index')}";
+                        });
+            },
+            onCancel:function (e) {
+                e.close();
+            }
+        });
+    }
+    function editTask(id) {
+        location.href=("{:U('Admin/Testrun/index',array('pid'=>vid))}").replace('vid',id);
+    }
+    function reorder(name) {
+        location.href=("{:U(Admin/Project/Index,array('sort'=>sort_rule))}").replace('sort_rule',name);
+    }
+
+
+</script>
+</body>
+</html>

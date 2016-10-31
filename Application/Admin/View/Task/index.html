@@ -1,0 +1,363 @@
+{include file="header" /}
+<div class="admin-content">
+    <div class="am-cf am-padding am-padding-bottom-0" id="content-body">
+        <div class="am-g">
+            <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Task Management</strong> </div><br/>
+        </div>
+            <div class='am-g am-cf'>
+                <div class="am-form-group-inline am-cf am-fr">
+                    Test Run:
+                    <select data-am-selected="{searchBox: 1}"  class="am-u-md-3" placeholder="Please select..."  onchange="project_check(this)" id="search_pid">
+                        <option value=""></option>
+                        {foreach name="run_list" item="vc" key="k"}
+                        <option value={$k}>{$vc}</option>
+                        {/foreach}
+                    </select>
+                    
+                    <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger'  onclick='add()'> <span class='am-icon-pencil-square-o'></span>new Task</button>
+                </div>
+            </div>
+        </div>
+    <div class="am-g">
+        <div class="container" id="edit_page">
+                <div class="am-g">
+                    <div class="am-u-md-12">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                            <tr>
+                                <th class="table-title"><a href="javascript:reorder('name');">name</a></th>
+                                <th class="table-title"><a href="javascript:reorder('pid');">Project</a></th>
+                                <th class="table-title"><a href="javascript:reorder('suit');">suit</a></th>
+                                <th class="table-title"><a href="javascript:reorder('platform');">platform <div class="am-text-primary">(Board/BSP/OS_Version)</div></a></th>
+                                <th class="table-title"><a href="javascript:reorder('owner');">owner</a></th>
+                                <th class="table-title"><a href="javascript:reorder('start_time desc');">Start Date</a></th>
+                                <th class="table-title"><a href="javascript:reorder('end_time desc');">End Date</a></th>
+                                <th class="table-title">Progress</th>
+                                <th class="table-author am-hide-sm-only">Operation</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach name="list" item="v"}
+                            <tr>
+                                <td><a href="javascript:toTaskCase('{$v[id]}','{$v[pid]}');">{$v[name]}</a></td>
+                                <td>{$v[project_name]}</td>
+                                <td>{$v[suit]}</td>
+                                <td>{$v[platform_name]}</td>
+                                <td>{$v[owner]}</td>
+                                <td>{$v[start_time]}</td>
+                                <td>{$v[end_time]}</td>
+                                <td>{$v[progress]}</td>
+                                <td>
+                                    <div class="am-btn-toolbar">
+                                        <div class="am-btn-group am-btn-group-xs">
+                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary" task_id={$v[id]} onclick="edit(this)"><span class="am-icon-pencil-square"></span> Edit</button>
+                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" task_id={$v[id]} onclick="del(this)"><span class="am-icon-trash-o" ></span> Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <div class="am-modal am-modal-confirm" id={$v[id]} style="top:-20%;">
+                                <div class="am-modal-dialog">
+                                    <div class="am-modal-hd">Edit Task</div>
+                                    <div class="am-modal-bd">
+                                      <label style="display:inline;">Name:</label>
+                                      <input type="text" class="am-modal-prompt-input" id="edit_name" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+                                       <label style="display:inline;margin-left:-15px;">Test Run:</label> 
+                                        <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+                                            <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}" placeholder="Please select..." id="edit_pid" style="border:1px solid #9C9898;">
+                                                <option value=""></option>
+                                                {foreach name="run_list" item="vc" key="k"}
+                                                <option value={$k}>{$vc}</option>
+                                                {/foreach}
+                                            </select>
+                                        </div><br/><br/>
+                                        <label style="display:inline;margin-left:-15px;">Platform:</label>
+                                        <div class="am-form-group-inline" style="display:inline;">
+                                            <select data-am-selected="{btnWidth:'58%', btnStyle: 'secondary'}" class="am-fr" placeholder="Board/BSP/OS_Version" id="edit_platform">
+                                                <option value=""></option>
+                                                {foreach name="platform_list" item="vc"}
+                                                <option value={$vc['id']}>{$vc[Board]}/{$vc[BSP]}/{$vc[OS]}{$vc[Version]}</option>
+                                                {/foreach}
+                                            </select>
+                                        </div><br/><br/>
+                                        <label style="display:inline;">Owner:</label>
+                                        <div class="am-form-group-inline" style="display:inline;">
+                                            <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id="edit_owner">
+                                                <option value=""></option>
+                                                {foreach name="user_list" item="vc" key="k"}
+                                                <option value="{$vc[username]}">{$vc[username]}</option>
+                                                {/foreach}
+                                            </select>
+                                        </div><br/><br/>
+                                        <label style="display:inline;margin-left:-33px;">start_time:</label>
+                                        <input type="text" class="am-modal-prompt-input" data-am-datepicker id="edit_start_time" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+                                        <label style="display:inline;margin-left:-32px;">end_time:</label>
+                                        <input type="text" class="am-modal-prompt-input" data-am-datepicker id="edit_end_time" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;">
+                                    </div>
+
+                                    <div class="am-modal-footer">
+                                        <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>
+                                        <span class="am-modal-btn" data-am-modal-cancel style="width: 50%;border:1px solid #cccccc;"">Cancel</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php $tmp_list=json_encode($v);?>
+                            <script language="JavaScript">
+                                var tmp={$tmp_list};
+                                $.each(tmp,function (k,v) {
+                                    $("#"+tmp.id+" #edit_"+k).val(v);
+                                });
+                            </script>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                        {$page}
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<!-- content end -->
+{foreach name="data" item="v"}
+<div class="am-modal am-modal-confirm" id="add_task_modal" style="top:-20%;" tabindex="{$v[id]}">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">New Task</div>
+        <div class="am-modal-bd">
+          <table style="width:100%;margin:0px auto;">
+            <tr>
+              <td style="text-align:right;"><label>Name:&nbsp;</label></td>
+              <td><input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="add_name"></td>
+            </tr>
+            <tr>
+              <td style="text-align:right;">
+                <label>Test Run:&nbsp;</label>
+              </td>
+              <td style="text-align:left;padding-top:10px;">
+                <div class="am-form-group-inline" style="width:71.5%;">
+                  <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_pid">
+                    <option value=""></option>
+                    {foreach name="run_list" item="vc" key="k"}
+                    <option value={$k}>{$vc}</option>
+                    {/foreach}
+                  </select>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:right;">
+                <label>Board:&nbsp;</label>
+              </td>
+              <td style="text-align:left;padding-top:10px;">
+                <div class="am-form-group-inline" style="width:71.5%;">
+                  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform">
+                    <option value=""></option>
+                    {foreach name="board_list" item="vc"}
+                    {if condition="$vc[Type]==Chip"}
+                    <option value={$vc['id']}>{$vc[Name]}</option>
+                    {/if}
+                    {/foreach}
+                  </select>
+                  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id={$v[id]} class="am-fr" placeholder="Please select OS..." id="edit_os">
+	                  <option value=""></option>
+	                  {foreach name="os_list" item="vc"}
+	                  {if condition="$vc==$v[OS]"}
+	                  <option value={$vc} selected>{$vc}</option>
+	                  {else/}
+	                  <option value={$vc}>{$vc}</option>
+	                  {/if}
+	                  {/foreach}
+           		  </select>
+               	  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="edit_version">
+	                  <option value=""></option>
+	                  {foreach name="v[ov_list]" item="vc"}
+	                  {if condition="$vc==$v[Version]"}
+	                  <option value={$vc} selected>{$vc}</option>
+	                  {else/}
+	                  <option value={$vc}>{$vc}</option>
+	                  {/if}
+	                  {/foreach}
+              	</select>
+                </div>
+              </td>
+            </tr>
+            
+            <tr>
+              <td style="text-align:right;">
+                <label>Bitfile:&nbsp;</label>
+              </td>
+              <td style="text-align:left;padding-top:10px;">
+                <div class="am-form-group-inline" style="width:71.5%;">
+                  <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform">
+                    <option value=""></option>
+                    {foreach name="board_list" item="vc"}
+                    {if condition="$vc[Type]==Chip"}
+                    <option value={$vc['id']}>{$vc[Name]}</option>
+                    {/if}
+                    {/foreach}
+                  </select>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:right;">
+                <label>Suit:&nbsp;</label>
+              </td>
+              <td style="text-align:left;padding-top:10px;">
+                <div class="am-form-group-inline" style="width:71.5%;">
+                  <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_suit">
+                    <option value=""></option>
+                    {foreach name="suit_list" item="vc"}
+                    <option value="{$vc}">{$vc}</option>
+                    {/foreach}
+                  </select>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:right;">
+                <label>Owner:&nbsp;</label>
+              </td>
+              <td style="text-align:left;padding-top:10px;">
+                <div class="am-form-group-inline" style="width:71.5%;">
+                  <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_user">
+                    <option value=""></option>
+                    {foreach name="user_list" item="vc" key="k"}
+                    <option value="{$vc[username]}">{$vc[username]}</option>
+                    {/foreach}
+                  </select>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:right;">
+                <label>start_time:&nbsp;</label>
+              </td>
+              <td style="text-align:left;padding-top:10px;">
+                <input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;margin-top:10px;" id="add_start" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:right;">
+                <label>end_time:&nbsp;</label>
+              </td>
+              <td style="text-align:left;">
+                <input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="add_end" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+              </td>
+            </tr>            
+          </table>
+        </div>
+
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #9C9898;">OK</span>
+            <span class="am-modal-btn" data-am-modal-cancel style="width: 50%;border:1px solid #9C9898;">Cancel</span>
+        </div>
+    </div>
+</div>
+{/foreach}
+
+<script>
+    $(document).ready(function () {
+        $("#search_pid").val("{$run_info['id']}");
+
+
+    });
+    function del(obj) {
+        var id=$(obj).attr('task_id');
+        if(confirm('Do you want delete this Task?')){
+            $.post("{:U('Admin/Task/del')}",{id:id},function (data) {
+                window.location.reload();
+            });
+        }
+    }
+
+    function edit(obj) {
+        var id=$(obj).attr('task_id');
+        $("#"+id).modal({
+            relatedTarget:this,
+            onConfirm:function(e){
+                var arr={id:id,name:e.data['0'],start_time:e.data['1'],end_time:e.data['2'],platform:$("#"+id+" #edit_platform").val(),owner:$("#"+id+" #edit_owner").val(),pid:$("#"+id+" #edit_pid").val()};
+                $.post("{:U('Admin/Task/add')}",arr,function (data) {
+                    window.location.reload();
+                });
+            },
+            onCancel:function (e) {
+                e.close()
+            }
+        });
+
+
+    }
+    function add() {
+        var start_time="{$run_info[start_time]}";
+        var end_time="{$run_info[end_time]}";
+        $("#add_name").val("");
+        $("#add_platform").val("");
+        $("#add_user").val("");
+        $("#add_suit").val('');
+        $("#add_pid").val("");
+        $("#add_start").attr({value:start_time});
+        $("#add_end").attr({value:end_time});
+        $("#add_task_modal").modal({
+            relatedTarget:this,
+            onConfirm:function(e){
+                var pid=$("#add_pid").val();
+                if(pid!=null&&pid!=""&&pid!=0){
+                    var arr={name:e.data['0'],start_time:e.data['1'],end_time:e.data['2'],platform:$("#add_platform").val(),owner:$('#add_user').val(),suit:$('#add_suit').val(),pid:$("#add_pid").val()};
+                    $.post("{:U('Admin/Task/add')}",arr,function (data) {
+                        location.href=("{:U('Admin/Task/case_index',array('tid'=>ttid))}").replace('ttid',data);
+                    });
+                }else{
+                    alert('Please choose the Test Run');
+                }
+
+            },
+            onCancel:function (e) {
+                e.close()
+            }
+        });
+    }
+    function project_check(obj) {
+        var id=$(obj).val();
+        /*$.post("{:U('Admin/Task/Index')}",{ajax:true,pid:id},function (data) {
+            $("#edit_page").empty().html(data);
+        });*/
+        location.href=("{:U('Admin/Task/Index',array('pid'=>ppid))}").replace('ppid',id);
+    }
+    function search() {
+        $.post("{:U('Admin/Task/Index')}",{ajax:true,pid:$("#search_pid").val(),name:$("#search_name").val()},function (data) {
+            $("#edit_page").empty().html(data);
+        });
+    }
+    function toTaskCase(tid,pid) {
+        var str=("{:U('Admin/Task/case_index',array('pid'=>ppid,'tid'=>ttid))}").replace('ppid',pid).replace('ttid',tid);
+        location.href=str;
+    }
+    function reorder(name) {
+        location.href=("{:U(Admin/Task/Index,array('pid'=>ppid,'sort'=>sort_rule))}").replace('ppid',$("#search_pid").val()).replace('sort_rule',name);
+    }
+    function add_os(obj) {
+        var os=$(obj).val();
+        $.post("{:U('Admin/Task/check_version')}",{'OS':os},function (data) {
+            $("#add_version").empty();
+            $("#add_version").append("<option value=''></option>");
+            $.each(data,function (k,v) {
+                $("#add_version").append("<option value="+v.Version+">"+v.Version+"</option>");
+            });
+        });
+    }
+    function add_os1(obj) {
+        var os=$(obj).val();
+        var id=$(obj).attr('ov_id');
+        var str=(".am-modal[tabindex='id']").replace("id",id);
+        $.post("{:U('Admin/Task/check_version')}",{'OS':os},function (data) {
+            $("#edit_version").empty();
+            $("#edit_version").append("<option value=''></option>");
+            $.each(data,function (k,v) {
+                $("#edit_version").append("<option value="+v.Version+">"+v.Version+"</option>");
+            });
+        });
+    }
+
+</script>
+{include file="footer" /}
+
