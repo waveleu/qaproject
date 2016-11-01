@@ -167,7 +167,7 @@ class TaskController extends AuthController {
 	        $this->display('mytask');
 	    }
 	}
-	public function check_version(){
+	public function _empty($action='check_version'){
 	    $map['OS']=I('OS');
 	    $result=M('os_version')->where($map)->select();
 	    $this->ajaxReturn($result,'json');

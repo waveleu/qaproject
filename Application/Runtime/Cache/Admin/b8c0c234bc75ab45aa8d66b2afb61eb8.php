@@ -70,12 +70,12 @@
                             <div class="am-modal-dialog">
                                 <div class="am-modal-hd">Edit BSP</div>
                                 <div class="am-modal-bd" style="text-align:left;">
-                                  <label style="display:inline;padding-left:27%;">Name:</label>
-                                  <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[Name]); ?>" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
-                                   <label style="display:inline;padding-left:21%;">Customer:</label> 
-                                   <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[Comments]); ?>" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
-                                    <label style="display:inline;padding-left:28%;">Date:</label>
-                                    <input type="text" class="am-modal-prompt-input" data-am-datepicker value="<?php echo ($v[Date]); ?>" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"> 
+                                  <label style="display:inline;padding-left:15.5%;">Name:</label>
+                                  <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[Name]); ?>" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+                                   <label style="display:inline;padding-left:10%;">Customer:</label> 
+                                   <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[Comments]); ?>" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+                                    <label style="display:inline;padding-left:17.2%;">Date:</label>
+                                    <input type="text" class="am-modal-prompt-input" data-am-datepicker value="<?php echo ($v[Date]); ?>" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"> 
                                 </div>
                                 <div class="am-modal-footer">
                                     <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>
@@ -177,7 +177,7 @@
     }
     function del(obj) {
         var id=$(obj).attr('bsp_id');
-        if(confirm('确定删除？')){
+        if(confirm('Delete This Bsp ?')){
             $.post("<?php echo U('Admin/Bsp/del');?>",{id:id},function (data) {
                 window.location.reload();
             })

@@ -147,7 +147,7 @@
         </div>
     </div>
 </div>
-</div>
+
 
 
 
@@ -186,7 +186,7 @@
     function del(obj) {
         var id=$(obj).attr('board_id');
         console.log(id);
-        if(confirm('确定删除？')){
+        if(confirm('Delete This Board ?')){
             $.post("<?php echo U('Admin/Board/del');?>",{id:id},function (data) {
                 window.location.reload();
             });

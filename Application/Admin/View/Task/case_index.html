@@ -186,9 +186,22 @@
                                     {/if}
                                 {/foreach}
                             </select>
-                            &nbsp;&nbsp;BugID:&nbsp;<input type="text" id="search_name">
+                            <!-- &nbsp;&nbsp;BugID:&nbsp;<input type="text" id="search_name">
                             <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary'  onclick='search()'> <span class='am-icon-search'></span>Search</button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                            <select data-am-selected="{btnWidth: '23%', btnStyle: 'secondary'}"  class="am-u-md-3" placeholder="Please select..."  id="search_type">
+	                            <option value="CaseName">CaseName</option>
+	                            <option value="BugID">BugID</option>
+	                            <option value="driver">Driver</option>
+	                            <option value="Status">Status</option>
+	                            <option value="result">Result</option>
+                            </select>
+                            <br />
+                            <br />
+                            <div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <input type="text" id="search_name">
+                            <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary'  onclick='search()'> <span class='am-icon-search'></span>Search</button>
+                        	</div>
                         </div>
                         <div class="am-u-md-12" id="edit_table">
                             <div class="am-tabs am-margin" data-am-tabs>
@@ -283,7 +296,7 @@
 </div>
 <!-- content end -->
 
-<script>
+<script >
     window.onload=function () {
         tree_fresh();
         var arr=window.location.href.split("/");
@@ -377,8 +390,20 @@
 
     //search按钮
     function search() {
-        var arr={ajax:true,tid:$("#search_tid").val(),BugID:$("#search_name").val()};
-        $.post("{:U('Admin/Task/case_index')}",arr,function (data) {
+    	var search_type=$("#search_type").val();
+    	var search_tid=$("#search_tid").val();
+    	var search_name=$("#search_name").val();
+    	//var arr=("{ajax:true,tid:search_tid,BugID:search_name}").replace("BugID",search_type).replace("search_tid",search_tid).replace("search_name",search_name);
+    	if(search_type=='BugID')
+        	var arr={ajax:true,tid:$("#search_tid").val(),BugID:$("#search_name").val()};
+    	else if(search_type=='result')
+            var arr={ajax:true,tid:$("#search_tid").val(),result:$("#search_name").val()};
+    	else if(search_type=='Status')
+            var arr={ajax:true,tid:$("#search_tid").val(),Status:$("#search_name").val()};
+    	else if(search_type=='CaseName')
+            var arr={ajax:true,tid:$("#search_tid").val(),CaseName:$("#search_name").val()};
+    	else var arr={ajax:true,tid:$("#search_tid").val(),driver:$("#search_name").val()};
+         $.post("{:U('Admin/Task/case_index')}",arr,function (data) {
             page_fresh(data);
         });
     }

@@ -124,7 +124,7 @@
                             <td><?php echo ($v[owner]); ?></td>
                             <td><?php echo ($v[start_time]); ?></td>
                             <td><?php echo ($v[end_time]); ?></td>
-                            <td><?php echo ($v[progress]); ?></td>
+                            <td><a href="javascript:toTaskCase('<?php echo ($v[id]); ?>','<?php echo ($v[pid]); ?>');"><?php echo ($v[progress]); ?></a></td>
                            <!-- <td>
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">

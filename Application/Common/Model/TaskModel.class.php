@@ -29,24 +29,32 @@ class TaskModel extends BaseModel{
 			array_push($user_list, $tmp);
 		}
 		foreach ($list as $k=>$v){
-			$tmp=M('platform')->where(array('id'=>$v['platform']))->find();
+			$tmp=M('board')->where(array('Name'=>$v['board']))->find();
 			//$list[$k]['platform_name']=' '.$tmp['Board'].' '.'/'.' '.$tmp['BSP'].' '.' '.'/'.$tmp['OS'].$tmp['Version'];
-			$list[$k]['platform_name']=$tmp['Board'];
+			$list[$k]['board_name']=$tmp['Name'];
 			$list[$k]['project_name']=D('Project')->table('go_project Project,go_test_run Run,go_task Task')->
 			                                             where(array('Project.id=Run.pid ','Run.id'=>$v['pid']))->getField('Project.name');
 			$case_count=D('TaskCase')->where(array('tid'=>$v['id']))->count();
-			$str='total : '.sprintf('%04s',$case_count);
-			foreach ($result_type as $k=>$v){
-			    $tmp=D('TaskCase')->where(array('tid'=>$v['id'],'result'=>$v))->count();
-			    if($v=='pass')
-			        $str.=' pass : <span style="background-color: green">'.sprintf('%03s',$tmp).'</span>';
-			    else if($v=='fail'){
-			        $str.=' fail : <span style="background-color: red">'.sprintf('%03s',$tmp).'</span>';
-			    }	         
-			    else 
-			        $str.='<span> '.$v.' : '.sprintf('%03s',$tmp).'</span>';
+			$str_total='total: '.sprintf('%04s',$case_count);
+			foreach ($result_type as $key=>$vc){
+			    $tmp=D('TaskCase')->where(array('tid'=>$vc['id'],'result'=>$vc))->count();
+			    if($vc=='pass')
+			        $str_pass='pass: <span style="background-color: green">'.sprintf('%03s',$tmp).'</span>';
+			    else if($vc=='fail'){
+			        $str_fail='fail: <span style="background-color: red">'.sprintf('%03s',$tmp).'</span>';
+			    }	
+			    else if($vc=='timeout'){
+			        $str_timeout='timeout: <span style="background-color: red">'.sprintf('%03s',$tmp).'</span>';
+			    }
+			    else if($vc=='N/A'){ 
+			        $str_NA='N/A: <span style="background-color: red">'.sprintf('%03s',$tmp).'</span>';
+			    }
 			}
-			$list[$k]['progress']=$str;
+			$list[$k]['total']=$str_total;
+			$list[$k]['pass']=$str_pass;
+			$list[$k]['fail']=$str_fail;
+			$list[$k]['timeout']=$str_timeout;
+			$list[$k]['NA']=$str_NA;
 		}
 		//var_dump($list);
 		$run_info=D('TestRun')->where(array('id'=>$filter['pid']))->find();

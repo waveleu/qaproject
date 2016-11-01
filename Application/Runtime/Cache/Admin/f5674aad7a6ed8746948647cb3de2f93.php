@@ -47,11 +47,6 @@
                     <tr>
                         <th class="table-title">Host</th>
                         <th class="table-title">Platform</th>
-                   <!-- <th class="table-title">2D Core</th>
-                        <th class="table-title">3D Core</th>
-                        <th class="table-title">Customer</th>
-                        <th class="table-title">OS</th>
-                        <th class="table-title">BSP</th> -->
                         <th class="table-title">Owner</th>
                         <th class="table-author am-hide-sm-only am-fr">Operation</th>
                     </tr>
@@ -60,11 +55,6 @@
                     <?php if(is_array($data)): foreach($data as $key=>$v): ?><tr>
                         <td><?php echo ($v[host]); ?></td>
                         <td><?php echo ($v[info][name]); ?></td>
-                   <!-- <td><?php echo ($v[info]['2D_Core']); ?></td>
-                        <td><?php echo ($v[info]['3D_Core']); ?></td>
-                        <td><?php echo ($v[info][Customer]); ?></td>
-                        <td><?php echo ($v[OS]); ?></td>
-                        <td><?php echo ($v[BSP]); ?></td> -->
                         <td><?php echo ($v[owner]); ?></td>
                         <td>
                             <div class="am-btn-toolbar am-fr">
@@ -160,14 +150,14 @@
     </div>
 </div>
 
-<div class="am-modal am-modal-confirm" tabindex="del_class" id="del_modal">
+<div class="am-modal am-modal-confirm" tabindex="del_class" id="del_modal" style="top:-15%;">
     <div class="am-modal-dialog">
         <div class="am-modal-bd">
-            Delete This Board?
+            <label>Delete This Board?</label>
         </div>
         <div class="am-modal-footer">
-            <span class="am-modal-btn" data-am-modal-confirm style="width: 50%">OK</span>
-            <span class="am-modal-btn" data-am-modal-cancel style="width: 50%">Cancel</span>
+            <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>
+            <span class="am-modal-btn" data-am-modal-cancel style="width: 50%;border:1px solid #cccccc;">Cancel</span>
         </div>
     </div>
 </div>

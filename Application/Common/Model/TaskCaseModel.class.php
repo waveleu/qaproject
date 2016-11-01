@@ -24,6 +24,14 @@ class TaskCaseModel extends BaseModel{
 				}elseif($k=='sort'){
 				    $sort_rule=$v; 
 				    unset($filter['sort']);
+				}else if($k=='CaseName'){
+				    $arr['TaskCase.CaseName']=array('like',"%{$v}%");
+				}else if($k=='driver'){
+				    $arr['TaskCase.driver']=array('like',"%{$v}%");
+				}else if($k=='Status'){
+				    $arr['TaskCase.Status']=array('like',"%{$v}%");
+				}else if($k=='result'){
+				    $arr['TaskCase.result']=array('like',"%{$v}%");
 				}
 				else {
 				    $arr['TaskCase.'.$k]="";
