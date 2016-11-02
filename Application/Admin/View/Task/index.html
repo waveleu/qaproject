@@ -3,21 +3,31 @@
     <div class="am-cf am-padding am-padding-bottom-0" id="content-body">
         <div class="am-g">
             <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Task Management</strong> </div><br/>
-        </div>
+        </div><br/><br/>
             <div class='am-g am-cf'>
-                <div class="am-form-group-inline am-cf am-fr">
-                    Test Run:
-                    <select data-am-selected="{searchBox: 1}"  class="am-u-md-3" placeholder="Please select..."  onchange="project_check(this)" id="search_pid">
+                <div class="am-form-group-inline" style="display:inline;">
+                   <select data-am-selected="{btnWidth: '7%',btnStyle: 'secondary',searchBox: 1}"  class="am-u-md-3" placeholder="FPGA">
                         <option value=""></option>
                         {foreach name="run_list" item="vc" key="k"}
                         <option value={$k}>{$vc}</option>
                         {/foreach}
                     </select>
-                    
-                    <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger'  onclick='add()'> <span class='am-icon-pencil-square-o'></span>new Task</button>
+                    <input type="text" style="width:200px;height:37px;display:inline;border:1px solid #9C9898;margin-left:-5px;">&nbsp;&nbsp;
+                    <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary'> <span class='am-icon-search'></span> Search</button>
+                </div>
+                <div class="am-form-group-inline am-cf am-fr" style="width:400px;display:inline;">
+                    Test Run:
+                    <select data-am-selected="{btnWidth: '50%', btnStyle: 'secondary',searchBox: 1}"  class="am-u-md-3" placeholder="Please select..."  onchange="project_check(this)" id="search_pid">
+                        <option value=""></option>
+                        {foreach name="run_list" item="vc" key="k"}
+                        <option value={$k}>{$vc}</option>
+                        {/foreach}
+                    </select>
+                    &nbsp;&nbsp;
+                    <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger'  onclick='add()'> <span class='am-icon-pencil-square-o'></span> new Task</button>
                 </div>
             </div>
-        </div>
+        </div><br/>
     <div class="am-g">
         <div class="container" id="edit_page">
                 <div class="am-g">
@@ -27,16 +37,18 @@
                             <tr>
                                 <th class="table-title"><a href="javascript:reorder('name');">name</a></th>
                                 <th class="table-title"><a href="javascript:reorder('pid');">Project</a></th>
-                                <th class="table-title"><a href="javascript:reorder('suit');">suit</a></th>
-                                <th class="table-title"><a href="javascript:reorder('board');">Board <div class="am-text-primary">(Board/BSP/OS_Version)</div></a></th>
+                                <th class="table-title"><a href="#">Driver</a></th>
+                                <th class="table-title"><a href="javascript:reorder('suit');">suite</a></th>
+                                <th class="table-title"><a href="javascript:reorder('board');">Board </a></th>
                                 <th class="table-title"><a href="javascript:reorder('owner');">owner</a></th>
                                 <th class="table-title"><a href="javascript:reorder('start_time desc');">Start Date</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">End Date</a></th>
-                                <th class="table-title"><a href="javascript:reorder('end_time desc');">Total</a></th>
+                                <th class="table-title"><a href="#">Progress</a></th>
+                                <!--<th class="table-title"><a href="javascript:reorder('end_time desc');">Total</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">Pass</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">Fail</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">Timeout</a></th>
-                                <th class="table-title"><a href="javascript:reorder('end_time desc');">N/A</a></th>
+                                <th class="table-title"><a href="javascript:reorder('end_time desc');">N/A</a></th>-->
                                 <th class="table-author am-hide-sm-only">Operation</th>
                             </tr>
                             </thead>
@@ -45,16 +57,18 @@
                             <tr>
                                 <td><a href="javascript:toTaskCase('{$v[id]}','{$v[pid]}');">{$v[name]}</a></td>
                                 <td>{$v[project_name]}</td>
+                                <td>{$v[driver]}</td>
                                 <td>{$v[suit]}</td>
                                 <td>{$v[board_name]}</td>
                                 <td>{$v[owner]}</td>
                                 <td>{$v[start_time]}</td>
                                 <td>{$v[end_time]}</td>
-                                <td>{$v['total']}</td>
+                                <td>{$v[progress]}</td>
+                                <!--<td>{$v['total']}</td>
                                 <td>{$v['pass']}</td>
                                 <td>{$v['fail']}</td>
                                 <td>{$v['timeout']}</td>
-                                <td>{$v['NA']}</td>
+                                <td>{$v['NA']}</td>-->
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
@@ -70,6 +84,8 @@
                                     <div class="am-modal-bd">
                                       <label style="display:inline;">Name:</label>
                                       <input type="text" class="am-modal-prompt-input" id="edit_name" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+                                      <label style="display:inline;margin-left:-5px;">Driver:</label>
+                                      <input type="text" class="am-modal-prompt-input" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
                                        <label style="display:inline;margin-left:-15px;">Test Run:</label> 
                                         <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
                                             <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}" placeholder="Please select..." id="edit_pid" style="border:1px solid #9C9898;">
@@ -137,6 +153,14 @@
               <td><input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="add_name"></td>
             </tr>
             <tr>
+              <td style="text-align:right;margin-top:-20px;">
+                <label>Driver:&nbsp;</label>
+              </td>
+              <td style="text-align:left;padding-top:10px;">
+                <input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;margin-top:10px;">
+              </td>
+            </tr>
+            <tr>
               <td style="text-align:right;">
                 <label>Test Run:&nbsp;</label>
               </td>
@@ -157,7 +181,7 @@
               </td>
               <td style="text-align:left;padding-top:10px;">
                 <div class="am-form-group-inline" style="width:71.5%;">
-                  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform">
+                  <select data-am-selected="{btnWidth: '32%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform">
                     <option value=""></option>
                     {foreach name="board_list" item="vc"}
                     {if condition="$vc[Type]==Chip"}
@@ -165,7 +189,7 @@
                     {/if}
                     {/foreach}
                   </select>
-                  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id={$v[id]} class="am-fr" placeholder="Please select OS..." id="edit_os">
+                  <select data-am-selected="{btnWidth: '32%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id={$v[id]} class="am-fr" placeholder="Please select OS..." id="edit_os">
 	                  <option value=""></option>
 	                  {foreach name="os_list" item="vc"}
 	                  {if condition="$vc==$v[OS]"}
@@ -175,7 +199,7 @@
 	                  {/if}
 	                  {/foreach}
            		  </select>
-               	  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="edit_version">
+               	  <select data-am-selected="{btnWidth: '32%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="edit_version">
 	                  <option value=""></option>
 	                  {foreach name="v[ov_list]" item="vc"}
 	                  {if condition="$vc==$v[Version]"}
@@ -208,7 +232,7 @@
             </tr>
             <tr>
               <td style="text-align:right;">
-                <label>Suit:&nbsp;</label>
+                <label>Suite:&nbsp;</label>
               </td>
               <td style="text-align:left;padding-top:10px;">
                 <div class="am-form-group-inline" style="width:71.5%;">
