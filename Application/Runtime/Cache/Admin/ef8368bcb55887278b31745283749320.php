@@ -415,7 +415,7 @@
         var os=$(obj).val();
         var id=$(obj).attr('ov_id');
         var str=(".am-modal[tabindex='id']").replace("id",id);
-        $.post("<?php echo U('Admin/Task/check_version');?>",{'OS':os},function (data) {
+        $.post("<?php echo U('Admin/Task/index');?>",{'OS':os,'seconglist':true},function (data) {
         	console.log(data);
             $("#edit_version").empty();
             $("#edit_version").append("<option value=''></option>");

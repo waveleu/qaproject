@@ -7,24 +7,30 @@ class TaskController extends AuthController {
 	 */
 	public function index(){
 		$filter=I('param.');
-		$ajax=$filter['ajax'];
-		unset($filter['ajax']);
-		$data=D('Task')->getData($filter);
-		$os_list=M('os')->where('id>0')->getField('OS',true);
-		$tree=D('Testcase')->getTree();
-		$data_task=M('task')->where('id>0')->select();
-		foreach ($data_task as $k=>$v){
-		    $data_task[$k]['ov_list']=M('os_version')->where(array('OS'=>$v['OS']))->getField('Version',true);
-		};
-    	$this->assign($data);
-    	$this->assign($tree);
-    	$this->assign('os_list',$os_list);
-    	$this->assign('data',$data_task);
-    	if($ajax==true){
-    		$this->display('task_index_table_div');
-    	}else{
-    		$this->display();  	
-    	} 	
+		if($filter['seconglist']==true){
+		    $map['OS']=I('OS');
+		    $result=M('os_version')->where($map)->select();
+		    $this->ajaxReturn($result,'json');
+		}else{
+		    $ajax=$filter['ajax'];
+		    unset($filter['ajax']);
+		    $data=D('Task')->getData($filter);
+		    $os_list=M('os')->where('id>0')->getField('OS',true);
+		    $tree=D('Testcase')->getTree();
+		    $data_task=M('task')->where('id>0')->select();
+		    foreach ($data_task as $k=>$v){
+		        $data_task[$k]['ov_list']=M('os_version')->where(array('OS'=>$v['OS']))->getField('Version',true);
+		    }
+		    $this->assign($data);
+		    $this->assign($tree);
+		    $this->assign('os_list',$os_list);
+		    $this->assign('data',$data_task);
+		    if($ajax==true){
+		        $this->display('task_index_table_div');
+		    }else{
+		        $this->display();
+		    }
+		}
 	}
 	public function task_search(){
 		
