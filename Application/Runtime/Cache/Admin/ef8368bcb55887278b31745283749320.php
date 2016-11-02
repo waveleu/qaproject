@@ -118,11 +118,11 @@
                                 <th class="table-title"><a href="javascript:reorder('name');">name</a></th>
                                 <th class="table-title"><a href="javascript:reorder('pid');">Project</a></th>
                                 <th class="table-title"><a href="javascript:reorder('suit');">suit</a></th>
-                                <th class="table-title"><a href="javascript:reorder('board');">Board <div class="am-text-primary">(Board/BSP/OS_Version)</div></a></th>
+                                <th class="table-title"><a href="javascript:reorder('board');">Board <div class="am-text-primary"></div></a></th>
                                 <th class="table-title"><a href="javascript:reorder('owner');">owner</a></th>
                                 <th class="table-title"><a href="javascript:reorder('start_time desc');">Start Date</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">End Date</a></th>
-                                <th class="table-title"><a href="javascript:reorder('end_time desc');">Total</a></th>
+                                <th class="table-title"><a href="javascript:reorder('end_time desc');">Progress</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">Pass</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">Fail</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">Timeout</a></th>
@@ -139,7 +139,7 @@
                                 <td><?php echo ($v[owner]); ?></td>
                                 <td><?php echo ($v[start_time]); ?></td>
                                 <td><?php echo ($v[end_time]); ?></td>
-                                <td><?php echo ($v['total']); ?></td>
+                                <td><?php echo ($v['progress']); ?></td>
                                 <td><?php echo ($v['pass']); ?></td>
                                 <td><?php echo ($v['fail']); ?></td>
                                 <td><?php echo ($v['timeout']); ?></td>

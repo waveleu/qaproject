@@ -37,17 +37,17 @@ class TaskModel extends BaseModel{
 			$case_count=D('TaskCase')->where(array('tid'=>$v['id']))->count();
 			$str_total='total: '.sprintf('%04s',$case_count);
 			foreach ($result_type as $key=>$vc){
-			    $tmp=D('TaskCase')->where(array('tid'=>$vc['id'],'result'=>$vc))->count();
+			    $tmp=D('TaskCase')->where(array('tid'=>$v['id']))->where(array('result'=>$vc))->count();
 			    if($vc=='pass')
-			        $str_pass='pass: <span style="background-color: green">'.sprintf('%03s',$tmp).'</span>';
+			        $str_pass='pass: <span style="background-color: #0a0">'.sprintf('%03s',$tmp).'</span>';
 			    else if($vc=='fail'){
-			        $str_fail='fail: <span style="background-color: red">'.sprintf('%03s',$tmp).'</span>';
+			        $str_fail='fail: <span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
 			    }	
 			    else if($vc=='timeout'){
-			        $str_timeout='timeout: <span style="background-color: red">'.sprintf('%03s',$tmp).'</span>';
+			        $str_timeout='timeout: <span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
 			    }
 			    else if($vc=='N/A'){ 
-			        $str_NA='N/A: <span style="background-color: red">'.sprintf('%03s',$tmp).'</span>';
+			        $str_NA='N/A: <span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
 			    }
 			}
 			$list[$k]['total']=$str_total;
@@ -55,6 +55,7 @@ class TaskModel extends BaseModel{
 			$list[$k]['fail']=$str_fail;
 			$list[$k]['timeout']=$str_timeout;
 			$list[$k]['NA']=$str_NA;
+			$list[$k]['progress']=sprintf('%.1f',(floatval(preg_replace('/\D/s', '', $str_pass))/floatval(preg_replace('/\D/s', '', $str_total)))*100).'%';
 		}
 		//var_dump($list);
 		$run_info=D('TestRun')->where(array('id'=>$filter['pid']))->find();

@@ -82,6 +82,7 @@ class TaskController extends AuthController {
     		$tree=D('Testcase')->getTree();
     		$testrun_list=D('TestRun')->getField('id,name',true);
     		$task_list=array();
+    		$project_list=D('Project')->getField('id,name',true);
     		foreach ($project_list as $k=>$v){
     			$task_list[$k]=D('Task')->where(array('pid'=>$k))->getField('id,name');
     		}
