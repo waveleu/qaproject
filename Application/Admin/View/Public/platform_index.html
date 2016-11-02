@@ -67,14 +67,15 @@
                             </div>
                         </td>
                     </tr>
-                        <div class="am-modal am-modal-confirm" tabindex="{$v[id]}" >
+                        <div class="am-modal am-modal-confirm" tabindex="{$v[id]}" style="top:-15%;">
                         <div class="am-modal-dialog">
                             <div class="am-modal-hd">Edit Platform</div>
                             <div class="am-modal-bd">
-                                name<input type="text" class="am-modal-prompt-input" value="{$v[name]}">
-                                Customer
-                                <div class="am-form-group-inline am-cf" >
-                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}"  id="edit_board" class="am-fr" placeholder="Please select...">
+                               <label style="display:inline;margin-left:-17%;">name:</label>
+                               <input type="text" class="am-modal-prompt-input" value="{$v[name]}" style="width:208px;display:inline;border:1px solid #9C9898;"><br/><br/>
+                                <label style="display:inline;margin-left:-22.5%;">Customer:</label> 
+                                <div class="am-form-group-inline" style="display:inline;">
+                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
                                         {foreach name="board_list" item="vc"}
 	                                        {if condition="explode(',',$vc)[0]==Chip"}
 		                                        {if condition="explode(',',$vc)[1]==$v[Board]"}
@@ -85,10 +86,10 @@
                                         	{/if}
                                         {/foreach}
                                     </select>
-                                </div>
-                                OS_Version
-                                <div class="am-form-group-inline am-cf" >
-                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id={$v[id]} class="am-fr" placeholder="Please select OS..." id="edit_os">
+                                </div><br/><br/>
+                                <label style="display:inline;margin-left:-4%;">OS_Version:</label>
+                                <div class="am-form-group-inline" style="display:inline;">
+                                    <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id={$v[id]} class="am-fr" placeholder="Please select OS..." id="edit_os" style="display:inline;">
                                         <option value=""></option>
                                         {foreach name="os_list" item="vc"}
                                         {if condition="$vc==$v[OS]"}
@@ -98,7 +99,7 @@
                                         {/if}
                                         {/foreach}
                                     </select>
-                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="edit_version">
+                                    <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select OS..." id="edit_version" style="display:inline;">
                                         <option value=""></option>
                                         {foreach name="v[ov_list]" item="vc"}
                                         {if condition="$vc==$v[Version]"}
@@ -108,9 +109,9 @@
                                         {/if}
                                         {/foreach}
                                     </select>
-                                </div>
-                                BSP
-                                <div class="am-form-group-inline am-cf" >
+                                </div><br/><br/>
+                                <label style="display:inline;margin-left:-15%;">BSP:</label>
+                                <div class="am-form-group-inline" style="display:inline;">
                                     <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}"  id="edit_bsp" class="am-fr" placeholder="Please select...">
                                         <option value="" ></option>
                                         {foreach name="bsp_list" item="vc"}
@@ -141,34 +142,35 @@
 
 
 //add new platform
-<div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_board_modal" >
+<div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_board_modal" style="top:-15%;">
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New Platform</div>
         <div class="am-modal-bd">
-            name<input type="text" class="am-modal-prompt-input">
-            Customer
-                <div class="am-form-group-inline am-cf" >
-                    <select data-am-selected  id="add_board" class="am-fr" placeholder="Please select...">
-                        <option value=""></option>
-                        {foreach name="board_list" item="vc"}
+           <label style="display:inline;margin-left:-17%;">name:</label>
+           <input type="text" class="am-modal-prompt-input" value="{$v[name]}" style="width:208px;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label style="display:inline;margin-left:-22.5%;">Customer:</label> 
+            <div class="am-form-group-inline" style="display:inline;">
+                <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
+                    <option value=""></option>
+                    {foreach name="board_list" item="vc"}
+                    <option value={$vc}>{$vc}</option>
+                    {/foreach}
+                </select>
+            </div><br/><br/>
+            <label style="display:inline;margin-left:-4%;">OS_Version:</label>
+            <div class="am-form-group-inline" style="display:inline;">
+                <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id={$v[id]} class="am-fr" placeholder="Please select OS..." id="os_add" style="display:inline;">
+                    <option value=""></option>
+                    {foreach name="os_list" item="vc"}
                         <option value={$vc}>{$vc}</option>
-                        {/foreach}
-                    </select>
-                </div>
-            OS_version
-                <div class="am-form-group-inline am-cf" >
-                    <select data-am-selected  onchange="add_os(this)" class="am-fr" placeholder="Please select OS..." id="os_add">
-                            <option value=""></option>
-                        {foreach name="os_list" item="vc"}
-                            <option value={$vc}>{$vc}</option>
-                        {/foreach}
-                    </select>
-                    <select data-am-selected  id="add_version" class="am-fr" placeholder="Please select Version...">
-                    </select>
-                </div>
-            BSP
-            <div class="am-form-group-inline am-cf" >
-                <select data-am-selected  id="add_bsp" class="am-fr" placeholder="Please select...">
+                    {/foreach}
+                </select>
+                <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  id="add_version" class="am-fr" placeholder="Please select...">
+                </select>
+            </div><br/><br/>
+            <label style="display:inline;margin-left:-15%;">BSP:</label>
+            <div class="am-form-group-inline" style="display:inline;">
+                <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}"  id="add_bsp" class="am-fr" placeholder="Please select...">
                     <option value=""></option>
                     {foreach name="bsp_list" item="vc"}
                     <option value={$vc}>{$vc}</option>
