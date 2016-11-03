@@ -46,19 +46,21 @@
                 <table class="am-table am-table-striped am-table-hover table-main">
                     <thead>
                     <tr>
-                        <th class="table-title">Board_Name</th><th class="table-title">Customer</th>
+                        <th class="table-title">Board_Name</th><th class="table-title">Type</th><th class="table-title">Customer</th>
                         <th class="table-title">2D_Core</th><th class="table-title">3D_Core</th><th class="table-title">2D_VG_Core</th>
+                        <th class="table-title">Bitfile</th>
                         <th class="table-author am-hide-sm-only am-fr">Operation</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php if(is_array($data)): foreach($data as $key=>$v): ?><tr>
                         <td><?php echo ($v[Name]); ?></td>
+                        <td><?php echo ($v[Type]); ?></td>
                         <td><?php echo ($v[Customer]); ?></td>
-  
                         <td><?php echo ($v['2D_Core']); ?></td>
                         <td><?php echo ($v['3D_Core']); ?></td>
                         <td><?php echo ($v['2D_VG_Core']); ?></td>
+                        <td><?php echo ($v[Bitfile]); ?></td>
                         <td >
                             <div class="am-btn-toolbar am-fr">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -84,8 +86,8 @@
                                             </div>
                                     	<?php else: ?>
 	                                        <?php if($key==Customer): ?><span id="Customer_1"><?php echo ($key); ?></span>
-	                                            <div class="am-form-group-inline am-cf" id="Customer">
-	                                                <select data-am-selected   class="am-fr" placeholder="Please select..." >
+	                                            <div class="am-form-group-inline am-cf" >
+	                                                <select data-am-selected   class="am-fr" placeholder="Please select..." id="Customer">
 	                                                    <option value=""></option>
 	                                                    <?php if(is_array($customer_list)): foreach($customer_list as $key=>$vc): if($vc==$vsub): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
 	                                                        <?php else: ?>
@@ -167,12 +169,15 @@
     function edit(obj) {
         var id=$(obj).attr('board_id');
         var str=(".am-modal[tabindex='id']").replace("id",id);
+        var aa='';
         $(str).modal({
             relatedTarget: this,
             onConfirm:function (e) {
-                var customer=$(str+' option:selected').val();
+                var Type=$(str+' option:selected').val();
+                var customer=$('#Customer option:selected').val();
+                console.log(customer);
                 //$.post("<?php echo U('Admin/Board/edit');?>",{id:id,Name:e.data[0],Customer:customer,Chip_Info:e.data[1],'2D_Core':e.data[2],'3D_Core':e.data[3],'2D_VG_Core':e.data[4]},
-           		$.post("<?php echo U('Admin/Board/edit');?>",{id:id,Name:e.data[0],Customer:customer,'2D_Core':e.data[1],'3D_Core':e.data[2],'2D_VG_Core':e.data[3],'Bitfile':e.data[4],'CModel_Location-P4':e.data[5],'CModel_Location-Build':e.data[6]},		 
+           		$.post("<?php echo U('Admin/Board/edit');?>",{id:id,Name:e.data[0],Customer:customer,'Type':Type,'2D_Core':e.data[1],'3D_Core':e.data[2],'2D_VG_Core':e.data[3],'Bitfile':e.data[4],'CModel_Location-P4':e.data[5],'CModel_Location-Build':e.data[6]},		 
            			function () {
                        	window.location.reload();
                 });
@@ -193,13 +198,14 @@
 
     }
     function add() {
+    	var customer=$('#Customer_add option:selected').val();
+        var Type=$('#new_select').val();
         $('#add_board_modal').modal({
             relatedTarget: this,
             onConfirm:function (e) {
-                var customer=$('#add_board_modal option:selected').val();
                 $.post("<?php echo U('Admin/Board/add');?>",
                         //{Name:e.data[0],Customer:customer,Chip_Info:e.data[1],'2D_Core':e.data[2],'3D_Core':e.data[3],'2D_VG_Core':e.data[4]},
-                        {Name:e.data[0],Customer:customer,'2D_Core':e.data[1],'3D_Core':e.data[2],'2D_VG_Core':e.data[3],'Bitfile':e.data[4],'CModel_Location-P4':e.data[5],'CModel_Location-Build':e.data[6]},
+                        {Name:e.data[0],Customer:customer,'Type':Type,'2D_Core':e.data[1],'3D_Core':e.data[2],'2D_VG_Core':e.data[3],'Bitfile':e.data[4],'CModel_Location-P4':e.data[5],'CModel_Location-Build':e.data[6]},
                         function (data) {
                             window.location.reload();
                 });
