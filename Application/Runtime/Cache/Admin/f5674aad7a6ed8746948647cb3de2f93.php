@@ -114,6 +114,44 @@
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New Board</div>
         <div class="am-modal-bd">
+<<<<<<< HEAD
+        <table style="width:100%;margin:5px auto;">
+        <tr style="margin:10px auto;">
+          <td style="text-align:right;"><label>host:&nbsp;</label></td>
+          <td><input type="text" id="Name" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;"></td>
+        </tr>
+        <tr>
+          <td style="text-align:right;"><label>Alias:&nbsp;</label></td>
+          <td><input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;"></td>
+        </tr>
+        <tr>
+          <td style="text-align:right;">
+            <label style="padding-top:10px;">Platform:&nbsp;</label>
+          </td>
+          <td style="text-align:left;padding-top:10px;">
+            <div class="am-form-group-inline" style="width:71.5%;">
+             <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary'}"  placeholder="Please select..." class="am-fl" id="e_board">
+                <option value=""></option>
+                <?php if(is_array($platform_info)): foreach($platform_info as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
+             </select>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align:right;">
+            <label style="text-align:right;padding-top:10px;">Owner:&nbsp;</label>
+          </td>
+          <td style="text-align:left;padding-top:10px;">
+            <div class="am-form-group-inline" style="width:71.5%;">
+             <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary'}"  placeholder="Please select..." id="e_owner">
+                <option value=""></option>
+                <?php if(is_array($owner_list)): foreach($owner_list as $k=>$vc): ?><option value=<?php echo ($vc[username]); ?>><?php echo ($vc[username]); ?></option><?php endforeach; endif; ?>
+             </select>
+            </div>
+          </td>
+        </tr>
+      </table>
+=======
           <label style="display:inline;">host:&nbsp;</label>
           <input type="text" id="Name" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:300px;border:1px solid #9C9898;display:inline;"><br/><br/>
           <label style="display:inline;">Alias:</label>
@@ -132,6 +170,7 @@
             <?php if(is_array($owner_list)): foreach($owner_list as $k=>$vc): ?><option value=<?php echo ($vc[username]); ?>><?php echo ($vc[username]); ?></option><?php endforeach; endif; ?>
            </select>
          </div>                  
+>>>>>>> a1b874d8325c5b5122120bec579e2263c8c3341b
       </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>

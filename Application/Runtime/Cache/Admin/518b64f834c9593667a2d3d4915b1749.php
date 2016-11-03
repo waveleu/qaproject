@@ -163,10 +163,17 @@
         </div>
         <br/>
         <!--Task case--->
+<<<<<<< HEAD
+        <div class="am-g" style="padding-left:10%;">
+            <div class="am-u-md-9 am-u-md-pull-1">
+                <div class="container" id="edit_page" >
+                    <div class="am-g" style="width:1100px;">
+=======
         <div class="am-g" style="padding-left:10px;">
            <div class="container" id="edit_page">
               <div class="am-g">
                 <div class="am-u-md-12">   
+>>>>>>> a1b874d8325c5b5122120bec579e2263c8c3341b
                           <table class="am-table am-table-striped am-table-hover table-main">
                             <thead>
                             <tr>
