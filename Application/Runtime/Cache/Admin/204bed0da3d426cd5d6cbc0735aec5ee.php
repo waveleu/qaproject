@@ -139,7 +139,7 @@
 	        <div id="2D_VG_Core_add">2D_VG_Core<input type="text" class="am-modal-prompt-input" ></div>
 	        <div id="Bitfile_add">Bitfile<input type="text" class="am-modal-prompt-input" ></div>
 	        <div id="CModel_Location-P4_add">CModel_Location-P4<input type="text" class="am-modal-prompt-input" ></div>
-	        <div id="CMpdel_Location-Build_add">CMpdel_Location-Build<input type="text" class="am-modal-prompt-input" ></div>
+	        <div id="CModel_Location-Build_add">CModel_Location-Build<input type="text" class="am-modal-prompt-input" ></div>
         </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-confirm style="width: 50%">OK</span>
@@ -172,7 +172,7 @@
             onConfirm:function (e) {
                 var customer=$(str+' option:selected').val();
                 //$.post("<?php echo U('Admin/Board/edit');?>",{id:id,Name:e.data[0],Customer:customer,Chip_Info:e.data[1],'2D_Core':e.data[2],'3D_Core':e.data[3],'2D_VG_Core':e.data[4]},
-           		$.post("<?php echo U('Admin/Board/edit');?>",{id:id,Name:e.data[0],Customer:customer,'2D_Core':e.data[1],'3D_Core':e.data[2],'2D_VG_Core':e.data[3]},		 
+           		$.post("<?php echo U('Admin/Board/edit');?>",{id:id,Name:e.data[0],Customer:customer,'2D_Core':e.data[1],'3D_Core':e.data[2],'2D_VG_Core':e.data[3],'Bitfile':e.data[4],'CModel_Location-P4':e.data[5],'CModel_Location-Build':e.data[6]},		 
            			function () {
                        	window.location.reload();
                 });
@@ -185,7 +185,6 @@
     }
     function del(obj) {
         var id=$(obj).attr('board_id');
-        console.log(id);
         if(confirm('Delete This Board ?')){
             $.post("<?php echo U('Admin/Board/del');?>",{id:id},function (data) {
                 window.location.reload();
@@ -200,7 +199,7 @@
                 var customer=$('#add_board_modal option:selected').val();
                 $.post("<?php echo U('Admin/Board/add');?>",
                         //{Name:e.data[0],Customer:customer,Chip_Info:e.data[1],'2D_Core':e.data[2],'3D_Core':e.data[3],'2D_VG_Core':e.data[4]},
-                        {Name:e.data[0],Customer:customer,'2D_Core':e.data[2],'3D_Core':e.data[3],'2D_VG_Core':e.data[4]},
+                        {Name:e.data[0],Customer:customer,'2D_Core':e.data[1],'3D_Core':e.data[2],'2D_VG_Core':e.data[3],'Bitfile':e.data[4],'CModel_Location-P4':e.data[5],'CModel_Location-Build':e.data[6]},
                         function (data) {
                             window.location.reload();
                 });
@@ -212,35 +211,35 @@
     }
     
     $(document).ready(function(){
-    	$("#Customer_1,#Customer,#2D_Core,#3D_Core,#2D_VG_Core,#Bitfile,#CModel_Location-P4,#CMpdel_Location-Build").css("visibility","hidden");
-    	$("#Customer_add,#2D_Core_add,#3D_Core_add,#2D_VG_Core_add,#Bitfile_add,#CModel_Location-P4_add,#CMpdel_Location-Build_add").css("visibility","hidden");	
+    	$("#Customer_1,#Customer,#2D_Core,#3D_Core,#2D_VG_Core,#Bitfile,#CModel_Location-P4,#CModel_Location-Build").css("visibility","hidden");
+    	$("#Customer_add,#2D_Core_add,#3D_Core_add,#2D_VG_Core_add,#Bitfile_add,#CModel_Location-P4_add,#CModel_Location-Build_add").css("visibility","hidden");	
     });
     function edit_select(obj){
     	var id=$(obj).attr('id');
     	if($("#"+id).val()=='Chip'){
     		$("#Customer_1,#Customer,#2D_Core,#3D_Core,#2D_VG_Core").css("visibility","visible");
-    		$("#Bitfile,#CModel_Location-P4,#CMpdel_Location-Build").css("visibility","hidden");
+    		$("#Bitfile,#CModel_Location-P4,#CModel_Location-Build").css("visibility","hidden");
     		};
     	if($("#"+id).val()=='FPGA'){
     		$("#Bitfile,#Customer").css("visibility","visible");
-    		$("#Customer_1,#Customer,#2D_Core,#3D_Core,#2D_VG_Core,#CModel_Location-P4,#CMpdel_Location-Build").css("visibility","hidden");
+    		$("#Customer_1,#Customer,#2D_Core,#3D_Core,#2D_VG_Core,#CModel_Location-P4,#CModel_Location-Build").css("visibility","hidden");
     		};
     	if($("#"+id).val()=='CModel'){
-    		$("#CModel_Location-P4,#CMpdel_Location-Build").css("visibility","visible");
+    		$("#CModel_Location-P4,#CModel_Location-Build").css("visibility","visible");
     		$("#Customer_1,#Customer,#2D_Core,#3D_Core,#2D_VG_Core,#Bitfile").css("visibility","hidden");
     		};
     	}
     function new_select(){
     	if($("#new_select").val()=='Chip'){
     		$("#Customer_add,#2D_Core_add,#3D_Core_add,#2D_VG_Core_add").css("visibility","visible");
-    		$("#Bitfile_add,#CModel_Location-P4_add,#CMpdel_Location-Build_add").css("visibility","hidden");
+    		$("#Bitfile_add,#CModel_Location-P4_add,#CModel_Location-Build_add").css("visibility","hidden");
     		};
     	if($("#new_select").val()=='FPGA'){
     		$("#Bitfile_add").css("visibility","visible");
-    		$("#Customer_add,#2D_Core_add,#3D_Core_add,#2D_VG_Core_add,#CModel_Location-P4_add,#CMpdel_Location-Build_add").css("visibility","hidden");
+    		$("#Customer_add,#2D_Core_add,#3D_Core_add,#2D_VG_Core_add,#CModel_Location-P4_add,#CModel_Location-Build_add").css("visibility","hidden");
     		};
     	if($("#new_select").val()=='CModel'){
-    		$("#CModel_Location-P4_add,#CMpdel_Location-Build_add").css("visibility","visible");
+    		$("#CModel_Location-P4_add,#CModel_Location-Build_add").css("visibility","visible");
     		$("#Customer_add,#2D_Core_add,#3D_Core_add,#2D_VG_Core_add,#Bitfile_add").css("visibility","hidden");
     		};
     	}
