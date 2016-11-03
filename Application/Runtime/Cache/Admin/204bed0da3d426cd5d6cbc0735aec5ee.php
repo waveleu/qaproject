@@ -168,14 +168,12 @@
 <script>
     function edit(obj) {
         var id=$(obj).attr('board_id');
-        var str=(".am-modal[tabindex='id']").replace("id",id);
-        var aa='';
+        var str=(".am-modal[tabindex='id']").replace("id",id);;
         $(str).modal({
             relatedTarget: this,
             onConfirm:function (e) {
                 var Type=$(str+' option:selected').val();
                 var customer=$('#Customer option:selected').val();
-                console.log(customer);
                 //$.post("<?php echo U('Admin/Board/edit');?>",{id:id,Name:e.data[0],Customer:customer,Chip_Info:e.data[1],'2D_Core':e.data[2],'3D_Core':e.data[3],'2D_VG_Core':e.data[4]},
            		$.post("<?php echo U('Admin/Board/edit');?>",{id:id,Name:e.data[0],Customer:customer,'Type':Type,'2D_Core':e.data[1],'3D_Core':e.data[2],'2D_VG_Core':e.data[3],'Bitfile':e.data[4],'CModel_Location-P4':e.data[5],'CModel_Location-Build':e.data[6]},		 
            			function () {
@@ -198,11 +196,11 @@
 
     }
     function add() {
-    	var customer=$('#Customer_add option:selected').val();
-        var Type=$('#new_select').val();
         $('#add_board_modal').modal({
             relatedTarget: this,
             onConfirm:function (e) {
+            	var customer=$('#Customer_add option:selected').val();
+                var Type=$('#new_select option:selected').val();
                 $.post("<?php echo U('Admin/Board/add');?>",
                         //{Name:e.data[0],Customer:customer,Chip_Info:e.data[1],'2D_Core':e.data[2],'3D_Core':e.data[3],'2D_VG_Core':e.data[4]},
                         {Name:e.data[0],Customer:customer,'Type':Type,'2D_Core':e.data[1],'3D_Core':e.data[2],'2D_VG_Core':e.data[3],'Bitfile':e.data[4],'CModel_Location-P4':e.data[5],'CModel_Location-Build':e.data[6]},
@@ -217,8 +215,8 @@
     }
     
     $(document).ready(function(){
-    	$("#Customer_1,#Customer,#2D_Core,#3D_Core,#2D_VG_Core,#Bitfile,#CModel_Location-P4,#CModel_Location-Build").css("visibility","hidden");
-    	$("#Customer_add,#2D_Core_add,#3D_Core_add,#2D_VG_Core_add,#Bitfile_add,#CModel_Location-P4_add,#CModel_Location-Build_add").css("visibility","hidden");	
+    	$("#2D_Core,#3D_Core,#2D_VG_Core,#Bitfile,#CModel_Location-P4,#CModel_Location-Build").css("visibility","hidden");
+    	$("#2D_Core_add,#3D_Core_add,#2D_VG_Core_add,#Bitfile_add,#CModel_Location-P4_add,#CModel_Location-Build_add").css("visibility","hidden");	
     });
     function edit_select(obj){
     	var id=$(obj).attr('id');
@@ -231,8 +229,8 @@
     		$("#Customer_1,#Customer,#2D_Core,#3D_Core,#2D_VG_Core,#CModel_Location-P4,#CModel_Location-Build").css("visibility","hidden");
     		};
     	if($("#"+id).val()=='CModel'){
-    		$("#CModel_Location-P4,#CModel_Location-Build").css("visibility","visible");
-    		$("#Customer_1,#Customer,#2D_Core,#3D_Core,#2D_VG_Core,#Bitfile").css("visibility","hidden");
+    		$("#CModel_Location-P4,#CModel_Location-Build,#3D_Core").css("visibility","visible");
+    		$("#Customer_1,#Customer,#2D_Core,#2D_VG_Core,#Bitfile").css("visibility","hidden");
     		};
     	}
     function new_select(){
@@ -245,8 +243,8 @@
     		$("#Customer_add,#2D_Core_add,#3D_Core_add,#2D_VG_Core_add,#CModel_Location-P4_add,#CModel_Location-Build_add").css("visibility","hidden");
     		};
     	if($("#new_select").val()=='CModel'){
-    		$("#CModel_Location-P4_add,#CModel_Location-Build_add").css("visibility","visible");
-    		$("#Customer_add,#2D_Core_add,#3D_Core_add,#2D_VG_Core_add,#Bitfile_add").css("visibility","hidden");
+    		$("#CModel_Location-P4_add,#CModel_Location-Build_add,#3D_Core_add").css("visibility","visible");
+    		$("#Customer_add,#2D_Core_add,#2D_VG_Core_add,#Bitfile_add").css("visibility","hidden");
     		};
     	}
 </script>

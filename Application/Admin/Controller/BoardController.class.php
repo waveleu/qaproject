@@ -20,7 +20,7 @@ class BoardController extends AuthController {
 		//$result=M('board')->where(array('id'=>$id))->save($map);
 		if($map['Type']=="Chip"){$map['Bitfile']="null";$map['CModel_Location-Build']="null";$map['CModel_Location-P4']="null";}
 		if($map['Type']=="FPGA"){$map['2D_Core']="null";$map['3D_Core']="null";$map['2D_VG_Core']="null";$map['CModel_Location-Build']="null";$map['CModel_Location-P4']="null";}
-		if($map['Type']=="CModel"){$map['2D_Core']="null";$map['3D_Core']="null";$map['2D_VG_Core']="null";$map['Bitfile']="null";}
+		if($map['Type']=="CModel"){$map['2D_Core']="null";$map['2D_VG_Core']="null";$map['Bitfile']="null";}
 		$result=M('board')->where("id=$id")->save($map);
 		$this->ajaxReturn($result,'json');
 	}
@@ -28,7 +28,7 @@ class BoardController extends AuthController {
 		$map=I('post.');
 		if($map['Type']=="Chip"){$map['Bitfile']="null";$map['CModel_Location-Build']="null";$map['CModel_Location-P4']="null";}
 		if($map['Type']=="FPGA"){$map['2D_Core']="null";$map['3D_Core']="null";$map['2D_VG_Core']="null";$map['CModel_Location-Build']="null";$map['CModel_Location-P4']="null";}
-		if($map['Type']=="CModel"){$map['2D_Core']="null";$map['3D_Core']="null";$map['2D_VG_Core']="null";$map['Bitfile']="null";}
+		if($map['Type']=="CModel"){$map['2D_Core']="null";$map['2D_VG_Core']="null";$map['Bitfile']="null";}
 		 if($map['Name']!=null&&$map['Name']!=""){
 			$result=M('board')->add($map);
 		}

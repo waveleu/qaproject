@@ -55,7 +55,7 @@
                     <tbody>
                     <?php if(is_array($data)): foreach($data as $key=>$v): ?><tr>
                         <td><?php echo ($v[host]); ?></td>
-                        <td>name</td>
+                        <td><?php echo ($v[Alias]); ?></td>
                         <td><?php echo ($v[info][name]); ?></td>
                         <td><?php echo ($v[owner]); ?></td>
                         <td>
@@ -173,12 +173,12 @@
             relatedTarget: this,
             onConfirm:function (e) {
                 var board_id=$(str+' #a_board').val();
-                var OS=$(str+' #a_os').val();
-                var BSP=$(str+' #a_bsp').val();
+                //var OS=$(str+' #a_os').val();
+                //var BSP=$(str+' #a_bsp').val();
                 var owner=$(str+' #a_owner').val();
                 $.post("<?php echo U('Admin/Boardlist/edit');?>",
                         //{id:id,host:e.data,board_id:board_id,OS:OS,BSP:BSP,owner:owner},
-                        {id:id,host:e.data,board_id:board_id,owner:owner},
+                        {id:id,host:e.data[0],Alias:e.data[1],board_id:board_id,owner:owner},
                         function (data) {
                             location.reload();
                         });
@@ -214,27 +214,7 @@
                 var owner=$('#add_board_modal #e_owner').val();
                 $.post("<?php echo U('Admin/Boardlist/add');?>",
                         //{host:e.data,board_id:board_id,OS:OS,BSP:BSP,owner:owner},
-                        {host:e.data,board_id:board_id,owner:owner},
-                        function (data) {
-                            location.reload();
-                        });
-            },
-            onCancel:function (e) {
-                e.close();
-            }
-        });
-    }
-
-
-</script>
-</body>
-</html>').val();
-                //var OS=$('#add_board_modal #e_os').val();
-                //var BSP=$('#add_board_modal #e_bsp').val();
-                var owner=$('#add_board_modal #e_owner').val();
-                $.post("<?php echo U('Admin/Boardlist/add');?>",
-                        //{host:e.data,board_id:board_id,OS:OS,BSP:BSP,owner:owner},
-                        {host:e.data,board_id:board_id,owner:owner},
+                        {host:e.data[0],Alias:e.data[1],board_id:board_id,owner:owner},
                         function (data) {
                             location.reload();
                         });
