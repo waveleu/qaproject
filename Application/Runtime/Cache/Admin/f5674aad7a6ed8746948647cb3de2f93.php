@@ -114,6 +114,7 @@
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New Board</div>
         <div class="am-modal-bd">
+<<<<<<< HEAD
         <table style="width:100%;margin:5px auto;">
         <tr style="margin:10px auto;">
           <td style="text-align:right;"><label>host:&nbsp;</label></td>
@@ -150,6 +151,26 @@
           </td>
         </tr>
       </table>
+=======
+          <label style="display:inline;">host:&nbsp;</label>
+          <input type="text" id="Name" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:300px;border:1px solid #9C9898;display:inline;"><br/><br/>
+          <label style="display:inline;">Alias:</label>
+          <input type="text" class="am-modal-prompt-input" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>   
+          <label style="display:inline;margin-left:-6%;">Platform:&nbsp;</label>  
+          <div class="am-form-group-inline" style="display:inline;">
+           <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}"  placeholder="Please select..." class="am-fl" id="e_board">
+            <option value=""></option>
+            <?php if(is_array($platform_info)): foreach($platform_info as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
+          </select>
+         </div><br/><br/> 
+         <label style="display:inline;margin-left:-4%;">Owner:&nbsp;</label>   
+         <div class="am-form-group-inline" style="display:inline;">
+           <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}"  placeholder="Please select..." id="e_owner">
+            <option value=""></option>
+            <?php if(is_array($owner_list)): foreach($owner_list as $k=>$vc): ?><option value=<?php echo ($vc[username]); ?>><?php echo ($vc[username]); ?></option><?php endforeach; endif; ?>
+           </select>
+         </div>                  
+>>>>>>> a1b874d8325c5b5122120bec579e2263c8c3341b
       </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>

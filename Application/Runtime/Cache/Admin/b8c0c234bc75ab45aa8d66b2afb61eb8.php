@@ -97,41 +97,19 @@
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New BSP</div>
         <div class="am-modal-bd">
-          <table style="width:100%;margin:5px auto;">
-        <tr>
-          <td style="text-align:right;"><label>Name:&nbsp;</label></td>
-          <td><input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="Name"></td>
-        </tr>
-        <tr>
-          <td style="text-align:right;">
-            <label style="padding-top:10px;">Customer:&nbsp;</label>
-          </td>
-          <td style="text-align:left;padding-top:10px;">
-            <div class="am-form-group-inline" style="width:71.5%;">
-              <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary'}"   class="am-fr" placeholder="Please select...">
-                    <option value=""></option>
-                <?php if(is_array($customer_list)): foreach($customer_list as $key=>$vc): ?><option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
-              </select>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align:right;">
-            <label style="text-align:right;padding-top:10px;">Comments:&nbsp;</label>
-          </td>
-          <td style="text-align:left;padding-top:10px;">
-            <input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;">
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align:right;">
-            <label style="text-align:right;padding-top:10px;">Date:&nbsp;</label>
-          </td>
-          <td style="text-align:left;padding-top:10px;">
-            <input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;"  data-am-datepicker="{format: 'yyyy-mm-dd'}">
-          </td>
-        </tr>
-      </table>
+          <label style="display:inline;margin-left:0px;">Name:</label>
+          <input type="text" class="am-modal-prompt-input" id="Name" style="width:300px;display:inline;border:1px solid #9C9898;"><br/><br/> 
+          <label style="display:inline;margin-left:-23px;">Customer:</label>
+          <div class="am-form-group-inline" style="display:inline;">
+            <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}"   class="am-fr" placeholder="Please select...">
+               <option value=""></option>
+             <?php if(is_array($customer_list)): foreach($customer_list as $key=>$vc): ?><option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
+            </select>
+          </div><br/><br/>   
+          <label style="display:inline;margin-left:-34px;">Comments:</label>   
+          <input type="text" class="am-modal-prompt-input" style="width:300px;display:inline;border:1px solid #9C9898;"><br/><br/>   
+          <label style="display:inline;margin-left:9px;">Date:</label>
+          <input type="text" class="am-modal-prompt-input" style="width:300px;display:inline;border:1px solid #9C9898;"  data-am-datepicker="{format: 'yyyy-mm-dd'}">                  
         </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>

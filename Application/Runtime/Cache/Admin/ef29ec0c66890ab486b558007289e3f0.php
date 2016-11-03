@@ -10,8 +10,20 @@
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
     <link rel="stylesheet" href="/qaweb/Public/assets/css/amazeui.min.css"/>
     <link rel="stylesheet" href="/qaweb/Public/assets/css/admin.css">
-
 </head>
+<style>
+/*.am-offcanvas-bar ul:hover{
+	  position: relative;
+      left: 100%;
+      margin-left: -32px;
+      box-shadow: 0 -8px 8px -8px, 0 8px 8px -8px;
+      transition: all 0.3s ease-in-out;
+}
+.am-offcanvas-bar ul li{
+	 display: inline-block;
+     white-space: nowrap;
+}*/
+</style>
 <body>
 <header class="am-topbar am-topbar-inverse admin-header" style="background-color: #BF2126">
     <div class="am-topbar-brand" style="background-color: white" >
@@ -33,8 +45,8 @@
 <div class="am-cf admin-main">
     <!-- sidebar start -->
     <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
-        <div class="am-offcanvas-bar admin-offcanvas-bar" >
-            <ul class="am-list admin-sidebar-list" >
+        <div class="am-offcanvas-bar admin-offcanvas-bar">
+            <ul class="am-list admin-sidebar-list">
                 <?php if(is_array($data)): foreach($data as $key=>$v): if(empty($v['_data'])): ?><li><a href="<?php echo U($v['mca']);?>" class="am-cf" target="right-content" title=<?php echo ($v['mca']); ?>><span class=<?php echo ($v[ico]); ?>></span> <?php echo ($v['name']); ?></a></li>
                 <?php else: ?>
                 <?php $tmp= "{target:"."'#".$v['id']."'}"; ?>
