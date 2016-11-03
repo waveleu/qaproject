@@ -86,7 +86,7 @@
 
     <div class="admin-content">
         <div class="am-cf am-padding am-padding-bottom-0" id="content-body">
-            <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Task Suit</strong></div>
+            <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Task Suite</strong></div>
         </div>
     <div class="am-g">
      <div class="am-u-md-3" style="margin-top:40px;">
@@ -107,7 +107,7 @@
         <div class="container" id="edit_page">
             <div class="am-g">
                 <div class="am-u-md-8">
-                    <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary am-fr'  onclick='add(this)'> <span class='am-icon-pencil-square'></span>&nbsp;new Suit</button><br/>
+                    <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary am-fr'  onclick='add(this)'> <span class='am-icon-pencil-square'></span>&nbsp;new Suite</button><br/>
                     <table class="am-table am-table-striped am-table-hover table-main">
                         <thead>
                         <tr>

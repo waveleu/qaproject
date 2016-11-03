@@ -263,6 +263,7 @@
                                                 <th class="table-title"><a href="#">Status</a></th>
                                                 <th class="table-title"><a href="javascript:reorder('comments');">Comments</a></th>
 
+                                                <th class="table-author am-hide-sm-only">Log</th>
                                                 <th class="table-author am-hide-sm-only"></span>Operation</th>
                                             </tr>
                                             </thead>
@@ -275,6 +276,11 @@
                                                 <td><?php echo ($v[driver]); ?></td>
                                                 <td><?php echo ($v[status]); ?></td>
                                                 <td><?php echo ($v[comments]); ?></td>
+                                                <td>
+                                                   <div class="am-btn-toolbar">
+                                                      <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary" style="margin-left:2px;"><span class="am-icon-arrow-circle-right"></span>  Log</button>
+                                                   </div>
+                                                </td>
 
 
                                                 <td>
