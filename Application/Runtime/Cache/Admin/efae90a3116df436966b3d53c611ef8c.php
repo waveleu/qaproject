@@ -19,7 +19,7 @@
     <SCRIPT type="text/javascript">
         var setting = {
             view: {
-                dblClickExpand: false
+                dblClickExpand: true
             },
             check: {
              enable: true,
@@ -41,11 +41,11 @@
             if(v.id<10)
                 var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:true,isParent:true};
             else
-                var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:true,isParent:true};
+                var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:false,isParent:true};
             zNodes.push(temp);
         })
         $.each(<?php echo ($tree_data); ?>,function (k,v) {
-            var temp={id:v.id+1000-1000,pId:v.pid,name:""+v.CaseName,open:false,isParent:false};
+            var temp={id:v.id+1000-1000,pId:v.pid,name:""+v.CaseName,open:true,isParent:false};
             zNodes.push(temp);
         })
 
@@ -88,12 +88,12 @@
         <div class="am-cf am-padding am-padding-bottom-0" id="content-body">
             <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Task Suit</strong></div>
         </div>
-        <div class="am-g">
-    <div class="am-u-md-3 ">
+    <div class="am-g">
+     <div class="am-u-md-3" style="margin-top:40px;">
         <div class="container" id="tree_btn">
             <div class="zTreeDemoBackground left">
-                <ul id="treeDemo" class="ztree" style="height: auto; border: hidden;overflow: auto;" ></ul>
-                <div class="am-btn-toolbar ">
+                <ul id="treeDemo" class="ztree" style="height: auto; border: hidden;overflow:auto;" ></ul>
+                <div class="am-btn-toolbar" style="margin-left:3px;">
                     <div class="am-btn-group am-btn-group-md">
                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="edit()"><span class="am-icon-pencil" ></span>&nbsp;Save</button>
                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="cancel()"><span class="am-icon-pencil" ></span>&nbsp;Cancel</button>
@@ -103,11 +103,11 @@
         </div>
     </div>
 
-    <div class="am-u-md-6 am-u-md-pull-4">
+    <div class="am-g" style="margin-left:10px;">
         <div class="container" id="edit_page">
-            <div class="am-g" style="width:800px;margin-left:20px;">
-                <div class="am-u-md-12" style="width:800px;margin-left:20px;">
-                    <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary am-fr'  onclick='add(this)'> <span class='am-icon-pencil-square'></span>&nbsp;new Suit</button>
+            <div class="am-g">
+                <div class="am-u-md-8">
+                    <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary am-fr'  onclick='add(this)'> <span class='am-icon-pencil-square'></span>&nbsp;new Suit</button><br/>
                     <table class="am-table am-table-striped am-table-hover table-main">
                         <thead>
                         <tr>
@@ -120,8 +120,8 @@
                             <td>
                                 <div class="am-btn-toolbar am-fr">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary" shot_id=<?php echo ($v[id]); ?> onclick="rename(this)"><span class="am-icon-pencil-square"></span>Rename</button>
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" shot_id=<?php echo ($v[id]); ?> onclick="del(this)"><span class="am-icon-trash-o" ></span>Delete</button>
+                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary" shot_id=<?php echo ($v[id]); ?> onclick="rename(this)"><span class="am-icon-pencil-square"></span> Rename</button>
+                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" shot_id=<?php echo ($v[id]); ?> onclick="del(this)"><span class="am-icon-trash-o" ></span> Delete</button>
                                     </div>
                                 </div>
                             </td>
@@ -137,7 +137,7 @@
     </div>
 </div>
 
-<div class="am-modal am-modal-confirm" id="shot_edit_name" style="top:-15%;">
+<div class="am-modal am-modal-confirm" id="shot_edit_name" style="top:-30%;">
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New/Rename Suit</div>
         <div class="am-modal-bd">

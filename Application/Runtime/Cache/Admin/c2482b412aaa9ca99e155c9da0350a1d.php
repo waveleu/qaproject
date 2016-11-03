@@ -109,7 +109,7 @@
 					<div class="am-modal-hd">New OS_Version</div>
                       <div class="am-modal-bd">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="display:inline;">OS Name:</label>
-                        <input type="text" class="am-modal-prompt-input" style="width:60%;display:inline; color:#000;border:1px solid #9C9898;"><br/>
+                        <input type="text" class="am-modal-prompt-input" style="width:60%;display:inline; color:#000;border:1px solid #9C9898;"><br/><br/>
                         <label style="display:inline;">Version Name:</label>
                         <input type="text" class="am-modal-prompt-input" style="width:60%;display:inline; color:#000;border:1px solid #9C9898;">
                       </div>

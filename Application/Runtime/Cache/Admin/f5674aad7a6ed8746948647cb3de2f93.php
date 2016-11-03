@@ -46,6 +46,7 @@
                     <thead>
                     <tr>
                         <th class="table-title">Host</th>
+                        <th class="table-title">Alias</th>
                         <th class="table-title">Platform</th>
                         <th class="table-title">Owner</th>
                         <th class="table-author am-hide-sm-only am-fr">Operation</th>
@@ -54,6 +55,7 @@
                     <tbody>
                     <?php if(is_array($data)): foreach($data as $key=>$v): ?><tr>
                         <td><?php echo ($v[host]); ?></td>
+                        <td>name</td>
                         <td><?php echo ($v[info][name]); ?></td>
                         <td><?php echo ($v[owner]); ?></td>
                         <td>
@@ -66,12 +68,14 @@
                         </td>
                     </tr>
 
-                    <div class="am-modal am-modal-confirm" tabindex=<?php echo ($v[id]); ?> style="top:-15%;">
+                    <div class="am-modal am-modal-confirm" tabindex=<?php echo ($v[id]); ?> style="top:-22%;">
                         <div class="am-modal-dialog">
                             <div class="am-modal-hd">Edit Board</div>
                             <div class="am-modal-bd">
                               <label style="display:inline;">host:</label>
                               <input type="text" class="am-modal-prompt-input" value=<?php echo ($v[host]); ?> style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+                              <label style="display:inline;">Alias:</label>
+                              <input type="text" class="am-modal-prompt-input" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>                             
                               <label style="display:inline;margin-left:-6%;">Platform:</label>
                               <div class="am-form-group-inline" style="display:inline;">
                                   <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}" placeholder="Please select..." id="a_board" style="border:1px solid #9C9898;">
@@ -106,42 +110,28 @@
 <!-- content end -->
 
 
-<div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_board_modal" style="top:-15%;">
+<div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_board_modal" style="top:-22%;">
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New Board</div>
         <div class="am-modal-bd">
-          <table style="width:100%;margin:5px auto;">
-        <tr>
-          <td style="text-align:right;"><label>host:&nbsp;</label></td>
-          <td><input type="text" id="Name" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;"></td>
-        </tr>
-        <tr>
-          <td style="text-align:right;">
-            <label style="padding-top:10px;">Platform:&nbsp;</label>
-          </td>
-          <td style="text-align:left;padding-top:10px;">
-            <div class="am-form-group-inline" style="width:71.5%;">
-             <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary'}"  placeholder="Please select..." class="am-fl" id="e_board">
-                <option value=""></option>
-                <?php if(is_array($platform_info)): foreach($platform_info as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
-             </select>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align:right;">
-            <label style="text-align:right;padding-top:10px;">Owner:&nbsp;</label>
-          </td>
-          <td style="text-align:left;padding-top:10px;">
-            <div class="am-form-group-inline" style="width:71.5%;">
-             <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary'}"  placeholder="Please select..." id="e_owner">
-                <option value=""></option>
-                <?php if(is_array($owner_list)): foreach($owner_list as $k=>$vc): ?><option value=<?php echo ($vc[username]); ?>><?php echo ($vc[username]); ?></option><?php endforeach; endif; ?>
-             </select>
-            </div>
-          </td>
-        </tr>
-      </table>
+          <label style="display:inline;">host:&nbsp;</label>
+          <input type="text" id="Name" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:300px;border:1px solid #9C9898;display:inline;"><br/><br/>
+          <label style="display:inline;">Alias:</label>
+          <input type="text" class="am-modal-prompt-input" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>   
+          <label style="display:inline;margin-left:-6%;">Platform:&nbsp;</label>  
+          <div class="am-form-group-inline" style="display:inline;">
+           <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}"  placeholder="Please select..." class="am-fl" id="e_board">
+            <option value=""></option>
+            <?php if(is_array($platform_info)): foreach($platform_info as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
+          </select>
+         </div><br/><br/> 
+         <label style="display:inline;margin-left:-4%;">Owner:&nbsp;</label>   
+         <div class="am-form-group-inline" style="display:inline;">
+           <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}"  placeholder="Please select..." id="e_owner">
+            <option value=""></option>
+            <?php if(is_array($owner_list)): foreach($owner_list as $k=>$vc): ?><option value=<?php echo ($vc[username]); ?>><?php echo ($vc[username]); ?></option><?php endforeach; endif; ?>
+           </select>
+         </div>                  
       </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>
@@ -150,7 +140,7 @@
     </div>
 </div>
 
-<div class="am-modal am-modal-confirm" tabindex="del_class" id="del_modal" style="top:-15%;">
+<div class="am-modal am-modal-confirm" tabindex="del_class" id="del_modal" style="top:-30%;">
     <div class="am-modal-dialog">
         <div class="am-modal-bd">
             <label>Delete This Board?</label>
