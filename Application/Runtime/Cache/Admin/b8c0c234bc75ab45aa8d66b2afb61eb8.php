@@ -66,7 +66,7 @@
                         </td>
                     </tr>
 
-                    <div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" style="top:-15%;">
+                    <div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" style="top:-20%;">
                             <div class="am-modal-dialog">
                                 <div class="am-modal-hd">Edit BSP</div>
                                 <div class="am-modal-bd" style="text-align:left;">

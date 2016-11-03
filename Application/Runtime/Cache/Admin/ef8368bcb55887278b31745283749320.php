@@ -123,10 +123,10 @@
                                 <th class="table-title"><a href="javascript:reorder('start_time desc');">Start Date</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">End Date</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">Progress</a></th>
-                                <th class="table-title"><a href="javascript:reorder('end_time desc');">Pass</a></th>
+                                <!-- <th class="table-title"><a href="javascript:reorder('end_time desc');">Pass</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">Fail</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">Timeout</a></th>
-                                <th class="table-title"><a href="javascript:reorder('end_time desc');">N/A</a></th>
+                                <th class="table-title"><a href="javascript:reorder('end_time desc');">N/A</a></th> -->
                                 <th class="table-author am-hide-sm-only">Operation</th>
                             </tr>
                             </thead>
@@ -140,10 +140,10 @@
                                 <td><?php echo ($v[start_time]); ?></td>
                                 <td><?php echo ($v[end_time]); ?></td>
                                 <td><?php echo ($v['progress']); ?></td>
-                                <td><?php echo ($v['pass']); ?></td>
+                                <!-- <td><?php echo ($v['pass']); ?></td>
                                 <td><?php echo ($v['fail']); ?></td>
                                 <td><?php echo ($v['timeout']); ?></td>
-                                <td><?php echo ($v['NA']); ?></td>
+                                <td><?php echo ($v['NA']); ?></td> -->
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
@@ -159,19 +159,33 @@
                                     <div class="am-modal-bd">
                                       <label style="display:inline;">Name:</label>
                                       <input type="text" class="am-modal-prompt-input" id="edit_name" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
-                                       <label style="display:inline;margin-left:-15px;">Test Run:</label> 
-                                        <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+                                      <label style="display:inline;">Driver:</label>
+                                      <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+                                      <label style="display:inline;margin-left:-15px;">Test Run:</label> 
+                                      <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
                                             <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}" placeholder="Please select..." id="edit_pid" style="border:1px solid #9C9898;">
                                                 <option value=""></option>
                                                 <?php if(is_array($run_list)): foreach($run_list as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
                                             </select>
-                                        </div><br/><br/>
-                                        <label style="display:inline;margin-left:-15px;">Platform:</label>
-                                        <div class="am-form-group-inline" style="display:inline;">
-                                            <select data-am-selected="{btnWidth:'58%', btnStyle: 'secondary'}" class="am-fr" placeholder="Board/BSP/OS_Version" id="edit_platform">
-                                                <option value=""></option>
-                                                <?php if(is_array($platform_list)): foreach($platform_list as $key=>$vc): ?><option value=<?php echo ($vc['id']); ?>><?php echo ($vc[Board]); ?>/<?php echo ($vc[BSP]); ?>/<?php echo ($vc[OS]); echo ($vc[Version]); ?></option><?php endforeach; endif; ?>
-                                            </select>
+                                      </div><br/><br/>
+                                      <label style="display:inline;margin-left:-15px;">Board:</label>
+                                      <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+                                          <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="edit_platform">
+						                    <option value=""></option>
+					                    	<?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['id']); ?>><?php echo ($vc[Name]); ?></option><?php endforeach; endif; ?>
+					                   	  </select>
+						                  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="edit_os(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="edit_os">
+							                  <option value=""></option>
+							                  <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): if($vc==$v[OS]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+							                  <?php else: ?>
+							                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
+						           		  </select>
+						               	  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="edit_version">
+							                  <option value=""></option>
+							                  <?php if(is_array($v[ov_list])): foreach($v[ov_list] as $key=>$vc): if($vc==$v[Version]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+							                  <?php else: ?>
+							                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
+						              	</select>
                                         </div><br/><br/>
                                         <label style="display:inline;">Owner:</label>
                                         <div class="am-form-group-inline" style="display:inline;">
@@ -218,6 +232,10 @@
               <td><input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="add_name"></td>
             </tr>
             <tr>
+              <td style="text-align:right;"><label>Driver:&nbsp;</label></td>
+              <td><input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="add_driver"></td>
+            </tr>
+            <tr>
               <td style="text-align:right;">
                 <label>Test Run:&nbsp;</label>
               </td>
@@ -230,6 +248,7 @@
                 </div>
               </td>
             </tr>
+            
             <tr>
               <td style="text-align:right;">
                 <label>Board:&nbsp;</label>
@@ -238,15 +257,16 @@
                 <div class="am-form-group-inline" style="width:71.5%;">
                   <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform">
                     <option value=""></option>
-                    <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if($vc[Type]==Chip): ?><option value=<?php echo ($vc['id']); ?>><?php echo ($vc[Name]); ?></option><?php endif; endforeach; endif; ?>
+                    <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['id']); ?>><?php echo ($vc[Name]); ?></option>
+	                    {else if condition="$vc[Type]==CModel"}<?php endforeach; endif; ?>
                   </select>
-                  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="edit_os">
+                  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="add_os">
 	                  <option value=""></option>
 	                  <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): if($vc==$v[OS]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
 	                  <?php else: ?>
 	                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
            		  </select>
-               	  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="edit_version">
+               	  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="add_version">
 	                  <option value=""></option>
 	                  <?php if(is_array($v[ov_list])): foreach($v[ov_list] as $key=>$vc): if($vc==$v[Version]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
 	                  <?php else: ?>
@@ -256,19 +276,7 @@
               </td>
             </tr>
             
-            <tr>
-              <td style="text-align:right;">
-                <label>Bitfile:&nbsp;</label>
-              </td>
-              <td style="text-align:left;padding-top:10px;">
-                <div class="am-form-group-inline" style="width:71.5%;">
-                  <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform">
-                    <option value=""></option>
-                    <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if($vc[Type]==Chip): ?><option value=<?php echo ($vc['id']); ?>><?php echo ($vc[Name]); ?></option><?php endif; endforeach; endif; ?>
-                  </select>
-                </div>
-              </td>
-            </tr>
+            
             <tr>
               <td style="text-align:right;">
                 <label>Suit:&nbsp;</label>
@@ -341,7 +349,7 @@
         $("#"+id).modal({
             relatedTarget:this,
             onConfirm:function(e){
-                var arr={id:id,name:e.data['0'],start_time:e.data['1'],end_time:e.data['2'],platform:$("#"+id+" #edit_platform").val(),owner:$("#"+id+" #edit_owner").val(),pid:$("#"+id+" #edit_pid").val()};
+                var arr={id:id,name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:$("#"+id+" #edit_platform").val(),owner:$("#"+id+" #edit_owner").val(),pid:$("#"+id+" #edit_pid").val(),OS:$('#edit_os').val(),Version:$("#edit_version").val()};
                 $.post("<?php echo U('Admin/Task/add');?>",arr,function (data) {
                     window.location.reload();
                 });
@@ -361,6 +369,9 @@
         $("#add_user").val("");
         $("#add_suit").val('');
         $("#add_pid").val("");
+        $("#add_os").val("");
+        $("#add_version").val("");   
+        $("#add_driver").val("");   
         $("#add_start").attr({value:start_time});
         $("#add_end").attr({value:end_time});
         $("#add_task_modal").modal({
@@ -368,7 +379,7 @@
             onConfirm:function(e){
                 var pid=$("#add_pid").val();
                 if(pid!=null&&pid!=""&&pid!=0){
-                    var arr={name:e.data['0'],start_time:e.data['1'],end_time:e.data['2'],platform:$("#add_platform").val(),owner:$('#add_user').val(),suit:$('#add_suit').val(),pid:$("#add_pid").val()};
+                    var arr={name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:$("#add_platform").val(),owner:$('#add_user').val(),suit:$('#add_suit').val(),pid:$("#add_pid").val(),OS:$('#add_os').val(),Version:$("#add_version").val()};
                     $.post("<?php echo U('Admin/Task/add');?>",arr,function (data) {
                         location.href=("<?php echo U('Admin/Task/case_index',array('tid'=>ttid));?>").replace('ttid',data);
                     });
@@ -401,26 +412,23 @@
     function reorder(name) {
         location.href=("<?php echo U(Admin/Task/Index,array('pid'=>ppid,'sort'=>sort_rule));?>").replace('ppid',$("#search_pid").val()).replace('sort_rule',name);
     }
-    function add_os55(obj) {
+    function edit_os(obj) {
         var os=$(obj).val();
-        $.post("<?php echo U('Admin/Task/check_version');?>",{'OS':os},function (data) {
-            $("#add_version").empty();
-            $("#add_version").append("<option value=''></option>");
-            $.each(data,function (k,v) {
-                $("#add_version").append("<option value="+v.Version+">"+v.Version+"</option>");
-            });
-        });
-    }
-    function add_os1(obj) {
-        var os=$(obj).val();
-        var id=$(obj).attr('ov_id');
-        var str=(".am-modal[tabindex='id']").replace("id",id);
         $.post("<?php echo U('Admin/Task/index');?>",{'OS':os,'seconglist':true},function (data) {
-        	console.log(data);
             $("#edit_version").empty();
             $("#edit_version").append("<option value=''></option>");
             $.each(data,function (k,v) {
                 $("#edit_version").append("<option value="+v.Version+">"+v.Version+"</option>");
+            });
+        });
+    }
+    function add_os(obj) {
+        var os=$(obj).val();
+        $.post("<?php echo U('Admin/Task/index');?>",{'OS':os,'seconglist':true},function (data) {
+            $("#add_version").empty();
+            $("#add_version").append("<option value=''></option>");
+            $.each(data,function (k,v) {
+                $("#add_version").append("<option value="+v.Version+">"+v.Version+"</option>");
             });
         });
     }
