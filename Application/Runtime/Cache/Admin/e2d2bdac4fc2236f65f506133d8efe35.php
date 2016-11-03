@@ -113,10 +113,6 @@
                             <th class="table-title"><a href="javascript:reorder('start_time desc');">Start Date</a></th>
                             <th class="table-title"><a href="javascript:reorder('end_time desc');">End Date</a></th>
                             <th class="table-title">Progress</th>
-                            <th class="table-title"><a href="javascript:reorder('end_time desc');">Pass</a></th>
-                            <th class="table-title"><a href="javascript:reorder('end_time desc');">Fail</a></th>
-                            <th class="table-title"><a href="javascript:reorder('end_time desc');">Timeout</a></th>
-                            <th class="table-title"><a href="javascript:reorder('end_time desc');">N/A</a></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -124,15 +120,11 @@
                             <td><a href="javascript:toTaskCase('<?php echo ($v[id]); ?>','<?php echo ($v[pid]); ?>');"><?php echo ($v[name]); ?></a></td>
                             <td><?php echo ($v[project_name]); ?></td>
                             <td><?php echo ($v[suit]); ?></td>
-                            <td><?php echo ($v[board_name]); ?></td>
+                            <td><?php echo ($v[platform_name]); ?></td>
                             <td><?php echo ($v[owner]); ?></td>
                             <td><?php echo ($v[start_time]); ?></td>
                             <td><?php echo ($v[end_time]); ?></td>
                             <td><a href="javascript:toTaskCase('<?php echo ($v[id]); ?>','<?php echo ($v[pid]); ?>');"><?php echo ($v[progress]); ?></a></td>
-                            <td><?php echo ($v['pass']); ?></td>
-                            <td><?php echo ($v['fail']); ?></td>
-                            <td><?php echo ($v['timeout']); ?></td>
-                            <td><?php echo ($v['NA']); ?></td>
                            <!-- <td>
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">

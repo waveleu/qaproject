@@ -46,14 +46,19 @@
                 <table class="am-table am-table-striped am-table-hover table-main">
                     <thead>
                     <tr>
-                        <th class="table-title">Name</th><th class="table-title">Board</th><th class="table-title">OS_Version</th>
-                        <th class="table-title">BSP</th><th class="table-author am-hide-sm-only am-fr">Operation</th>
+                        <th class="table-title">Name</th>
+                        <th class="table-title">Board</th>
+                        <th class="table-title">x86 / x64</th>
+                        <th class="table-title">OS_Version</th>
+                        <th class="table-title">BSP</th>
+                        <th class="table-author am-hide-sm-only am-fr">Operation</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php if(is_array($data)): foreach($data as $key=>$v): ?><tr>
                         <td><?php echo ($v[name]); ?></td>
                         <td><?php echo ($v[Board]); ?></td>
+                        <td>x64</td>
                         <td><?php echo ($v[OS]); echo ($v[Version]); ?></td>
                         <td><?php echo ($v[BSP]); ?></td>
                         <td>
@@ -66,36 +71,45 @@
                             </div>
                         </td>
                     </tr>
-                        <div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" >
+                        <div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" style="top:-15%;">
                         <div class="am-modal-dialog">
                             <div class="am-modal-hd">Edit Platform</div>
                             <div class="am-modal-bd">
-                                name<input type="text" class="am-modal-prompt-input" value="<?php echo ($v[name]); ?>">
-                                Customer
-                                <div class="am-form-group-inline am-cf" >
-                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}"  id="edit_board" class="am-fr" placeholder="Please select...">
+                               <label style="display:inline;margin-left:-17%;">name:</label>
+                               <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[name]); ?>" style="width:208px;display:inline;border:1px solid #9C9898;"><br/><br/>
+                                <label style="display:inline;margin-left:-22.5%;">Customer:</label> 
+                                <div class="am-form-group-inline" style="display:inline;">
+                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
                                         <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if(explode(',',$vc)[0]==Chip): if(explode(',',$vc)[1]==$v[Board]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
 		                                        <?php else: ?>
 		                                        <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endif; endforeach; endif; ?>
                                     </select>
-                                </div>
-                                OS_Version
-                                <div class="am-form-group-inline am-cf" >
-                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="edit_os">
+                                </div><br/><br/>
+                                <label style="display:inline;margin-left:-22.5%;">x86 / x64:</label> 
+                                <div class="am-form-group-inline" style="display:inline;">
+                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
+                                        <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if(explode(',',$vc)[0]==Chip): if(explode(',',$vc)[1]==$v[Board]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+		                                        <?php else: ?>
+		                                        <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endif; endforeach; endif; ?>
+                                    </select>
+                                </div><br/><br/>
+                                <label style="display:inline;margin-left:-4%;">OS_Version:</label>
+                                <div class="am-form-group-inline" style="display:inline;">
+                                    <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="edit_os" style="display:inline;">
                                         <option value=""></option>
                                         <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): if($vc==$v[OS]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
                                         <?php else: ?>
                                         <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
                                     </select>
-                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="edit_version">
+                                    <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select OS..." id="edit_version" style="display:inline;">
                                         <option value=""></option>
                                         <?php if(is_array($v[ov_list])): foreach($v[ov_list] as $key=>$vc): if($vc==$v[Version]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
                                         <?php else: ?>
                                         <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
                                     </select>
-                                </div>
-                                BSP
-                                <div class="am-form-group-inline am-cf" >
+                                </div><br/><br/>
+                                <label style="display:inline;margin-left:-15%;">BSP:</label>
+                                <div class="am-form-group-inline" style="display:inline;">
                                     <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}"  id="edit_bsp" class="am-fr" placeholder="Please select...">
                                         <option value="" ></option>
                                         <?php if(is_array($bsp_list)): foreach($bsp_list as $key=>$vc): if($vc==$v[BSP]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
@@ -121,30 +135,39 @@
 
 
 //add new platform
-<div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_board_modal" >
+<div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_board_modal" style="top:-15%;">
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New Platform</div>
         <div class="am-modal-bd">
-            name<input type="text" class="am-modal-prompt-input">
-            Customer
-                <div class="am-form-group-inline am-cf" >
-                    <select data-am-selected  id="add_board" class="am-fr" placeholder="Please select...">
-                        <option value=""></option>
-                        <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
-                    </select>
-                </div>
-            OS_version
-                <div class="am-form-group-inline am-cf" >
-                    <select data-am-selected  onchange="add_os(this)" class="am-fr" placeholder="Please select OS..." id="os_add">
-                            <option value=""></option>
-                        <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): ?><option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
-                    </select>
-                    <select data-am-selected  id="add_version" class="am-fr" placeholder="Please select Version...">
-                    </select>
-                </div>
-            BSP
-            <div class="am-form-group-inline am-cf" >
-                <select data-am-selected  id="add_bsp" class="am-fr" placeholder="Please select...">
+           <label style="display:inline;margin-left:-17%;">name:</label>
+           <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[name]); ?>" style="width:208px;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label style="display:inline;margin-left:-22.5%;">Customer:</label> 
+            <div class="am-form-group-inline" style="display:inline;">
+                <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
+                    <option value=""></option>
+                    <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
+                </select>
+            </div><br/><br/>
+            <label style="display:inline;margin-left:-22.5%;">x86 / x64:</label> 
+            <div class="am-form-group-inline" style="display:inline;">
+                <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
+                    <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if(explode(',',$vc)[0]==Chip): if(explode(',',$vc)[1]==$v[Board]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+                            <?php else: ?>
+                            <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endif; endforeach; endif; ?>
+                </select>
+            </div><br/><br/>
+            <label style="display:inline;margin-left:-4%;">OS_Version:</label>
+            <div class="am-form-group-inline" style="display:inline;">
+                <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="os_add" style="display:inline;">
+                    <option value=""></option>
+                    <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): ?><option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
+                </select>
+                <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  id="add_version" class="am-fr" placeholder="Please select...">
+                </select>
+            </div><br/><br/>
+            <label style="display:inline;margin-left:-15%;">BSP:</label>
+            <div class="am-form-group-inline" style="display:inline;">
+                <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}"  id="add_bsp" class="am-fr" placeholder="Please select...">
                     <option value=""></option>
                     <?php if(is_array($bsp_list)): foreach($bsp_list as $key=>$vc): ?><option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
                 </select>

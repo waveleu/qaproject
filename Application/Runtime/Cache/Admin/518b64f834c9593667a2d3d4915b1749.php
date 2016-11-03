@@ -163,41 +163,89 @@
         </div>
         <br/>
         <!--Task case--->
-        <div class="am-g" style="padding-left:10%;">
-            <div class="am-u-md-9 am-u-md-pull-1">
-                <div class="container" id="edit_page" >
-                    <div class="am-g" style="width:800px;">
-                        <div class="am-form-group-inline am-cf am-fr" style="width:800px;">
+        <div class="am-g" style="padding-left:10px;">
+           <div class="container" id="edit_page">
+              <div class="am-g">
+                <div class="am-u-md-12">   
+                          <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                            <tr>
+                                <th class="table-title"><a href="javascript:reorder('name');">TaskName</a></th>
+                                <th class="table-title"><a href="javascript:reorder('pid');">Project</a></th>
+                                <th class="table-title"><a href="javascript:reorder('suit');">Board</a></th>
+                                <th class="table-title"><a href="javascript:reorder('platform');">Progress</a></th>
+                                <th class="table-title"><a href="javascript:reorder('owner');">Pass</a></th>
+                                <th class="table-title"><a href="javascript:reorder('start_time desc');">Fail</a></th>
+                                <th class="table-title"><a href="javascript:reorder('end_time desc');">N/A</a></th>
+                                <th class="table-title">Not Run</th>
+                                <th class="table-title"><a href="javascript:reorder('end_time desc');">Total</a></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>11</td>
+                                <td>pr01</td>
+                                <td>host1</td>
+                                <td>100%</td>
+                                <td>11</td>
+                                <td>34</td>
+                                <td>N</td>
+                                <td>s</td>
+                                <td>d</td>
+                            </tr>
+                            <tr>
+                                <td>34</td>
+                                <td>pro3</td>
+                                <td>host3</td>
+                                <td>80%</td>
+                                <td>14</td>
+                                <td>34t</td>
+                                <td>A</td>
+                                <td>d</td>
+                                <td>d</td>
+                            </tr>
+                            <tr>
+                                <td>39</td>
+                                <td>pro7</td>
+                                <td>host2</td>
+                                <td>50%</td>
+                                <td>64</td>
+                                <td>30</td>
+                                <td>A</td>
+                                <td>d</td>
+                                <td>d</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--<div class="am-form-group-inline" style="width:1000px;">
                             Task:
-                            <select data-am-selected="{btnWidth: '23%', btnStyle: 'secondary',searchBox: 1}"  class="am-u-md-3" placeholder="Please select..."  id="search_tid">
+                            <select data-am-selected="{btnWidth: '20%', btnStyle: 'secondary',searchBox: 1}"  class="am-u-md-3" placeholder="Please select..."  id="search_tid">
                                 <option value=""></option>
                                 <?php if(is_array($task)): foreach($task as $k=>$v): ?><option value=<?php echo ($k); ?>><?php echo ($v); ?></option><?php endforeach; endif; ?>
                             </select>
                             &nbsp;&nbsp;Result:
-                            <select data-am-selected="{btnWidth: '23%', btnStyle: 'secondary'}"  class="am-u-md-3" placeholder="Please select..."  id="search_result">
+                            <select data-am-selected="{btnWidth: '20%', btnStyle: 'secondary'}"  class="am-u-md-3" placeholder="Please select..."  id="search_result">
                                 <option value="0">all</option>
                                 <?php if(is_array($result_list)): foreach($result_list as $key=>$v): if($v==N/A): ?><option value="NA">N/A</option>
                                     <?php else: ?>
                                         <option value=<?php echo ($v); ?>><?php echo ($v); ?></option><?php endif; endforeach; endif; ?>
                             </select>
-                            <!-- &nbsp;&nbsp;BugID:&nbsp;<input type="text" id="search_name">
+                             &nbsp;&nbsp;BugID:&nbsp;<input type="text" id="search_name">
                             <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary'  onclick='search()'> <span class='am-icon-search'></span>Search</button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
-                            <select data-am-selected="{btnWidth: '23%', btnStyle: 'secondary'}"  class="am-u-md-3" placeholder="Please select..."  id="search_type">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                            <select data-am-selected="{btnWidth: '20%', btnStyle: 'secondary'}"  class="am-u-md-3" placeholder="Please select..."  id="search_type">
 	                            <option value="CaseName">CaseName</option>
 	                            <option value="BugID">BugID</option>
 	                            <option value="driver">Driver</option>
 	                            <option value="Status">Status</option>
 	                            <option value="result">Result</option>
-                            </select>
-                            <br />
-                            <br />
-                            <div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <input type="text" id="search_name">
+                            </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div style="display:inline;" class="am-fr">
+                            <input type="text" id="search_name" style="width:180px;height:30px;border:1px solid #9C9898;">&nbsp;&nbsp;
                             <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary'  onclick='search()'> <span class='am-icon-search'></span>Search</button>
                         	</div>
-                        </div>
-                        <div class="am-u-md-12" id="edit_table">
+                        </div><br/>-->
+                        <div class="am-u-md-10" id="edit_table">
                             <div class="am-tabs am-margin" data-am-tabs>
                                 <ul class="am-tabs-nav am-nav am-nav-tabs">
                                     <?php if(is_array($cname_list)): $i = 0; $__LIST__ = $cname_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?><li><a href="<?php echo '#'.$v; ?>"><?php echo ($v); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
@@ -212,6 +260,7 @@
                                                 <th class="table-title"><a href="javascript:reorder('result');">Result</a></th>
                                                 <th class="table-title"><a href="javascript:reorder('BugID');">BugID</a></th>
                                                 <th class="table-title"><a href="javascript:reorder('driver');">Driver</a></th>
+                                                <th class="table-title"><a href="#">Status</a></th>
                                                 <th class="table-title"><a href="javascript:reorder('comments');">Comments</a></th>
 
                                                 <th class="table-author am-hide-sm-only"></span>Operation</th>
@@ -224,13 +273,14 @@
  if($v['result']=='fail') echo "<td style='background-color: red'>".$v['result']."</td>"; elseif($v['result']=='pass') echo "<td style='background-color: green'>".$v['result']."</td>"; else echo "<td>".$v['result']."</td>"; ?>
                                                 <td><?php echo ($v[BugID]); ?></td>
                                                 <td><?php echo ($v[driver]); ?></td>
+                                                <td><?php echo ($v[status]); ?></td>
                                                 <td><?php echo ($v[comments]); ?></td>
 
 
                                                 <td>
                                                     <div class="am-btn-toolbar">
                                                         <div class="am-btn-group am-btn-group-xs">
-                                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary" task_id=<?php echo ($v[id]); ?>   onclick="edit(this)"><span class="am-icon-pencil-square"></span> Excute</button>
+                                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary" task_id=<?php echo ($v[id]); ?>   onclick="edit(this)"><span class="am-icon-pencil-square"></span> Edit</button>
                                                             <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" task_id=<?php echo ($v[id]); ?> onclick="del(this)"><span class="am-icon-trash-o" ></span> Delete</button>
                                                         </div>
                                                     </div>
@@ -254,8 +304,6 @@
     <div class="am-modal-dialog">
         <div class="am-modal-hd">Edit TaskCase</div>
         <div class="am-modal-bd">
-            <label style="display:inline;">driver:</label>
-            <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
             <label style="display:inline;">Result:</label>
             <div class="am-form-group-inline" style="display:inline;">
                 <select data-am-selected="{btnWidth: '39%', btnStyle: 'secondary',searchBox: 1}" placeholder="Please select..." id="edit_result" style="border:1px solid #9C9898;">
@@ -265,9 +313,13 @@
             </div><br/><br/>
             <label style="display:inline;">BugID:</label>
             <input type="text" class="am-modal-prompt-input" id="edit_BugID" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label style="display:inline;">Driver:</label>
+            <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label style="display:inline;">Status:</label>
+            <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
             <label style="display:inline;margin-left:-32px;">Comments:</label>
             <input type="text" class="am-modal-prompt-input"  id="edit_comments" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;">
-            <input type="text" class="am-modal-prompt-input"  id="edit_id" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;">
+            
         </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>
