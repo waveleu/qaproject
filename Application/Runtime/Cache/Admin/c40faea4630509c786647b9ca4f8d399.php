@@ -58,7 +58,7 @@
                     <?php if(is_array($data)): foreach($data as $key=>$v): ?><tr>
                         <td><?php echo ($v[name]); ?></td>
                         <td><?php echo ($v[Board]); ?></td>
-                        <td>x64</td>
+                        <td><?php echo ($v['x86/x64']); ?></td>
                         <td><?php echo ($v[OS]); echo ($v[Version]); ?></td>
                         <td><?php echo ($v[BSP]); ?></td>
                         <td>
@@ -77,7 +77,7 @@
                             <div class="am-modal-bd">
                                <label style="display:inline;margin-left:-17%;">name:</label>
                                <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[name]); ?>" style="width:208px;display:inline;border:1px solid #9C9898;"><br/><br/>
-                                <label style="display:inline;margin-left:-22.5%;">Customer:</label> 
+                                <label style="display:inline;margin-left:-22.5%;">Board:</label> 
                                 <div class="am-form-group-inline" style="display:inline;">
                                     <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
                                         <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if(explode(',',$vc)[0]==Chip): if(explode(',',$vc)[1]==$v[Board]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
@@ -87,10 +87,9 @@
                                 </div><br/><br/>
                                 <label style="display:inline;margin-left:-22.5%;">x86 / x64:</label> 
                                 <div class="am-form-group-inline" style="display:inline;">
-                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
-                                        <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if(explode(',',$vc)[0]==Chip): if(explode(',',$vc)[1]==$v[Board]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
-		                                        <?php else: ?>
-		                                        <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endif; endforeach; endif; ?>
+                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id="edit_bit">
+                                        <option value='x86' selected>x86</option>
+                     					<option value='x64'>x64</option>
                                     </select>
                                 </div><br/><br/>
                                 <label style="display:inline;margin-left:-4%;">OS_Version:</label>
@@ -141,7 +140,7 @@
         <div class="am-modal-bd">
            <label style="display:inline;margin-left:-17%;">name:</label>
            <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[name]); ?>" style="width:208px;display:inline;border:1px solid #9C9898;"><br/><br/>
-            <label style="display:inline;margin-left:-22.5%;">Customer:</label> 
+            <label style="display:inline;margin-left:-22.5%;">Board:</label> 
             <div class="am-form-group-inline" style="display:inline;">
                 <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
                     <option value=""></option>
@@ -150,10 +149,9 @@
             </div><br/><br/>
             <label style="display:inline;margin-left:-22.5%;">x86 / x64:</label> 
             <div class="am-form-group-inline" style="display:inline;">
-                <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
-                    <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if(explode(',',$vc)[0]==Chip): if(explode(',',$vc)[1]==$v[Board]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
-                            <?php else: ?>
-                            <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endif; endforeach; endif; ?>
+                <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id="add_bit">
+                     <option value='x86'>x86</option>
+                     <option value='x64'>x64</option>
                 </select>
             </div><br/><br/>
             <label style="display:inline;margin-left:-4%;">OS_Version:</label>
@@ -202,12 +200,15 @@
         $(str).modal({
             relatedTarget: this,
             onConfirm:function (e) {
+            	var bit=$("#edit_bit option:selected").val;
                 var os=$(str+" #edit_os option:selected").val();
                 var version=$(str+" #edit_version option:selected").val();
                 var bsp=$(str+" #edit_bsp option:selected").val();
                 var board=$(str+" #edit_board option:selected").val();
+                console.log(bit);
+                console.log(os);
                 $.post("<?php echo U('Admin/Platform/edit');?>",
-                        {id:id,OS:os,Version:version,BSP:bsp,Board:board,name:e.data},
+                        {id:id,OS:os,Version:version,BSP:bsp,Board:board,name:e.data,'x86/x64':bit},
                         function () {
                             location.href="<?php echo U('Admin/Platform/index');?>";
                         });
@@ -229,12 +230,13 @@
         $('#add_board_modal').modal({
             relatedTarget: this,
             onConfirm:function (e) {
+            	var bit=$("#add_bit option:selected").val;
                 var os=$("#os_add option:selected").val();
                 var version=$("#add_version option:selected").val();
                 var bsp=$("#add_bsp option:selected").val();
                 var board=$("#add_board option:selected").val();
                 $.post("<?php echo U('Admin/Platform/add');?>",
-                        {Board:board,BSP:bsp,OS:os,Version:version,name:e.data},
+                        {Board:board,BSP:bsp,OS:os,Version:version,name:e.data,'x86/x64':bit},
                         function (data) {
                             window.location.reload();
                         });
@@ -269,5 +271,3 @@
 </script>
 </body>
 </html>
-Contact GitHub API Training Shop Blog About
-© 2016 GitHub, Inc. Terms Privacy Security Status Help
