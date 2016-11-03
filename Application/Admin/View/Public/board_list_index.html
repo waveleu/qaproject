@@ -46,6 +46,7 @@
                     <thead>
                     <tr>
                         <th class="table-title">Host</th>
+                        <th class="table-title">Alias</th>
                         <th class="table-title">Platform</th>
                         <th class="table-title">Owner</th>
                         <th class="table-author am-hide-sm-only am-fr">Operation</th>
@@ -55,6 +56,7 @@
                     {foreach name="data" item="v"}
                     <tr>
                         <td>{$v[host]}</td>
+                        <td>name</td>
                         <td>{$v[info][name]}</td>
                         <td>{$v[owner]}</td>
                         <td>
@@ -67,12 +69,14 @@
                         </td>
                     </tr>
 
-                    <div class="am-modal am-modal-confirm" tabindex={$v[id]} style="top:-15%;">
+                    <div class="am-modal am-modal-confirm" tabindex={$v[id]} style="top:-22%;">
                         <div class="am-modal-dialog">
                             <div class="am-modal-hd">Edit Board</div>
                             <div class="am-modal-bd">
                               <label style="display:inline;">host:</label>
                               <input type="text" class="am-modal-prompt-input" value={$v[host]} style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+                              <label style="display:inline;">Alias:</label>
+                              <input type="text" class="am-modal-prompt-input" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>                             
                               <label style="display:inline;margin-left:-6%;">Platform:</label>
                               <div class="am-form-group-inline" style="display:inline;">
                                   <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}" placeholder="Please select..." id="a_board" style="border:1px solid #9C9898;">
@@ -116,14 +120,18 @@
 <!-- content end -->
 
 
-<div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_board_modal" style="top:-15%;">
+<div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_board_modal" style="top:-22%;">
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New Board</div>
         <div class="am-modal-bd">
-          <table style="width:100%;margin:5px auto;">
-        <tr>
+        <table style="width:100%;margin:5px auto;">
+        <tr style="margin:10px auto;">
           <td style="text-align:right;"><label>host:&nbsp;</label></td>
           <td><input type="text" id="Name" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;"></td>
+        </tr>
+        <tr>
+          <td style="text-align:right;"><label>Alias:&nbsp;</label></td>
+          <td><input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;"></td>
         </tr>
         <tr>
           <td style="text-align:right;">
@@ -164,7 +172,7 @@
     </div>
 </div>
 
-<div class="am-modal am-modal-confirm" tabindex="del_class" id="del_modal" style="top:-15%;">
+<div class="am-modal am-modal-confirm" tabindex="del_class" id="del_modal" style="top:-30%;">
     <div class="am-modal-dialog">
         <div class="am-modal-bd">
             <label>Delete This Board?</label>

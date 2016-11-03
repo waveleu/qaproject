@@ -105,9 +105,9 @@
 
     <div class="am-u-md-6 am-u-md-pull-4">
         <div class="container" id="edit_page">
-            <div class="am-g" style="width:800px;margin-left:20px;">
-                <div class="am-u-md-12" style="width:800px;margin-left:20px;">
-                    <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary am-fr'  onclick='add(this)'> <span class='am-icon-pencil-square'></span>&nbsp;new Suit</button>
+            <div class="am-g" style="margin-left:40px;">
+                <div class="am-u-md-12" style="width:800px;margin-left:40px;">
+                    <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary am-fr'  onclick='add(this)'> <span class='am-icon-pencil-square'></span>&nbsp;new Suit</button><br/>
                     <table class="am-table am-table-striped am-table-hover table-main">
                         <thead>
                         <tr>
@@ -122,8 +122,8 @@
                             <td>
                                 <div class="am-btn-toolbar am-fr">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary" shot_id={$v[id]} onclick="rename(this)"><span class="am-icon-pencil-square"></span>Rename</button>
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" shot_id={$v[id]} onclick="del(this)"><span class="am-icon-trash-o" ></span>Delete</button>
+                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary" shot_id={$v[id]} onclick="rename(this)"><span class="am-icon-pencil-square"></span> Rename</button>
+                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" shot_id={$v[id]} onclick="del(this)"><span class="am-icon-trash-o" ></span> Delete</button>
                                     </div>
                                 </div>
                             </td>
@@ -141,7 +141,7 @@
     </div>
 </div>
 
-<div class="am-modal am-modal-confirm" id="shot_edit_name" style="top:-15%;">
+<div class="am-modal am-modal-confirm" id="shot_edit_name" style="top:-30%;">
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New/Rename Suit</div>
         <div class="am-modal-bd">
