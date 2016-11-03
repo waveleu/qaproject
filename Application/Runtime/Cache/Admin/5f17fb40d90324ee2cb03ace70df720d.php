@@ -118,15 +118,15 @@
                                 <th class="table-title"><a href="javascript:reorder('name');">name</a></th>
                                 <th class="table-title"><a href="javascript:reorder('pid');">Project</a></th>
                                 <th class="table-title"><a href="javascript:reorder('suit');">suit</a></th>
-                                <th class="table-title"><a href="javascript:reorder('board');">Board <div class="am-text-primary"></div></a></th>
+                                <th class="table-title"><a href="javascript:reorder('platform');">platform <div class="am-text-primary">(Board/BSP/OS_Version)</div></a></th>
                                 <th class="table-title"><a href="javascript:reorder('owner');">owner</a></th>
                                 <th class="table-title"><a href="javascript:reorder('start_time desc');">Start Date</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">End Date</a></th>
-                                <th class="table-title"><a href="javascript:reorder('end_time desc');">Progress</a></th>
-                                <th class="table-title"><a href="javascript:reorder('end_time desc');">Pass</a></th>
-                                <th class="table-title"><a href="javascript:reorder('end_time desc');">Fail</a></th>
-                                <th class="table-title"><a href="javascript:reorder('end_time desc');">Timeout</a></th>
-                                <th class="table-title"><a href="javascript:reorder('end_time desc');">N/A</a></th>
+                                <th class="table-title">Total</th>
+                                <th class="table-title">Fail</th>
+                                <th class="table-title">Pass</th>
+                                <th class="table-title">Timeout</th>
+                                <th class="table-title">N/A</th>
                                 <th class="table-author am-hide-sm-only">Operation</th>
                             </tr>
                             </thead>
@@ -135,15 +135,15 @@
                                 <td><a href="javascript:toTaskCase('<?php echo ($v[id]); ?>','<?php echo ($v[pid]); ?>');"><?php echo ($v[name]); ?></a></td>
                                 <td><?php echo ($v[project_name]); ?></td>
                                 <td><?php echo ($v[suit]); ?></td>
-                                <td><?php echo ($v[board_name]); ?></td>
+                                <td><?php echo ($v[platform_name]); ?></td>
                                 <td><?php echo ($v[owner]); ?></td>
                                 <td><?php echo ($v[start_time]); ?></td>
                                 <td><?php echo ($v[end_time]); ?></td>
-                                <td><?php echo ($v['progress']); ?></td>
-                                <td><?php echo ($v['pass']); ?></td>
-                                <td><?php echo ($v['fail']); ?></td>
-                                <td><?php echo ($v['timeout']); ?></td>
-                                <td><?php echo ($v['NA']); ?></td>
+                                <td><?php echo ($v[progress][0]); ?></td>
+                                <td><?php echo ($v[progress][1]); ?></td>
+                                <td><?php echo ($v[progress][2]); ?></td>
+                                <td><?php echo ($v[progress][3]); ?></td>
+                                <td><?php echo ($v[progress][4]); ?></td>
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
@@ -401,7 +401,7 @@
     function reorder(name) {
         location.href=("<?php echo U(Admin/Task/Index,array('pid'=>ppid,'sort'=>sort_rule));?>").replace('ppid',$("#search_pid").val()).replace('sort_rule',name);
     }
-    function add_os55(obj) {
+    function add_os(obj) {
         var os=$(obj).val();
         $.post("<?php echo U('Admin/Task/check_version');?>",{'OS':os},function (data) {
             $("#add_version").empty();
@@ -415,8 +415,7 @@
         var os=$(obj).val();
         var id=$(obj).attr('ov_id');
         var str=(".am-modal[tabindex='id']").replace("id",id);
-        $.post("<?php echo U('Admin/Task/index');?>",{'OS':os,'seconglist':true},function (data) {
-        	console.log(data);
+        $.post("<?php echo U('Admin/Task/check_version');?>",{'OS':os},function (data) {
             $("#edit_version").empty();
             $("#edit_version").append("<option value=''></option>");
             $.each(data,function (k,v) {

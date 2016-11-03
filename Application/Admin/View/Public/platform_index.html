@@ -47,7 +47,7 @@
                     <thead>
                     <tr>
                         <th class="table-title">Name</th>
-                        <th class="table-title">BoardType</th>
+                        <th class="table-title">Board</th>
                         <th class="table-title">x86 / x64</th>
                         <th class="table-title">OS_Version</th>
                         <th class="table-title">BSP</th>
