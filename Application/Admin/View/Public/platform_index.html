@@ -47,7 +47,7 @@
                     <thead>
                     <tr>
                         <th class="table-title">Name</th>
-                        <th class="table-title">Board</th>
+                        <th class="table-title">Board Type</th>
                         <th class="table-title">x86 / x64</th>
                         <th class="table-title">OS_Version</th>
                         <th class="table-title">BSP</th>
@@ -80,15 +80,22 @@
                                <input type="text" class="am-modal-prompt-input" value="{$v[name]}" style="width:208px;display:inline;border:1px solid #9C9898;"><br/><br/>
                                 <label style="display:inline;margin-left:-22.5%;">Board:</label> 
                                 <div class="am-form-group-inline" style="display:inline;">
-                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
-                                        {foreach name="board_list" item="vc"}
-	                                        {if condition="explode(',',$vc)[0]==Chip"}
-		                                        {if condition="explode(',',$vc)[1]==$v[Board]"}
+                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id='edit_board'>
+                                        <!-- {foreach name="board_list" item="vc"}
+	                                         {if condition="explode(',',$vc)[0]==Chip"} 
+		                                        {if condition="$vc==$v[Board]"}
 		                                        <option value={$vc} selected>{$vc}</option>
 		                                        {else/}
 		                                        <option value={$vc}>{$vc}</option>
 		                                        {/if}
-                                        	{/if}
+                                        	 {/if} 
+                                        {/foreach} -->
+                                        {foreach name="board_list" item="vc"}
+		                                        {if condition="$vc==$v[Board]"}
+		                                        <option value={$vc} selected>{$vc}</option>
+		                                        {else/}
+		                                        <option value={$vc}>{$vc}</option>
+		                                        {/if}
                                         {/foreach}
                                     </select>
                                 </div><br/><br/>
@@ -162,7 +169,7 @@
            <input type="text" class="am-modal-prompt-input" value="{$v[name]}" style="width:208px;display:inline;border:1px solid #9C9898;"><br/><br/>
             <label style="display:inline;margin-left:-22.5%;">Board:</label> 
             <div class="am-form-group-inline" style="display:inline;">
-                <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
+                <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id='add_board'>
                     <option value=""></option>
                     {foreach name="board_list" item="vc"}
                     <option value={$vc}>{$vc}</option>
@@ -178,7 +185,7 @@
             </div><br/><br/>
             <label style="display:inline;margin-left:-4%;">OS_Version:</label>
             <div class="am-form-group-inline" style="display:inline;">
-                <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id={$v[id]} class="am-fr" placeholder="Please select OS..." id="os_add" style="display:inline;">
+                <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="add_os(this)" ov_id={$v[id]} class="am-fr" placeholder="Please select OS..." id="os_add" style="display:inline;">
                     <option value=""></option>
                     {foreach name="os_list" item="vc"}
                         <option value={$vc}>{$vc}</option>
@@ -226,13 +233,13 @@
         $(str).modal({
             relatedTarget: this,
             onConfirm:function (e) {
-            	var bit=$("#edit_bit option:selected").val;
+            	var bit=$(str+" #edit_bit option:selected").val();
                 var os=$(str+" #edit_os option:selected").val();
                 var version=$(str+" #edit_version option:selected").val();
                 var bsp=$(str+" #edit_bsp option:selected").val();
                 var board=$(str+" #edit_board option:selected").val();
                 console.log(bit);
-                console.log(os);
+                console.log(board);
                 $.post("{:U('Admin/Platform/edit')}",
                         {id:id,OS:os,Version:version,BSP:bsp,Board:board,name:e.data,'x86/x64':bit},
                         function () {
@@ -256,7 +263,7 @@
         $('#add_board_modal').modal({
             relatedTarget: this,
             onConfirm:function (e) {
-            	var bit=$("#add_bit option:selected").val;
+            	var bit=$("#add_bit option:selected").val();
                 var os=$("#os_add option:selected").val();
                 var version=$("#add_version option:selected").val();
                 var bsp=$("#add_bsp option:selected").val();

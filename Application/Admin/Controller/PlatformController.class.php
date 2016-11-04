@@ -8,7 +8,7 @@ class PlatformController extends AuthController {
 		$board_list=M('board')->where('id>0')->getField('id,Type,Name',',',true);
 		$bsp_list=M('bsp')->where('id>0')->getField('Name',true);
 		$os_list=M('os')->where('id>0')->getField('OS',true);
-		
+		$osversion_list=M('os_version')->select();
 		foreach ($data as $k=>$v){
 			$data[$k]['ov_list']=M('os_version')->where(array('OS'=>$v['OS']))->getField('Version',true);
 		}

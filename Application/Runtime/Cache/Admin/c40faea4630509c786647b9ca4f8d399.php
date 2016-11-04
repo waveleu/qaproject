@@ -47,7 +47,7 @@
                     <thead>
                     <tr>
                         <th class="table-title">Name</th>
-                        <th class="table-title">Board</th>
+                        <th class="table-title">Board Type</th>
                         <th class="table-title">x86 / x64</th>
                         <th class="table-title">OS_Version</th>
                         <th class="table-title">BSP</th>
@@ -79,10 +79,13 @@
                                <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[name]); ?>" style="width:208px;display:inline;border:1px solid #9C9898;"><br/><br/>
                                 <label style="display:inline;margin-left:-22.5%;">Board:</label> 
                                 <div class="am-form-group-inline" style="display:inline;">
-                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
-                                        <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if(explode(',',$vc)[0]==Chip): if(explode(',',$vc)[1]==$v[Board]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id='edit_board'>
+                                        <!-- <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if(explode(',',$vc)[0]==Chip): if($vc==$v[Board]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
 		                                        <?php else: ?>
-		                                        <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endif; endforeach; endif; ?>
+		                                        <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endif; endforeach; endif; ?> -->
+                                        <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if($vc==$v[Board]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+		                                        <?php else: ?>
+		                                        <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
                                     </select>
                                 </div><br/><br/>
                                 <label style="display:inline;margin-left:-22.5%;">x86 / x64:</label> 
@@ -142,7 +145,7 @@
            <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[name]); ?>" style="width:208px;display:inline;border:1px solid #9C9898;"><br/><br/>
             <label style="display:inline;margin-left:-22.5%;">Board:</label> 
             <div class="am-form-group-inline" style="display:inline;">
-                <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
+                <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id='add_board'>
                     <option value=""></option>
                     <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
                 </select>
@@ -156,7 +159,7 @@
             </div><br/><br/>
             <label style="display:inline;margin-left:-4%;">OS_Version:</label>
             <div class="am-form-group-inline" style="display:inline;">
-                <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="os_add" style="display:inline;">
+                <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="add_os(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="os_add" style="display:inline;">
                     <option value=""></option>
                     <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): ?><option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
                 </select>
@@ -200,13 +203,13 @@
         $(str).modal({
             relatedTarget: this,
             onConfirm:function (e) {
-            	var bit=$("#edit_bit option:selected").val;
+            	var bit=$(str+" #edit_bit option:selected").val();
                 var os=$(str+" #edit_os option:selected").val();
                 var version=$(str+" #edit_version option:selected").val();
                 var bsp=$(str+" #edit_bsp option:selected").val();
                 var board=$(str+" #edit_board option:selected").val();
                 console.log(bit);
-                console.log(os);
+                console.log(board);
                 $.post("<?php echo U('Admin/Platform/edit');?>",
                         {id:id,OS:os,Version:version,BSP:bsp,Board:board,name:e.data,'x86/x64':bit},
                         function () {
@@ -230,7 +233,7 @@
         $('#add_board_modal').modal({
             relatedTarget: this,
             onConfirm:function (e) {
-            	var bit=$("#add_bit option:selected").val;
+            	var bit=$("#add_bit option:selected").val();
                 var os=$("#os_add option:selected").val();
                 var version=$("#add_version option:selected").val();
                 var bsp=$("#add_bsp option:selected").val();
