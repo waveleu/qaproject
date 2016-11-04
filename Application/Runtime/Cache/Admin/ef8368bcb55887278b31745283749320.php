@@ -143,7 +143,7 @@
                             <?php if(is_array($list)): foreach($list as $key=>$v): ?><tr>
                                 <td><a href="javascript:toTaskCase('<?php echo ($v[id]); ?>','<?php echo ($v[pid]); ?>');"><?php echo ($v[name]); ?></a></td>
                                 <td><?php echo ($v[project_name]); ?></td>
-                                <td>11</td>
+                                <td><?php echo ($v[driver]); ?></td>
                                 <td><?php echo ($v[suit]); ?></td>
                                 <td><?php echo ($v[board_name]); ?></td>
                                 <td><?php echo ($v[owner]); ?></td>
@@ -171,6 +171,13 @@
                                       <input type="text" class="am-modal-prompt-input" id="edit_name" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
                                       <label style="display:inline;">Driver:</label>
                                       <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+                                      <label style="display:inline;margin-left:10px;">Type:</label> 
+                                      <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+                                            <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="edit_type" style="border:1px solid #9C9898;">
+                                                <option value="manual">Manual</option>
+                                                <option value="auto">Auto</option>
+                                            </select>
+                                      </div><br/><br/>
                                       <label style="display:inline;margin-left:-17px;">Test Run:</label> 
                                       <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
                                             <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="edit_pid" style="border:1px solid #9C9898;">
@@ -240,6 +247,13 @@
           <input type="text" class="am-modal-prompt-input" id="add_name" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
           <label style="display:inline;">Driver:</label>
           <input type="text" class="am-modal-prompt-input" id="add_driver" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+          <label style="display:inline;margin-left:10px;">Type:</label>
+          <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+             <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="add_type" style="border:1px solid #9C9898;">
+                 <option value="manual">Manual</option>
+                 <option value="auto">Auto</option>
+             </select>
+          </div><br/><br/>
           <label style="display:inline;margin-left:-17px;">Test Run:</label> 
           <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
              <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="add_pid" style="border:1px solid #9C9898;">
@@ -254,7 +268,7 @@
                 <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['id']); ?>><?php echo ($vc[Name]); ?></option>
                     {else if condition="$vc[Type]==CModel"}<?php endforeach; endif; ?>
               </select>
-              <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="add_os">
+              <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"  onchange="add_os(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="add_os">
                   <option value=""></option>
                   <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): if($vc==$v[OS]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
                   <?php else: ?>
@@ -408,7 +422,7 @@
         $("#"+id).modal({
             relatedTarget:this,
             onConfirm:function(e){
-                var arr={id:id,name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:$("#"+id+" #edit_platform").val(),owner:$("#"+id+" #edit_owner").val(),pid:$("#"+id+" #edit_pid").val(),OS:$('#edit_os').val(),Version:$("#edit_version").val()};
+                var arr={id:id,name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:$("#"+id+" #edit_platform").val(),Type:$("#"+id+" #edit_type").val(),owner:$("#"+id+" #edit_owner").val(),pid:$("#"+id+" #edit_pid").val(),OS:$('#edit_os').val(),Version:$("#edit_version").val()};
                 $.post("<?php echo U('Admin/Task/add');?>",arr,function (data) {
                     window.location.reload();
                 });
@@ -438,7 +452,7 @@
             onConfirm:function(e){
                 var pid=$("#add_pid").val();
                 if(pid!=null&&pid!=""&&pid!=0){
-                    var arr={name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:$("#add_platform").val(),owner:$('#add_user').val(),suit:$('#add_suit').val(),pid:$("#add_pid").val(),OS:$('#add_os').val(),Version:$("#add_version").val()};
+                    var arr={name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:$("#add_platform").val(),owner:$('#add_user').val(),Type:$('#add_type').val(),suit:$('#add_suit').val(),pid:$("#add_pid").val(),OS:$('#add_os').val(),Version:$("#add_version").val()};
                     $.post("<?php echo U('Admin/Task/add');?>",arr,function (data) {
                         location.href=("<?php echo U('Admin/Task/case_index',array('tid'=>ttid));?>").replace('ttid',data);
                     });

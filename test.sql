@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-11-02 05:56:19
+-- Generation Time: 2016-11-04 04:03:45
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -245,19 +245,20 @@ CREATE TABLE IF NOT EXISTS `go_board` (
   `2D_VG_Core` varchar(255) DEFAULT NULL,
   `Bitfile` varchar(255) NOT NULL,
   `CModel_Location-P4` varchar(255) NOT NULL,
-  `CMpdel_Location-Build` varchar(255) NOT NULL,
+  `CModel_Location-Build` varchar(255) NOT NULL,
   PRIMARY KEY (`id`,`Name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- 转存表中的数据 `go_board`
 --
 
-INSERT INTO `go_board` (`id`, `Name`, `Type`, `Customer`, `2D_Core`, `3D_Core`, `2D_VG_Core`, `Bitfile`, `CModel_Location-P4`, `CMpdel_Location-Build`) VALUES
-(1, 'b1', '', 'Chip', '1111', 'aaa', 'ccc', '', '', ''),
-(4, 'b2', '', 'FreeScale', '11', '22', '33', '', '', ''),
-(5, 'b3', '', 'Nvida', '44', '55', '66', '', '', ''),
-(7, 'b4', '', 'Marvell', 'gg', 'qq', 'zz', '', '', '');
+INSERT INTO `go_board` (`id`, `Name`, `Type`, `Customer`, `2D_Core`, `3D_Core`, `2D_VG_Core`, `Bitfile`, `CModel_Location-P4`, `CModel_Location-Build`) VALUES
+(1, 'b1', 'FPGA', 'FreeScale', 'null', 'null', 'null', 'null', 'null', 'null'),
+(4, 'b2', 'Chip', 'FreeScale', 'null', 'null', 'null', 'null', 'null', 'null'),
+(5, 'b3', 'Chip', 'undefined', '44', '55', '66', 'null', 'null', 'null'),
+(7, 'b4', 'Chip', 'undefined', '11', 'qq', 'zz', 'null', 'null', 'null'),
+(15, 'b5', 'CModel', 'FreeScale', 'null', '111', 'null', 'null', '111', '111');
 
 -- --------------------------------------------------------
 
@@ -271,6 +272,7 @@ CREATE TABLE IF NOT EXISTS `go_board_list` (
   `board_id` int(11) DEFAULT NULL,
   `BSP` varchar(255) DEFAULT NULL,
   `owner` varchar(255) DEFAULT NULL,
+  `Alias` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
@@ -278,11 +280,11 @@ CREATE TABLE IF NOT EXISTS `go_board_list` (
 -- 转存表中的数据 `go_board_list`
 --
 
-INSERT INTO `go_board_list` (`id`, `host`, `board_id`, `BSP`, `owner`) VALUES
-(2, 'host1', 1, 'bsp3', 'user2'),
-(3, 'host2', 3, 'bsp2', 'user3'),
-(4, 'host3', 1, 'bsp4', 'user3'),
-(6, 'host4', 1, NULL, 'user1');
+INSERT INTO `go_board_list` (`id`, `host`, `board_id`, `BSP`, `owner`, `Alias`) VALUES
+(2, 'host1', 1, 'bsp3', 'user2', '111'),
+(3, 'host2', 3, 'bsp2', 'user3', '123'),
+(4, 'host3', 1, 'bsp4', 'user3', '222'),
+(6, 'host4', 1, NULL, 'user1', '33');
 
 -- --------------------------------------------------------
 
@@ -330,6 +332,19 @@ INSERT INTO `go_bsp` (`id`, `Name`, `Customer`, `Comments`, `Date`) VALUES
 (2, 'bsp2', 'Marvell', 'dddd', '2016-03-17 00:00:00'),
 (4, 'bsp3', 'FreeScale', 'dddd', '0000-00-00 00:00:00'),
 (5, 'bsp4', 'Marvell', 'ddd', '2016-12-31 23:59:00');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `go_case`
+--
+
+CREATE TABLE IF NOT EXISTS `go_case` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group` int(11) NOT NULL,
+  `item` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -525,18 +540,20 @@ CREATE TABLE IF NOT EXISTS `go_platform` (
   `BSP` varchar(255) DEFAULT NULL,
   `Version` varchar(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
+  `x86/x64` varchar(255) NOT NULL,
   PRIMARY KEY (`id`,`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- 转存表中的数据 `go_platform`
 --
 
-INSERT INTO `go_platform` (`id`, `Board`, `OS`, `BSP`, `Version`, `name`) VALUES
-(1, 'b4', 'KitKat', 'bsp3', '1.60', 'p1'),
-(2, 'b1', 'WinCE', 'bsp4', '7.20', 'p2'),
-(3, 'b11111', 'LoliPop', 'bsp2', '5.11', 'p3'),
-(5, 'b1', '', '', '', 'p4');
+INSERT INTO `go_platform` (`id`, `Board`, `OS`, `BSP`, `Version`, `name`, `x86/x64`) VALUES
+(1, 'Chip,b4', 'KitKat', 'bsp3', '1.60', 'p1', 'x64'),
+(2, 'Chip,b2', 'WinCE', 'bsp4', '7.20', 'p2', 'x86'),
+(3, 'Chip,b2', 'LoliPop', 'bsp2', '5.11', 'p3', 'x86'),
+(5, 'Chip,b2', 'KitKat', 'bsp2', '6.08', 'p4', 'x86'),
+(12, 'FPGA,b1', 'Ubuntu', 'bsp2', NULL, 'p5', 'x64');
 
 -- --------------------------------------------------------
 
@@ -621,32 +638,34 @@ CREATE TABLE IF NOT EXISTS `go_task` (
   `end_time` date DEFAULT NULL,
   `OS` varchar(255) NOT NULL,
   `Version` varchar(255) NOT NULL,
+  `driver` varchar(255) NOT NULL,
+  `Type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`,`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
 
 --
 -- 转存表中的数据 `go_task`
 --
 
-INSERT INTO `go_task` (`id`, `name`, `board`, `owner`, `pid`, `suit`, `start_time`, `end_time`, `OS`, `Version`) VALUES
-(38, '111111111111111', 'b4', '', 5, '', '0000-00-00', '0000-00-00', '', ''),
-(7, 'shuai', 'b1', 'user3', 3, 't5', '2016-07-01', '2016-07-31', '', ''),
-(8, 'linkdd', '1', 'user3', 4, 't5', '2016-07-01', '2016-07-31', '', ''),
-(9, 'ggg', '1', 'user3', 1, 't3', '2016-07-03', '2016-07-23', '', ''),
-(10, 'dd', '1', 'user1', 1, 't5', '2016-07-09', '2016-07-29', '', ''),
-(11, 'task3', '2', 'user3', 3, 't5', '2016-07-06', '2016-07-31', '', ''),
-(12, 'dfdf', '2', 'user1', 3, 't2', '2016-07-10', '2016-07-26', '', ''),
-(13, 'taskpro1', '3', 'user1', 4, 't3', '2016-07-06', '2016-07-28', '', ''),
-(14, 'task4', '2', 'user3', 3, 't7', '2016-07-07', '2016-07-31', '', ''),
-(23, 'link2', '1', 'user3', 4, 't3', '2016-07-08', '2016-07-31', '', ''),
-(24, 'link3', '2', 'user1', 4, 't5', '2016-07-02', '2016-07-31', '', ''),
-(25, 'link4', '3', 'user1', 1, 't11', '2016-07-10', '2016-07-24', '', ''),
-(26, 'link5', '2', 'user2', 4, 't2', '2016-07-10', '2016-07-24', '', ''),
-(27, 'link6', '1', 'user2', 4, 't7', '2016-07-03', '2016-07-30', '', ''),
-(33, '555', 'b2', '', 1, '', '2016-07-15', '2016-07-10', '', ''),
-(32, '55', '5', '', 1, '', '2016-07-15', '2016-07-10', '', ''),
-(30, '111111111111', '2', 'user2', 1, 't2', '0000-00-00', '0000-00-00', '', ''),
-(37, '6666', '', '', 4, '', '0000-00-00', '0000-00-00', '', '');
+INSERT INTO `go_task` (`id`, `name`, `board`, `owner`, `pid`, `suit`, `start_time`, `end_time`, `OS`, `Version`, `driver`, `Type`) VALUES
+(7, 'shuai', 'b1', 'user3', 3, 't5', '2016-07-01', '2016-07-31', '', '', '', ''),
+(8, 'linkdd', '1', 'user3', 4, 't5', '2016-07-01', '2016-07-31', '', '', '', ''),
+(9, 'ggg', '1', 'user3', 1, 't3', '2016-07-03', '2016-07-23', '', '', '', ''),
+(10, 'dd', '1', 'user1', 1, 't5', '2016-07-09', '2016-07-29', '', '', '', ''),
+(11, 'task3', '2', 'user3', 3, 't5', '2016-07-06', '2016-07-31', '', '', '', ''),
+(12, 'dfdf', '2', 'user1', 3, 't2', '2016-07-10', '2016-07-26', '', '', '', ''),
+(13, 'taskpro1', '3', 'user1', 4, 't3', '2016-07-06', '2016-07-28', '', '', '', ''),
+(14, 'task4', '2', 'user3', 3, 't7', '2016-07-07', '2016-07-31', '', '', '', ''),
+(23, 'link2', '1', 'user3', 4, 't3', '2016-07-08', '2016-07-31', '', '', '', ''),
+(24, 'link3', '2', 'user1', 4, 't5', '2016-07-02', '2016-07-31', '', '', '', ''),
+(25, 'link4', '3', 'user1', 1, 't11', '2016-07-10', '2016-07-24', '', '', '', ''),
+(26, 'link5', '2', 'user2', 4, 't2', '2016-07-10', '2016-07-24', '', '', '', ''),
+(27, 'link6', '1', 'user2', 4, 't7', '2016-07-03', '2016-07-30', '', '', '', ''),
+(33, '555', 'b2', '', 1, '', '2016-07-15', '2016-07-10', '', '', '', ''),
+(32, '55', '5', '', 1, '', '2016-07-15', '2016-07-10', '', '', '', ''),
+(37, '6666', '', '', 4, '', '0000-00-00', '0000-00-00', '', '', '', ''),
+(40, '55555', '', 'user2', 5, 't5', '2016-11-09', '2016-11-18', 'Ubuntu', '', '54644', 'auto'),
+(41, '1111111', '4', 'user2', 1, 't5', '0000-00-00', '0000-00-00', 'Ubuntu', '10.11', '1111111', 'manual');
 
 -- --------------------------------------------------------
 
@@ -666,7 +685,7 @@ CREATE TABLE IF NOT EXISTS `go_task_case` (
   `end_time` date DEFAULT NULL,
   `Status` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=218 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=235 ;
 
 --
 -- 转存表中的数据 `go_task_case`
@@ -729,6 +748,7 @@ INSERT INTO `go_task_case` (`id`, `cid`, `tid`, `BugID`, `result`, `driver`, `co
 (99, 5, 25, NULL, NULL, NULL, NULL, '2016-07-10', '2016-07-24', ''),
 (100, 7, 25, NULL, NULL, NULL, NULL, '2016-07-10', '2016-07-24', ''),
 (101, 8, 25, NULL, NULL, NULL, NULL, '2016-07-10', '2016-07-24', ''),
+(227, 8, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', ''),
 (103, 21, 27, 11, '', NULL, '', '2016-07-03', '2016-07-30', ''),
 (124, 14, 11, 0, 'fail', NULL, '22', '2016-07-20', '2016-07-07', ''),
 (125, 19, 11, 0, 'pass', NULL, '', '2016-07-06', '2016-07-31', ''),
@@ -760,13 +780,18 @@ INSERT INTO `go_task_case` (`id`, `cid`, `tid`, `BugID`, `result`, `driver`, `co
 (169, 15, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, ''),
 (199, 0, 33, NULL, NULL, NULL, NULL, '2016-07-15', '2016-07-10', ''),
 (198, 0, 32, NULL, NULL, NULL, NULL, '2016-07-15', '2016-07-10', ''),
-(192, 12, 30, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', ''),
-(193, 17, 30, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', ''),
-(194, 2, 30, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', ''),
-(195, 28, 30, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', ''),
-(196, 9, 30, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', ''),
-(217, 0, 38, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', ''),
-(216, 0, 37, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', '');
+(226, 5, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', ''),
+(225, 28, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', ''),
+(224, 27, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', ''),
+(216, 0, 37, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', ''),
+(223, 2, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', ''),
+(228, 9, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', ''),
+(229, 2, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', ''),
+(230, 27, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', ''),
+(231, 28, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', ''),
+(232, 5, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', ''),
+(233, 8, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', ''),
+(234, 9, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', '');
 
 -- --------------------------------------------------------
 
@@ -861,9 +886,9 @@ CREATE TABLE IF NOT EXISTS `go_test_run` (
 INSERT INTO `go_test_run` (`id`, `name`, `pid`, `start_time`, `end_time`) VALUES
 (1, 'run1', 1, '2016-07-03', '2016-07-30'),
 (2, '44', 1, '2016-07-15', '2016-07-10'),
-(5, 'run5', 2, NULL, NULL),
-(4, 'run4', 2, NULL, NULL),
-(3, 'run3', 1, '2016-07-02', '2016-07-31'),
+(5, 'run5', 3, NULL, NULL),
+(4, 'run4', 3, NULL, NULL),
+(3, 'run3', 2, '2016-07-02', '2016-07-31'),
 (6, '456', 1, '2016-07-15', '2016-07-10'),
 (7, '44', 1, '2016-07-15', '2016-07-10');
 
