@@ -95,19 +95,27 @@
     <div class="am-cf am-padding am-padding-bottom-0" id="content-body">
         <div class="am-g">
             <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Task Management</strong> </div><br/>
-        </div>
+        </div><br/><br/>
             <div class='am-g am-cf'>
-                <div class="am-form-group-inline am-cf am-fr">
-                    Test Run:
-                    <select data-am-selected="{searchBox: 1}"  class="am-u-md-3" placeholder="Please select..."  onchange="project_check(this)" id="search_pid">
+                <div class="am-form-group-inline" style="display:inline;">
+                   <select data-am-selected="{btnWidth: '7%',btnStyle: 'secondary',searchBox: 1}"  class="am-u-md-3" placeholder="FPGA">
                         <option value=""></option>
                         <?php if(is_array($run_list)): foreach($run_list as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
                     </select>
-                    
+                    <input type="text" style="width:200px;height:37px;display:inline;border:1px solid #9C9898;margin-left:-5px;">&nbsp;&nbsp;
+                    <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary'> <span class='am-icon-search'></span> Search</button>
+                </div>            
+                <div class="am-form-group-inline am-cf am-fr" style="width:400px;display:inline;">
+                    Test Run:
+                    <select data-am-selected="{btnWidth: '50%', btnStyle: 'secondary',searchBox: 1}"  class="am-u-md-3" placeholder="Please select..."  onchange="project_check(this)" id="search_pid">
+                        <option value=""></option>
+                        <?php if(is_array($run_list)): foreach($run_list as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
+                    </select>
+                    &nbsp;&nbsp;
                     <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger'  onclick='add()'> <span class='am-icon-pencil-square-o'></span>new Task</button>
                 </div>
             </div>
-        </div>
+        </div><br/>
     <div class="am-g">
         <div class="container" id="edit_page">
                 <div class="am-g">
@@ -117,7 +125,8 @@
                             <tr>
                                 <th class="table-title"><a href="javascript:reorder('name');">name</a></th>
                                 <th class="table-title"><a href="javascript:reorder('pid');">Project</a></th>
-                                <th class="table-title"><a href="javascript:reorder('suit');">suit</a></th>
+                                <th class="table-title"><a href="javascript:reorder('pid');">Driver</a></th>
+                                <th class="table-title"><a href="javascript:reorder('suit');">Suite</a></th>
                                 <th class="table-title"><a href="javascript:reorder('board');">Board <div class="am-text-primary"></div></a></th>
                                 <th class="table-title"><a href="javascript:reorder('owner');">owner</a></th>
                                 <th class="table-title"><a href="javascript:reorder('start_time desc');">Start Date</a></th>
@@ -134,6 +143,7 @@
                             <?php if(is_array($list)): foreach($list as $key=>$v): ?><tr>
                                 <td><a href="javascript:toTaskCase('<?php echo ($v[id]); ?>','<?php echo ($v[pid]); ?>');"><?php echo ($v[name]); ?></a></td>
                                 <td><?php echo ($v[project_name]); ?></td>
+                                <td>11</td>
                                 <td><?php echo ($v[suit]); ?></td>
                                 <td><?php echo ($v[board_name]); ?></td>
                                 <td><?php echo ($v[owner]); ?></td>
@@ -161,26 +171,26 @@
                                       <input type="text" class="am-modal-prompt-input" id="edit_name" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
                                       <label style="display:inline;">Driver:</label>
                                       <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
-                                      <label style="display:inline;margin-left:-15px;">Test Run:</label> 
+                                      <label style="display:inline;margin-left:-17px;">Test Run:</label> 
                                       <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
-                                            <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}" placeholder="Please select..." id="edit_pid" style="border:1px solid #9C9898;">
+                                            <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="edit_pid" style="border:1px solid #9C9898;">
                                                 <option value=""></option>
                                                 <?php if(is_array($run_list)): foreach($run_list as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
                                             </select>
                                       </div><br/><br/>
-                                      <label style="display:inline;margin-left:-15px;">Board:</label>
-                                      <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
-                                          <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="edit_platform">
+                                      <label style="display:inline;padding-left:-17px;">Board:</label>
+                                      <div class="am-form-group-inline" style="display:inline;text-align:center;">
+                                          <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="edit_platform">
 						                    <option value=""></option>
 					                    	<?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['id']); ?>><?php echo ($vc[Name]); ?></option><?php endforeach; endif; ?>
 					                   	  </select>
-						                  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="edit_os(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="edit_os">
+						                  <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"  onchange="edit_os(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="edit_os">
 							                  <option value=""></option>
 							                  <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): if($vc==$v[OS]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
 							                  <?php else: ?>
 							                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
 						           		  </select>
-						               	  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="edit_version">
+						               	  <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="edit_version">
 							                  <option value=""></option>
 							                  <?php if(is_array($v[ov_list])): foreach($v[ov_list] as $key=>$vc): if($vc==$v[Version]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
 							                  <?php else: ?>
@@ -196,7 +206,7 @@
                                         </div><br/><br/>
                                         <label style="display:inline;margin-left:-33px;">start_time:</label>
                                         <input type="text" class="am-modal-prompt-input" data-am-datepicker id="edit_start_time" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
-                                        <label style="display:inline;margin-left:-32px;">end_time:</label>
+                                        <label style="display:inline;margin-left:-5%;">end_time:</label>
                                         <input type="text" class="am-modal-prompt-input" data-am-datepicker id="edit_end_time" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;">
                                     </div>
 
