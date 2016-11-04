@@ -143,7 +143,7 @@
                             <?php if(is_array($list)): foreach($list as $key=>$v): ?><tr>
                                 <td><a href="javascript:toTaskCase('<?php echo ($v[id]); ?>','<?php echo ($v[pid]); ?>');"><?php echo ($v[name]); ?></a></td>
                                 <td><?php echo ($v[project_name]); ?></td>
-                                <td>11</td>
+                                <td><?php echo ($v[driver]); ?></td>
                                 <td><?php echo ($v[suit]); ?></td>
                                 <td><?php echo ($v[board_name]); ?></td>
                                 <td><?php echo ($v[owner]); ?></td>
@@ -171,6 +171,13 @@
                                       <input type="text" class="am-modal-prompt-input" id="edit_name" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
                                       <label style="display:inline;">Driver:</label>
                                       <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+                                      <label style="display:inline;margin-left:10px;">Type:</label> 
+                                      <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+                                            <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="edit_type" style="border:1px solid #9C9898;">
+                                                <option value="manual">Manual</option>
+                                                <option value="auto">Auto</option>
+                                            </select>
+                                      </div><br/><br/>
                                       <label style="display:inline;margin-left:-17px;">Test Run:</label> 
                                       <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
                                             <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="edit_pid" style="border:1px solid #9C9898;">
@@ -182,7 +189,7 @@
                                       <div class="am-form-group-inline" style="display:inline;text-align:center;">
                                           <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="edit_platform">
 						                    <option value=""></option>
-					                    	<?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['id']); ?>><?php echo ($vc[Name]); ?></option><?php endforeach; endif; ?>
+					                    	<?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['Name']); ?>><?php echo ($vc[Name]); ?></option><?php endforeach; endif; ?>
 					                   	  </select>
 						                  <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"  onchange="edit_os(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="edit_os">
 							                  <option value=""></option>
@@ -236,7 +243,63 @@
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New Task</div>
         <div class="am-modal-bd">
-          <table style="width:100%;margin:0px auto;">
+          <label style="display:inline;">Name:</label>
+          <input type="text" class="am-modal-prompt-input" id="add_name" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+          <label style="display:inline;">Driver:</label>
+          <input type="text" class="am-modal-prompt-input" id="add_driver" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+          <label style="display:inline;margin-left:10px;">Type:</label>
+          <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+             <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="add_type" style="border:1px solid #9C9898;">
+                 <option value="manual">Manual</option>
+                 <option value="auto">Auto</option>
+             </select>
+          </div><br/><br/>
+          <label style="display:inline;margin-left:-17px;">Test Run:</label> 
+          <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+             <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="add_pid" style="border:1px solid #9C9898;">
+                <option value=""></option>
+                <?php if(is_array($run_list)): foreach($run_list as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
+             </select>
+          </div><br/><br/>
+          <label style="display:inline;margin-left:2px;">Board:</label>
+          <div class="am-form-group-inline" style="display:inline;text-align:center;">
+              <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform">
+                <option value=""></option>
+                <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['Name']); ?>><?php echo ($vc[Name]); ?></option>
+                    {else if condition="$vc[Type]==CModel"}<?php endforeach; endif; ?>
+              </select>
+              <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"  onchange="add_os(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="add_os">
+                  <option value=""></option>
+                  <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): if($vc==$v[OS]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+                  <?php else: ?>
+                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
+              </select>
+              <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="add_version">
+                  <option value=""></option>
+                  <?php if(is_array($v[ov_list])): foreach($v[ov_list] as $key=>$vc): if($vc==$v[Version]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+                  <?php else: ?>
+                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
+            </select>
+            </div><br/><br/>
+            <label style="display:inline;margin-left:10px;">Suite:</label> 
+            <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+             <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="add_suit" style="border:1px solid #9C9898;">
+                <option value=""></option>
+                <?php if(is_array($suit_list)): foreach($suit_list as $key=>$vc): ?><option value="<?php echo ($vc); ?>"><?php echo ($vc); ?></option><?php endforeach; endif; ?>
+             </select>
+             </div><br/><br/>           
+            <label style="display:inline;">Owner:</label>
+            <div class="am-form-group-inline" style="display:inline;">
+                <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id="add_user">
+                    <option value=""></option>
+                    <?php if(is_array($user_list)): foreach($user_list as $k=>$vc): ?><option value="<?php echo ($vc[username]); ?>"><?php echo ($vc[username]); ?></option><?php endforeach; endif; ?>
+                </select>
+            </div><br/><br/>
+            <label style="display:inline;margin-left:-33px;">start_time:</label>
+            <input type="text" class="am-modal-prompt-input" data-am-datepicker id="add_start" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label style="display:inline;margin-left:-5%;">end_time:</label>
+            <input type="text" class="am-modal-prompt-input" data-am-datepicker id="add_end" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;">        
+          <!--<table style="width:100%;margin:0px auto;">
             <tr>
               <td style="text-align:right;"><label>Name:&nbsp;</label></td>
               <td><input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="add_name"></td>
@@ -289,7 +352,7 @@
             
             <tr>
               <td style="text-align:right;">
-                <label>Suit:&nbsp;</label>
+                <label>Suite:&nbsp;</label>
               </td>
               <td style="text-align:left;padding-top:10px;">
                 <div class="am-form-group-inline" style="width:71.5%;">
@@ -329,7 +392,7 @@
                 <input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="add_end" data-am-datepicker="{format: 'yyyy-mm-dd'}">
               </td>
             </tr>            
-          </table>
+          </table>-->
         </div>
 
         <div class="am-modal-footer">
@@ -359,7 +422,7 @@
         $("#"+id).modal({
             relatedTarget:this,
             onConfirm:function(e){
-                var arr={id:id,name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:$("#"+id+" #edit_platform").val(),owner:$("#"+id+" #edit_owner").val(),pid:$("#"+id+" #edit_pid").val(),OS:$('#edit_os').val(),Version:$("#edit_version").val()};
+                var arr={id:id,name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:$("#"+id+" #edit_platform").val(),Type:$("#"+id+" #edit_type").val(),owner:$("#"+id+" #edit_owner").val(),pid:$("#"+id+" #edit_pid").val(),OS:$('#edit_os').val(),Version:$("#edit_version").val()};
                 $.post("<?php echo U('Admin/Task/add');?>",arr,function (data) {
                     window.location.reload();
                 });
@@ -379,6 +442,7 @@
         $("#add_user").val("");
         $("#add_suit").val('');
         $("#add_pid").val("");
+        $("#add_type").val("");
         $("#add_os").val("");
         $("#add_version").val("");   
         $("#add_driver").val("");   
@@ -389,7 +453,7 @@
             onConfirm:function(e){
                 var pid=$("#add_pid").val();
                 if(pid!=null&&pid!=""&&pid!=0){
-                    var arr={name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:$("#add_platform").val(),owner:$('#add_user').val(),suit:$('#add_suit').val(),pid:$("#add_pid").val(),OS:$('#add_os').val(),Version:$("#add_version").val()};
+                    var arr={name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:$("#add_platform").val(),owner:$('#add_user').val(),Type:$('#add_type').val(),suit:$('#add_suit').val(),pid:$("#add_pid").val(),OS:$('#add_os').val(),Version:$("#add_version").val()};
                     $.post("<?php echo U('Admin/Task/add');?>",arr,function (data) {
                         location.href=("<?php echo U('Admin/Task/case_index',array('tid'=>ttid));?>").replace('ttid',data);
                     });
@@ -423,12 +487,13 @@
         location.href=("<?php echo U(Admin/Task/Index,array('pid'=>ppid,'sort'=>sort_rule));?>").replace('ppid',$("#search_pid").val()).replace('sort_rule',name);
     }
     function edit_os(obj) {
+    	var id=$(obj).attr('ov_id');
         var os=$(obj).val();
         $.post("<?php echo U('Admin/Task/index');?>",{'OS':os,'seconglist':true},function (data) {
-            $("#edit_version").empty();
-            $("#edit_version").append("<option value=''></option>");
+            $('#'+id+' #edit_version').empty();
+            $('#'+id+' #edit_version').append("<option value=''></option>");
             $.each(data,function (k,v) {
-                $("#edit_version").append("<option value="+v.Version+">"+v.Version+"</option>");
+                $('#'+id+' #edit_version').append("<option value="+v.Version+">"+v.Version+"</option>");
             });
         });
     }
