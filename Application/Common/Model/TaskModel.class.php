@@ -45,6 +45,8 @@ class TaskModel extends BaseModel{
 			    }	
 			    else if($vc=='timeout'){
 			        $str_timeout='timeout: <span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
+			    }else if($vc=='Not Run'){
+			        $str_Notrun='Notrun: <span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
 			    }
 			    else if($vc=='N/A'){ 
 			        $str_NA='N/A: <span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
@@ -55,6 +57,7 @@ class TaskModel extends BaseModel{
 			$list[$k]['fail']=$str_fail;
 			$list[$k]['timeout']=$str_timeout;
 			$list[$k]['NA']=$str_NA;
+			$list[$k]['Notrun']=$str_Notrun;
 			$list[$k]['progress']=sprintf('%.1f',(floatval(preg_replace('/\D/s', '', $str_pass))/floatval(preg_replace('/\D/s', '', $str_total)))*100).'%';
 		}
 		//var_dump($list);

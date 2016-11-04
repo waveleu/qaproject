@@ -43,17 +43,48 @@ class TaskCaseModel extends BaseModel{
 		$cid_list 		  =$this->table('go_task_case TaskCase,go_task Task,go_testcase Testcase')->field('TaskCase.id,TaskCase.cid,TaskCase.tid')
 							->where($arr)->select();		
 		$list=$this->table('go_task_case TaskCase,go_task Task,go_testcase Testcase')
-							->field('TaskCase.id,TaskCase.cid,TaskCase.tid,TaskCase.BugID,TaskCase.comments,TaskCase.driver,TaskCase.result,Testcase.pid as class_id,Testcase.CaseName as casename,Task.name as taskname')
+							->field('TaskCase.id,TaskCase.cid,TaskCase.tid,Task.pid,TaskCase.BugID,TaskCase.comments,TaskCase.driver,TaskCase.result,Testcase.pid as class_id,Testcase.CaseName as casename,Task.name as taskname,Task.board')
 							->where($arr)->order($sort_rule)->select();
-		//var_dump($list);
 		//case信息
+		$result_type=M('result_type')->where('id>0')->getField('name',true);
 		foreach ($list as $k=>$v){
 		    $info=M('Testcase')->where(array('id'=>$v['cid']))->find();
 		    $list[$k]['info']="";
-		    foreach ($info as $key=>$val)
-		        if($key!='id')
-		            $list[$k]['info'].=$key.'&nbsp;:&nbsp;'.$val.'&#10;';
+		    foreach ($info as $key1=>$val)
+		        if($key1!='id')
+		            $list[$k]['info'].=$key1.'&nbsp;:&nbsp;'.$val.'&#10;';
+		        
+	        $tmp=M('board')->where(array('Name'=>$v['board']))->find();
+	        $list[$k]['board_name']=$tmp['Name'];
+	        $list[$k]['project_name']=D('Project')->table('go_project Project,go_test_run Run,go_task Task')->
+	        where(array('Project.id=Run.pid ','Run.id'=>$v['pid']))->getField('Project.name');
+	        $case_count=D('TaskCase')->where(array('tid'=>$v['id']))->count();
+	        $str_total='<span style="background-color: #ccc">'.sprintf('%04s',$case_count).'</span>';;
+	        foreach ($result_type as $key=>$vc){
+	            $tmp=D('TaskCase')->where(array('tid'=>$v['id']))->where(array('result'=>$vc))->count();
+	            if($vc=='pass')
+	                $str_pass='<span style="background-color: #0a0">'.sprintf('%03s',$tmp).'</span>';
+	            else if($vc=='fail'){
+	                $str_fail='<span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
+	            }
+	            else if($vc=='timeout'){
+	                $str_timeout='<span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
+	            }else if($vc=='Not Run'){
+	                $str_Notrun='<span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
+	            }
+	            else if($vc=='N/A'){
+	                $str_NA='<span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
+	            }
+	        }
+	        $list[$k]['total']=$str_total;
+	        $list[$k]['pass']=$str_pass;
+	        $list[$k]['fail']=$str_fail;
+	        $list[$k]['timeout']=$str_timeout;
+	        $list[$k]['NA']=$str_NA;
+	        $list[$k]['Notrun']=$str_Notrun;
+	        $list[$k]['progress']=sprintf('%.1f',(floatval(preg_replace('/\D/s', '', $str_pass))/floatval(preg_replace('/\D/s', '', $str_total)))*100).'%';
 		}
+		//var_dump($list);
 		$data=array();
 		$cname_list=array();
 		foreach($list as $k=>$v){

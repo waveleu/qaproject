@@ -167,7 +167,7 @@
            <div class="container" id="edit_page">
               <div class="am-g">
                 <div class="am-u-md-12">   
-                          <table class="am-table am-table-striped am-table-hover table-main">
+                         <table class="am-table am-table-striped am-table-hover table-main">
                             <thead>
                             <tr>
                                 <th class="table-title"><a href="javascript:reorder('name');">TaskName</a></th>
@@ -177,44 +177,24 @@
                                 <th class="table-title"><a href="javascript:reorder('owner');">Pass</a></th>
                                 <th class="table-title"><a href="javascript:reorder('start_time desc');">Fail</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">N/A</a></th>
-                                <th class="table-title">Not Run</th>
+                                <th class="table-title"><a href="javascript:reorder('end_time desc');">Timeout</a></th>
+                                <th class="table-title"><a href="javascript:reorder('end_time desc');">Not Run</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">Total</a></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>11</td>
-                                <td>pr01</td>
-                                <td>host1</td>
-                                <td>100%</td>
-                                <td>11</td>
-                                <td>34</td>
-                                <td>N</td>
-                                <td>s</td>
-                                <td>d</td>
-                            </tr>
-                            <tr>
-                                <td>34</td>
-                                <td>pro3</td>
-                                <td>host3</td>
-                                <td>80%</td>
-                                <td>14</td>
-                                <td>34t</td>
-                                <td>A</td>
-                                <td>d</td>
-                                <td>d</td>
-                            </tr>
-                            <tr>
-                                <td>39</td>
-                                <td>pro7</td>
-                                <td>host2</td>
-                                <td>50%</td>
-                                <td>64</td>
-                                <td>30</td>
-                                <td>A</td>
-                                <td>d</td>
-                                <td>d</td>
-                            </tr>
+                            <?php if(is_array($list)): foreach($list as $key=>$v): if($key==0): ?><tr>
+                                <td><?php echo ($v[taskname]); ?></td>
+                                <td><?php echo ($v[project_name]); ?></td>
+                                <td><?php echo ($v[board_name]); ?></td>
+                                <td><?php echo ($v['progress']); ?></td>
+                                <td><?php echo ($v['pass']); ?></td>
+                                <td><?php echo ($v['fail']); ?></td>
+                                <td><?php echo ($v['NA']); ?></td> 
+                                <td><?php echo ($v['timeout']); ?></td>
+                                <td><?php echo ($v['Notrun']); ?></td>
+                                <td><?php echo ($v['total']); ?></td>
+                            </tr><?php endif; endforeach; endif; ?>
                             </tbody>
                         </table>
                         <!--<div class="am-form-group-inline" style="width:1000px;">
@@ -256,7 +236,6 @@
                                             <thead>
                                             <tr>
                                                 <th class="table-title"><a href="javascript:reorder('casename');">CaseName</a></th>
-
                                                 <th class="table-title"><a href="javascript:reorder('result');">Result</a></th>
                                                 <th class="table-title"><a href="javascript:reorder('BugID');">BugID</a></th>
                                                 <th class="table-title"><a href="javascript:reorder('driver');">Driver</a></th>
