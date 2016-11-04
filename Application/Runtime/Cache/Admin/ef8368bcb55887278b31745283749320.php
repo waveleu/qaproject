@@ -189,7 +189,7 @@
                                       <div class="am-form-group-inline" style="display:inline;text-align:center;">
                                           <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="edit_platform">
 						                    <option value=""></option>
-					                    	<?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['id']); ?>><?php echo ($vc[Name]); ?></option><?php endforeach; endif; ?>
+					                    	<?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['Name']); ?>><?php echo ($vc[Name]); ?></option><?php endforeach; endif; ?>
 					                   	  </select>
 						                  <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"  onchange="edit_os(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="edit_os">
 							                  <option value=""></option>
@@ -265,7 +265,7 @@
           <div class="am-form-group-inline" style="display:inline;text-align:center;">
               <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform">
                 <option value=""></option>
-                <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['id']); ?>><?php echo ($vc[Name]); ?></option>
+                <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['Name']); ?>><?php echo ($vc[Name]); ?></option>
                     {else if condition="$vc[Type]==CModel"}<?php endforeach; endif; ?>
               </select>
               <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"  onchange="add_os(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="add_os">
@@ -442,6 +442,7 @@
         $("#add_user").val("");
         $("#add_suit").val('');
         $("#add_pid").val("");
+        $("#add_type").val("");
         $("#add_os").val("");
         $("#add_version").val("");   
         $("#add_driver").val("");   
@@ -486,12 +487,13 @@
         location.href=("<?php echo U(Admin/Task/Index,array('pid'=>ppid,'sort'=>sort_rule));?>").replace('ppid',$("#search_pid").val()).replace('sort_rule',name);
     }
     function edit_os(obj) {
+    	var id=$(obj).attr('ov_id');
         var os=$(obj).val();
         $.post("<?php echo U('Admin/Task/index');?>",{'OS':os,'seconglist':true},function (data) {
-            $("#edit_version").empty();
-            $("#edit_version").append("<option value=''></option>");
+            $('#'+id+' #edit_version').empty();
+            $('#'+id+' #edit_version').append("<option value=''></option>");
             $.each(data,function (k,v) {
-                $("#edit_version").append("<option value="+v.Version+">"+v.Version+"</option>");
+                $('#'+id+' #edit_version').append("<option value="+v.Version+">"+v.Version+"</option>");
             });
         });
     }
