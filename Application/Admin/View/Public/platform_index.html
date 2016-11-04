@@ -47,7 +47,7 @@
                     <thead>
                     <tr>
                         <th class="table-title">Name</th>
-                        <th class="table-title">Board</th>
+                        <th class="table-title">Board Type</th>
                         <th class="table-title">x86 / x64</th>
                         <th class="table-title">OS_Version</th>
                         <th class="table-title">BSP</th>
@@ -78,7 +78,7 @@
                             <div class="am-modal-bd">
                                <label style="display:inline;margin-left:-17%;">name:</label>
                                <input type="text" class="am-modal-prompt-input" value="{$v[name]}" style="width:208px;display:inline;border:1px solid #9C9898;"><br/><br/>
-                                <label style="display:inline;margin-left:-22.5%;">Board:</label> 
+                                <label style="display:inline;margin-left:-25%;">Board Type:</label> 
                                 <div class="am-form-group-inline" style="display:inline;">
                                     <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
                                         {foreach name="board_list" item="vc"}
@@ -92,7 +92,7 @@
                                         {/foreach}
                                     </select>
                                 </div><br/><br/>
-                                <label style="display:inline;margin-left:-22.5%;">x86 / x64:</label> 
+                                <label style="display:inline;margin-left:-22%;">x86 / x64:</label> 
                                 <div class="am-form-group-inline" style="display:inline;">
                                     <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id="edit_bit">
                                         <option value='x86' selected>x86</option>
@@ -160,7 +160,7 @@
         <div class="am-modal-bd">
            <label style="display:inline;margin-left:-17%;">name:</label>
            <input type="text" class="am-modal-prompt-input" value="{$v[name]}" style="width:208px;display:inline;border:1px solid #9C9898;"><br/><br/>
-            <label style="display:inline;margin-left:-22.5%;">Board:</label> 
+            <label style="display:inline;margin-left:-25%;">Board Type:</label> 
             <div class="am-form-group-inline" style="display:inline;">
                 <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select...">
                     <option value=""></option>
@@ -169,7 +169,7 @@
                     {/foreach}
                 </select>
             </div><br/><br/>
-            <label style="display:inline;margin-left:-22.5%;">x86 / x64:</label> 
+            <label style="display:inline;margin-left:-22%;">x86 / x64:</label> 
             <div class="am-form-group-inline" style="display:inline;">
                 <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id="add_bit">
                      <option value='x86'>x86</option>

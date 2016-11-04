@@ -264,10 +264,10 @@
 			<br>
 
 			<div class="am-g">
-				<div class="am-u-md-3 ">
-					<div class="container">
-						<div class="zTreeDemoBackground left">
-							<ul id="treeDemo" class="ztree" style="height: auto; border: hidden;overflow: auto;" ></ul>
+				<div class="am-u-md-3" style="width:22%;">
+					<div class="container" style="width:100%;">
+						<div class="zTreeDemoBackground left" style="width:100%;">
+							<ul id="treeDemo" class="ztree" style="width:100%;height: auto; border: hidden;overflow: auto;" ></ul>
 						</div>
 					</div>
 				</div>

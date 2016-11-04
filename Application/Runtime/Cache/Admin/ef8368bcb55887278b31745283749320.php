@@ -285,105 +285,11 @@
             <input type="text" class="am-modal-prompt-input" data-am-datepicker id="add_start" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
             <label style="display:inline;margin-left:-5%;">end_time:</label>
             <input type="text" class="am-modal-prompt-input" data-am-datepicker id="add_end" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;">        
-          <!--<table style="width:100%;margin:0px auto;">
-            <tr>
-              <td style="text-align:right;"><label>Name:&nbsp;</label></td>
-              <td><input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="add_name"></td>
-            </tr>
-            <tr>
-              <td style="text-align:right;"><label>Driver:&nbsp;</label></td>
-              <td><input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="add_driver"></td>
-            </tr>
-            <tr>
-              <td style="text-align:right;">
-                <label>Test Run:&nbsp;</label>
-              </td>
-              <td style="text-align:left;padding-top:10px;">
-                <div class="am-form-group-inline" style="width:71.5%;">
-                  <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_pid">
-                    <option value=""></option>
-                    <?php if(is_array($run_list)): foreach($run_list as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
-                  </select>
-                </div>
-              </td>
-            </tr>
-            
-            <tr>
-              <td style="text-align:right;">
-                <label>Board:&nbsp;</label>
-              </td>
-              <td style="text-align:left;padding-top:10px;">
-                <div class="am-form-group-inline" style="width:71.5%;">
-                  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform">
-                    <option value=""></option>
-                    <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['id']); ?>><?php echo ($vc[Name]); ?></option>
-	                    {else if condition="$vc[Type]==CModel"}<?php endforeach; endif; ?>
-                  </select>
-                  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="add_os">
-	                  <option value=""></option>
-	                  <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): if($vc==$v[OS]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
-	                  <?php else: ?>
-	                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
-           		  </select>
-               	  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="add_version">
-	                  <option value=""></option>
-	                  <?php if(is_array($v[ov_list])): foreach($v[ov_list] as $key=>$vc): if($vc==$v[Version]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
-	                  <?php else: ?>
-	                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
-              	</select>
-                </div>
-              </td>
-            </tr>
-            
-            
-            <tr>
-              <td style="text-align:right;">
-                <label>Suite:&nbsp;</label>
-              </td>
-              <td style="text-align:left;padding-top:10px;">
-                <div class="am-form-group-inline" style="width:71.5%;">
-                  <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_suit">
-                    <option value=""></option>
-                    <?php if(is_array($suit_list)): foreach($suit_list as $key=>$vc): ?><option value="<?php echo ($vc); ?>"><?php echo ($vc); ?></option><?php endforeach; endif; ?>
-                  </select>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align:right;">
-                <label>Owner:&nbsp;</label>
-              </td>
-              <td style="text-align:left;padding-top:10px;">
-                <div class="am-form-group-inline" style="width:71.5%;">
-                  <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_user">
-                    <option value=""></option>
-                    <?php if(is_array($user_list)): foreach($user_list as $k=>$vc): ?><option value="<?php echo ($vc[username]); ?>"><?php echo ($vc[username]); ?></option><?php endforeach; endif; ?>
-                  </select>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align:right;">
-                <label>start_time:&nbsp;</label>
-              </td>
-              <td style="text-align:left;padding-top:10px;">
-                <input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;margin-top:10px;" id="add_start" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align:right;">
-                <label>end_time:&nbsp;</label>
-              </td>
-              <td style="text-align:left;">
-                <input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="add_end" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-              </td>
-            </tr>            
-          </table>-->
         </div>
 
         <div class="am-modal-footer">
-            <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #9C9898;">OK</span>
-            <span class="am-modal-btn" data-am-modal-cancel style="width: 50%;border:1px solid #9C9898;">Cancel</span>
+            <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>
+            <span class="am-modal-btn" data-am-modal-cancel style="width: 50%;border:1px solid #cccccc;">Cancel</span>
         </div>
     </div>
 </div><?php endforeach; endif; ?>

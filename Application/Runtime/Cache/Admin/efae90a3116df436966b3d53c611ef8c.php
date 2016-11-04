@@ -89,11 +89,11 @@
             <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Task Suite</strong></div>
         </div>
     <div class="am-g">
-     <div class="am-u-md-3" style="margin-top:40px;">
-        <div class="container" id="tree_btn">
-            <div class="zTreeDemoBackground left">
-                <ul id="treeDemo" class="ztree" style="height: auto; border: hidden;overflow:auto;" ></ul>
-                <div class="am-btn-toolbar" style="margin-left:3px;">
+     <div class="am-u-md-3" style="width:22%;margin-top:40px;">
+        <div class="container" id="tree_btn" style="width:100%;">
+            <div class="zTreeDemoBackground left" style="width:100%;">
+                <ul id="treeDemo" class="ztree" style="width:100%;height: auto; border: hidden;overflow:auto;" ></ul>
+                <div class="am-btn-toolbar" style="width:100%;margin-left:3px;">
                     <div class="am-btn-group am-btn-group-md">
                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="edit()"><span class="am-icon-pencil" ></span>&nbsp;Save</button>
                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="cancel()"><span class="am-icon-pencil" ></span>&nbsp;Cancel</button>
@@ -103,7 +103,7 @@
         </div>
     </div>
 
-    <div class="am-g" style="margin-left:10px;">
+    <div class="am-g" style="margin-right:20px;">
         <div class="container" id="edit_page">
             <div class="am-g">
                 <div class="am-u-md-8">
