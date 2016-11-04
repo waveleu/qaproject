@@ -236,7 +236,56 @@
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New Task</div>
         <div class="am-modal-bd">
-          <table style="width:100%;margin:0px auto;">
+          <label style="display:inline;">Name:</label>
+          <input type="text" class="am-modal-prompt-input" id="add_name" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+          <label style="display:inline;">Driver:</label>
+          <input type="text" class="am-modal-prompt-input" id="add_driver" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+          <label style="display:inline;margin-left:-17px;">Test Run:</label> 
+          <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+             <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="add_pid" style="border:1px solid #9C9898;">
+                <option value=""></option>
+                <?php if(is_array($run_list)): foreach($run_list as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
+             </select>
+          </div><br/><br/>
+          <label style="display:inline;margin-left:2px;">Board:</label>
+          <div class="am-form-group-inline" style="display:inline;text-align:center;">
+              <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform">
+                <option value=""></option>
+                <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['id']); ?>><?php echo ($vc[Name]); ?></option>
+                    {else if condition="$vc[Type]==CModel"}<?php endforeach; endif; ?>
+              </select>
+              <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="add_os">
+                  <option value=""></option>
+                  <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): if($vc==$v[OS]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+                  <?php else: ?>
+                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
+              </select>
+              <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="add_version">
+                  <option value=""></option>
+                  <?php if(is_array($v[ov_list])): foreach($v[ov_list] as $key=>$vc): if($vc==$v[Version]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+                  <?php else: ?>
+                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
+            </select>
+            </div><br/><br/>
+            <label style="display:inline;margin-left:10px;">Suite:</label> 
+            <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+             <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="add_suit" style="border:1px solid #9C9898;">
+                <option value=""></option>
+                <?php if(is_array($suit_list)): foreach($suit_list as $key=>$vc): ?><option value="<?php echo ($vc); ?>"><?php echo ($vc); ?></option><?php endforeach; endif; ?>
+             </select>
+             </div><br/><br/>           
+            <label style="display:inline;">Owner:</label>
+            <div class="am-form-group-inline" style="display:inline;">
+                <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id="add_user">
+                    <option value=""></option>
+                    <?php if(is_array($user_list)): foreach($user_list as $k=>$vc): ?><option value="<?php echo ($vc[username]); ?>"><?php echo ($vc[username]); ?></option><?php endforeach; endif; ?>
+                </select>
+            </div><br/><br/>
+            <label style="display:inline;margin-left:-33px;">start_time:</label>
+            <input type="text" class="am-modal-prompt-input" data-am-datepicker id="add_start" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label style="display:inline;margin-left:-5%;">end_time:</label>
+            <input type="text" class="am-modal-prompt-input" data-am-datepicker id="add_end" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;">        
+          <!--<table style="width:100%;margin:0px auto;">
             <tr>
               <td style="text-align:right;"><label>Name:&nbsp;</label></td>
               <td><input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="add_name"></td>
@@ -289,7 +338,7 @@
             
             <tr>
               <td style="text-align:right;">
-                <label>Suit:&nbsp;</label>
+                <label>Suite:&nbsp;</label>
               </td>
               <td style="text-align:left;padding-top:10px;">
                 <div class="am-form-group-inline" style="width:71.5%;">
@@ -329,7 +378,7 @@
                 <input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="add_end" data-am-datepicker="{format: 'yyyy-mm-dd'}">
               </td>
             </tr>            
-          </table>
+          </table>-->
         </div>
 
         <div class="am-modal-footer">
