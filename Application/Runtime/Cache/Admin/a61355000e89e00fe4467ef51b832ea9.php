@@ -23,21 +23,21 @@
                         <div class="am-form-group am-form-horizontal am-form-error">
                             <label for='CaseName' class="am-u-sm-2 am-form-label am-fl" style="margin-top:-6px;">CaseName:</label>
                             <div class="am-u-sm-8">
-                                <input type="text" class="am-form-field " name='CaseName'  id="CaseName" style="width:407px;">
+                                <input type="text" class="am-form-field " name='CaseName'  id="CaseName" style="width:320px;">
                             </div>
                             <br>
                         </div>
                         <div class="am-form-group am-form-horizontal am-form-error">
                             <label for='TestSteps' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">TestSteps:</label>
                             <div class="am-u-sm-8">
-                                <input type="text" class="am-form-field " name='TestSteps'  id="TestSteps" style="width:407px;">
+                                <input type="text" class="am-form-field " name='TestSteps'  id="TestSteps" style="width:320px;">
                             </div>
                             <br>
                         </div>
                         <div class="am-form-group am-form-horizontal am-form-error">
                             <label for='Priority' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">Priority:</label>
                             <div class="am-u-sm-8">
-                                <select id="Priority" placeholder="Please Select" id="Priority" name="Priority" data-am-selected="{btnWidth: '32%', btnStyle: 'secondary'}">
+                                <select id="Priority" placeholder="Please Select" id="Priority" name="Priority" data-am-selected="{btnWidth: '25.3%', btnStyle: 'secondary'}">
                                     <option value=""></option>
                                     <?php $priority_arr=array('P0','P1','P2','P3');?>
                                     <?php if(is_array($priority_arr)): foreach($priority_arr as $key=>$v): if($v==$data[Priority]): ?><option value=<?php echo ($data[Priority]); ?> selected><?php echo ($data[Priority]); ?></option>
@@ -51,7 +51,7 @@
                         <div class="am-form-group am-form-horizontal am-form-error">
                             <label for='Automated' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">Automated:</label>
                             <div class="am-u-sm-8" id="Automated">
-                                <select data-am-selected="{btnWidth: '32%', btnStyle: 'secondary'}"  name="Automated" >
+                                <select data-am-selected="{btnWidth: '25.3%', btnStyle: 'secondary'}"  name="Automated" >
                                     <?php if($data[Automated]==Yes): ?><option value="Yes" selected>Yes</option>
                                         <option value="No">No</option>
                                     <?php else: ?>
@@ -67,7 +67,7 @@
                         <div class="am-form-group am-form-horizontal am-form-error">
                             <label for='Project1' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">Project:</label>
                             <div class="am-u-sm-10" id="Project1">
-                                <select multiple data-am-selected="{btnWidth:'25%', btnStyle: 'secondary'}" placeholder="Choose Project" id="Project" name="Project[]">
+                                <select multiple data-am-selected="{btnWidth:'20%', btnStyle: 'secondary'}" placeholder="Choose Project" id="Project" name="Project[]">
                                     <?php if(is_array($project_list)): foreach($project_list as $key=>$v): if(in_array($v[name],$data[Project])) echo '<option value=',$v[name].' selected>',$v[name].'</option>'; else echo '<option value=',$v[name].' >',$v[name].'</option>'; endforeach; endif; ?>
                                 </select>
                             </div>
@@ -76,7 +76,7 @@
                         <div class="am-form-group am-form-horizontal am-form-error">
                             <label for='Board1' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">Board Type:</label>
                             <div class="am-u-sm-10" id="Board1">
-                            <select multiple data-am-selected="{btnWidth: '25%', btnStyle: 'secondary'}" placeholder="Choose Board" id="Board" name="Board[]">
+                            <select multiple data-am-selected="{btnWidth: '20%', btnStyle: 'secondary'}" placeholder="Choose Board" id="Board" name="Board[]">
                                 <option value=""></option>
                                 <?php if(is_array($board_list)): foreach($board_list as $key=>$v): if(in_array($v[Name],$data[Board])) echo '<option value=',$v[Name].' selected>',$v[Name].'</option>'; else echo '<option value=',$v[Name].' >',$v[Name].'</option>'; endforeach; endif; ?>
                             </select>
@@ -86,7 +86,7 @@
                         <div class="am-form-group am-form-horizontal am-form-error">
                             <label for='OS1' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">OS:</label>
                             <div class="am-u-sm-10" id="OS1">
-                            <select multiple data-am-selected="{btnWidth: '25%', btnStyle: 'secondary'}" placeholder="Choose OS" id="OS" name="OS[]" >
+                            <select multiple data-am-selected="{btnWidth: '20%', btnStyle: 'secondary'}" placeholder="Choose OS" id="OS" name="OS[]" >
                                 <option value=""></option>
                                 <?php if(is_array($os_list)): foreach($os_list as $key=>$v): if(in_array($v[OS],$data[OS])) echo '<option value=',$v[OS].' title=',$v[Comments].' selected>',$v[OS].'</option>'; else echo '<option value=',$v[OS].' title=',$v[Comments].' >',$v[OS].'</option>'; endforeach; endif; ?>
                             </select>
@@ -96,28 +96,28 @@
                         <div class="am-form-group am-form-horizontal am-form-error">
                             <label for='ScripLocation' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">ScripLocation:</label>
                             <div class="am-u-sm-8">
-                                <input type="text" class="am-form-field " id='ScripLocation'  name="ScripLocation" style="width:407px;">
+                                <input type="text" class="am-form-field " id='ScripLocation'  name="ScripLocation" style="width:320px;">
                             </div>
                             <br>
                         </div>
                         <div class="am-form-group am-form-horizontal am-form-error">
                             <label for='ScripLocation' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">Gold Location:</label>
                             <div class="am-u-sm-8">
-                                <input type="text" class="am-form-field " id='ScripLocation'  name="ScripLocation" style="width:407px;">
+                                <input type="text" class="am-form-field " id='ScripLocation'  name="ScripLocation" style="width:320px;">
                             </div>
                             <br>
                         </div>
                         <div class="am-form-group am-form-horizontal am-form-error">
                             <label for='ExpectedResults' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">ExpectedResults:</label>
                             <div class="am-u-sm-8">
-                                <input type="text" class="am-form-field " id='ExpectedResults'  name="ExpectedResults" style="width:407px;">
+                                <input type="text" class="am-form-field " id='ExpectedResults'  name="ExpectedResults" style="width:320px;">
                             </div>
                             <br>
                         </div>
                         <div class="am-form-group am-form-horizontal am-form-error">
                             <label for='OS1' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">Customer:</label>
                             <div class="am-u-sm-10" id="OS1">
-                            <select multiple data-am-selected="{btnWidth: '25.3%', btnStyle: 'secondary'}" placeholder="Choose OS" id="OS" name="OS[]" >
+                            <select multiple data-am-selected="{btnWidth: '19.8%', btnStyle: 'secondary'}" placeholder="Choose OS" id="OS" name="OS[]" >
                                 <option value=""></option>
                                 <?php if(is_array($os_list)): foreach($os_list as $key=>$v): if(in_array($v[OS],$data[OS])) echo '<option value=',$v[OS].' title=',$v[Comments].' selected>',$v[OS].'</option>'; else echo '<option value=',$v[OS].' title=',$v[Comments].' >',$v[OS].'</option>'; endforeach; endif; ?>
                             </select>
@@ -127,13 +127,13 @@
                         <div class="am-form-group am-form-horizontal am-form-error" id="customer_hide">
                             <label for='From' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">From:</label>
                             <div class="am-u-sm-8 "  >
-                                <select data-am-selected="{btnWidth: '32%', btnStyle: 'secondary'}" placeholder="Choose From" id="From" name="From">
+                                <select data-am-selected="{btnWidth: '25%', btnStyle: 'secondary'}" placeholder="Choose From" id="From" name="From">
                                     <option value=""></option>
                                     <?php if(is_array($from_list)): foreach($from_list as $key=>$v): if($v[Name]==$data[From]): ?><option value="<?php echo ($v[name]); ?>" selected><?php echo ($v[name]); ?></option>
                                         <?php else: ?>
                                             <option value="<?php echo ($v[name]); ?>"><?php echo ($v[name]); ?></option><?php endif; endforeach; endif; ?>
                                 </select>
-                                <select data-am-selected="{btnWidth: '32%', btnStyle: 'secondary'}"  placeholder="Choose Customer"  id="Customer" name="Customer" style="display: none">
+                                <select data-am-selected="{btnWidth: '25%', btnStyle: 'secondary'}"  placeholder="Choose Customer"  id="Customer" name="Customer" style="display: none">
                                     <option value=""></option>
                                     <?php if(is_array($customer_list)): foreach($customer_list as $key=>$v): if($v[Name]==$data[Customer]): ?><option value="<?php echo ($v[Name]); ?>" selected><?php echo ($v[Name]); ?></option>
                                         <?php else: ?>
@@ -145,14 +145,14 @@
                         <div class="am-form-group am-form-horizontal am-form-error">
                             <label for='BugID' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">BugID:</label>
                             <div class="am-u-sm-8">
-                                <input type="text" class="am-form-field " id='BugID' name="BugID" style="width:407px;">
+                                <input type="text" class="am-form-field " id='BugID' name="BugID" style="width:320px;">
                             </div>
                             <br>
                         </div>
                         <div class="am-form-group am-form-horizontal am-form-error">
                             <label for='Comments' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">Comments:</label>
                             <div class="am-u-sm-8">
-                                <input type="text" class="am-form-field " id='Comments' name="Comments" style="width:407px;">
+                                <input type="text" class="am-form-field " id='Comments' name="Comments" style="width:320px;">
                             </div>
                             <br>
                         </div>

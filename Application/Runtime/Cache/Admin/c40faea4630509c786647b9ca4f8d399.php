@@ -77,7 +77,7 @@
                             <div class="am-modal-bd">
                                <label style="display:inline;margin-left:-17%;">name:</label>
                                <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[name]); ?>" style="width:208px;display:inline;border:1px solid #9C9898;"><br/><br/>
-                                <label style="display:inline;margin-left:-22.5%;">Board:</label> 
+                                <label style="display:inline;margin-left:-25%;">Board Type:</label> 
                                 <div class="am-form-group-inline" style="display:inline;">
                                     <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id='edit_board'>
                                         <!-- <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if(explode(',',$vc)[0]==Chip): if($vc==$v[Board]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
@@ -88,7 +88,7 @@
 		                                        <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
                                     </select>
                                 </div><br/><br/>
-                                <label style="display:inline;margin-left:-22.5%;">x86 / x64:</label> 
+                                <label style="display:inline;margin-left:-22%;">x86 / x64:</label> 
                                 <div class="am-form-group-inline" style="display:inline;">
                                     <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id="edit_bit">
                                         <option value='x86' selected>x86</option>
@@ -143,14 +143,14 @@
         <div class="am-modal-bd">
            <label style="display:inline;margin-left:-17%;">name:</label>
            <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[name]); ?>" style="width:208px;display:inline;border:1px solid #9C9898;"><br/><br/>
-            <label style="display:inline;margin-left:-22.5%;">Board:</label> 
+            <label style="display:inline;margin-left:-25%;">Board Type:</label> 
             <div class="am-form-group-inline" style="display:inline;">
                 <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id='add_board'>
                     <option value=""></option>
                     <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
                 </select>
             </div><br/><br/>
-            <label style="display:inline;margin-left:-22.5%;">x86 / x64:</label> 
+            <label style="display:inline;margin-left:-22%;">x86 / x64:</label> 
             <div class="am-form-group-inline" style="display:inline;">
                 <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id="add_bit">
                      <option value='x86'>x86</option>
