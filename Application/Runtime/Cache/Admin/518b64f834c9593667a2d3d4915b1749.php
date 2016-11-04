@@ -163,17 +163,10 @@
         </div>
         <br/>
         <!--Task case--->
-<<<<<<< HEAD
-        <div class="am-g" style="padding-left:10%;">
-            <div class="am-u-md-9 am-u-md-pull-1">
-                <div class="container" id="edit_page" >
-                    <div class="am-g" style="width:1100px;">
-=======
         <div class="am-g" style="padding-left:10px;">
            <div class="container" id="edit_page">
               <div class="am-g">
                 <div class="am-u-md-12">   
->>>>>>> a1b874d8325c5b5122120bec579e2263c8c3341b
                           <table class="am-table am-table-striped am-table-hover table-main">
                             <thead>
                             <tr>
@@ -269,7 +262,7 @@
                                                 <th class="table-title"><a href="javascript:reorder('driver');">Driver</a></th>
                                                 <th class="table-title"><a href="#">Status</a></th>
                                                 <th class="table-title"><a href="javascript:reorder('comments');">Comments</a></th>
-
+                                                <th class="table-title"><a href="#">Logo</a></th>
                                                 <th class="table-author am-hide-sm-only"></span>Operation</th>
                                             </tr>
                                             </thead>
@@ -280,8 +273,11 @@
  if($v['result']=='fail') echo "<td style='background-color: red'>".$v['result']."</td>"; elseif($v['result']=='pass') echo "<td style='background-color: green'>".$v['result']."</td>"; else echo "<td>".$v['result']."</td>"; ?>
                                                 <td><?php echo ($v[BugID]); ?></td>
                                                 <td><?php echo ($v[driver]); ?></td>
-                                                <td><?php echo ($v[status]); ?></td>
+                                                <td>34</td>
                                                 <td><?php echo ($v[comments]); ?></td>
+                                                <td>
+                                                   <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-arrow-circle-right"></span> Log</button>
+                                                </td>
 
 
                                                 <td>

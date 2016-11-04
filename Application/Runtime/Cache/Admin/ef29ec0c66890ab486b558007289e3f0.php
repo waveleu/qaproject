@@ -44,7 +44,7 @@
 
 <div class="am-cf admin-main">
     <!-- sidebar start -->
-    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas" style="width:17%;">
         <div class="am-offcanvas-bar admin-offcanvas-bar">
             <ul class="am-list admin-sidebar-list">
                 <?php if(is_array($data)): foreach($data as $key=>$v): if(empty($v['_data'])): ?><li><a href="<?php echo U($v['mca']);?>" class="am-cf" target="right-content" title=<?php echo ($v['mca']); ?>><span class=<?php echo ($v[ico]); ?>></span> <?php echo ($v['name']); ?></a></li>
