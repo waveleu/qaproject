@@ -83,6 +83,11 @@ class TaskController extends AuthController {
     		$this->assign($data);
     		$this->display('case_table_div');    		
     	}
+    	else if($filter['case_item']==true){
+    	    $data=D('Item')->getData();
+    	    $this->assign('data',$data);
+    	    $this->display('case_item');
+    	}
     	else{
     		$data=D('TaskCase')->getData($filter);
     		$tree=D('Testcase')->getTree();
@@ -127,7 +132,7 @@ class TaskController extends AuthController {
 	}
 	public function case_edit(){
 		$data=I('post.');
-		 $id['id']=$data['id'];
+		$id['id']=$data['id'];
 		unset($data['id']);
 		$result=D('TaskCase')->where($id)->save($data);
 		$this->ajaxReturn($result); 

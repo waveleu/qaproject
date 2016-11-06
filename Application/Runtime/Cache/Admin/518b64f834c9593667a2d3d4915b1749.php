@@ -241,7 +241,7 @@
                                                 <th class="table-title"><a href="javascript:reorder('driver');">Driver</a></th>
                                                 <th class="table-title"><a href="#">Status</a></th>
                                                 <th class="table-title"><a href="javascript:reorder('comments');">Comments</a></th>
-                                                <th class="table-title"><a href="#">Logo</a></th>
+                                                <th class="table-title"><a href="#">Item</a></th>
                                                 <th class="table-author am-hide-sm-only"></span>Operation</th>
                                             </tr>
                                             </thead>
@@ -252,13 +252,9 @@
  if($v['result']=='fail') echo "<td style='background-color: red'>".$v['result']."</td>"; elseif($v['result']=='pass') echo "<td style='background-color: green'>".$v['result']."</td>"; else echo "<td>".$v['result']."</td>"; ?>
                                                 <td><?php echo ($v[BugID]); ?></td>
                                                 <td><?php echo ($v[driver]); ?></td>
-                                                <td>34</td>
+                                                <td><?php echo ($v[Status]); ?></td>
                                                 <td><?php echo ($v[comments]); ?></td>
-                                                <td>
-                                                   <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-arrow-circle-right"></span> Log</button>
-                                                </td>
-
-
+                                                <td><a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');"><?php echo ($v[item]); ?></a></td>
                                                 <td>
                                                     <div class="am-btn-toolbar">
                                                         <div class="am-btn-group am-btn-group-xs">
@@ -335,7 +331,7 @@
     //编辑相应taskcase
     function edit(obj) {
         var id=$(obj).attr('task_id');
-        $.each(taskcase_info,function (k,v) {
+       /* $.each(taskcase_info,function (k,v) {
             if(v['id']==id){
                 $("#edit_id").val(id).hide();
                 $("#edit_result").find("option[value="+v.result+"]").attr('selected',true);
@@ -345,12 +341,12 @@
 
                 return false;
             }
-        });
+        }); */
 
         $("#edit_case_modal").modal({
             relatedTarget:this,
             onConfirm:function(e){
-                var arr={id:e.data['3'],driver:e.data['0'],BugID:e.data['1'],comments:e.data['2'],result:$("#edit_result").val()};
+                var arr={id:id,driver:e.data['1'],BugID:e.data['0'],Status:e.data['2'],comments:e.data['3'],result:$("#edit_result").val()};
                 $.post("<?php echo U('Admin/Task/case_edit');?>",arr,function (data) {
                     location.reload();
                     //task_show($("#search_tid"));
@@ -465,6 +461,10 @@
     function page_fresh(data) {
         $("#edit_table").empty().html(data);
         tree_fresh();
+    }
+    function toCaseItem(id) {
+        var str=("<?php echo U('Admin/Task/case_index',array('case_item'=>'true'));?>");
+        location.href=str;
     }
 </script>
 

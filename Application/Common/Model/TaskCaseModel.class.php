@@ -43,7 +43,7 @@ class TaskCaseModel extends BaseModel{
 		$cid_list 		  =$this->table('go_task_case TaskCase,go_task Task,go_testcase Testcase')->field('TaskCase.id,TaskCase.cid,TaskCase.tid')
 							->where($arr)->select();		
 		$list=$this->table('go_task_case TaskCase,go_task Task,go_testcase Testcase')
-							->field('TaskCase.id,TaskCase.cid,TaskCase.tid,Task.pid,TaskCase.BugID,TaskCase.comments,TaskCase.driver,TaskCase.result,Testcase.pid as class_id,Testcase.CaseName as casename,Task.name as taskname,Task.board')
+							->field('TaskCase.id,TaskCase.cid,TaskCase.tid,Task.pid,TaskCase.BugID,TaskCase.item,TaskCase.comments,TaskCase.driver,TaskCase.result,Testcase.pid as class_id,Testcase.CaseName as casename,Task.name as taskname,Task.board')
 							->where($arr)->order($sort_rule)->select();
 		//case信息
 		$result_type=M('result_type')->where('id>0')->getField('name',true);
@@ -84,7 +84,6 @@ class TaskCaseModel extends BaseModel{
 	        $list[$k]['Notrun']=$str_Notrun;
 	        $list[$k]['progress']=sprintf('%.1f',(floatval(preg_replace('/\D/s', '', $str_pass))/floatval(preg_replace('/\D/s', '', $str_total)))*100).'%';
 		}
-		//var_dump($list);
 		$data=array();
 		$cname_list=array();
 		foreach($list as $k=>$v){
@@ -94,8 +93,8 @@ class TaskCaseModel extends BaseModel{
 		   }
 		   $data[$cname_list[$tmp]][]=$v;
 		}
+		//var_dump($data);
 		ksort($cname_list);
-		//var_dump($cname_list);
 		$result=array(
 		         'list'=>$list,
 				'data'=>$data,
