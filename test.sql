@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-11-04 11:04:08
+-- Generation Time: 2016-11-06 17:30:31
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -344,7 +344,19 @@ CREATE TABLE IF NOT EXISTS `go_case` (
   `group` int(11) NOT NULL,
   `item` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- 转存表中的数据 `go_case`
+--
+
+INSERT INTO `go_case` (`id`, `group`, `item`) VALUES
+(1, 37, 1),
+(2, 37, 2),
+(3, 44, 3),
+(4, 44, 4),
+(5, 91, 5),
+(6, 37, 6);
 
 -- --------------------------------------------------------
 
@@ -465,6 +477,30 @@ INSERT INTO `go_from` (`id`, `name`) VALUES
 (3, 'Benchmark'),
 (4, 'Customer Issue'),
 (5, 'Customer Case');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `go_item`
+--
+
+CREATE TABLE IF NOT EXISTS `go_item` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `unit` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 转存表中的数据 `go_item`
+--
+
+INSERT INTO `go_item` (`id`, `name`, `unit`) VALUES
+(1, 'hhhhhhhh', 'ms'),
+(2, 'ggggggg', 'ns'),
+(3, 'gsdfgdfg', 'df'),
+(4, 'dfgdsfgdg', 'gd'),
+(5, 'rtr', 'f'),
+(6, 'sfdsdfsd', 'fsdf');
 
 -- --------------------------------------------------------
 
@@ -685,7 +721,7 @@ CREATE TABLE IF NOT EXISTS `go_task_case` (
   `start_time` date DEFAULT NULL,
   `end_time` date DEFAULT NULL,
   `Status` varchar(255) NOT NULL DEFAULT 'Waiting',
-  `Log` varchar(255) NOT NULL,
+  `item` varchar(255) NOT NULL DEFAULT 'default',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=235 ;
 
@@ -693,107 +729,107 @@ CREATE TABLE IF NOT EXISTS `go_task_case` (
 -- 转存表中的数据 `go_task_case`
 --
 
-INSERT INTO `go_task_case` (`id`, `cid`, `tid`, `BugID`, `result`, `driver`, `comments`, `start_time`, `end_time`, `Status`, `Log`) VALUES
-(18, 24, 8, NULL, NULL, NULL, NULL, '2016-07-01', '2016-07-31', 'Waiting', ''),
-(19, 15, 8, 11, 'fail', NULL, 'dfdf', '2016-07-01', '2016-07-31', 'Waiting', ''),
-(20, 33, 8, NULL, NULL, NULL, NULL, '2016-07-01', '2016-07-31', 'Waiting', ''),
-(21, 36, 8, NULL, NULL, NULL, NULL, '2016-07-01', '2016-07-31', 'Waiting', ''),
-(22, 27, 9, 0, 'fail', NULL, '', '2016-07-03', '2016-07-23', 'Waiting', ''),
-(23, 4, 9, 0, 'pass', NULL, '', '2016-07-03', '2016-07-23', 'Waiting', ''),
-(24, 5, 9, 0, 'pass', NULL, '', '2016-07-03', '2016-07-23', 'Waiting', ''),
-(25, 7, 9, 0, 'pass', NULL, '', '2016-07-03', '2016-07-23', 'Waiting', ''),
-(26, 8, 9, 0, 'fail', NULL, '', '2016-07-03', '2016-07-23', 'Waiting', ''),
-(27, 24, 8, NULL, NULL, NULL, NULL, '2016-07-09', '2016-07-29', 'Waiting', ''),
-(28, 15, 8, 0, 'fail', NULL, '', '2016-07-09', '2016-07-29', 'Waiting', ''),
-(29, 33, 8, NULL, NULL, NULL, NULL, '2016-07-09', '2016-07-29', 'Waiting', ''),
-(30, 36, 8, NULL, NULL, NULL, NULL, '2016-07-09', '2016-07-29', 'Waiting', ''),
-(31, 14, 7, 0, 'N/A', NULL, '', '0000-00-00', '0000-00-00', 'Waiting', ''),
-(33, 19, 7, 0, 'N/A', NULL, '', '0000-00-00', '0000-00-00', 'Waiting', ''),
-(35, 13, 7, 0, 'pass', NULL, '', '2016-07-14', '0000-00-00', 'Waiting', ''),
-(36, 20, 7, NULL, NULL, NULL, NULL, '2016-07-14', NULL, 'Waiting', ''),
-(37, 2, 9, 0, 'fail', NULL, '', '2016-07-14', '0000-00-00', 'Waiting', ''),
-(38, 9, 9, 0, 'N/A', NULL, '', '2016-07-14', '0000-00-00', 'Waiting', ''),
-(39, 28, 9, 0, 'fail', NULL, '', '2016-07-14', '0000-00-00', 'Waiting', ''),
-(41, 15, 11, 0, 'pass', NULL, '', '2016-07-06', '2016-07-31', 'Waiting', ''),
-(44, 2, 12, NULL, NULL, NULL, NULL, '2016-07-10', '2016-07-26', 'Waiting', ''),
-(45, 27, 13, 0, 'N/A', NULL, '', '2016-07-06', '2016-07-28', 'Waiting', ''),
-(46, 4, 13, 0, 'pass', NULL, '', '2016-07-06', '2016-07-28', 'Waiting', ''),
-(47, 5, 13, 0, 'pass', NULL, '', '2016-07-06', '2016-07-28', 'Waiting', ''),
-(48, 7, 13, 0, 'N/A', NULL, '', '2016-07-06', '2016-07-28', 'Waiting', ''),
-(49, 8, 13, 0, 'pass', NULL, '', '2016-07-06', '2016-07-28', 'Waiting', ''),
-(50, 21, 14, 0, 'N/A', NULL, '', '2016-07-07', '2016-07-31', 'Waiting', ''),
-(66, 21, 18, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', ''),
-(67, 25, 18, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', ''),
-(68, 23, 18, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', ''),
-(69, 26, 18, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', ''),
-(74, 21, 20, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', ''),
-(75, 25, 20, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', ''),
-(76, 23, 20, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', ''),
-(77, 26, 20, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', ''),
-(78, 2, 10, NULL, NULL, NULL, NULL, '2016-07-15', NULL, 'Waiting', ''),
-(79, 9, 10, NULL, NULL, NULL, NULL, '2016-07-15', NULL, 'Waiting', ''),
-(80, 28, 10, NULL, NULL, NULL, NULL, '2016-07-15', NULL, 'Waiting', ''),
-(81, 5, 10, NULL, NULL, NULL, NULL, '2016-07-15', NULL, 'Waiting', ''),
-(82, 8, 10, NULL, NULL, NULL, NULL, '2016-07-15', NULL, 'Waiting', ''),
-(83, 27, 10, NULL, NULL, NULL, NULL, '2016-07-15', NULL, 'Waiting', ''),
-(88, 27, 23, 0, '', NULL, '', '2016-07-08', '2016-07-31', 'Waiting', ''),
-(89, 4, 23, 0, '', NULL, 'dfdf', '2016-07-08', '2016-07-31', 'Waiting', ''),
-(90, 5, 23, 2323, '', NULL, 'dfdd', '2016-07-08', '2016-07-31', 'Waiting', ''),
-(91, 7, 23, 1111, '', NULL, 'fff', '2016-07-08', '2016-07-31', 'Waiting', ''),
-(92, 8, 23, 0, '', NULL, 'uu', '2016-07-08', '2016-07-31', 'Waiting', ''),
-(93, 24, 24, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', ''),
-(94, 15, 24, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', ''),
-(95, 33, 24, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', ''),
-(96, 36, 24, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', ''),
-(97, 27, 25, NULL, NULL, NULL, NULL, '2016-07-10', '2016-07-24', 'Waiting', ''),
-(98, 4, 25, NULL, NULL, NULL, NULL, '2016-07-10', '2016-07-24', 'Waiting', ''),
-(99, 5, 25, NULL, NULL, NULL, NULL, '2016-07-10', '2016-07-24', 'Waiting', ''),
-(100, 7, 25, NULL, NULL, NULL, NULL, '2016-07-10', '2016-07-24', 'Waiting', ''),
-(101, 8, 25, NULL, NULL, NULL, NULL, '2016-07-10', '2016-07-24', 'Waiting', ''),
-(227, 8, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', 'Waiting', ''),
-(103, 21, 27, 11, '', NULL, '', '2016-07-03', '2016-07-30', 'Waiting', ''),
-(124, 14, 11, 0, 'fail', NULL, '22', '2016-07-20', '2016-07-07', 'Waiting', ''),
-(125, 19, 11, 0, 'pass', NULL, '', '2016-07-06', '2016-07-31', 'Waiting', ''),
-(128, 11, 23, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', ''),
-(129, 16, 23, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', ''),
-(130, 21, 23, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', ''),
-(133, 11, 9, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', ''),
-(134, 16, 9, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', ''),
-(135, 21, 9, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', ''),
-(136, 12, 9, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', ''),
-(137, 17, 9, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', ''),
-(138, 13, 11, 2222, 'N/A', NULL, '22', '2016-07-20', '2016-07-07', 'Waiting', ''),
-(139, 20, 11, 2222, 'pass', NULL, '22', '2016-07-20', '2016-07-07', 'Waiting', ''),
-(140, 30, 27, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', ''),
-(141, 40, 27, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', ''),
-(142, 30, 14, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', ''),
-(143, 40, 14, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', ''),
-(158, 2, 7, 0, '', NULL, '', '2016-07-22', '2016-07-08', 'Waiting', ''),
-(159, 9, 7, 0, '', NULL, '', '2016-07-08', '2016-07-29', 'Waiting', ''),
-(160, 28, 7, 0, '', NULL, '', '2016-07-22', '2016-07-23', 'Waiting', ''),
-(161, 5, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', ''),
-(162, 8, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', ''),
-(163, 27, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', ''),
-(164, 12, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', ''),
-(165, 17, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', ''),
-(166, 11, 7, 0, '', NULL, '', '2016-07-02', '0000-00-00', 'Waiting', ''),
-(167, 16, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', ''),
-(168, 21, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', ''),
-(169, 15, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', ''),
-(199, 0, 33, NULL, NULL, NULL, NULL, '2016-07-15', '2016-07-10', 'Waiting', ''),
-(198, 0, 32, NULL, NULL, NULL, NULL, '2016-07-15', '2016-07-10', 'Waiting', ''),
-(226, 5, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', 'Waiting', ''),
-(225, 28, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', 'Waiting', ''),
-(224, 27, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', 'Waiting', ''),
-(216, 0, 37, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', ''),
-(223, 2, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', 'Waiting', ''),
-(228, 9, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', 'Waiting', ''),
-(229, 2, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', ''),
-(230, 27, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', ''),
-(231, 28, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', ''),
-(232, 5, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', ''),
-(233, 8, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', ''),
-(234, 9, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', '');
+INSERT INTO `go_task_case` (`id`, `cid`, `tid`, `BugID`, `result`, `driver`, `comments`, `start_time`, `end_time`, `Status`, `item`) VALUES
+(18, 24, 8, NULL, NULL, NULL, NULL, '2016-07-01', '2016-07-31', 'Waiting', 'default'),
+(19, 15, 8, 11, 'fail', NULL, 'dfdf', '2016-07-01', '2016-07-31', 'Waiting', 'default'),
+(20, 33, 8, NULL, NULL, NULL, NULL, '2016-07-01', '2016-07-31', 'Waiting', 'default'),
+(21, 36, 8, NULL, NULL, NULL, NULL, '2016-07-01', '2016-07-31', 'Waiting', 'default'),
+(22, 27, 9, 0, 'fail', NULL, '', '2016-07-03', '2016-07-23', 'Waiting', 'default'),
+(23, 4, 9, 0, 'pass', NULL, '', '2016-07-03', '2016-07-23', 'Waiting', 'default'),
+(24, 5, 9, 0, 'pass', NULL, '', '2016-07-03', '2016-07-23', 'Waiting', 'default'),
+(25, 7, 9, 0, 'pass', NULL, '', '2016-07-03', '2016-07-23', 'Waiting', 'default'),
+(26, 8, 9, 0, 'fail', NULL, '', '2016-07-03', '2016-07-23', 'Waiting', 'default'),
+(27, 24, 8, NULL, NULL, NULL, NULL, '2016-07-09', '2016-07-29', 'Waiting', 'default'),
+(28, 15, 8, 0, 'fail', NULL, '', '2016-07-09', '2016-07-29', 'Waiting', 'default'),
+(29, 33, 8, NULL, NULL, NULL, NULL, '2016-07-09', '2016-07-29', 'Waiting', 'default'),
+(30, 36, 8, NULL, NULL, NULL, NULL, '2016-07-09', '2016-07-29', 'Waiting', 'default'),
+(31, 14, 7, 0, 'N/A', NULL, '', '0000-00-00', '0000-00-00', 'Waiting', 'default'),
+(33, 19, 7, 0, 'N/A', NULL, '', '0000-00-00', '0000-00-00', 'Waiting', 'default'),
+(35, 13, 7, 0, 'pass', NULL, '', '2016-07-14', '0000-00-00', 'Waiting', 'default'),
+(36, 20, 7, NULL, NULL, NULL, NULL, '2016-07-14', NULL, 'Waiting', 'default'),
+(37, 2, 9, 0, 'fail', NULL, '', '2016-07-14', '0000-00-00', 'Waiting', 'default'),
+(38, 9, 9, 0, 'N/A', NULL, '', '2016-07-14', '0000-00-00', 'Waiting', 'default'),
+(39, 28, 9, 0, 'fail', NULL, '', '2016-07-14', '0000-00-00', 'Waiting', 'default'),
+(41, 15, 11, 0, 'pass', NULL, '', '2016-07-06', '2016-07-31', 'Waiting', 'default'),
+(44, 2, 12, NULL, NULL, NULL, NULL, '2016-07-10', '2016-07-26', 'Waiting', 'default'),
+(45, 27, 13, 0, 'N/A', NULL, '', '2016-07-06', '2016-07-28', 'Waiting', 'default'),
+(46, 4, 13, 0, 'pass', NULL, '', '2016-07-06', '2016-07-28', 'Waiting', 'default'),
+(47, 5, 13, 0, 'pass', NULL, '', '2016-07-06', '2016-07-28', 'Waiting', 'default'),
+(48, 7, 13, 0, 'N/A', NULL, '', '2016-07-06', '2016-07-28', 'Waiting', 'default'),
+(49, 8, 13, 0, 'pass', NULL, '', '2016-07-06', '2016-07-28', 'Waiting', 'default'),
+(50, 21, 14, 0, 'N/A', NULL, '', '2016-07-07', '2016-07-31', 'Waiting', 'default'),
+(66, 21, 18, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', 'default'),
+(67, 25, 18, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', 'default'),
+(68, 23, 18, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', 'default'),
+(69, 26, 18, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', 'default'),
+(74, 21, 20, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', 'default'),
+(75, 25, 20, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', 'default'),
+(76, 23, 20, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', 'default'),
+(77, 26, 20, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', 'default'),
+(78, 2, 10, NULL, NULL, NULL, NULL, '2016-07-15', NULL, 'Waiting', 'default'),
+(79, 9, 10, NULL, NULL, NULL, NULL, '2016-07-15', NULL, 'Waiting', 'default'),
+(80, 28, 10, NULL, NULL, NULL, NULL, '2016-07-15', NULL, 'Waiting', 'default'),
+(81, 5, 10, NULL, NULL, NULL, NULL, '2016-07-15', NULL, 'Waiting', 'default'),
+(82, 8, 10, NULL, NULL, NULL, NULL, '2016-07-15', NULL, 'Waiting', 'default'),
+(83, 27, 10, NULL, NULL, NULL, NULL, '2016-07-15', NULL, 'Waiting', 'default'),
+(88, 27, 23, 0, '', NULL, '', '2016-07-08', '2016-07-31', 'Waiting', 'default'),
+(89, 4, 23, 0, '', NULL, 'dfdf', '2016-07-08', '2016-07-31', 'Waiting', 'default'),
+(90, 5, 23, 2323, '', NULL, 'dfdd', '2016-07-08', '2016-07-31', 'Waiting', 'default'),
+(91, 7, 23, 1111, '', NULL, 'fff', '2016-07-08', '2016-07-31', 'Waiting', 'default'),
+(92, 8, 23, 0, '', NULL, 'uu', '2016-07-08', '2016-07-31', 'Waiting', 'default'),
+(93, 24, 24, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', 'default'),
+(94, 15, 24, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', 'default'),
+(95, 33, 24, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', 'default'),
+(96, 36, 24, NULL, NULL, NULL, NULL, '2016-07-02', '2016-07-31', 'Waiting', 'default'),
+(97, 27, 25, NULL, NULL, NULL, NULL, '2016-07-10', '2016-07-24', 'Waiting', 'default'),
+(98, 4, 25, NULL, NULL, NULL, NULL, '2016-07-10', '2016-07-24', 'Waiting', 'default'),
+(99, 5, 25, NULL, NULL, NULL, NULL, '2016-07-10', '2016-07-24', 'Waiting', 'default'),
+(100, 7, 25, NULL, NULL, NULL, NULL, '2016-07-10', '2016-07-24', 'Waiting', 'default'),
+(101, 8, 25, NULL, NULL, NULL, NULL, '2016-07-10', '2016-07-24', 'Waiting', 'default'),
+(227, 8, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', 'Waiting', 'default'),
+(103, 21, 27, 11, '', NULL, '', '2016-07-03', '2016-07-30', 'Waiting', 'default'),
+(124, 14, 11, 0, 'fail', NULL, '22', '2016-07-20', '2016-07-07', 'Waiting', 'default'),
+(125, 19, 11, 0, 'pass', NULL, '', '2016-07-06', '2016-07-31', 'Waiting', 'default'),
+(128, 11, 23, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', 'default'),
+(129, 16, 23, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', 'default'),
+(130, 21, 23, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', 'default'),
+(133, 11, 9, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', 'default'),
+(134, 16, 9, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', 'default'),
+(135, 21, 9, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', 'default'),
+(136, 12, 9, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', 'default'),
+(137, 17, 9, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', 'default'),
+(138, 13, 11, 2222, 'N/A', NULL, '22', '2016-07-20', '2016-07-07', 'Waiting', 'default'),
+(139, 20, 11, 2222, 'pass', NULL, '22', '2016-07-20', '2016-07-07', 'Waiting', 'default'),
+(140, 30, 27, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', 'default'),
+(141, 40, 27, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', 'default'),
+(142, 30, 14, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', 'default'),
+(143, 40, 14, NULL, NULL, NULL, NULL, '2016-07-20', NULL, 'Waiting', 'default'),
+(158, 2, 7, 0, '', NULL, '', '2016-07-22', '2016-07-08', 'Waiting', 'default'),
+(159, 9, 7, 0, '', NULL, '', '2016-07-08', '2016-07-29', 'Waiting', 'default'),
+(160, 28, 7, 0, '', NULL, '', '2016-07-22', '2016-07-23', 'Waiting', 'default'),
+(161, 5, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', 'default'),
+(162, 8, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', 'default'),
+(163, 27, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', 'default'),
+(164, 12, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', 'default'),
+(165, 17, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', 'default'),
+(166, 11, 7, 0, '', NULL, '', '2016-07-02', '0000-00-00', 'Waiting', 'default'),
+(167, 16, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', 'default'),
+(168, 21, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', 'default'),
+(169, 15, 7, NULL, NULL, NULL, NULL, '2016-07-22', NULL, 'Waiting', 'default'),
+(199, 0, 33, NULL, NULL, NULL, NULL, '2016-07-15', '2016-07-10', 'Waiting', 'default'),
+(198, 0, 32, NULL, NULL, NULL, NULL, '2016-07-15', '2016-07-10', 'Waiting', 'default'),
+(226, 5, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', 'Waiting', 'default'),
+(225, 28, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', 'Waiting', 'default'),
+(224, 27, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', 'Waiting', 'default'),
+(216, 0, 37, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', 'default'),
+(223, 2, 40, 333, 'pass', '333', '333', '2016-11-09', '2016-11-18', '444', 'default'),
+(228, 9, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', 'Waiting', 'default'),
+(229, 2, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', 'default'),
+(230, 27, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', 'default'),
+(231, 28, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', 'default'),
+(232, 5, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', 'default'),
+(233, 8, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', 'default'),
+(234, 9, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', 'default');
 
 -- --------------------------------------------------------
 
