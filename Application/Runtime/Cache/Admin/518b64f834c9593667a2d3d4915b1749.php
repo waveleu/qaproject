@@ -296,8 +296,9 @@
             <label style="display:inline;">Status:</label>
             <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
             <label style="display:inline;margin-left:-32px;">Comments:</label>
-            <input type="text" class="am-modal-prompt-input"  id="edit_comments" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;">
-            
+            <input type="text" class="am-modal-prompt-input"  id="edit_comments" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label style="display:inline;margin-left:13px;">Item:</label>
+            <input type="text" class="am-modal-prompt-input"  id="edit_item" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
         </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>
@@ -346,7 +347,7 @@
         $("#edit_case_modal").modal({
             relatedTarget:this,
             onConfirm:function(e){
-                var arr={id:id,driver:e.data['1'],BugID:e.data['0'],Status:e.data['2'],comments:e.data['3'],result:$("#edit_result").val()};
+                var arr={id:id,driver:e.data['1'],BugID:e.data['0'],Status:e.data['2'],comments:e.data['3'],item:e.data['4'],result:$("#edit_result").val()};
                 $.post("<?php echo U('Admin/Task/case_edit');?>",arr,function (data) {
                     location.reload();
                     //task_show($("#search_tid"));
