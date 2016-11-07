@@ -39,7 +39,6 @@
 				onClick:onClick,
 			}
 		};
-
 		var zNodes =[{id:0,pId:0,name:'root',open:true,isParent:true}];
 		$.each(<?php echo ($class); ?>,function (k,v) {
 			if(v.id<10)
@@ -54,7 +53,6 @@
 			var temp={id:v.id+1000-1000,pId:v.pid,name:""+v.CaseName,open:true,isParent:false};
 			zNodes.push(temp);
 		});
-
 		function beforeDrag(treeId, treeNodes) {
 			return true;
 		}
@@ -90,7 +88,6 @@
 		function showRenameBtn(treeId, treeNode) {
 			return (treeNode.id>10000);
 		}
-
 		//右击菜单及取消
 		function OnRightClick(event, treeId, treeNode) {
 			if(treeNode.isParent==true){
@@ -102,7 +99,6 @@
 					showRMenu("node", event.clientX, event.clientY);
 				}
 			}
-
 		}
 		function showRMenu(type, x, y) {
 			$("#rMenu ul").show();
@@ -116,7 +112,6 @@
 				$("#m_unCheck").show();
 			}
 			rMenu.css({"top":y+"px", "left":x+"px", "visibility":"visible"});
-
 			$("body").bind("mousedown", onBodyMouseDown);
 		}
 		function hideRMenu() {
@@ -141,7 +136,6 @@
 		
 		//对应功能区
 		function add_class() {
-
 			$("#edit_add_class").modal({
 				relatedTarget:this,
 				onConfirm:function (e) {
@@ -191,7 +185,6 @@
 			});
 			rMenu.css({"visibility" : "hidden"});
 		}
-
 		//辅助函数，求某个class下的子case
 		function get_case_id(e) {
 			var case_id=new Array();
@@ -216,13 +209,11 @@
 				});
 			return class_id;
 		}
-
 		function add_case() {
 			var node=zTree.getSelectedNodes()[0].id;
 			if(node<10000){
 				var str=("<?php echo U('Admin/Testcase/add',array('pid'=>ppid));?>").replace('ppid',node);
 				$("#edit_page").empty().append('<iframe name="right-content" src='+str+' id="iframepage"  width="1000px"  height="800px" align="left" style="margin-top: 0px;padding-top: 0px"></iframe>');
-
 			}
 			rMenu.css({"visibility" : "hidden"});
 		}
@@ -231,16 +222,13 @@
 					.not(':button, :submit, :reset, :hidden')
 					.val('');
 			//
-
 		}
-
 		var zTree, rMenu;
 		$(document).ready(function(){
 			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
 			zTree = $.fn.zTree.getZTreeObj("treeDemo");
 			rMenu = $("#rMenu");
 		});
-
 	</SCRIPT>
 	<style type="text/css">
 		div#rMenu {position:absolute; visibility:hidden; top:0;text-align: left;padding: 2px;}
@@ -264,10 +252,10 @@
 			<br>
 
 			<div class="am-g">
-				<div class="am-u-md-3 ">
-					<div class="container">
-						<div class="zTreeDemoBackground left">
-							<ul id="treeDemo" class="ztree" style="height: auto; border: hidden;overflow: auto;" ></ul>
+				<div class="am-u-md-3" style="width:22%;">
+					<div class="container" style="width:100%;">
+						<div class="zTreeDemoBackground left" style="width:100%;">
+							<ul id="treeDemo" class="ztree" style="width:100%;height: auto; border: hidden;overflow: auto;" ></ul>
 						</div>
 					</div>
 				</div>
