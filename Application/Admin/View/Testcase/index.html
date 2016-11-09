@@ -41,16 +41,14 @@
 		};
 		var zNodes =[{id:0,pId:0,name:'root',open:true,isParent:true}];
 		$.each({$class},function (k,v) {
-			if(v.id<10)
+			if(v.id<1000000)
 				var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:true,isParent:true};
-			else if(v.id>999&&v.id<10000)
-				var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:false,isParent:true};
 			else
 				var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:false,isParent:true};
 			zNodes.push(temp);
 		});
 		$.each({$data},function (k,v) {
-			var temp={id:v.id+1000-1000,pId:v.pid,name:""+v.CaseName,open:true,isParent:false};
+			var temp={id:v.id+1000000,pId:v.pid,name:""+v.CaseName,open:true,isParent:false};
 			zNodes.push(temp);
 		});
 		function beforeDrag(treeId, treeNodes) {
@@ -62,7 +60,7 @@
 			});
 		}
 		function beforeEditName(treeId, treeNode) {
-			var id=treeNode.id/10000;
+			var id=treeNode.id-1000000;
 			var str=("{:U('Admin/Testcase/edit',array('id'=>vid,'flag'=>true))}").replace('vid',id);
 				$("#edit_page").empty().append('<iframe name="right-content" src='+str+' id="iframepage"  width="100%"  height="800px" align="left" style="margin-top: 0px;padding-top: 0px"></iframe>');
 			return false;
@@ -72,7 +70,7 @@
 			$("#del_modal").modal({
 				relatedTarget:this,
 				onConfirm:function () {
-					$.post("{:U('Admin/testcase/del')}",{id:treeNode.id/10000},function (data) {
+					$.post("{:U('Admin/testcase/del')}",{id:treeNode.id-1000000},function (data) {
 						location.reload();
 					})
 				},
@@ -83,10 +81,10 @@
 			return isDel;
 		}
 		function showRemoveBtn(treeId, treeNode) {
-			return (treeNode.id>10000);
+			return (treeNode.id>1000000);
 		}
 		function showRenameBtn(treeId, treeNode) {
-			return (treeNode.id>10000);
+			return (treeNode.id>1000000);
 		}
 		//右击菜单及取消
 		function OnRightClick(event, treeId, treeNode) {

@@ -59,7 +59,7 @@
                     <tr>
                         <td>{$v[name]}</td>
                         <td>{$v[Board]}</td>
-                        <td>{$v['x86/x64']}</td>
+                        <td>{$v['x86x64']}</td>
                         <td>{$v[OS]}{$v[Version]}</td>
                         <td>{$v[BSP]}</td>
                         <td>
@@ -241,7 +241,7 @@
                 console.log(bit);
                 console.log(board);
                 $.post("{:U('Admin/Platform/edit')}",
-                        {id:id,OS:os,Version:version,BSP:bsp,Board:board,name:e.data,'x86/x64':bit},
+                        {id:id,OS:os,Version:version,BSP:bsp,Board:board,name:e.data,'x86x64':bit},
                         function () {
                             location.href="{:U('Admin/Platform/index')}";
                         });
@@ -269,7 +269,7 @@
                 var bsp=$("#add_bsp option:selected").val();
                 var board=$("#add_board option:selected").val();
                 $.post("{:U('Admin/Platform/add')}",
-                        {Board:board,BSP:bsp,OS:os,Version:version,name:e.data,'x86/x64':bit},
+                        {Board:board,BSP:bsp,OS:os,Version:version,name:e.data,'x86x64':bit},
                         function (data) {
                             window.location.reload();
                         });

@@ -50,7 +50,7 @@
 			zNodes.push(temp);
 		});
 		$.each(<?php echo ($data); ?>,function (k,v) {
-			var temp={id:v.id+1000-1000,pId:v.pid,name:""+v.CaseName,open:true,isParent:false};
+			var temp={id:v.id+1000000,pId:v.pid,name:""+v.CaseName,open:true,isParent:false};
 			zNodes.push(temp);
 		});
 		function beforeDrag(treeId, treeNodes) {
@@ -83,10 +83,10 @@
 			return isDel;
 		}
 		function showRemoveBtn(treeId, treeNode) {
-			return (treeNode.id>10000);
+			return (treeNode.id>1000000);
 		}
 		function showRenameBtn(treeId, treeNode) {
-			return (treeNode.id>10000);
+			return (treeNode.id>1000000);
 		}
 		//右击菜单及取消
 		function OnRightClick(event, treeId, treeNode) {

@@ -58,7 +58,7 @@
                     <?php if(is_array($data)): foreach($data as $key=>$v): ?><tr>
                         <td><?php echo ($v[name]); ?></td>
                         <td><?php echo ($v[Board]); ?></td>
-                        <td><?php echo ($v['x86/x64']); ?></td>
+                        <td><?php echo ($v['x86x64']); ?></td>
                         <td><?php echo ($v[OS]); echo ($v[Version]); ?></td>
                         <td><?php echo ($v[BSP]); ?></td>
                         <td>
@@ -211,7 +211,7 @@
                 console.log(bit);
                 console.log(board);
                 $.post("<?php echo U('Admin/Platform/edit');?>",
-                        {id:id,OS:os,Version:version,BSP:bsp,Board:board,name:e.data,'x86/x64':bit},
+                        {id:id,OS:os,Version:version,BSP:bsp,Board:board,name:e.data,'x86x64':bit},
                         function () {
                             location.href="<?php echo U('Admin/Platform/index');?>";
                         });
@@ -239,7 +239,7 @@
                 var bsp=$("#add_bsp option:selected").val();
                 var board=$("#add_board option:selected").val();
                 $.post("<?php echo U('Admin/Platform/add');?>",
-                        {Board:board,BSP:bsp,OS:os,Version:version,name:e.data,'x86/x64':bit},
+                        {Board:board,BSP:bsp,OS:os,Version:version,name:e.data,'x86x64':bit},
                         function (data) {
                             window.location.reload();
                         });
