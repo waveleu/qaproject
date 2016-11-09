@@ -27,7 +27,7 @@ class TestcaseController extends AuthController {
         $from_list=M('from')->select();
         $edata['pid']=I('pid');
         $map=array(
-            'edata'=>json_encode($edata),
+            'edata'=>$edata,
             'customer_list'=>$customer_list,
             'project_list'=>$project_list,
             'board_list'=>$board_list,
