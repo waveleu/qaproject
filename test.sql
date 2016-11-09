@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-11-06 17:30:31
+-- Generation Time: 2016-11-09 07:43:48
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -237,17 +237,25 @@ INSERT INTO `go_auth_rule` (`id`, `pid`, `name`, `title`, `status`, `type`, `con
 
 CREATE TABLE IF NOT EXISTS `go_board` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(255) NOT NULL,
-  `Type` varchar(255) NOT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Type` varchar(255) DEFAULT NULL,
   `Customer` varchar(255) DEFAULT NULL,
   `2D_Core` varchar(255) DEFAULT NULL,
   `3D_Core` varchar(255) DEFAULT NULL,
   `2D_VG_Core` varchar(255) DEFAULT NULL,
-  `Bitfile` varchar(255) NOT NULL,
-  `CModel_Location-P4` varchar(255) NOT NULL,
-  `CModel_Location-Build` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`,`Name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+  `Bitfile` varchar(255) DEFAULT NULL,
+  `CModel_Location-P4` varchar(255) DEFAULT NULL,
+  `CModel_Location-Build` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Name` (`Name`),
+  KEY `Name_2` (`Name`),
+  KEY `Name_3` (`Name`),
+  KEY `Name_4` (`Name`),
+  KEY `Name_5` (`Name`),
+  KEY `Type` (`Type`),
+  KEY `Type_2` (`Type`),
+  KEY `Customer` (`Customer`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
 -- 转存表中的数据 `go_board`
@@ -255,10 +263,11 @@ CREATE TABLE IF NOT EXISTS `go_board` (
 
 INSERT INTO `go_board` (`id`, `Name`, `Type`, `Customer`, `2D_Core`, `3D_Core`, `2D_VG_Core`, `Bitfile`, `CModel_Location-P4`, `CModel_Location-Build`) VALUES
 (1, 'b1', 'FPGA', 'FreeScale', 'null', 'null', 'null', 'null', 'null', 'null'),
-(4, 'b2', 'Chip', 'FreeScale', 'null', 'null', 'null', 'null', 'null', 'null'),
+(4, 'b2', 'FPGA', 'FreeScale', 'null', 'null', 'null', '5555', 'null', 'null'),
 (5, 'b3', 'Chip', 'undefined', '44', '55', '66', 'null', 'null', 'null'),
 (7, 'b4', 'Chip', 'undefined', '11', 'qq', 'zz', 'null', 'null', 'null'),
-(15, 'b5', 'CModel', 'FreeScale', 'null', '111', 'null', 'null', '111', '111');
+(15, 'b5', 'CModel', 'FreeScale', 'null', '111', 'null', 'null', '111', '111'),
+(25, 'v620_v2', 'CModel', NULL, NULL, 'vipf8022', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -371,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `go_class` (
   `name` varchar(255) DEFAULT NULL,
   `format` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1012 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1016 ;
 
 --
 -- 转存表中的数据 `go_class`
@@ -386,7 +395,7 @@ INSERT INTO `go_class` (`id`, `pid`, `level`, `name`, `format`) VALUES
 (21, '2', 2, 's1', 'adfd'),
 (22, '2', 2, 's2', NULL),
 (23, '2', 2, 's3', NULL),
-(1011, '22', NULL, '44', NULL);
+(1015, '12', NULL, '111', NULL);
 
 -- --------------------------------------------------------
 
@@ -575,21 +584,22 @@ CREATE TABLE IF NOT EXISTS `go_platform` (
   `OS` varchar(255) DEFAULT NULL,
   `BSP` varchar(255) DEFAULT NULL,
   `Version` varchar(11) DEFAULT NULL,
-  `name` varchar(255) NOT NULL,
-  `x86/x64` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`,`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+  `name` varchar(255) DEFAULT NULL,
+  `x86x64` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 --
 -- 转存表中的数据 `go_platform`
 --
 
-INSERT INTO `go_platform` (`id`, `Board`, `OS`, `BSP`, `Version`, `name`, `x86/x64`) VALUES
-(1, 'Chip,b4', 'KitKat', 'bsp3', '1.60', 'p1', 'x64'),
+INSERT INTO `go_platform` (`id`, `Board`, `OS`, `BSP`, `Version`, `name`, `x86x64`) VALUES
+(1, 'CModel,b5', 'KitKat', 'bsp3', '1.60', 'p1', 'x64'),
 (2, 'Chip,b2', 'WinCE', 'bsp4', '7.20', 'p2', 'x86'),
-(3, 'Chip,b2', 'LoliPop', 'bsp2', '5.11', 'p3', 'x86'),
+(3, 'FPGA,b1', 'LoliPop', 'bsp2', '5.11', 'p3', 'x64'),
 (5, 'Chip,b2', 'KitKat', 'bsp2', '6.08', 'p4', 'x86'),
-(12, 'FPGA,b1', 'Ubuntu', 'bsp2', NULL, 'p5', 'x64');
+(12, 'FPGA,b1', 'Ubuntu', 'bsp2', NULL, 'p5', 'x64'),
+(21, 'CModel,v620_v2', '', '', '', '', 'x64');
 
 -- --------------------------------------------------------
 
@@ -651,12 +661,21 @@ INSERT INTO `go_result_type` (`id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `go_scm` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
   `Branch` varchar(255) NOT NULL,
-  `Build No.` int(255) NOT NULL,
+  `Build No.` varchar(255) NOT NULL,
   `Build Type` varchar(255) NOT NULL,
   `Compile(Pass/Fail)` varchar(255) NOT NULL,
-  `Time` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `Time` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `go_scm`
+--
+
+INSERT INTO `go_scm` (`id`, `Branch`, `Build No.`, `Build Type`, `Compile(Pass/Fail)`, `Time`) VALUES
+(1, '5.0.0_81855', 'dev82446.5.3021_p5.0.0_81855', 'dev', '', '');
 
 -- --------------------------------------------------------
 
@@ -822,7 +841,7 @@ INSERT INTO `go_task_case` (`id`, `cid`, `tid`, `BugID`, `result`, `driver`, `co
 (225, 28, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', 'Waiting', 'default'),
 (224, 27, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', 'Waiting', 'default'),
 (216, 0, 37, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', 'default'),
-(223, 2, 40, 333, 'pass', '333', '333', '2016-11-09', '2016-11-18', '444', 'default'),
+(223, 2, 40, 333, 'pass', '333', '111', '2016-11-09', '2016-11-18', 'Waiting', 'fgdgdfg'),
 (228, 9, 40, NULL, NULL, NULL, NULL, '2016-11-09', '2016-11-18', 'Waiting', 'default'),
 (229, 2, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', 'default'),
 (230, 27, 41, NULL, NULL, NULL, NULL, '0000-00-00', '0000-00-00', 'Waiting', 'default'),
@@ -879,7 +898,7 @@ CREATE TABLE IF NOT EXISTS `go_testcase` (
   `Board` varchar(255) DEFAULT NULL,
   `Comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`,`CaseName`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
 
 --
 -- 转存表中的数据 `go_testcase`
