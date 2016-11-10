@@ -77,9 +77,9 @@
                             <div class="am-modal-bd">
                                <label style="display:inline;margin-left:-17%;">name:</label>
                                <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[name]); ?>" style="width:208px;display:inline;border:1px solid #9C9898;"><br/><br/>
-                                <label style="display:inline;margin-left:-22.5%;">Board Type:</label> 
+                                <label style="display:inline;margin-left:-22.5%;">Board:</label> 
                                 <div class="am-form-group-inline" style="display:inline;">
-                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary',searchBox:1}" class="am-fr" placeholder="Please select..." id='edit_board'>
+                                    <select data-am-selected="{btnWidth: '40%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id='edit_board'>
                                         <!-- <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if(explode(',',$vc)[0]==Chip): if($vc==$v[Board]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
 		                                        <?php else: ?>
 		                                        <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endif; endforeach; endif; ?> -->

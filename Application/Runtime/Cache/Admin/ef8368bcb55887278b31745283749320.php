@@ -180,7 +180,7 @@
                                       </div><br/><br/>
                                       <label style="display:inline;margin-left:-17px;">Test Run:</label> 
                                       <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
-                                            <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary',searchBox:1}" placeholder="Please select..." id="edit_pid" style="border:1px solid #9C9898;">
+                                            <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="edit_pid" style="border:1px solid #9C9898;">
                                                 <option value=""></option>
                                                 <?php if(is_array($run_list)): foreach($run_list as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
                                             </select>
@@ -256,7 +256,7 @@
           </div><br/><br/>
           <label style="display:inline;margin-left:-17px;">Test Run:</label> 
           <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
-             <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary',searchBox:1}" placeholder="Please select..." id="add_pid" style="border:1px solid #9C9898;">
+             <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="add_pid" style="border:1px solid #9C9898;">
                 <option value=""></option>
                 <?php if(is_array($run_list)): foreach($run_list as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
              </select>
@@ -396,8 +396,8 @@
         </div>
 
         <div class="am-modal-footer">
-            <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>
-            <span class="am-modal-btn" data-am-modal-cancel style="width: 50%;border:1px solid #cccccc;">Cancel</span>
+            <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #9C9898;">OK</span>
+            <span class="am-modal-btn" data-am-modal-cancel style="width: 50%;border:1px solid #9C9898;">Cancel</span>
         </div>
     </div>
 </div><?php endforeach; endif; ?>

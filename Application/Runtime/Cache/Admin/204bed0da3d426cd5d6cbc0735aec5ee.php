@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Amaze UI Admin table Examples</title>
-    <meta name="description" content="这是一个 table 页面">
+    <meta name="description" content="����һ�� table ҳ��">
     <meta name="keywords" content="table">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
@@ -85,7 +85,7 @@
                             </div>
                         </td>
                     </tr>
-                    <div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" style="top:-200px;">
+                    <div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" >
                         <div class="am-modal-dialog">
                             <div class="am-modal-hd">Edit Board Type</div>
                             <div class="am-modal-bd edit">
@@ -130,7 +130,7 @@
 
 
 //add new board
-<div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_board_modal" style="top:-20%;">
+<div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_board_modal" style="top:-15%;">
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New Board Type</div>
         <div class="am-modal-bd">
@@ -171,17 +171,11 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 <!--[if lt IE 9]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="/qaweb/Public/assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="/qaweb/Public/assets/js/jquery.min.js"></script>
 <!--<![endif]-->
@@ -206,7 +200,6 @@
                 e.close();
             }
         });
-
     }
     function del(obj) {
         var id=$(obj).attr('board_id');
@@ -215,7 +208,6 @@
                 window.location.reload();
             });
         }
-
     }
     function add() {
         $('#add_board_modal').modal({
@@ -243,7 +235,7 @@
     function edit_select(obj){
     	var id=$(obj).attr('id');
     	if($("#"+id).val()=='Chip'){
-    		$("#Customer_1,#Customer,#2D_Core,#3D_Core,#2D_VG_Core").css("display","block");
+    		$("#Customer_1,#2D_Core,#3D_Core,#2D_VG_Core").css("display","block");
     		$("#Bitfile,#CModel_Location-P4,#CModel_Location-Build").css("display","none");
     		};
     	if($("#"+id).val()=='FPGA'){

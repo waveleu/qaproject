@@ -60,11 +60,7 @@
 			});
 		}
 		function beforeEditName(treeId, treeNode) {
-<<<<<<< HEAD
-			var id=treeNode.id-1000000;
-=======
 			var id=treeNode.id/10000000;
->>>>>>> db525adda16d4758472a6ed428b365d4b148bcac
 			var str=("<?php echo U('Admin/Testcase/edit',array('id'=>vid,'flag'=>true));?>").replace('vid',id);
 				$("#edit_page").empty().append('<iframe name="right-content" src='+str+' id="iframepage"  width="100%"  height="800px" align="left" style="margin-top: 0px;padding-top: 0px"></iframe>');
 			return false;
@@ -74,11 +70,7 @@
 			$("#del_modal").modal({
 				relatedTarget:this,
 				onConfirm:function () {
-<<<<<<< HEAD
-					$.post("<?php echo U('Admin/testcase/del');?>",{id:treeNode.id-1000000},function (data) {
-=======
 					$.post("<?php echo U('Admin/testcase/del');?>",{id:treeNode.id/10000000},function (data) {
->>>>>>> db525adda16d4758472a6ed428b365d4b148bcac
 						location.reload();
 					})
 				},
