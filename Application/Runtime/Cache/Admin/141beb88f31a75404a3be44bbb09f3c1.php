@@ -41,10 +41,8 @@
 		};
 		var zNodes =[{id:0,pId:0,name:'root',open:true,isParent:true}];
 		$.each(<?php echo ($class); ?>,function (k,v) {
-			if(v.id<10)
+			if(v.id<1000000)
 				var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:true,isParent:true};
-			else if(v.id>999&&v.id<10000)
-				var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:false,isParent:true};
 			else
 				var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:false,isParent:true};
 			zNodes.push(temp);
@@ -62,7 +60,7 @@
 			});
 		}
 		function beforeEditName(treeId, treeNode) {
-			var id=treeNode.id/10000;
+			var id=treeNode.id-1000000;
 			var str=("<?php echo U('Admin/Testcase/edit',array('id'=>vid,'flag'=>true));?>").replace('vid',id);
 				$("#edit_page").empty().append('<iframe name="right-content" src='+str+' id="iframepage"  width="100%"  height="800px" align="left" style="margin-top: 0px;padding-top: 0px"></iframe>');
 			return false;
@@ -72,7 +70,7 @@
 			$("#del_modal").modal({
 				relatedTarget:this,
 				onConfirm:function () {
-					$.post("<?php echo U('Admin/testcase/del');?>",{id:treeNode.id/10000},function (data) {
+					$.post("<?php echo U('Admin/testcase/del');?>",{id:treeNode.id-1000000},function (data) {
 						location.reload();
 					})
 				},
