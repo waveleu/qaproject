@@ -14,6 +14,23 @@
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
     <link rel="stylesheet" href="/qaweb/Public/assets/css/amazeui.min.css"/>
     <link rel="stylesheet" href="/qaweb/Public/assets/css/admin.css">
+    <style>
+    .edit{
+        width:90%;
+        margin:0 auto;
+        text-align: left;
+    }
+    .edit label{
+        width:130px;
+        display:inline-block;
+        text-align:right;
+        padding:0px;
+    }
+    .edit input{
+        width:60%;
+
+    }
+</style>
 </head>
 <body>
 
@@ -46,13 +63,13 @@
                                     <div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" style="top:-20%;">
                                         <div class="am-modal-dialog">
                                             <div class="am-modal-hd">Edit Customer</div>
-                                            <div class="am-modal-bd">
-                                              <label style="display:inline;">Name: </label>
-                                              <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[Name]); ?>" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
-                                               <label style="display:inline;margin-left:-35px;">Description: </label> 
-                                               <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[Description]); ?>" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
-                                                <label style="display:inline;margin-left:-50px;">PM_Contactor: </label>
-                                                <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[PM_Contactor]); ?>" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"> 
+                                            <div class="am-modal-bd edit">
+                                              <label>Name: </label>
+                                              <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[Name]); ?>" style="display:inline;border:1px solid #9C9898;"><br/><br/>
+                                               <label>Description: </label> 
+                                               <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[Description]); ?>" style="display:inline;border:1px solid #9C9898;"><br/><br/>
+                                                <label>PM_Contactor: </label>
+                                                <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[PM_Contactor]); ?>" style="display:inline;border:1px solid #9C9898;"> 
                                             </div>
                                             <div class="am-modal-footer">
                                                 <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>

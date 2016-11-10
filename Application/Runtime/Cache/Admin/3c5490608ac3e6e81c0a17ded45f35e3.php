@@ -84,7 +84,7 @@
 //add new board
 <div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_modal" style="top:-15%;">
     <div class="am-modal-dialog">
-        <div class="am-modal-hd">New Version</div>
+        <div class="am-modal-hd">New/Edit Version</div>
         <div class="am-modal-bd">
           <table style="width:100%;margin:5px auto;">
             <tr>

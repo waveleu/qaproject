@@ -15,6 +15,18 @@
 	<link rel="stylesheet" href="/qaweb/Public/assets/css/amazeui.min.css"/>
 	<link rel="stylesheet" href="/qaweb/Public/assets/css/admin.css">
 </head>
+<style>
+    .am-modal-bd{
+    	width:90%;
+    	margin:0 auto;
+    }
+	.am-modal-bd label{
+		width:120px;
+		display:inline-block;
+		text-align:right;
+	}
+
+</style>
 <body>
 
 
@@ -44,10 +56,10 @@
 											<button class="am-btn am-btn-default am-btn-xs am-text-secondary" ov_id="<?php echo ($v[id]); ?>" ov_os="<?php echo ($v[OS]); ?>" onclick="edit_version(this)"><span class="am-icon-pencil-square"></span> Edit Version</button>
 											<div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" style="top:-30%;">
 												<div class="am-modal-dialog">
-													<div class="am-modal-hd">Delete Version</div>
+													<div class="am-modal-hd">Edit Version</div>
 													<div class="am-modal-bd">
-														Please choose the Version to be delete
-														<table style="width:60%;margin:12px auto;">
+														Please choose the Version to be edit
+														<table style="margin:12px 20px;">
 															<?php if(is_array($v['version_list'])): $k = 0; $__LIST__ = $v['version_list'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vsub): $mod = ($k % 2 );++$k; if($k%4==1): ?><tr><?php endif; ?>
 															<td><label class="am-checkbox" style="text-align:left;"><input type="checkbox" value=<?php echo ($vsub); ?> data-am-ucheck style="text-align:left;"> <?php echo ($vsub); ?> </label></td>
 															<?php if($k%4==4): ?></tr><?php endif; endforeach; endif; else: echo "" ;endif; ?>
@@ -108,9 +120,9 @@
 				<div class="am-modal-dialog">
 					<div class="am-modal-hd">New OS_Version</div>
                       <div class="am-modal-bd">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="display:inline;">OS Name:</label>
+                        <label class="">OS Name:</label>
                         <input type="text" class="am-modal-prompt-input" style="width:60%;display:inline; color:#000;border:1px solid #9C9898;"><br/><br/>
-                        <label style="display:inline;">Version Name:</label>
+                        <label>Version Name:</label>
                         <input type="text" class="am-modal-prompt-input" style="width:60%;display:inline; color:#000;border:1px solid #9C9898;">
                       </div>
 					<div class="am-modal-footer">
