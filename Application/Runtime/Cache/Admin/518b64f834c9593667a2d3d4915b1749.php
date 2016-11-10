@@ -360,7 +360,7 @@
     }
 
     //添加，删除taskcase
-    function add() {
+    /* function add() {
         var tid=$("#search_tid").val();
         if(tid==""||tid==null){
             alert("There is no explicit task!");
@@ -375,12 +375,10 @@
             $.post("<?php echo U('Admin/Task/case_reassign');?>",{cids:cids,tid:tid},function (data) {
                 $.post("<?php echo U('Admin/Task/case_index');?>",{ajax:true,tid:tid},function (data) {
                     location.reload();
-                    /*$("#edit_table").empty().html(data);
-                    tree_fresh();*/
                 });
             })
         }
-    }
+    } */
 
     //task下拉菜单 切换查看task
     function task_show(obj) {
@@ -435,7 +433,7 @@
         });
     }
     //树对应刷新
-    function tree_fresh(){
+    /* function tree_fresh(){
         var arr=<?php echo ($cid_list); ?>;
         zTree.checkAllNodes(false);
         if(arr!=null){
@@ -456,12 +454,12 @@
                 zTree.updateNode(node['0']);
             });
         }
-    }
+    } */
 
     //异步刷新页面
     function page_fresh(data) {
         $("#edit_table").empty().html(data);
-        tree_fresh();
+        //tree_fresh();
     }
     function toCaseItem(id) {
         var str=("<?php echo U('Admin/Task/case_index',array('case_item'=>'true'));?>");
@@ -469,12 +467,12 @@
     }
 </script>
 
-    <div id="rMenu">
+   <!--  <div id="rMenu">
         <ul>
             <li id="reassign" onclick="reassign();">Reassign</li>
             <li id="all_result" onclick="set_result();">Batch set result</li>
         </ul>
-    </div>
+    </div> -->
 
 <script src="/qaweb/Public/assets/js/amazeui.min.js"></script>
 
