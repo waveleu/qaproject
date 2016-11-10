@@ -85,7 +85,7 @@
                             </div>
                         </td>
                     </tr>
-                    <div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" >
+                    <div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" style="top:-200px;">
                         <div class="am-modal-dialog">
                             <div class="am-modal-hd">Edit Board Type</div>
                             <div class="am-modal-bd edit">
@@ -130,7 +130,7 @@
 
 
 //add new board
-<div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_board_modal" style="top:-15%;">
+<div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_board_modal" style="top:-20%;">
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New Board Type</div>
         <div class="am-modal-bd">

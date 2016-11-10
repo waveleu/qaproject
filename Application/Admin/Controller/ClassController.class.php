@@ -13,8 +13,8 @@ class ClassController extends AuthController {
 				if($v['isParent']=='true'){
 					M('class')->where(array('id'=>$v['id']))->save(array('pid'=>$pNode['id']));
 				}else{
-					M('testcase')->where(array('id'=>floor($v['id']/10000)))->save(array('pid'=>$pNode['id']));
-					$result="".floor($v['id']/10000).":".$pNode['id'];
+					M('testcase')->where(array('id'=>floor($v['id']/10000000)))->save(array('pid'=>$pNode['id']));
+					$result="".floor($v['id']/10000000).":".$pNode['id'];
 				}
 			}//$result=true;			
 		}

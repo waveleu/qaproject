@@ -48,7 +48,7 @@
 			zNodes.push(temp);
 		});
 		$.each(<?php echo ($data); ?>,function (k,v) {
-			var temp={id:v.id+1000000,pId:v.pid,name:""+v.CaseName,open:true,isParent:false};
+			var temp={id:v.id+1000000-1000000,pId:v.pid,name:""+v.CaseName,open:true,isParent:false};
 			zNodes.push(temp);
 		});
 		function beforeDrag(treeId, treeNodes) {
@@ -60,7 +60,11 @@
 			});
 		}
 		function beforeEditName(treeId, treeNode) {
+<<<<<<< HEAD
 			var id=treeNode.id-1000000;
+=======
+			var id=treeNode.id/10000000;
+>>>>>>> db525adda16d4758472a6ed428b365d4b148bcac
 			var str=("<?php echo U('Admin/Testcase/edit',array('id'=>vid,'flag'=>true));?>").replace('vid',id);
 				$("#edit_page").empty().append('<iframe name="right-content" src='+str+' id="iframepage"  width="100%"  height="800px" align="left" style="margin-top: 0px;padding-top: 0px"></iframe>');
 			return false;
@@ -70,7 +74,11 @@
 			$("#del_modal").modal({
 				relatedTarget:this,
 				onConfirm:function () {
+<<<<<<< HEAD
 					$.post("<?php echo U('Admin/testcase/del');?>",{id:treeNode.id-1000000},function (data) {
+=======
+					$.post("<?php echo U('Admin/testcase/del');?>",{id:treeNode.id/10000000},function (data) {
+>>>>>>> db525adda16d4758472a6ed428b365d4b148bcac
 						location.reload();
 					})
 				},
@@ -122,8 +130,8 @@
 			}
 		}
 		function onClick(event, treeId, treeNode) {
-			if(treeNode.id>10000) {
-				$.post("<?php echo U('Admin/Testcase/edit');?>",{id:treeNode.id/10000},function (data) {
+			if(treeNode.id>1000000) {
+				$.post("<?php echo U('Admin/Testcase/edit');?>",{id:treeNode.id/10000000},function (data) {
 					$("#edit_page").empty().append('<table class="am-table" id="show_table">').append('</table>');
 					$.each(data,function (k,v) {
 						$("#show_table").append('<tr style="height: 40px"><td style="width: 200px">'+k+'</td><td>'+v+'</td></tr>');
@@ -187,8 +195,8 @@
 		function get_case_id(e) {
 			var case_id=new Array();
 			$.each(e.children,function (k,v) {
-				if(v.id>10000)
-					case_id.push(v.id/10000);
+				if(v.id>1000000)
+					case_id.push(v.id/10000000);
 				else if(v.children!=null){
 					case_id.push(get_case_id(v));
 				}
@@ -201,7 +209,7 @@
 			class_id.push(e.id);
 			if(e.children!=null)
 				$.each(e.children,function (k,v) {
-					if(v.id<10000){
+					if(v.id<1000000){
 						class_id.push(get_class_id(v));
 					}
 				});
@@ -209,7 +217,7 @@
 		}
 		function add_case() {
 			var node=zTree.getSelectedNodes()[0].id;
-			if(node<10000){
+			if(node<1000000){
 				var str=("<?php echo U('Admin/Testcase/add',array('pid'=>ppid));?>").replace('ppid',node);
 				$("#edit_page").empty().append('<iframe name="right-content" src='+str+' id="iframepage"  width="1000px"  height="800px" align="left" style="margin-top: 0px;padding-top: 0px"></iframe>');
 			}
