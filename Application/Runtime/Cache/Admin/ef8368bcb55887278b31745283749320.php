@@ -321,10 +321,26 @@
 </div><?php endforeach; endif; ?>
 
 <script>
+	$(document).ready(function(){
+		var type=$("#edit_type").val();
+        var type2=$("#add_type").val();
+        if(type=="CModel"){
+        	$('#Chip_selected').css("display","none");
+        	$('#CModel_selected').css("display","inline");
+        }else if(type!="CModel"){
+        	$('#Chip_selected').css("display","inline");
+        	$('#CModel_selected').css("display","none");
+        }
+        if(type=="CModel"){
+        	$('#Chip_selected_add').css("display","none");
+        	$('#CModel_selected_add').css("display","inline");
+        }else if(type!="CModel"){
+        	$('#Chip_selected_add').css("display","inline");
+        	$('#CModel_selected_add').css("display","none");
+        }
+	});
     $(document).ready(function () {
         $("#search_pid").val("<?php echo ($run_info['id']); ?>");
-
-
     });
     function del(obj) {
         var id=$(obj).attr('task_id');

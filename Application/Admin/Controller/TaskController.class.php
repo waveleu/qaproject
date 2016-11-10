@@ -18,7 +18,6 @@ class TaskController extends AuthController {
 		    $os_list=M('os')->where('id>0')->getField('OS',true);
 		    $tree=D('Testcase')->getTree();
 		    $scm=M('scm')->where('id>0')->getField('Build_No',true);
-		    var_dump($scm);
 		    $data_task=M('task')->where('id>0')->select();
 		    foreach ($data_task as $k=>$v){
 		        $data_task[$k]['ov_list']=M('os_version')->where(array('OS'=>$v['OS']))->getField('Version',true);
