@@ -28,6 +28,19 @@
             -ms-appearance: none;
             appearance: none;
         }
+        .am-modal-bd{
+            width:90%;
+            margin:0 auto;
+        }
+        .am-modal-bd label{
+            width:20%;
+            display:inline-block;
+            text-align:right;
+            padding-left:0px;
+        }
+        .am-modal-bd input{
+            width:80%;
+        }
     </style>
 </head>
 <body>
@@ -72,22 +85,22 @@
                         <div class="am-modal-dialog">
                             <div class="am-modal-hd">Edit Board</div>
                             <div class="am-modal-bd">
-                              <label style="display:inline;">host:</label>
-                              <input type="text" class="am-modal-prompt-input" value=<?php echo ($v[host]); ?> style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
-                              <label style="display:inline;">Alias:</label>
+                              <label>host:</label>
+                              <input type="text" class="am-modal-prompt-input" value=<?php echo ($v[host]); ?> style="width:300px;display:inline;border:1px solid #9C9898;"><br/><br/>
+                              <label>Alias:</label>
                               <input type="text" class="am-modal-prompt-input" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>                             
-                              <label style="display:inline;margin-left:-6%;">Platform:</label>
+                              <label>Platform:</label>
                               <div class="am-form-group-inline" style="display:inline;">
-                                  <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}" placeholder="Please select..." id="a_board" style="border:1px solid #9C9898;">
+                                  <select data-am-selected="{btnWidth: '64%', btnStyle: 'secondary'}" placeholder="Please select..." id="a_board" style="border:1px solid #9C9898;">
                                         <option value=""></option>
                                         <?php if(is_array($platform_info)): foreach($platform_info as $k=>$vc): if($k==$v[board_id]): ?><option value=<?php echo ($k); ?> selected><?php echo ($vc); ?></option>
                                             <?php else: ?>
                                                 <option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
                                     </select>
                                 </div><br/><br/>
-                                <label style="display:inline;margin-left:-4%;">Owner:</label>
+                                <label>Owner:</label>
                                 <div class="am-form-group-inline" style="display:inline;">
-                                  <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}" placeholder="Please select..." id="a_owner" style="border:1px solid #9C9898;">
+                                  <select data-am-selected="{btnWidth: '65%', btnStyle: 'secondary'}" placeholder="Please select..." id="a_owner" style="border:1px solid #9C9898;">
                                         <option value=""></option>
                                         <?php if(is_array($owner_list)): foreach($owner_list as $k=>$vc): if($vc[username]==$v[owner]): ?><option value=<?php echo ($vc[username]); ?> selected><?php echo ($vc[username]); ?></option>
                                             <?php else: ?>
@@ -114,20 +127,20 @@
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New Board</div>
         <div class="am-modal-bd">
-          <label style="display:inline;">host:&nbsp;</label>
-          <input type="text" id="Name" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:300px;border:1px solid #9C9898;display:inline;"><br/><br/>
-          <label style="display:inline;">Alias:</label>
-          <input type="text" class="am-modal-prompt-input" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>   
-          <label style="display:inline;margin-left:-6%;">Platform:&nbsp;</label>  
+          <label>host:&nbsp;</label>
+          <input type="text" id="Name" class="am-modal-prompt-input" style="width:300px;border:1px solid #9C9898;display:inline;"><br/><br/>
+          <label>Alias:&nbsp;</label>
+          <input type="text" class="am-modal-prompt-input" style="width:300px;display:inline;border:1px solid #9C9898;"><br/><br/>   
+          <label>Platform:&nbsp;</label>  
           <div class="am-form-group-inline" style="display:inline;">
-           <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}"  placeholder="Please select..." class="am-fl" id="e_board">
+           <select data-am-selected="{btnWidth: '64%', btnStyle: 'secondary'}"  placeholder="Please select..." id="e_board">
             <option value=""></option>
             <?php if(is_array($platform_info)): foreach($platform_info as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
           </select>
          </div><br/><br/> 
-         <label style="display:inline;margin-left:-4%;">Owner:&nbsp;</label>   
+         <label>Owner:&nbsp;</label>   
          <div class="am-form-group-inline" style="display:inline;">
-           <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}"  placeholder="Please select..." id="e_owner">
+           <select data-am-selected="{btnWidth: '65%', btnStyle: 'secondary'}"  placeholder="Please select..." id="e_owner">
             <option value=""></option>
             <?php if(is_array($owner_list)): foreach($owner_list as $k=>$vc): ?><option value=<?php echo ($vc[username]); ?>><?php echo ($vc[username]); ?></option><?php endforeach; endif; ?>
            </select>
@@ -143,7 +156,7 @@
 <div class="am-modal am-modal-confirm" tabindex="del_class" id="del_modal" style="top:-30%;">
     <div class="am-modal-dialog">
         <div class="am-modal-bd">
-            <label>Delete This Board?</label>
+            <label style="width:200px;text-align:center;">Delete This Board?</label>
         </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>

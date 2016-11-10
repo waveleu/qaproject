@@ -50,11 +50,11 @@
                                                         <div class="am-modal-hd">Edit User Info</div>
                                                         <div class="am-modal-bd">
                                                            <label style="display:inline;">Username:</label>
-                                                           <input type="text" value="" class="am-modal-prompt-input" style="width:60%;display:inline; color:#000;border:1px solid #9C9898;" value=<?php echo ($v[username]); ?>><br/><br/>
+                                                           <input type="text" value="" class="am-modal-prompt-input" style="width:60%;display:inline;border:1px solid #9C9898;" value=<?php echo ($v[username]); ?>><br/><br/>
                                                            <label style="display:inline;">Password:</label>
-                                                           <input type="password" class="am-modal-prompt-input" style="width:60%;display:inline; color:#000;border:1px solid #9C9898;" value=<?php echo ($v[password]); ?>><br/><br/>
+                                                           <input type="password" class="am-modal-prompt-input" style="width:60%;display:inline;border:1px solid #9C9898;" value=<?php echo ($v[password]); ?>><br/><br/>
                                                            <label style="display:inline;margin-left:27px;">Email:</label>
-                                                           <input type="email" value="" class="am-modal-prompt-input" style="width:60%;display:inline; color:#000;border:1px solid #9C9898;" value=<?php echo ($v[email]); ?>><br/><br/>
+                                                           <input type="email" value="" class="am-modal-prompt-input" style="width:60%;display:inline;border:1px solid #9C9898;" value=<?php echo ($v[email]); ?>><br/><br/>
 
                                                            <label>Auth Group</label> 
                                                                  <table style="width:60%;margin:12px auto;">
@@ -90,11 +90,11 @@
         <div class="am-modal-hd">New User/Admin</div>
         <div class="am-modal-bd">
            <label style="display:inline;">Username:</label>
-           <input type="text" value="" class="am-modal-prompt-input" style="width:60%;display:inline; color:#000;border:1px solid #9C9898;"><br/><br/>
+           <input type="text" value="" class="am-modal-prompt-input" style="width:60%;display:inline;border:1px solid #9C9898;"><br/><br/>
            <label style="display:inline;">Password:</label>
-           <input type="password" class="am-modal-prompt-input" style="width:60%;display:inline; color:#000;border:1px solid #9C9898;"><br/><br/>
+           <input type="password" class="am-modal-prompt-input" style="width:60%;display:inline;border:1px solid #9C9898;"><br/><br/>
            <label style="display:inline;margin-left:27px;">Email:</label>
-           <input type="email" value="" class="am-modal-prompt-input" style="width:60%;display:inline; color:#000;border:1px solid #9C9898;"><br/><br/>         
+           <input type="email" value="" class="am-modal-prompt-input" style="width:60%;display:inline;border:1px solid #9C9898;"><br/><br/>         
             <label>Select Auth Group</label>
             <table style="width:60%;margin:12px auto;">
                 <tr>
