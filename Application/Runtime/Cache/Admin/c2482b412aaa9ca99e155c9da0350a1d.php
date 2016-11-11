@@ -25,7 +25,6 @@
 		display:inline-block;
 		text-align:right;
 	}
-
 </style>
 <body>
 

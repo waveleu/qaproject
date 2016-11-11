@@ -92,7 +92,7 @@
      <div class="am-u-md-3" style="margin-top:40px;">
         <div class="container" id="tree_btn">
             <div class="zTreeDemoBackground left">
-                <ul id="treeDemo" class="ztree" style="height: auto; border: hidden;overflow:auto;" ></ul>
+                <ul id="treeDemo" class="ztree" style="height: auto; border: hidden;overflow:auto;width:80%;" ></ul>
                 <div class="am-btn-toolbar" style="margin-left:3px;">
                     <div class="am-btn-group am-btn-group-md">
                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="edit()"><span class="am-icon-pencil" ></span>&nbsp;Save</button>

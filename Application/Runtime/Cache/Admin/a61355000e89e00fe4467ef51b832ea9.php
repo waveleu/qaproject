@@ -158,7 +158,7 @@
                             <br>
                         </div>
                         <input type="text" class="am-form-field " name="pid" style="width:1px;hight:1px;" value=<?php echo ($edata['pid']); ?>>
-                        <div class="am-u-md-offset-5" style="margin:20px 85px;">
+                        <div class="am-u-md-offset-5" style="margin:-10px 85px;">
                             <button class="am-btn am-btn-secondary am-radius" type="button" onclick="update()" style="margin-left:82px;">Submit</button>
                             <button class="am-btn am-btn-danger am-radius" type="button" onclick="reset1()" style="margin-left:40px;">Reset</button>
                         </div>

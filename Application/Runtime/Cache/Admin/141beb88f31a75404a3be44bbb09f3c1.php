@@ -48,7 +48,7 @@
 			zNodes.push(temp);
 		});
 		$.each(<?php echo ($data); ?>,function (k,v) {
-			var temp={id:v.id+1000000-1000000,pId:v.pid,name:""+v.CaseName,open:true,isParent:false};
+			var temp={id:v.id+1000000-1000000,pId:v.pid,name:""+v.CaseName,open:false,isParent:false};
 			zNodes.push(temp);
 		});
 		function beforeDrag(treeId, treeNodes) {
@@ -124,7 +124,7 @@
 		function onClick(event, treeId, treeNode) {
 			if(treeNode.id>1000000) {
 				$.post("<?php echo U('Admin/Testcase/edit');?>",{id:treeNode.id/10000000},function (data) {
-					$("#edit_page").empty().append('<table class="am-table" id="show_table">').append('</table>');
+					$("#edit_page").empty().append('<table class="am-table am-table-hover" id="show_table">').append('</table>');
 					$.each(data,function (k,v) {
 						$("#show_table").append('<tr style="height: 40px"><td style="width: 200px">'+k+'</td><td>'+v+'</td></tr>');
 					});
