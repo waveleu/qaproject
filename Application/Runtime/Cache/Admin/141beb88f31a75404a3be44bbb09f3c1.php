@@ -128,10 +128,29 @@
 					$.each(data,function (k,v) {
 						$("#show_table").append('<tr style="height: 40px"><td style="width: 200px">'+k+'</td><td>'+v+'</td></tr>');
 					});
+					$("#show_table").append('<tr style="height: 40px"><td style="width: 200px"><a href="javascript:edit_case('+data['id']+');">Edit</a></td><td><a href="javascript:del_case('+data['id']+')">Delete</a></td></tr>');
 				});
 			}
 		}
-		
+		function edit_case(id){
+			var str=("<?php echo U('Admin/Testcase/edit',array('id'=>vid,'flag'=>true));?>").replace('vid',id);
+			$("#edit_page").empty().append('<iframe name="right-content" src='+str+' id="iframepage"  width="100%"  height="800px" align="left" style="margin-top: 0px;padding-top: 0px"></iframe>');
+		}
+		function del_case(id) {
+				var isDel=false;
+				$("#del_modal").modal({
+					relatedTarget:this,
+					onConfirm:function () {
+						$.post("<?php echo U('Admin/testcase/del');?>",{id:id},function (data) {
+							location.reload();
+						})
+					},
+					onCancel:function (e) {
+						e.close();
+					}
+				});
+				return isDel;
+		}
 		//对应功能区
 		function add_class() {
 			$("#edit_add_class").modal({

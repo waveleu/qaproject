@@ -39,6 +39,7 @@ class TaskController extends AuthController {
 	}
 	public function add(){
 		$data=I('post.');
+		if($data['Type']=="CModel"){$data['OS']="null";}
 		$result=D('Task')->saveData($data);
 		$this->ajaxReturn($result);
 	}
