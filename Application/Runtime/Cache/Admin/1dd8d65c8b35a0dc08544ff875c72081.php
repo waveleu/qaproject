@@ -53,6 +53,7 @@
         <div class="am-cf am-padding am-padding-bottom-0" id="content-body">
             <div class="am-g">
                 <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Task</strong> / <?php echo ($task_info[name]); ?></div><br/>
+                <button type='button' style="float:right;" class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger'  onclick='add()'> <span class='am-icon-pencil-square-o'></span>new Task</button>
             </div>
         </div>
         <br/>
@@ -85,170 +86,123 @@
         </div>
 
 
+<div class="am-modal am-modal-confirm" id="add_task_modal" style="top:-20%;" tabindex="<?php echo ($v[id]); ?>">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">New Task</div>
+        <div class="am-modal-bd">
+          <label style="display:inline;">Name:</label>
+          <input type="text" class="am-modal-prompt-input" id="add_name" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+          <label style="display:inline;">Driver:</label>
+          <input type="text" class="am-modal-prompt-input" id="add_driver" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+          <label style="display:inline;margin-left:10px;">Type:</label>
+          <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+              <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." onchange="add_type(this)" id="add_type" style="border:1px solid #9C9898;">
+                  <option value="CModel">CModel</option>
+                  <option value="Chip">Chip</option>
+                  <option value="FPGA">FPGA</option>
+              </select>
+          </div><br/><br/>
+          <label style="display:inline;margin-left:-17px;">Test Run:</label> 
+          <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+             <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="add_pid" style="border:1px solid #9C9898;">
+                <option value=""></option>
+                <?php if(is_array($run_list)): foreach($run_list as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
+             </select>
+          </div><br/><br/>
+          <label style="display:inline;margin-left:2px;">Board:</label>
+          <div class="am-form-group-inline" style="display:inline;text-align:center;" id="Chip_selected_add">
+              <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform">
+                <option value=""></option>
+                <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['Name']); ?>><?php echo ($vc[Name]); ?></option>
+                {else if condition="$vc[Type]==CModel"}<?php endforeach; endif; ?>
+             </select>
+             <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"  onchange="add_os(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="add_os">
+                  <option value=""></option>
+                  <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): if($vc==$v[OS]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+                  <?php else: ?>
+                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
+            </select>
+            <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="add_version">
+                  <option value=""></option>
+            </select>
+            <br/><br/>
+            </div>
+             <div class="am-form-group-inline" style="display:none;text-align:center;" id="CModel_selected_add">
+             <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform2">
+             	 <option value=""></option>
+            	 <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if($vc[Type]==CModel): ?><option value=<?php echo ($vc['Name']); ?>><?php echo ($vc[Name]); ?></option><?php endif; endforeach; endif; ?>
+       	     </select>
+        	<select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="add_version2">
+            <option value=""></option>
+            <?php if(is_array($scm)): foreach($scm as $key=>$vscm): ?><option value=<?php echo ($vscm); ?>><?php echo ($vscm); ?></option><?php endforeach; endif; ?>
+       	    </select>
+       	    <br/><br/> 
+            </div> 
+            <label style="display:inline;margin-left:10px;">Suite:</label> 
+            <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+            <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="add_suit" style="border:1px solid #9C9898;">
+                <option value=""></option>
+                <?php if(is_array($suit_list)): foreach($suit_list as $key=>$vc): ?><option value="<?php echo ($vc); ?>"><?php echo ($vc); ?></option><?php endforeach; endif; ?>
+            </select>
+            </div><br/><br/>   
+            <label style="display:inline;">Owner:</label>
+            <div class="am-form-group-inline" style="display:inline;">
+                <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id="add_user">
+                    <option value=""></option>
+                    <?php if(is_array($user_list)): foreach($user_list as $k=>$vc): ?><option value="<?php echo ($vc[username]); ?>"><?php echo ($vc[username]); ?></option><?php endforeach; endif; ?>
+                </select>
+            </div><br/><br/>
+            <label style="display:inline;margin-left:-33px;">start_time:</label>
+            <input type="text" class="am-modal-prompt-input" data-am-datepicker id="add_start" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label style="display:inline;margin-left:-5%;">end_time:</label>
+            <input type="text" class="am-modal-prompt-input" data-am-datepicker id="add_end" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;">        
+        </div>
 
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #9C9898;">OK</span>
+            <span class="am-modal-btn" data-am-modal-cancel style="width: 50%;border:1px solid #9C9898;">Cancel</span>
+        </div>
+    </div>
+</div>
 
 
 
 <script >
-    window.onload=function () {
-        tree_fresh();
-        var arr=window.location.href.split("/");
-        $("#search_tid").find("option[value="+arr[arr.indexOf("tid")+1]+"]").attr('selected', true);
-        var result_id=arr.indexOf("result");
-        if(result_id!=-1)
-            $("#search_result").find("option[value="+arr[result_id+1]+"]").attr('selected', true);
-
-        $("#search_result").attr("onchange","task_show(this)");
-    }
-
-    function del(obj) {
-        var id=$(obj).attr('task_id');
-        if(confirm('Do you want delete this TaskCase ?')){
-            $.post("<?php echo U('Admin/Task/case_del');?>",{id:id},function () {
-                location.reload();
-                //task_show($("#search_tid"));
-            });
-        }
-    }
-
-    //编辑相应taskcase
-    function edit(obj) {
-        var id=$(obj).attr('task_id');
-       /* $.each(taskcase_info,function (k,v) {
-            if(v['id']==id){
-                $("#edit_id").val(id).hide();
-                $("#edit_result").find("option[value="+v.result+"]").attr('selected',true);
-                $("#edit_BugID").val(v.BugID);
-                $("#edit_comments").val(v.comments);
-                $("#edit_driver").val(v.driver);
-
-                return false;
-            }
-        }); */
-
-        $("#edit_case_modal").modal({
-            relatedTarget:this,
-            onConfirm:function(e){
-                var arr={id:id,driver:e.data['1'],BugID:e.data['0'],Status:e.data['2'],comments:e.data['3'],result:$("#edit_result").val()};
-                $.post("<?php echo U('Admin/Task/case_edit');?>",arr,function (data) {
-                    location.reload();
-                    //task_show($("#search_tid"));
+function add() {
+    var start_time="<?php echo ($run_info[start_time]); ?>";
+    var end_time="<?php echo ($run_info[end_time]); ?>";
+    $("#add_name").val("");
+    $("#add_platform").val("");
+    $("#add_user").val("");
+    $("#add_suit").val('');
+    $("#add_pid").val("");
+    $("#add_type").val("");
+    $("#add_os").val("");
+    $("#add_version").val("");   
+    $("#add_driver").val("");   
+    $("#add_start").attr({value:start_time});
+    $("#add_end").attr({value:end_time});
+    $("#add_task_modal").modal({
+        relatedTarget:this,
+        onConfirm:function(e){
+            var pid=$("#add_pid").val();
+            board_val=$("#add_platform").val()?$("#add_platform").val():$("#add_platform2").val();
+            version_val=$("#add_version").val()?$("#add_version").val():$("#add_version2").val();
+            if(pid!=null&&pid!=""&&pid!=0){
+                var arr={name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:board_val,owner:$('#add_user').val(),Type:$('#add_type').val(),suit:$('#add_suit').val(),pid:$("#add_pid").val(),OS:$('#add_os').val(),Version:version_val};
+                $.post("<?php echo U('Admin/Task/add');?>",arr,function (data) {
+                    location.href=("<?php echo U('Admin/Task/case_index',array('tid'=>ttid));?>").replace('ttid',data);
                 });
-            },
-            onCancel:function (e) {
-                e.close()
+            }else{
+                alert('Please choose the Test Run');
             }
-        });
-    }
 
-    //添加，删除taskcase
-    function add() {
-        var tid=$("#search_tid").val();
-        if(tid==""||tid==null){
-            alert("There is no explicit task!");
-        }else{
-            var nodes=zTree.getCheckedNodes();
-            var arr=new Array();
-            $.each(nodes,function (k,v) {
-                if(v.id>10000)
-                    arr.push(v.id/10000);
-            });
-            var cids=arr.join(',');
-            $.post("<?php echo U('Admin/Task/case_reassign');?>",{cids:cids,tid:tid},function (data) {
-                $.post("<?php echo U('Admin/Task/case_index');?>",{ajax:true,tid:tid},function (data) {
-                    location.reload();
-                    /*$("#edit_table").empty().html(data);
-                    tree_fresh();*/
-                });
-            })
+        },
+        onCancel:function (e) {
+            e.close()
         }
-    }
-
-    //task下拉菜单 切换查看task
-    function task_show(obj) {
-        var tid=$("#search_tid").val();
-        var result=$("#search_result").val();
-        if(tid!=null&&tid!="") {
-            location.href=("<?php echo U('Admin/Task/case_index',array('tid'=>vid,'result'=>'nowresult'));?>").replace('vid',tid).replace('nowresult',result);
-            if(result==0){
-                location.href=("<?php echo U('Admin/Task/case_index',array('tid'=>vid));?>").replace('vid',tid);
-            }
-            /*$.post("<?php echo U('Admin/Task/case_index');?>",{ajax:true,tid:tid},function (data) {
-                location.href
-            });*/
-        }
-        else
-            location.reload();
-    }
-
-    //search按钮
-    function search() {
-    	var search_type=$("#search_type").val();
-    	var search_tid=$("#search_tid").val();
-    	var search_name=$("#search_name").val();
-    	//var arr=("{ajax:true,tid:search_tid,BugID:search_name}").replace("BugID",search_type).replace("search_tid",search_tid).replace("search_name",search_name);
-    	if(search_type=='BugID')
-        	var arr={ajax:true,tid:$("#search_tid").val(),BugID:$("#search_name").val()};
-    	else if(search_type=='result')
-            var arr={ajax:true,tid:$("#search_tid").val(),result:$("#search_name").val()};
-    	else if(search_type=='Status')
-            var arr={ajax:true,tid:$("#search_tid").val(),Status:$("#search_name").val()};
-    	else if(search_type=='CaseName')
-            var arr={ajax:true,tid:$("#search_tid").val(),CaseName:$("#search_name").val()};
-    	else var arr={ajax:true,tid:$("#search_tid").val(),driver:$("#search_name").val()};
-         $.post("<?php echo U('Admin/Task/case_index');?>",arr,function (data) {
-            page_fresh(data);
-        });
-    }
-
-    function cancel() {
-        zTree.checkAllNodes(false);
-        $.each(taskcase_info,function (k,v) {
-            var node=zTree.getNodesByParam('id',v['cid']+"0000");
-            zTree.checkNode(node['0'],true,true);
-        });
-    }
-
-    function reorder(name) {
-        var arr={ajax:true,tid:$("#search_tid").val(),BugID:$("#search_name").val(),sort:name};
-        $.post("<?php echo U('Admin/Task/case_index');?>",arr,function (data) {
-            //location.reload();
-            page_fresh(data);
-        });
-    }
-    //树对应刷新
-    function tree_fresh(){
-        var arr=<?php echo ($cid_list); ?>;
-        zTree.checkAllNodes(false);
-        if(arr!=null){
-            var class_count={};
-            $.each(arr,function (k,v) {
-                var node=zTree.getNodesByParam('id',v['cid']+"0000");
-                zTree.checkNode(node['0'],true,true);
-                var pid=node['0']['pId'];
-                if(class_count[pid]==null){
-                    class_count[pid]=1;
-                }else{
-                    class_count[pid]+=1;
-                }
-            });
-            $.each(class_count,function (k,v) {
-                var node=zTree.getNodesByParam('id',k);
-                node['0'].name+='('+v+')';
-                zTree.updateNode(node['0']);
-            });
-        }
-    }
-
-    //异步刷新页面
-    function page_fresh(data) {
-        $("#edit_table").empty().html(data);
-        tree_fresh();
-    }
-    function toCaseItem(id) {
-        var str=("<?php echo U('Admin/Task/case_index',array('id'=>ppid));?>").replace('ppid',id);
-        location.href=str;
-    }
+    });
+}
 </script>
 
     <div id="rMenu">
