@@ -112,11 +112,10 @@ function add(obj) {
         relatedTarget:this,
         onConfirm:function(e){
                 var arr=e.data;
-                var 
                 /* $.post("<?php echo U('Admin/Task/index');?>",arr,function (data) {
                 	console.log(data);
                 });  */
-                var str=("<?php echo U('Admin/Task/index',array('item'=>arr));?>").replace('arr',arr);
+                var str=("<?php echo U('Admin/Task/index',array('item'=>arr,'group'=>group_id));?>").replace('arr',arr).replace('group_id',"5555");
                 location.href=str; 
         },
         onCancel:function (e) {

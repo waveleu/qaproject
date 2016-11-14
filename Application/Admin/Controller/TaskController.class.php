@@ -13,9 +13,8 @@ class TaskController extends AuthController {
 		    $this->ajaxReturn($result,'json');
 		}else if($filter['item']!=''){
     	    var_dump($filter);
-    	    D('Item')->saveData($filter['item']);
-    	    var_dump("545456");
-    	    $this->ajaxReturn("55555");
+    	    D('Item')->saveData($filter['item'],$filter['group_id']);
+    	    var_dump("4444444");
     	}else{
 		    $ajax=$filter['ajax'];
 		    unset($filter['ajax']);

@@ -18,27 +18,15 @@ class ItemModel extends BaseModel{
 		return $case_list;
 	}
 		
-	public function saveData($data){
+	public function saveData($data,$group_id){
 	    $array=explode(',',$data);
 	    foreach ($array as $value){
 	        list($name,$unit)=explode(' ',$value);
 	        $tmp=array('name'=>$name,'unit'=>$unit);
-	        $item_id=M(item)->add($tmp);
+	        $item_id=M('item')->add($tmp);
+	        $temp=array('group'=>$group_id,'item'=>$item_id);
+	        M('case')->add($temp);
 	    };
-	    
-	    $suit=$data['suit'];
-	    if($data['id']!=null&&$data['id']!=""){
-	        unset($data['id']);
-	        $result=$this->where(array('id'=>$id))->save($data);
-	    }else{
-	        $result=$this->add($data);
-	        $suit=D('TaskShot')->where(array('name'=>$suit))->getField('cids');
-	        $suit=explode(',', $suit);
-	        foreach ($suit as $k=>$v){
-	            $tmp=array('cid'=>$v,'tid'=>$result,'start_time'=>$data['start_time'],'end_time'=>$data['end_time']);
-	            M('task_case')->add($tmp);
-	        }
-	    }
 	    return $result;
 	}
 	
