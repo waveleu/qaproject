@@ -91,8 +91,8 @@
                               <label>Alias:</label>
                               <input type="text" class="am-modal-prompt-input" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>                             
                               <label>Platform:</label>
-                              <div class="am-form-group-inline" style="display:inline;">
-                                  <select data-am-selected="{btnWidth: '64%', btnStyle: 'secondary'}" placeholder="Please select..." id="a_board" style="border:1px solid #9C9898;">
+                              <div class="am-form-group-inline" style="display:inline;margin-left:5px;">
+                                  <select data-am-selected="{btnWidth: '64.6%', btnStyle: 'secondary'}" placeholder="Please select..." id="a_board" style="border:1px solid #9C9898;">
                                         <option value=""></option>
                                         {foreach name="platform_info" item="vc" key="k"}
                                             {if condition="$k==$v[board_id]"}
@@ -142,8 +142,8 @@
           <label>Alias:&nbsp;</label>
           <input type="text" class="am-modal-prompt-input" style="width:300px;display:inline;border:1px solid #9C9898;"><br/><br/>   
           <label>Platform:&nbsp;</label>  
-          <div class="am-form-group-inline" style="display:inline;">
-           <select data-am-selected="{btnWidth: '64%', btnStyle: 'secondary'}"  placeholder="Please select..." id="e_board">
+          <div class="am-form-group-inline" style="display:inline;margin-left:5px;">
+           <select data-am-selected="{btnWidth: '64.6%', btnStyle: 'secondary'}"  placeholder="Please select..." id="e_board">
             <option value=""></option>
             {foreach name="platform_info" item="vc" key="k"}
             <option value={$k}>{$vc}</option>
