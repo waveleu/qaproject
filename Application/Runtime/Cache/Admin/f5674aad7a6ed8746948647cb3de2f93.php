@@ -31,7 +31,6 @@
         .am-modal-bd{
             width:90%;
             margin:0 auto;
-            text-align: left;
         }
         .am-modal-bd label{
             width:20%;
@@ -92,7 +91,7 @@
                               <input type="text" class="am-modal-prompt-input" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>                             
                               <label>Platform:</label>
                               <div class="am-form-group-inline" style="display:inline;">
-                                  <select data-am-selected="{btnWidth: '64.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="a_board" style="border:1px solid #9C9898;">
+                                  <select data-am-selected="{btnWidth: '64%', btnStyle: 'secondary'}" placeholder="Please select..." id="a_board" style="border:1px solid #9C9898;">
                                         <option value=""></option>
                                         <?php if(is_array($platform_info)): foreach($platform_info as $k=>$vc): if($k==$v[board_id]): ?><option value=<?php echo ($k); ?> selected><?php echo ($vc); ?></option>
                                             <?php else: ?>
@@ -101,7 +100,7 @@
                                 </div><br/><br/>
                                 <label>Owner:</label>
                                 <div class="am-form-group-inline" style="display:inline;">
-                                  <select data-am-selected="{btnWidth: '64.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="a_owner" style="border:1px solid #9C9898;">
+                                  <select data-am-selected="{btnWidth: '65%', btnStyle: 'secondary'}" placeholder="Please select..." id="a_owner" style="border:1px solid #9C9898;">
                                         <option value=""></option>
                                         <?php if(is_array($owner_list)): foreach($owner_list as $k=>$vc): if($vc[username]==$v[owner]): ?><option value=<?php echo ($vc[username]); ?> selected><?php echo ($vc[username]); ?></option>
                                             <?php else: ?>
@@ -134,14 +133,14 @@
           <input type="text" class="am-modal-prompt-input" style="width:300px;display:inline;border:1px solid #9C9898;"><br/><br/>   
           <label>Platform:&nbsp;</label>  
           <div class="am-form-group-inline" style="display:inline;">
-           <select data-am-selected="{btnWidth: '64.5%', btnStyle: 'secondary'}"  placeholder="Please select..." id="e_board">
+           <select data-am-selected="{btnWidth: '64%', btnStyle: 'secondary'}"  placeholder="Please select..." id="e_board">
             <option value=""></option>
             <?php if(is_array($platform_info)): foreach($platform_info as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
           </select>
          </div><br/><br/> 
          <label>Owner:&nbsp;</label>   
          <div class="am-form-group-inline" style="display:inline;">
-           <select data-am-selected="{btnWidth: '64.5%', btnStyle: 'secondary'}"  placeholder="Please select..." id="e_owner">
+           <select data-am-selected="{btnWidth: '65%', btnStyle: 'secondary'}"  placeholder="Please select..." id="e_owner">
             <option value=""></option>
             <?php if(is_array($owner_list)): foreach($owner_list as $k=>$vc): ?><option value=<?php echo ($vc[username]); ?>><?php echo ($vc[username]); ?></option><?php endforeach; endif; ?>
            </select>
@@ -157,7 +156,7 @@
 <div class="am-modal am-modal-confirm" tabindex="del_class" id="del_modal" style="top:-30%;">
     <div class="am-modal-dialog">
         <div class="am-modal-bd">
-            <label style="width:300px;text-align:center!;">Delete This Board?</label>
+            <label style="width:200px;text-align:center;">Delete This Board?</label>
         </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>

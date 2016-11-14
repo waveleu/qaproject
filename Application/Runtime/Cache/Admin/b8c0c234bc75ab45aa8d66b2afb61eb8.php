@@ -30,7 +30,7 @@
         }
         .am-modal-bd{
             width:90%;
-            text-align:left;
+            text-align:center;
             margin:0 auto;
         }
         .am-modal-bd label{

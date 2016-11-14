@@ -37,21 +37,12 @@
             list-style: none outside none;
             background-color: #DFDFDF;
         }
-        .am-modal-bd{
-            width:90%;
-            margin:0 auto;
-            text-align: left;
-        }
-        .am-modal-bd label{
-            width:120px;
-            display:inline-block;
-            text-align:right;
-            padding:0px;
-        }
-        .am-modal-bd input{
-            width:60%;
-
-        }
+		.blo{
+			display:block;
+		}
+		.non{
+			display:none;
+		}
 
     </style>
     <script type="text/javascript">
@@ -235,7 +226,7 @@
                         	</div>
                         </div><br/>-->
                         <div class="am-u-md-10" id="edit_table">
-                            <div class="am-tabs am-margin am-tabs-bd-ofv" data-am-tabs>
+                            <div class="am-tabs am-margin" data-am-tabs>
                                 <ul class="am-tabs-nav am-nav am-nav-tabs">
                                     <?php if(is_array($cname_list)): $i = 0; $__LIST__ = $cname_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?><li><a href="<?php echo '#'.$v; ?>"><?php echo ($v); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
                                 </ul>
@@ -291,23 +282,23 @@
     <div class="am-modal-dialog">
         <div class="am-modal-hd">Edit TaskCase</div>
         <div class="am-modal-bd">
-            <label>Result:</label>
+            <label style="display:inline;">Result:</label>
             <div class="am-form-group-inline" style="display:inline;">
-                <select data-am-selected="{btnWidth: '60%', btnStyle: 'secondary',searchBox: 1}" placeholder="Please select..." id="edit_result" style="border:1px solid #9C9898;">
+                <select data-am-selected="{btnWidth: '39%', btnStyle: 'secondary',searchBox: 1}" placeholder="Please select..." id="edit_result" style="border:1px solid #9C9898;">
                     <option value=""></option>
                     <?php if(is_array($result_list)): foreach($result_list as $key=>$v): ?><option value=<?php echo ($v); ?>><?php echo ($v); ?></option><?php endforeach; endif; ?>
                 </select>
             </div><br/><br/>
-            <label>BugID:</label>
-            <input type="text" class="am-modal-prompt-input" id="edit_BugID" style="display:inline;border:1px solid #9C9898;"><br/><br/>
-            <label>Driver:</label>
-            <input type="text" class="am-modal-prompt-input" id="edit_driver" style="display:inline;border:1px solid #9C9898;"><br/><br/>
-            <label>Status:</label>
-            <input type="text" class="am-modal-prompt-input" id="edit_driver" style="display:inline;border:1px solid #9C9898;"><br/><br/>
-            <label>Comments:</label>
-            <input type="text" class="am-modal-prompt-input"  id="edit_comments" style="display:inline;border:1px solid #9C9898;"><br/><br/>
-            <label>Item:</label>
-            <input type="text" class="am-modal-prompt-input"  id="edit_item" style="display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label style="display:inline;">BugID:</label>
+            <input type="text" class="am-modal-prompt-input" id="edit_BugID" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label style="display:inline;">Driver:</label>
+            <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label style="display:inline;">Status:</label>
+            <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label style="display:inline;margin-left:-32px;">Comments:</label>
+            <input type="text" class="am-modal-prompt-input"  id="edit_comments" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label style="display:inline;margin-left:13px;">Item:</label>
+            <input type="text" class="am-modal-prompt-input"  id="edit_item" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
         </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>

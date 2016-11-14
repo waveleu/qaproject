@@ -28,15 +28,9 @@
             -ms-appearance: none;
             appearance: none;
         }
-        .am-modal {
-       
- 
-        }
         .am-modal-bd{
             width:70%;
             margin:0 auto;
-            height:300px;
-            overflow-y: auto;
         }
         .am-modal-bd input{
             border:1px solid #9C9898;
@@ -91,7 +85,7 @@
                             </div>
                         </td>
                     </tr>
-                    <div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" style="top:-20%;">
+                    <div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" >
                         <div class="am-modal-dialog">
                             <div class="am-modal-hd">Edit Board Type</div>
                             <div class="am-modal-bd edit">

@@ -1,28 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit();?><style>
-        .am-modal-bd{
-            width:90%;
-            margin:0 auto;
-            text-align: left;
-            float:left;
-        }
-        .am-modal-bd label{
-            width:150px;
-            display:inline-block;
-            text-align:right;
-        }
-        .am-modal-bd input{
-            width:60%;
-
-        }
-        .search{
-            width:200px;
-            height:37px;
-            display:inline;
-            border:1px solid #9C9898;
-            margin-left:-5px;
-        }
-</style>
-
+<?php if (!defined('THINK_PATH')) exit();?>
 <!DOCTYPE html>
 <HTML>
 <HEAD>
@@ -126,7 +102,7 @@
                         <option value=""></option>
                         <?php if(is_array($run_list)): foreach($run_list as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
                     </select>
-                    <input type="text" class="search">&nbsp;&nbsp;
+                    <input type="text" style="width:200px;height:37px;display:inline;border:1px solid #9C9898;margin-left:-5px;">&nbsp;&nbsp;
                     <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary'> <span class='am-icon-search'></span> Search</button>
                 </div>            
                 <div class="am-form-group-inline am-cf am-fr" style="width:400px;display:inline;">
@@ -156,6 +132,10 @@
                                 <th class="table-title"><a href="javascript:reorder('start_time desc');">Start Date</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">End Date</a></th>
                                 <th class="table-title"><a href="javascript:reorder('end_time desc');">Progress</a></th>
+                                <!-- <th class="table-title"><a href="javascript:reorder('end_time desc');">Pass</a></th>
+                                <th class="table-title"><a href="javascript:reorder('end_time desc');">Fail</a></th>
+                                <th class="table-title"><a href="javascript:reorder('end_time desc');">Timeout</a></th>
+                                <th class="table-title"><a href="javascript:reorder('end_time desc');">N/A</a></th> -->
                                 <th class="table-author am-hide-sm-only">Operation</th>
                             </tr>
                             </thead>
@@ -170,6 +150,10 @@
                                 <td><?php echo ($v[start_time]); ?></td>
                                 <td><?php echo ($v[end_time]); ?></td>
                                 <td><?php echo ($v['progress']); ?></td>
+                                <!-- <td><?php echo ($v['pass']); ?></td>
+                                <td><?php echo ($v['fail']); ?></td>
+                                <td><?php echo ($v['timeout']); ?></td>
+                                <td><?php echo ($v['NA']); ?></td> -->
                                 <td>
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
@@ -183,64 +167,54 @@
                                 <div class="am-modal-dialog">
                                     <div class="am-modal-hd">Edit Task</div>
                                     <div class="am-modal-bd">
-                                      <label>Name:</label>
-                                      <input type="text" class="am-modal-prompt-input" id="edit_name" style="display:inline;border:1px solid #9C9898;"><br/><br/>
-                                      <label>Driver:</label>
-                                      <input type="text" class="am-modal-prompt-input" id="edit_driver" style="display:inline;border:1px solid #9C9898;"><br/><br/>
-                                      <label>Type:</label> 
-                                      <div class="am-form-group-inline" style="display:inline;">
-                                            <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." ov_id=<?php echo ($v[id]); ?> onchange="edit_type(this)" id="edit_type" style="border:1px solid #9C9898;">
-                                                <option value="CModel">CModel</option>
-                                                <option value="Chip">Chip</option>
-                                                <option value="FPGA">FPGA</option>
+                                      <label style="display:inline;">Name:</label>
+                                      <input type="text" class="am-modal-prompt-input" id="edit_name" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+                                      <label style="display:inline;">Driver:</label>
+                                      <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+                                      <label style="display:inline;margin-left:10px;">Type:</label> 
+                                      <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+                                            <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="edit_type" style="border:1px solid #9C9898;">
+                                                <option value="manual">Manual</option>
+                                                <option value="auto">Auto</option>
                                             </select>
                                       </div><br/><br/>
-                                      <label>Test Run:</label> 
-                                      <div class="am-form-group-inline" style="display:inline;">
+                                      <label style="display:inline;margin-left:-17px;">Test Run:</label> 
+                                      <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
                                             <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="edit_pid" style="border:1px solid #9C9898;">
                                                 <option value=""></option>
                                                 <?php if(is_array($run_list)): foreach($run_list as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
                                             </select>
                                       </div><br/><br/>
-                                      <label>Board:</label>
-                                      <div class="am-form-group-inline" style="display:inline;" id="Chip_selected">
+                                      <label style="display:inline;padding-left:-17px;">Board:</label>
+                                      <div class="am-form-group-inline" style="display:inline;text-align:center;">
                                           <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="edit_platform">
-                                <option value=""></option>
-                                <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['Name']); ?>><?php echo ($vc[Name]); ?></option><?php endforeach; endif; ?>
-                                </select>
-                              <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"  onchange="edit_os(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="edit_os">
-                                <option value=""></option>
-                                <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): if($vc==$v[OS]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
-                                <?php else: ?>
-                                <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
-                            </select>
-                              <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="edit_version">
-                                <option value=""></option>
-                              </select>
-                              <br/><br/>
-                                      </div>
-                                      <div class="am-form-group-inline" style="display:none;text-align:center;" id="CModel_selected">
-                                        <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="edit_platform2">
-                                <option value=""></option>
-                                <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if($vc[Type]==CModel): ?><option value=<?php echo ($vc['Name']); ?>><?php echo ($vc[Name]); ?></option><?php endif; endforeach; endif; ?>
-                              </select>
-                            <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="edit_version2">
-                              <option value=""></option>
-                              <?php if(is_array($scm)): foreach($scm as $key=>$vscm): ?><option value=<?php echo ($vscm); ?>><?php echo ($vscm); ?></option><?php endforeach; endif; ?>
-                            </select>
-                            <br/><br/>
-                                        </div>
-                                        <label>Owner:</label>
+						                    <option value=""></option>
+					                    	<?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['Name']); ?>><?php echo ($vc[Name]); ?></option><?php endforeach; endif; ?>
+					                   	  </select>
+						                  <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"  onchange="edit_os(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="edit_os">
+							                  <option value=""></option>
+							                  <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): if($vc==$v[OS]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+							                  <?php else: ?>
+							                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
+						           		  </select>
+						               	  <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="edit_version">
+							                  <option value=""></option>
+							                  <?php if(is_array($v[ov_list])): foreach($v[ov_list] as $key=>$vc): if($vc==$v[Version]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+							                  <?php else: ?>
+							                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
+						              	</select>
+                                        </div><br/><br/>
+                                        <label style="display:inline;">Owner:</label>
                                         <div class="am-form-group-inline" style="display:inline;">
                                             <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id="edit_owner">
                                                 <option value=""></option>
                                                 <?php if(is_array($user_list)): foreach($user_list as $k=>$vc): ?><option value="<?php echo ($vc[username]); ?>"><?php echo ($vc[username]); ?></option><?php endforeach; endif; ?>
                                             </select>
                                         </div><br/><br/>
-                                        <label>start_time:</label>
-                                        <input type="text" class="am-modal-prompt-input" data-am-datepicker id="edit_start_time" style="display:inline;border:1px solid #9C9898;"><br/><br/>
+                                        <label style="display:inline;margin-left:-33px;">start_time:</label>
+                                        <input type="text" class="am-modal-prompt-input" data-am-datepicker id="edit_start_time" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
                                         <label style="display:inline;margin-left:-5%;">end_time:</label>
-                                        <input type="text" class="am-modal-prompt-input" data-am-datepicker id="edit_end_time" style="display:inline;border:1px solid #9C9898;">
+                                        <input type="text" class="am-modal-prompt-input" data-am-datepicker id="edit_end_time" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;">
                                     </div>
 
                                     <div class="am-modal-footer">
@@ -269,100 +243,170 @@
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New Task</div>
         <div class="am-modal-bd">
-          <label>Name:</label>
-          <input type="text" class="am-modal-prompt-input" id="add_name" style="display:inline;border:1px solid #9C9898;"><br/><br/>
-          <label>Driver:</label>
-          <input type="text" class="am-modal-prompt-input" id="add_driver" style="display:inline;border:1px solid #9C9898;"><br/><br/>
-          <label>Type:</label>
+          <label style="display:inline;">Name:</label>
+          <input type="text" class="am-modal-prompt-input" id="add_name" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+          <label style="display:inline;">Driver:</label>
+          <input type="text" class="am-modal-prompt-input" id="add_driver" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+          <label style="display:inline;margin-left:10px;">Type:</label>
           <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
-              <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." onchange="add_type(this)" id="add_type" style="border:1px solid #9C9898;">
-                  <option value="CModel">CModel</option>
-                  <option value="Chip">Chip</option>
-                  <option value="FPGA">FPGA</option>
-              </select>
+             <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="add_type" style="border:1px solid #9C9898;">
+                 <option value="manual">Manual</option>
+                 <option value="auto">Auto</option>
+             </select>
           </div><br/><br/>
-          <label>Test Run:</label> 
-          <div class="am-form-group-inline" style="display:inline;">
+          <label style="display:inline;margin-left:-17px;">Test Run:</label> 
+          <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
              <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="add_pid" style="border:1px solid #9C9898;">
                 <option value=""></option>
                 <?php if(is_array($run_list)): foreach($run_list as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
              </select>
           </div><br/><br/>
-          <label>Board:</label>
-          <div class="am-form-group-inline" style="display:inline;" id="Chip_selected_add">
+          <label style="display:inline;margin-left:2px;">Board:</label>
+          <div class="am-form-group-inline" style="display:inline;text-align:center;">
               <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform">
                 <option value=""></option>
                 <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['Name']); ?>><?php echo ($vc[Name]); ?></option>
-                {else if condition="$vc[Type]==CModel"}<?php endforeach; endif; ?>
-             </select>
-             <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"  onchange="add_os(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="add_os">
+                    {else if condition="$vc[Type]==CModel"}<?php endforeach; endif; ?>
+              </select>
+              <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"  onchange="add_os(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="add_os">
                   <option value=""></option>
                   <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): if($vc==$v[OS]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
                   <?php else: ?>
                   <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
-            </select>
-            <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="add_version">
+              </select>
+              <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="add_version">
                   <option value=""></option>
+                  <?php if(is_array($v[ov_list])): foreach($v[ov_list] as $key=>$vc): if($vc==$v[Version]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+                  <?php else: ?>
+                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
             </select>
-            <br/><br/>
-            </div>
-             <div class="am-form-group-inline" style="display:none;text-align:center;" id="CModel_selected_add">
-             <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform2">
-               <option value=""></option>
-               <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if($vc[Type]==CModel): ?><option value=<?php echo ($vc['Name']); ?>><?php echo ($vc[Name]); ?></option><?php endif; endforeach; endif; ?>
-             </select>
-          <select data-am-selected="{btnWidth: '18.7%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="add_version2">
-            <option value=""></option>
-            <?php if(is_array($scm)): foreach($scm as $key=>$vscm): ?><option value=<?php echo ($vscm); ?>><?php echo ($vscm); ?></option><?php endforeach; endif; ?>
-            </select>
-            <br/><br/> 
-            </div> 
-            <label>Suite:</label> 
-            <div class="am-form-group-inline" style="display:inline;">
-            <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="add_suit" style="border:1px solid #9C9898;">
+            </div><br/><br/>
+            <label style="display:inline;margin-left:10px;">Suite:</label> 
+            <div class="am-form-group-inline" style="width:71.5%;display:inline;text-align:center;">
+             <select data-am-selected="{btnWidth: '57.5%', btnStyle: 'secondary'}" placeholder="Please select..." id="add_suit" style="border:1px solid #9C9898;">
                 <option value=""></option>
                 <?php if(is_array($suit_list)): foreach($suit_list as $key=>$vc): ?><option value="<?php echo ($vc); ?>"><?php echo ($vc); ?></option><?php endforeach; endif; ?>
-            </select>
-            </div><br/><br/>   
-            <label>Owner:</label>
+             </select>
+             </div><br/><br/>           
+            <label style="display:inline;">Owner:</label>
             <div class="am-form-group-inline" style="display:inline;">
                 <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id="add_user">
                     <option value=""></option>
                     <?php if(is_array($user_list)): foreach($user_list as $k=>$vc): ?><option value="<?php echo ($vc[username]); ?>"><?php echo ($vc[username]); ?></option><?php endforeach; endif; ?>
                 </select>
             </div><br/><br/>
-            <label>start_time:</label>
-            <input type="text" class="am-modal-prompt-input" data-am-datepicker id="add_start" style="display:inline;border:1px solid #9C9898;"><br/><br/>
-            <label>end_time:</label>
-            <input type="text" class="am-modal-prompt-input" data-am-datepicker id="add_end" style="display:inline;border:1px solid #9C9898;">        
+            <label style="display:inline;margin-left:-33px;">start_time:</label>
+            <input type="text" class="am-modal-prompt-input" data-am-datepicker id="add_start" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label style="display:inline;margin-left:-5%;">end_time:</label>
+            <input type="text" class="am-modal-prompt-input" data-am-datepicker id="add_end" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;">        
+          <!--<table style="width:100%;margin:0px auto;">
+            <tr>
+              <td style="text-align:right;"><label>Name:&nbsp;</label></td>
+              <td><input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="add_name"></td>
+            </tr>
+            <tr>
+              <td style="text-align:right;"><label>Driver:&nbsp;</label></td>
+              <td><input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="add_driver"></td>
+            </tr>
+            <tr>
+              <td style="text-align:right;">
+                <label>Test Run:&nbsp;</label>
+              </td>
+              <td style="text-align:left;padding-top:10px;">
+                <div class="am-form-group-inline" style="width:71.5%;">
+                  <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_pid">
+                    <option value=""></option>
+                    <?php if(is_array($run_list)): foreach($run_list as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
+                  </select>
+                </div>
+              </td>
+            </tr>
+            
+            <tr>
+              <td style="text-align:right;">
+                <label>Board:&nbsp;</label>
+              </td>
+              <td style="text-align:left;padding-top:10px;">
+                <div class="am-form-group-inline" style="width:71.5%;">
+                  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform">
+                    <option value=""></option>
+                    <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['id']); ?>><?php echo ($vc[Name]); ?></option>
+	                    {else if condition="$vc[Type]==CModel"}<?php endforeach; endif; ?>
+                  </select>
+                  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"  onchange="add_os1(this)" ov_id=<?php echo ($v[id]); ?> class="am-fr" placeholder="Please select OS..." id="add_os">
+	                  <option value=""></option>
+	                  <?php if(is_array($os_list)): foreach($os_list as $key=>$vc): if($vc==$v[OS]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+	                  <?php else: ?>
+	                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
+           		  </select>
+               	  <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="add_version">
+	                  <option value=""></option>
+	                  <?php if(is_array($v[ov_list])): foreach($v[ov_list] as $key=>$vc): if($vc==$v[Version]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
+	                  <?php else: ?>
+	                  <option value=<?php echo ($vc); ?>><?php echo ($vc); ?></option><?php endif; endforeach; endif; ?>
+              	</select>
+                </div>
+              </td>
+            </tr>
+            
+            
+            <tr>
+              <td style="text-align:right;">
+                <label>Suite:&nbsp;</label>
+              </td>
+              <td style="text-align:left;padding-top:10px;">
+                <div class="am-form-group-inline" style="width:71.5%;">
+                  <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_suit">
+                    <option value=""></option>
+                    <?php if(is_array($suit_list)): foreach($suit_list as $key=>$vc): ?><option value="<?php echo ($vc); ?>"><?php echo ($vc); ?></option><?php endforeach; endif; ?>
+                  </select>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:right;">
+                <label>Owner:&nbsp;</label>
+              </td>
+              <td style="text-align:left;padding-top:10px;">
+                <div class="am-form-group-inline" style="width:71.5%;">
+                  <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_user">
+                    <option value=""></option>
+                    <?php if(is_array($user_list)): foreach($user_list as $k=>$vc): ?><option value="<?php echo ($vc[username]); ?>"><?php echo ($vc[username]); ?></option><?php endforeach; endif; ?>
+                  </select>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:right;">
+                <label>start_time:&nbsp;</label>
+              </td>
+              <td style="text-align:left;padding-top:10px;">
+                <input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;margin-top:10px;" id="add_start" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:right;">
+                <label>end_time:&nbsp;</label>
+              </td>
+              <td style="text-align:left;">
+                <input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:71.5%;border:1px solid #9C9898;" id="add_end" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+              </td>
+            </tr>            
+          </table>-->
         </div>
+
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #9C9898;">OK</span>
             <span class="am-modal-btn" data-am-modal-cancel style="width: 50%;border:1px solid #9C9898;">Cancel</span>
         </div>
     </div>
 </div><?php endforeach; endif; ?>
+
 <script>
-  $(document).ready(function(){
-    var type=$("#edit_type").val();
-        var type2=$("#add_type").val();
-        if(type=="CModel"){
-          $('#Chip_selected').css("display","none");
-          $('#CModel_selected').css("display","inline");
-        }else if(type!="CModel"){
-          $('#Chip_selected').css("display","inline");
-          $('#CModel_selected').css("display","none");
-        }
-        if(type=="CModel"){
-          $('#Chip_selected_add').css("display","none");
-          $('#CModel_selected_add').css("display","inline");
-        }else if(type!="CModel"){
-          $('#Chip_selected_add').css("display","inline");
-          $('#CModel_selected_add').css("display","none");
-        }
-  });
     $(document).ready(function () {
         $("#search_pid").val("<?php echo ($run_info['id']); ?>");
+
+
     });
     function del(obj) {
         var id=$(obj).attr('task_id');
@@ -372,14 +416,13 @@
             });
         }
     }
+
     function edit(obj) {
         var id=$(obj).attr('task_id');
         $("#"+id).modal({
             relatedTarget:this,
             onConfirm:function(e){
-              board_val=$("#"+id+" #edit_platform").val()?$("#"+id+" #edit_platform").val():$("#"+id+" #edit_platform2").val();
-              version_val=$("#"+id+" #edit_version").val()?$("#"+id+" #edit_version").val():$("#"+id+" #edit_version2").val();
-                var arr={id:id,name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:board_val,Type:$("#"+id+" #edit_type").val(),owner:$("#"+id+" #edit_owner").val(),pid:$("#"+id+" #edit_pid").val(),OS:$('#edit_os').val(),Version:version_val};
+                var arr={id:id,name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:$("#"+id+" #edit_platform").val(),Type:$("#"+id+" #edit_type").val(),owner:$("#"+id+" #edit_owner").val(),pid:$("#"+id+" #edit_pid").val(),OS:$('#edit_os').val(),Version:$("#edit_version").val()};
                 $.post("<?php echo U('Admin/Task/add');?>",arr,function (data) {
                     window.location.reload();
                 });
@@ -388,6 +431,8 @@
                 e.close()
             }
         });
+
+
     }
     function add() {
         var start_time="<?php echo ($run_info[start_time]); ?>";
@@ -407,10 +452,8 @@
             relatedTarget:this,
             onConfirm:function(e){
                 var pid=$("#add_pid").val();
-                board_val=$("#add_platform").val()?$("#add_platform").val():$("#add_platform2").val();
-                version_val=$("#add_version").val()?$("#add_version").val():$("#add_version2").val();
                 if(pid!=null&&pid!=""&&pid!=0){
-                    var arr={name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:board_val,owner:$('#add_user').val(),Type:$('#add_type').val(),suit:$('#add_suit').val(),pid:$("#add_pid").val(),OS:$('#add_os').val(),Version:version_val};
+                    var arr={name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:$("#add_platform").val(),owner:$('#add_user').val(),Type:$('#add_type').val(),suit:$('#add_suit').val(),pid:$("#add_pid").val(),OS:$('#add_os').val(),Version:$("#add_version").val()};
                     $.post("<?php echo U('Admin/Task/add');?>",arr,function (data) {
                         location.href=("<?php echo U('Admin/Task/case_index',array('tid'=>ttid));?>").replace('ttid',data);
                     });
@@ -444,7 +487,7 @@
         location.href=("<?php echo U(Admin/Task/Index,array('pid'=>ppid,'sort'=>sort_rule));?>").replace('ppid',$("#search_pid").val()).replace('sort_rule',name);
     }
     function edit_os(obj) {
-      var id=$(obj).attr('ov_id');
+    	var id=$(obj).attr('ov_id');
         var os=$(obj).val();
         $.post("<?php echo U('Admin/Task/index');?>",{'OS':os,'seconglist':true},function (data) {
             $('#'+id+' #edit_version').empty();
@@ -463,27 +506,6 @@
                 $("#add_version").append("<option value="+v.Version+">"+v.Version+"</option>");
             });
         });
-    }
-    function edit_type(obj) {
-        var type=$(obj).val();
-        var id=$(obj).attr('ov_id');
-        if(type=="CModel"){
-          $('#'+id+' #Chip_selected').css("display","none");
-          $('#'+id+' #CModel_selected').css("display","inline");
-        }else if(type!="CModel"){
-          $('#'+id+' #Chip_selected').css("display","inline");
-          $('#'+id+' #CModel_selected').css("display","none");
-        }
-    }
-    function add_type(obj) {
-        var type=$(obj).val();
-        if(type=="CModel"){
-          $('#Chip_selected_add').css("display","none");
-          $('#CModel_selected_add').css("display","inline");
-        }else if(type!="CModel"){
-          $('#Chip_selected_add').css("display","inline");
-          $('#CModel_selected_add').css("display","none");
-        }
     }
 
 </script>
