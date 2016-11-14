@@ -1,20 +1,20 @@
-<?php if (!defined('THINK_PATH')) exit();?>
+
 <!DOCTYPE html>
 <HTML>
 <HEAD>
     <TITLE> Case</TITLE>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="/qaweb/Public/ztree/css/demo.css" type="text/css">
-    <link rel="stylesheet" href="/qaweb/Public/ztree/css/awesomeStyle/awesome.css" type="text/css">
-    <script type="text/javascript" src="/qaweb/Public/assets/js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/qaweb/Public/ztree/js/jquery.ztree.core.js"></script>
-    <script type="text/javascript" src="/qaweb/Public/ztree/js/jquery.ztree.excheck.js"></script>
-    <script type="text/javascript" src="/qaweb/Public/ztree/js/jquery.ztree.exedit.js"></script>
+    <link rel="stylesheet" href="ZTREEBASE/css/demo.css" type="text/css">
+    <link rel="stylesheet" href="ZTREEBASE/css/awesomeStyle/awesome.css" type="text/css">
+    <script type="text/javascript" src="ASSETS/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="ZTREEBASE/js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="ZTREEBASE/js/jquery.ztree.excheck.js"></script>
+    <script type="text/javascript" src="ZTREEBASE/js/jquery.ztree.exedit.js"></script>
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="icon" type="image/png" href="/qaweb/Public/assets/i/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="/qaweb/Public/assets/i/app-icon72x72@2x.png">
-    <link rel="stylesheet" href="/qaweb/Public/assets/css/amazeui.min.css"/>
-    <link rel="stylesheet" href="/qaweb/Public/assets/css/admin.css">
+    <link rel="icon" type="image/png" href="ASSETS/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="ASSETS/i/app-icon72x72@2x.png">
+    <link rel="stylesheet" href="ASSETS/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="ASSETS/css/admin.css">
     <style>
         .am-form-group{
             display: block;
@@ -53,7 +53,7 @@
         <div class="am-cf am-padding am-padding-bottom-0" id="content-body">
             <div class="am-g">
                 <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Taskcase</strong></div><br/>
-                <button type='button' style="float:right;" class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger'  onclick='add()'> <span class='am-icon-pencil-square-o'></span>Edit Item</button>
+                <button type='button' style="float:right;" ov_id="{$filter['id']}" class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger'  onclick='add(this)'> <span class='am-icon-pencil-square-o'></span>Edit Item</button>
             </div>
         </div>
         <br/>
@@ -71,11 +71,13 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php if(is_array($data)): foreach($data as $key=>$v): ?><tr>
-                                <td><?php echo ($v[case_name]); ?></td>
-                                <td><?php echo ($v[item_name]); ?></td>
-                                <td><?php echo ($v[item_unit]); ?></td>
-                            </tr><?php endforeach; endif; ?>
+                            {foreach name="data" item="v"}
+                            <tr>
+                                <td>{$v[case_name]}</td>
+                                <td>{$v[item_name]}</td>
+                                <td>{$v[item_unit]}</td>
+                            </tr>
+                            {/foreach}
                             </tbody>
                         </table>
                        
@@ -86,7 +88,7 @@
         </div>
 
 
-<div class="am-modal am-modal-confirm" id="add_item_modal" style="top:-20%;" tabindex="<?php echo ($v[id]); ?>">
+<div class="am-modal am-modal-confirm" id="add_item_modal" style="top:-20%;" tabindex="{$v[id]}">
     <div class="am-modal-dialog">
         <div class="am-modal-hd">Edit Item</div>
         <div class="am-modal-bd">
@@ -104,15 +106,20 @@
 
 
 <script >
-function add() {
+function add(obj) {
+	var group_id=$(obj).attr('ov_id');
+	console.log(group_id);
     $("#add_item").val("");
     $("#add_item_modal").modal({
         relatedTarget:this,
         onConfirm:function(e){
-                var arr={item:e.data};
-                $.post("<?php echo U('Admin/Task/case_item');?>",arr,function (data) {
-                    location.href=("<?php echo U('Admin/Task/case_index');?>");
-                });
+                var arr=e.data;
+                var 
+                /* $.post("{:U('Admin/Task/index')}",arr,function (data) {
+                	console.log(data);
+                });  */
+                var str=("{:U('Admin/Task/index',array('item'=>arr,'group'=>group_id))}").replace('arr',arr).replace('group_id',group_id);
+                location.href=str; 
         },
         onCancel:function (e) {
             e.close()
@@ -128,7 +135,7 @@ function add() {
         </ul>
     </div>
 
-<script src="/qaweb/Public/assets/js/amazeui.min.js"></script>
+<script src="ASSETS/js/amazeui.min.js"></script>
 
 
 </body>

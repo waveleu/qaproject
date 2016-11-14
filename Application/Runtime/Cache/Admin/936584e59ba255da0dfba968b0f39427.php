@@ -53,7 +53,7 @@
         <div class="am-cf am-padding am-padding-bottom-0" id="content-body">
             <div class="am-g">
                 <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Taskcase</strong></div><br/>
-                <button type='button' style="float:right;" class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger'  onclick='add()'> <span class='am-icon-pencil-square-o'></span>Edit Item</button>
+                <button type='button' style="float:right;" ov_id="<?php echo ($filter['id']); ?>" class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger'  onclick='add(this)'> <span class='am-icon-pencil-square-o'></span>Edit Item</button>
             </div>
         </div>
         <br/>
@@ -104,15 +104,20 @@
 
 
 <script >
-function add() {
+function add(obj) {
+	var group_id=$(obj).attr('ov_id');
+	console.log(group_id);
     $("#add_item").val("");
     $("#add_item_modal").modal({
         relatedTarget:this,
         onConfirm:function(e){
-                var arr={item:e.data};
-                $.post("<?php echo U('Admin/Task/case_item');?>",arr,function (data) {
-                    location.href=("<?php echo U('Admin/Task/case_index');?>");
-                });
+                var arr=e.data;
+                var 
+                /* $.post("<?php echo U('Admin/Task/index');?>",arr,function (data) {
+                	console.log(data);
+                });  */
+                var str=("<?php echo U('Admin/Task/index',array('item'=>arr));?>").replace('arr',arr);
+                location.href=str; 
         },
         onCancel:function (e) {
             e.close()
