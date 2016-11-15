@@ -197,34 +197,7 @@
                             </tr><?php endif; endforeach; endif; ?>
                             </tbody>
                         </table>
-                        <!--<div class="am-form-group-inline" style="width:1000px;">
-                            Task:
-                            <select data-am-selected="{btnWidth: '20%', btnStyle: 'secondary',searchBox: 1}"  class="am-u-md-3" placeholder="Please select..."  id="search_tid">
-                                <option value=""></option>
-                                <?php if(is_array($task)): foreach($task as $k=>$v): ?><option value=<?php echo ($k); ?>><?php echo ($v); ?></option><?php endforeach; endif; ?>
-                            </select>
-                            &nbsp;&nbsp;Result:
-                            <select data-am-selected="{btnWidth: '20%', btnStyle: 'secondary'}"  class="am-u-md-3" placeholder="Please select..."  id="search_result">
-                                <option value="0">all</option>
-                                <?php if(is_array($result_list)): foreach($result_list as $key=>$v): if($v==N/A): ?><option value="NA">N/A</option>
-                                    <?php else: ?>
-                                        <option value=<?php echo ($v); ?>><?php echo ($v); ?></option><?php endif; endforeach; endif; ?>
-                            </select>
-                             &nbsp;&nbsp;BugID:&nbsp;<input type="text" id="search_name">
-                            <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary'  onclick='search()'> <span class='am-icon-search'></span>Search</button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                            <select data-am-selected="{btnWidth: '20%', btnStyle: 'secondary'}"  class="am-u-md-3" placeholder="Please select..."  id="search_type">
-	                            <option value="CaseName">CaseName</option>
-	                            <option value="BugID">BugID</option>
-	                            <option value="driver">Driver</option>
-	                            <option value="Status">Status</option>
-	                            <option value="result">Result</option>
-                            </select>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <div style="display:inline;" class="am-fr">
-                            <input type="text" id="search_name" style="width:180px;height:30px;border:1px solid #9C9898;">&nbsp;&nbsp;
-                            <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary'  onclick='search()'> <span class='am-icon-search'></span>Search</button>
-                        	</div>
-                        </div><br/>-->
+                       
                         <div class="am-u-md-10" id="edit_table">
                             <div class="am-tabs am-margin" data-am-tabs>
                                 <ul class="am-tabs-nav am-nav am-nav-tabs">
@@ -389,9 +362,6 @@
             if(result==0){
                 location.href=("<?php echo U('Admin/Task/case_index',array('tid'=>vid));?>").replace('vid',tid);
             }
-            /*$.post("<?php echo U('Admin/Task/case_index');?>",{ajax:true,tid:tid},function (data) {
-                location.href
-            });*/
         }
         else
             location.reload();
@@ -462,7 +432,7 @@
         //tree_fresh();
     }
     function toCaseItem(id) {
-        var str=("<?php echo U('Admin/Task/case_index',array('case_item'=>'true'));?>");
+        var str=("<?php echo U('Admin/Task/case_index',array('case_item'=>'true','id'=>taskcase_id));?>").replace('taskcase_id',id);
         location.href=str;
     }
 </script>
