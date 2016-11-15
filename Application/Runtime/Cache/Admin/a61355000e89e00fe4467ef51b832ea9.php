@@ -75,7 +75,7 @@
                             <br>
                         </div>
                         <div class="am-form-group am-form-horizontal am-form-error">
-                            <label for='Board1' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">Board Type:</label>
+                            <label for='Board1' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">Board:</label>
                             <div class="am-u-sm-10" id="Board1">
                             <select multiple data-am-selected="{btnWidth: '20%', btnStyle: 'secondary'}" placeholder="Choose Board" id="Board" name="Board[]">
                                 <option value=""></option>
@@ -113,16 +113,6 @@
                             <div class="am-u-sm-8">
                                 <input type="text" class="am-form-field " id='ExpectedResults'  name="ExpectedResults" style="width:320px;">
                             </div>
-                            <br>
-                        </div>
-                        <div class="am-form-group am-form-horizontal am-form-error">
-                            <label for='OS1' class="am-u-sm-2 am-form-label" style="margin-top:-6px;">Customer:</label>
-                            <div class="am-u-sm-10" id="OS1">
-                            <select multiple data-am-selected="{btnWidth: '19.8%', btnStyle: 'secondary'}" placeholder="Choose OS" id="OS" name="OS[]" >
-                                <option value=""></option>
-                                <?php if(is_array($os_list)): foreach($os_list as $key=>$v): if(in_array($v[OS],$data[OS])) echo '<option value=',$v[OS].' title=',$v[Comments].' selected>',$v[OS].'</option>'; else echo '<option value=',$v[OS].' title=',$v[Comments].' >',$v[OS].'</option>'; endforeach; endif; ?>
-                            </select>
-                                </div>
                             <br>
                         </div>
                         <div class="am-form-group am-form-horizontal am-form-error" id="customer_hide">

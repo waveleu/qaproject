@@ -13,9 +13,8 @@ class TaskController extends AuthController {
 		    $this->ajaxReturn($result,'json');
 		}else if($filter['item']!=''){
     	    D('Item')->saveData($filter['item'],$filter['group']);
-    	    $result=M('os_version')->select();
-    	    var_dump($result);
-    	    $this->ajaxReturn($result,'json');
+    	    $item_num=M('case')->where(array('group'=>$filter['group']))->count();
+            M('task_case')->where(array('id'=>$filter['group']))->setField('item',$item_num);
     	}else{
 		    $ajax=$filter['ajax'];
 		    unset($filter['ajax']);
@@ -101,9 +100,8 @@ class TaskController extends AuthController {
     	    $this->display('item_index');
     	}else if($filter['item']!=''){
     	    D('Item')->saveData($filter['item'],$filter['group']);
-    	    $result=M('os_version')->select();
-    	    var_dump($result);
-    	    $this->ajaxReturn($result,'json');
+            $item_num=M('case')->where(array('group'=>$filter['group']))->count();
+            M('task_case')->where(array('id'=>$filter['group']))->setField('item',$item_num);
     	}else{
     		$data=D('TaskCase')->getData($filter);
     		$tree=D('Testcase')->getTree();

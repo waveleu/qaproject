@@ -47,6 +47,7 @@
                     <tr>
                         <th class="table-title"><a href="javascript:reorder('name');">Name</a></th>
                         <th class="table-title"><a href="javascript:reorder('progress');">Progress</a></th>
+                        <th class="table-title"><a href="javascript:reorder('project');">Project</a></th>
                         <th class="table-title"><a href="javascript:reorder('start_time desc');">Start Time</a></th>
                         <th class="table-title"><a href="javascript:reorder('end_time desc');">End Time</a></th>
                         <th class="table-author am-hide-sm-only am-fr">Operation</th>
@@ -56,6 +57,7 @@
                     <?php if(is_array($list)): foreach($list as $key=>$v): ?><tr>
                         <td><a href="javascript:editTask('<?php echo ($v[id]); ?>');"><?php echo ($v[name]); ?></a></td>
                         <td><?php echo ($v[progress]); ?></td>
+                        <td><?php echo ($v[project]); ?></td>
                         <td><?php echo ($v[start_time]); ?></td>
                         <td><?php echo ($v[end_time]); ?></td>
                         <td>
@@ -83,6 +85,11 @@
         <div class="am-modal-bd">
           <label style="display:inline;">name:</label>
           <input type="text" class="am-modal-prompt-input" id="add_name" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+          <label style="display:inline;">project:</label>
+          <select data-am-selected="{btnWidth: '50%', btnStyle: 'secondary'}" class="" placeholder="Please select OS..." id="add_project" style="display:inline;">
+              <option value=""></option>
+              <?php if(is_array($project)): foreach($project as $key=>$vc): ?><option value=<?php echo ($vc['id']); ?>><?php echo ($vc['name']); ?></option><?php endforeach; endif; ?>
+          </select><br /><br />
           <label style="display:inline;margin-left:-32px;">start_time:</label>
           <input type="text" class="am-modal-prompt-input" data-am-datepicker  id="add_start" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
           <label style="display:inline;margin-left:-28px;">end_time:</label>
@@ -119,6 +126,8 @@
         $.each(testrun_info,function (k,v) {
             if(v.id==id){
                 $("#add_name").val(v.name);
+                var project=v.pid;
+                $("select option[value='"+project+"']").attr("selected", "selected"); 
                 $("#add_start").attr({value:v.start_time});
                 $("#add_end").attr({value:v.end_time});
             }
@@ -127,7 +136,7 @@
             relatedTarget: this,
             onConfirm:function (e) {
                 $.post("<?php echo U('Admin/Testrun/edit');?>",
-                        {id:id,name:e.data[0],start_time:e.data[1],end_time:e.data[2]},
+                        {id:id,pid:$("#add_project").val(),name:e.data[0],start_time:e.data[1],end_time:e.data[2]},
                         function () {
                             window.location.reload();
                         });
@@ -159,7 +168,7 @@
             onConfirm:function (e) {
                 var pid="<?php echo ($project_info[id]); ?>";
                 $.post("<?php echo U('Admin/Testrun/edit');?>",
-                        {name:e.data[0],start_time:e.data[1],end_time:e.data[2],pid:pid},
+                        {name:e.data[0],pid:$("#add_project").val(),start_time:e.data[1],end_time:e.data[2],pid:pid},
                         function (data) {
                             window.location.reload();
                         });

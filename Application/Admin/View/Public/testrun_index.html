@@ -47,6 +47,7 @@
                     <tr>
                         <th class="table-title"><a href="javascript:reorder('name');">Name</a></th>
                         <th class="table-title"><a href="javascript:reorder('progress');">Progress</a></th>
+                        <th class="table-title"><a href="javascript:reorder('project');">Project</a></th>
                         <th class="table-title"><a href="javascript:reorder('start_time desc');">Start Time</a></th>
                         <th class="table-title"><a href="javascript:reorder('end_time desc');">End Time</a></th>
                         <th class="table-author am-hide-sm-only am-fr">Operation</th>
@@ -57,6 +58,7 @@
                     <tr>
                         <td><a href="javascript:editTask('{$v[id]}');">{$v[name]}</a></td>
                         <td>{$v[progress]}</td>
+                        <td>{$v[project]}</td>
                         <td>{$v[start_time]}</td>
                         <td>{$v[end_time]}</td>
                         <td>
@@ -86,6 +88,13 @@
         <div class="am-modal-bd">
           <label style="display:inline;">name:</label>
           <input type="text" class="am-modal-prompt-input" id="add_name" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+          <label style="display:inline;">project:</label>
+          <select data-am-selected="{btnWidth: '50%', btnStyle: 'secondary'}" class="" placeholder="Please select OS..." id="add_project" style="display:inline;">
+              <option value=""></option>
+              {foreach name="project" item="vc"}
+              <option value={$vc['id']}>{$vc['name']}</option>
+              {/foreach}
+          </select><br /><br />
           <label style="display:inline;margin-left:-32px;">start_time:</label>
           <input type="text" class="am-modal-prompt-input" data-am-datepicker  id="add_start" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
           <label style="display:inline;margin-left:-28px;">end_time:</label>
@@ -122,6 +131,8 @@
         $.each(testrun_info,function (k,v) {
             if(v.id==id){
                 $("#add_name").val(v.name);
+                var project=v.pid;
+                $("select option[value='"+project+"']").attr("selected", "selected"); 
                 $("#add_start").attr({value:v.start_time});
                 $("#add_end").attr({value:v.end_time});
             }
@@ -130,7 +141,7 @@
             relatedTarget: this,
             onConfirm:function (e) {
                 $.post("{:U('Admin/Testrun/edit')}",
-                        {id:id,name:e.data[0],start_time:e.data[1],end_time:e.data[2]},
+                        {id:id,pid:$("#add_project").val(),name:e.data[0],start_time:e.data[1],end_time:e.data[2]},
                         function () {
                             window.location.reload();
                         });
@@ -162,7 +173,7 @@
             onConfirm:function (e) {
                 var pid="{$project_info[id]}";
                 $.post("{:U('Admin/Testrun/edit')}",
-                        {name:e.data[0],start_time:e.data[1],end_time:e.data[2],pid:pid},
+                        {name:e.data[0],pid:$("#add_project").val(),start_time:e.data[1],end_time:e.data[2],pid:pid},
                         function (data) {
                             window.location.reload();
                         });

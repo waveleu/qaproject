@@ -16,10 +16,13 @@ class TestRunModel extends BaseModel{
         }
         unset($filter['sort']);
         $data=$this->getPage('TestRun',20,$filter,$sort_rule);
+        
         foreach ($data['list'] as $k=>$v){
             $total=$this->table('go_task Task,go_task_case TaskCase')->where(array('TaskCase.tid=Task.id ','Task.pid'=>$v['id']))->count();
             $pass_count=$this->table('go_task Task,go_task_case TaskCase')->where(array('TaskCase.tid=Task.id ','Task.pid'=>$v['id'],'TaskCase.result'=>'pass'))->count();
             $data['list'][$k]['progress']=sprintf('%.1f',($pass_count/$total)*100).'%';
+            $temp=M('project')->where(array('id'=>$v['pid']))->find();
+            $data['list'][$k]['project']=$temp['name'];
         }
         if($progress){
             usort($data['list'], function ($a,$b){
@@ -50,7 +53,7 @@ class TestRunModel extends BaseModel{
         foreach ($task_id as $v) {
             D('Task')->delData($v);
         }
-        $result=$this->delete($id);
+        $result=$this->where(array('id'=>$id))->delete();
         return $result;
     }
 }

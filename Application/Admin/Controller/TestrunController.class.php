@@ -8,8 +8,10 @@ class TestrunController extends AuthController {
             unset($filter['ajax']);
         }else{
             $data=D('TestRun')->getData($filter);
+            $project=M('project')->field('id,name')->select();
         }
         $this->assign($data);
+        $this->assign('project',$project);
         $this->display("Public/testrun_index");
     }
     public function edit() {
