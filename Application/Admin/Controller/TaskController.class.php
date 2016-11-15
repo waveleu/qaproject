@@ -11,7 +11,12 @@ class TaskController extends AuthController {
 		    $map['OS']=I('OS');
 		    $result=M('os_version')->where($map)->select();
 		    $this->ajaxReturn($result,'json');
-		}else{
+		}else if($filter['item']!=''){
+    	    D('Item')->saveData($filter['item'],$filter['group']);
+    	    $result=M('os_version')->select();
+    	    var_dump($result);
+    	    $this->ajaxReturn($result,'json');
+    	}else{
 		    $ajax=$filter['ajax'];
 		    unset($filter['ajax']);
 		    $data=D('Task')->getData($filter);
@@ -85,13 +90,21 @@ class TaskController extends AuthController {
     		$data['task_list']=json_encode($task_list);
     		$this->assign($data);
     		$this->display('case_table_div');    		
-    	}
-    	else if($filter['case_item']==true){
-    	    $data=D('Item')->getData();
-    	    $this->assign('data',$data);
-    	    $this->display('case_item');
-    	}
-    	else{
+    	}else if($filter['case_item']==true){
+    	    $filter=I('param.');
+    	    $data=D('Item')->getData($filter['id']);
+    	    $data=array(
+    	        'data'=>$data,
+    	        'group_id'=>$filter['id']
+    	    );
+    	    $this->assign($data);
+    	    $this->display('item_index');
+    	}else if($filter['item']!=''){
+    	    D('Item')->saveData($filter['item'],$filter['group']);
+    	    $result=M('os_version')->select();
+    	    var_dump($result);
+    	    $this->ajaxReturn($result,'json');
+    	}else{
     		$data=D('TaskCase')->getData($filter);
     		$tree=D('Testcase')->getTree();
     		$testrun_list=D('TestRun')->getField('id,name',true);
@@ -186,5 +199,14 @@ class TaskController extends AuthController {
 	    $map['OS']=I('OS');
 	    $result=M('os_version')->where($map)->select();
 	    $this->ajaxReturn($result,'json');
+	}
+	public function item_index(){
+	    $filter=I('param.');
+	    if($filter['item']!=''){
+	        D('Item')->saveData($filter['item'],$filter['group']);
+    	    $result=M('os_version')->select();
+    	    var_dump($result);
+    	    $this->ajaxReturn($result,'json');
+	    }
 	}
 }

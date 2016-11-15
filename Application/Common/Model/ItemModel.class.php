@@ -5,8 +5,8 @@ use Common\Model\BaseModel;
  * task_case相关
  */
 class ItemModel extends BaseModel{
-	public function getData(){
-		$case_list=M('case')->where('id>0')->select();
+	public function getData($filter=""){
+		$case_list=M('case')->where(array('group'=>$filter))->select();
 		foreach($case_list as $k=>$v){
 		    $item_info=M('item')->where(array('id'=>$v['item']))->find();
 		    $taskcase_info=M('task_case')->where(array('id'=>$v['group']))->find();
@@ -17,18 +17,18 @@ class ItemModel extends BaseModel{
 		}
 		return $case_list;
 	}
-	
-    public function getClass($class_id){
-        $name=array();
-        while($class_id!=0){
-            $tmp=M('class')->where(array('id'=>$class_id))->getField('name');
-            $name[]=$tmp;
-            $class_id=M('class')->where(array('id'=>$class_id))->getField('pid');
-        }
-        $name=array_reverse($name);
-        return implode('-', $name);
-    }
-	
+		
+	public function saveData($data,$group_id){
+	    $array=explode(',',$data);
+	    foreach ($array as $value){
+	        list($name,$unit)=explode(' ',$value);
+	        $tmp=array('name'=>$name,'unit'=>$unit);
+	        $item_id=M('item')->add($tmp);
+	        $temp=array('group'=>$group_id,'item'=>$item_id);
+	        M('case')->add($temp);
+	    };
+	    return $result;
+	}
 	
 	public function getPage($data,$limit='15'){
 		$count      = $data->count();// 查询满足要求的总记录数
