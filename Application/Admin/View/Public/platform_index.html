@@ -34,7 +34,7 @@
             text-align: left;
         }
         .am-modal-bd label{
-            width:150px;
+            width:26%;
             display:inline-block;
             text-align:right;
             padding:0px;
