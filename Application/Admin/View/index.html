@@ -12,17 +12,11 @@
     <link rel="stylesheet" href="ASSETS/css/admin.css">
 </head>
 <style>
-/*.am-offcanvas-bar ul:hover{
-	  position: relative;
-      left: 100%;
-      margin-left: -32px;
-      box-shadow: 0 -8px 8px -8px, 0 8px 8px -8px;
-      transition: all 0.3s ease-in-out;
-}
-.am-offcanvas-bar ul li{
-	 display: inline-block;
-     white-space: nowrap;
-}*/
+    /*.hide-1{
+        height:80%;
+        margin-top:40px;
+        position:absolute;
+    }
 </style>
 <body>
 <header class="am-topbar am-topbar-inverse admin-header" style="background-color: #BF2126">
@@ -44,27 +38,27 @@
 
 <div class="am-cf admin-main">
     <!-- sidebar start -->
-    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas" style="width:17%;">
+    <div class="admin-sidebar am-offcanvas hide-1" id="admin-offcanvas" style="width:17%;">
         <div class="am-offcanvas-bar admin-offcanvas-bar">
             <ul class="am-list admin-sidebar-list">
                 {foreach name="data" item="v"}
                 {empty name="v['_data']"}
-                <li><a href="{:U($v['mca'])}" class="am-cf" target="right-content" title={$v['mca']}><span class={$v[ico]}></span> {$v['name']}</a></li>
+                <li class="hide"><a href="{:U($v['mca'])}" class="am-cf" target="right-content" title={$v['mca']}><span class={$v[ico]}></span> {$v['name']}</a></li>
                 {else/}
                 <?php $tmp= "{target:"."'#".$v['id']."'}"; ?>
-                <li class="admin-parent"><a data-am-collapse={$tmp}  title={$v['mca']}>
-                    <span class={$v['ico']}></span> {$v['name']} <span class="am-icon-angle-right am-fr"></span></a>
-                    <ul id={$v['id']} class="am-list am-collapse admin-sidebar-sub " >
+                <li class="admin-parent change"><a data-am-collapse={$tmp}  title={$v['mca']}>
+                    <span class={$v['ico']}></span> {$v['name']} <span class="am-icon-angle-right am-fr new"></span></a>
+                    <ul id={$v['id']} class="am-list am-collapse admin-sidebar-sub">
                         {foreach name="v['_data']" item="n"}
                         {empty name="n['_data']"}
-                            <li><a href="{:U($n['mca'])}" class="am-cf" target="right-content" title={$n['mca']}><span class={$n['ico']}></span> {$n['name']}</a></li>
+                            <li class="hide"><a href="{:U($n['mca'])}" class="am-cf" target="right-content" title={$n['mca']}><span class={$n['ico']}></span> {$n['name']}</a></li>
                         {else/}
                         <?php $tmpp= "{target:"."'#".$n['id']."'}"; ?>
                         <li class="admin-parent"><a data-am-collapse={$tmpp}  title={$n['mca']}>
                             <span class={$n['ico']}></span> {$n['name']} <span class="am-icon-angle-right am-fr"></span></a>
                             <ul id={$n['id']} class="am-list am-collapse admin-sidebar-sub" >
                                 {foreach name="n['_data']" item="nsub"}
-                                    <li><a href="{:U($nsub['mca'])}" class="am-cf" target="right-content" title={$nsub['mca']}><span class={$nsub[ico]}></span> {$nsub['name']}</a></li>
+                             <li class="hide"><a href="{:U($nsub['mca'])}" class="am-cf" target="right-content" title={$nsub['mca']}><span class={$nsub[ico]}></span> {$nsub['name']}</a></li>
                                 {/foreach}
                             </ul>
                         </li>
@@ -112,11 +106,23 @@
 <script src="ASSETS/js/amazeui.min.js"></script>
 <script src="ASSETS/js/app.js"></script>
 <script>
-/*$(document).ready(function(){
-   	$(".am-icon-angle-right").click(function(){
-	   $(this).addClass("am-icon-angle-down").siblings().removeClass("am-icon-angle-right");	
-	})
-})*/
+$(document).ready(function(){
+    /*$(".change").click(function(){
+        $(".new").toggleClass("am-icon-angle-down");//箭头变化
+    });
+
+    var isHiden=false;
+    if(isHiden){
+        $(".hide-1").click(function(){
+           $(".hide-2").css("left","200px");//显示
+        });
+    }else{
+        $(".hide").click(function(){
+           $('.hide-1').css("left","-200px");//隐藏
+        });
+    }
+    isHiden = !isHiden;*/
+});
 </script>
 </body>
 </html>

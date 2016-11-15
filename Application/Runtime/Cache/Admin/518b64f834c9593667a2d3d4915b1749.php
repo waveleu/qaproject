@@ -256,22 +256,22 @@
         <div class="am-modal-hd">Edit TaskCase</div>
         <div class="am-modal-bd">
             <label style="display:inline;">Result:</label>
-            <div class="am-form-group-inline" style="display:inline;">
-                <select data-am-selected="{btnWidth: '39%', btnStyle: 'secondary',searchBox: 1}" placeholder="Please select..." id="edit_result" style="border:1px solid #9C9898;">
+            <div class="am-form-group-inline" style="display:inline;margin-left:5px;">
+                <select data-am-selected="{btnWidth: '58%', btnStyle: 'secondary',searchBox: 1}" placeholder="Please select..." id="edit_result" style="border:1px solid #9C9898;">
                     <option value=""></option>
                     <?php if(is_array($result_list)): foreach($result_list as $key=>$v): ?><option value=<?php echo ($v); ?>><?php echo ($v); ?></option><?php endforeach; endif; ?>
                 </select>
             </div><br/><br/>
             <label style="display:inline;">BugID:</label>
-            <input type="text" class="am-modal-prompt-input" id="edit_BugID" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <input type="text" class="am-modal-prompt-input" id="edit_BugID" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
             <label style="display:inline;">Driver:</label>
-            <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
             <label style="display:inline;">Status:</label>
-            <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
-            <label style="display:inline;margin-left:-32px;">Comments:</label>
-            <input type="text" class="am-modal-prompt-input"  id="edit_comments" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label style="display:inline;margin-left:-35px;">Comments:</label>
+            <input type="text" class="am-modal-prompt-input"  id="edit_comments" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
             <label style="display:inline;margin-left:13px;">Item:</label>
-            <input type="text" class="am-modal-prompt-input"  id="edit_item" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <input type="text" class="am-modal-prompt-input"  id="edit_item" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
         </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>

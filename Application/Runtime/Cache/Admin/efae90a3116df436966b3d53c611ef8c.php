@@ -88,13 +88,13 @@
         <div class="am-cf am-padding am-padding-bottom-0" id="content-body">
             <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Task Suite</strong></div>
         </div>
-    <div class="am-g">
-     <div class="am-u-md-3" style="margin-top:40px;">
-        <div class="container" id="tree_btn">
-            <div class="zTreeDemoBackground left">
+    <div class="am-g" style="width:100%;">
+     <div class="am-u-md-3" style="margin-top:40px;width:22%;">
+        <div class="container" id="tree_btn" style="width:100%;">
+            <div class="zTreeDemoBackground left" style="width:100%;">
                 <ul id="treeDemo" class="ztree" style="height: auto; border: hidden;overflow:auto;" ></ul>
                 <div class="am-btn-toolbar" style="margin-left:3px;">
-                    <div class="am-btn-group am-btn-group-md">
+                    <div class="am-btn-group am-btn-group-md" style="width:100%;">
                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="edit()"><span class="am-icon-pencil" ></span>&nbsp;Save</button>
                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="cancel()"><span class="am-icon-pencil" ></span>&nbsp;Cancel</button>
                     </div>
@@ -106,9 +106,9 @@
     <div class="am-g" style="margin-left:10px;">
         <div class="container" id="edit_page">
             <div class="am-g">
-                <div class="am-u-md-8">
+                <div class="am-u-md-8" style="width:60%;float:right;margin-right:80px;">
                     <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary am-fr'  onclick='add(this)'> <span class='am-icon-pencil-square'></span>&nbsp;new Suite</button><br/>
-                    <table class="am-table am-table-striped am-table-hover table-main">
+                    <table class="am-table am-table-striped am-table-hover table-main" style="width:100%;">
                         <thead>
                         <tr>
                             <th class="table-title">name</th><th class="table-author am-hide-sm-only am-fr">Operation</th>
