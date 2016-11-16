@@ -29,7 +29,7 @@
 				<div class="am-u-sm-12">
 					<form class="am-form">
 						<div class="am-fr am-cf"><button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger" ruleId="<?php echo ($v['id']); ?>" ruleTitle="<?php echo ($v['title']); ?>" onclick="add_group()">
-							<span class="am-icon-pencil-square-o"></span>New Group</button></div>
+							<span class="am-icon-pencil-square-o"></span> New Group</button></div>
 						<table class="am-table am-table-striped am-table-hover table-main">
 							<thead>
 							<tr>
@@ -42,8 +42,9 @@
 								<td><?php echo ($v['title']); ?></td>
 								<td>
 									<div class="am-btn-toolbar am-fr">
+									<div class="am-btn-group am-btn-group-xs">
 									<button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary" ruleId="<?php echo ($v['id']); ?>" ruleTitle="<?php echo ($v['title']); ?>" onclick="rename(this)">
-										<span class="am-icon-pencil-square-o"></span>Rename</button>
+										<span class="am-icon-pencil-square-o"></span> Rename</button>
 
 										<div class="am-modal am-modal-prompt" tabindex="-1" id="<?php echo ($v['id']); ?>" style="top:-30%;">
 											<div class="am-modal-dialog">
@@ -60,22 +61,22 @@
 										</div>
 
 									<button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger" ruleId="<?php echo ($v['id']); ?>" ruleTitle="<?php echo ($v['title']); ?>" onclick="del(this)">
-										<span class="am-icon-trash-o"></span>Delete</button>
+										<span class="am-icon-trash-o"></span> Delete</button>
 
 									<div class="am-dropdown" data-am-dropdown >
-										<button class="am-btn  am-btn-default am-btn-xs am-text-secondary am-text-danger am-dropdown-toggle" data-am-dropdown-toggle>Edit Rules <span class="am-icon-caret-down"></span></button>
-										<ul class="am-dropdown-content" style="width: 900px" id=<?php echo ($v['title']); ?>>
-											<li class="am-dropdown-header">Title</li>
-											<li>
-												<table >
+									 <button class="am-btn  am-btn-default am-btn-xs am-text-secondary am-text-danger am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-pencil-square"></span> Edit Rules <span class="am-icon-caret-down"></span></button>
+									  <ul class="am-dropdown-content" style="width:800px;" id=<?php echo ($v['title']); ?>>
+										    <li class="am-dropdown-header" style="text-align: center;font-size:20px;">Title</li>
+										    <li>
+											    <table style="width:700px;margin:12px auto;margin-left:60px;">
 													<?php if(is_array($v['titles'])): $k = 0; $__LIST__ = $v['titles'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vsub): $mod = ($k % 2 );++$k; if($k%5==1): ?><tr><?php endif; ?>
 															<?php if($vsub['flag']==1): ?><td><label class="am-checkbox"><input type="checkbox" data-am-ucheck checked value=<?php echo ($vsub[id]); ?>><?php echo ($vsub[name]); ?></label></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 															<?php else: ?>
 																<td><label class="am-checkbox"><input type="checkbox" data-am-ucheck value=<?php echo ($vsub[id]); ?>><?php echo ($vsub[name]); ?></label></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php endif; ?>
 														<?php if($k%7==7): ?></tr><?php endif; endforeach; endif; else: echo "" ;endif; ?>
 												</table>
-												<button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary" ruleId="<?php echo ($v['id']); ?>" ruleTitle="<?php echo ($v['title']); ?>" onclick="edit(this)">
-													<span class="am-icon-pencil-square-o"></span>OK</button>
+												<button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary" ruleId="<?php echo ($v['id']); ?>" ruleTitle="<?php echo ($v['title']); ?>" onclick="edit(this)" style="margin:0 0 10px 47%;">
+													<span class="am-icon-pencil-square-o"></span> OK</button>
 												<!--<button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger" ruleId="<?php echo ($v['id']); ?>" ruleTitle="<?php echo ($v['title']); ?>" onclick="">
 													<span class="am-icon-trash-o"></span>Cancel</button>-->
 											</li>
@@ -101,6 +102,7 @@
 												<span class="am-modal-btn" data-am-modal-cancel style="width: 50%">Cancel</span>
 											</div>
 										</div>
+									</div>
 									</div>
 									</div>
 								</td>

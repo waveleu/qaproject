@@ -28,7 +28,7 @@
             </div>
             <div class="am-g">
                 <div class="am-u-sm-12">
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-fr" onclick="add_user(this)"><span class="am-icon-copy"></span> New User/Admin</button>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-fr" onclick="add_user(this)"><span class="am-icon-pencil-square-o"></span> New User/Admin</button>
                         <table class="am-table am-table-striped am-table-hover table-main">
                             <thead>
                             <tr>
@@ -44,7 +44,7 @@
                                 <td>
                                     <div class="am-btn-toolbar am-fr">
                                         <div class="am-btn-group am-btn-group-xs">
-                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary" uid="<?php echo ($v[id]); ?>" onclick="edit_user(this)"><span class="am-icon-pencil-square-o" ></span>Edit</button>
+                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary" uid="<?php echo ($v[id]); ?>" onclick="edit_user(this)"><span class="am-icon-pencil-square-o" ></span> Edit</button>
                                                 <div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" style="top:-15%;">
                                                     <div class="am-modal-dialog">
                                                         <div class="am-modal-hd">Edit User Info</div>

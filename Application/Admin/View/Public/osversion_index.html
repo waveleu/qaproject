@@ -39,7 +39,7 @@
 		<div class="am-g">
 
 			<div class="am-u-sm-12">
-				<button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger am-fr"  onclick="add()"><span class="am-icon-pencil-square-o"></span>new OS_Version</button>
+				<button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger am-fr"  onclick="add()"><span class="am-icon-pencil-square-o"></span> new OS_Version</button>
 					<table class="am-table am-table-striped am-table-hover table-main">
 						<thead>
 						<tr>

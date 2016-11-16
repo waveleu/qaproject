@@ -135,7 +135,7 @@
                         <?php if(is_array($run_list)): foreach($run_list as $k=>$vc): ?><option value=<?php echo ($k); ?>><?php echo ($vc); ?></option><?php endforeach; endif; ?>
                     </select>
                     &nbsp;&nbsp;
-                    <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger'  onclick='add()'> <span class='am-icon-pencil-square-o'></span>new Task</button>
+                    <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger'  onclick='add()'> <span class='am-icon-pencil-square-o'></span> new Task</button>
                 </div>
             </div>
         </div><br/>

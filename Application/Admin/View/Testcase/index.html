@@ -124,11 +124,11 @@
 		function onClick(event, treeId, treeNode) {
 			if(treeNode.id>1000000) {
 				$.post("{:U('Admin/Testcase/edit')}",{id:treeNode.id/10000000},function (data) {
-					$("#edit_page").empty().append('<table class="am-table" id="show_table">').append('</table>');
+					$("#edit_page").empty().append('<table class="am-table am-table-hover am-table-bordered" id="show_table">').append('</table>');
 					$.each(data,function (k,v) {
-						$("#show_table").append('<tr style="height: 40px"><td style="width: 200px">'+k+'</td><td>'+v+'</td></tr>');
+						$("#show_table").append('<tr style="height: 40px"><td style="width:180px;text-align:right;">'+k+'</td><td style="width:250px;text-align:center;">'+v+'</td></tr>');
 					});
-					$("#show_table").append('<tr style="height: 40px"><td style="width: 200px"><a href="javascript:edit_case('+data['id']+');">Edit</a></td><td><a href="javascript:del_case('+data['id']+')">Delete</a></td></tr>');
+					$("#edit_page").append('<a href="javascript:edit_case('+data['id']+');" class="edit">Edit</a><a href="javascript:del_case('+data['id']+')" class="delete">Delete</a>');
 				});
 			}
 		}
@@ -255,6 +255,25 @@
 			cursor: pointer;
 			list-style: none outside none;
 			background-color: #DFDFDF;
+		}
+		.edit{
+            background:#19A7F0;
+            padding:7px 20px;
+            color:#fff;
+            margin-top:15px;
+            border-radius: 4px;
+            margin-left:120px;
+		}
+		.delete{
+			background:#D7342E;
+            padding:7px 20px;
+            color:#fff;
+            margin-top:15px;
+            border-radius: 4px;
+            margin-left:100px;
+		}
+		.edit:hover,.delete:hover{
+			color:#fff;
 		}
 	</style>
 </HEAD>

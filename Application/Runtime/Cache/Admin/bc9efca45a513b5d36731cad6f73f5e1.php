@@ -31,8 +31,6 @@
     </style>
 </head>
 <body>
-
-
 <!-- content start -->
 <div class="admin-content">
     <div class="admin-content-body">
@@ -41,7 +39,7 @@
         </div>
         <div class="am-g">
             <div class="am-u-sm-12">
-                <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger am-fr"  onclick="add()"><span class="am-icon-pencil-square-o"></span>new Test Run</button>
+                <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger am-fr"  onclick="add()"><span class="am-icon-pencil-square-o"></span> new Test Run</button>
                 <table class="am-table am-table-striped am-table-hover table-main">
                     <thead>
                     <tr>
@@ -85,8 +83,8 @@
         <div class="am-modal-bd">
           <label style="display:inline;">name:</label>
           <input type="text" class="am-modal-prompt-input" id="add_name" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
-          <label style="display:inline;">project:</label>
-          <select data-am-selected="{btnWidth: '50%', btnStyle: 'secondary'}" class="" placeholder="Please select OS..." id="add_project" style="display:inline;">
+          <label style="display:inline;margin-left:-10px;">project:</label>
+          <select data-am-selected="{btnWidth: '57.8%', btnStyle: 'secondary'}" class="" placeholder="Please select OS..." id="add_project" style="display:inline;">
               <option value=""></option>
               <?php if(is_array($project)): foreach($project as $key=>$vc): ?><option value=<?php echo ($vc['id']); ?>><?php echo ($vc['name']); ?></option><?php endforeach; endif; ?>
           </select><br /><br />
