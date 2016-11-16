@@ -53,7 +53,7 @@
 							<td>
 								<div class="am-btn-toolbar am-fr">
 										<div class="am-btn-group am-btn-group-xs">
-											<button class="am-btn am-btn-default am-btn-xs am-text-secondary" ov_id="<?php echo ($v[id]); ?>" ov_os="<?php echo ($v[OS]); ?>" onclick="edit_version(this)"><span class="am-icon-pencil-square"></span> Edit Version</button>
+											<button class="am-btn am-btn-default am-btn-xs am-text-secondary" ov_id="<?php echo ($v[id]); ?>" ov_os="<?php echo ($v[OS]); ?>" onclick="edit_version(this)"><span class="am-icon-pencil-square"></span> delete Version</button>
 											<div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" style="top:-30%;">
 												<div class="am-modal-dialog">
 													<div class="am-modal-hd">Edit Version</div>

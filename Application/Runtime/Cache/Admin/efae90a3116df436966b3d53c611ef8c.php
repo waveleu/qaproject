@@ -23,7 +23,7 @@
             },
             check: {
              enable: true,
-             chkboxType:{ "Y" : "s", "N" : "ps" }
+             chkboxType:{ "Y" : "", "N" : "" },
              },
             data: {
                 simpleData: {
@@ -33,19 +33,23 @@
 
             callback: {
                 onClick:onClick,
+                onCheck: zTreeOnCheck
             }
         };
 
         var zNodes =[{id:0,pId:0,name:'root',open:true,isParent:true}];
         $.each(<?php echo ($class); ?>,function (k,v) {
-            if(v.id<10)
-                var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:true,isParent:true};
-            else
-                var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:false,isParent:true};
-            zNodes.push(temp);
+        	if(v.id<1000000)
+				if(v.pid==0)
+					var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:true,isParent:true};
+				else
+					var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:false,isParent:true};
+			else
+				var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:false,isParent:false};
+			zNodes.push(temp);
         })
         $.each(<?php echo ($tree_data); ?>,function (k,v) {
-            var temp={id:v.id+1000-1000,pId:v.pid,name:""+v.CaseName,open:true,isParent:false};
+            var temp={id:v.id+1000000-1000000,pId:v.pid,name:""+v.CaseName,open:true,isParent:false};
             zNodes.push(temp);
         })
 
@@ -58,7 +62,10 @@
             }
 
         }
-
+        
+        function zTreeOnCheck(event, treeId, treeNode) {
+        	
+        };
         //对应功能区
 
         var zTree;
@@ -106,7 +113,7 @@
     <div class="am-g" style="margin-left:10px;">
         <div class="container" id="edit_page">
             <div class="am-g">
-                <div class="am-u-md-8" style="width:60%;float:right;margin-right:80px;">
+                <div class="am-u-md-8" style="width:60%;float:right;margin-right:80px;" id="suite_list">
                     <button type='button' class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-primary am-fr'  onclick='add(this)'> <span class='am-icon-pencil-square'></span>&nbsp;new Suite</button><br/>
                     <table class="am-table am-table-striped am-table-hover table-main" style="width:100%;">
                         <thead>
@@ -116,7 +123,7 @@
                         </thead>
                         <tbody>
                         <?php if(is_array($list)): foreach($list as $key=>$v): if($v[name]!='user_defined'): ?><tr>
-                            <td><a href="javascript:check('<?php echo ($v[id]); ?>','<?php echo ($v[cids]); ?>')"><?php echo ($v[name]); ?></a></td>
+                            <td><a href="javascript:check('<?php echo ($v[id]); ?>','<?php echo ($v[cids]); ?>')" id="<?php echo ($v[id]); ?>"><?php echo ($v[name]); ?></a></td>
                             <td>
                                 <div class="am-btn-toolbar am-fr">
                                     <div class="am-btn-group am-btn-group-xs">
@@ -163,11 +170,14 @@
         if(cids!=''){
             cids=cids.split(',');
             $.each(cids,function (k,v) {
-                var node=zTree.getNodesByParam('id',v+"0000");
-                zTree.checkNode(node['0'],true,true);
+                var node=zTree.getNodesByParam('id',v+"0000000");
+                zTree.checkNode(node['0'],true,true,true);
             });
         }
-
+		
+        var suite_selected=$('#'+id).html();
+        $('#suite_list').children('div').remove();
+        $('#suite_list').prepend('<div style="float:left"><strong class="am-text-primary am-text-lg">Editing '+suite_selected+'</strong></div>');
     }
     function del(obj) {
         var id=$(obj).attr('shot_id');
@@ -183,8 +193,8 @@
             var nodes=zTree.getCheckedNodes();
             var cids=new Array();
             $.each(nodes,function (k,v) {
-                if(v.id>10000)
-                    cids.push(parseInt(v.id/10000));
+                if(v.id>10000000)
+                    cids.push(parseInt(v.id/10000000));
             });
             cids=cids.sort().join(',');
             $.post("<?php echo U('Admin/Task/shot_edit');?>",{id:nodeid,cids:cids},function (data) {
@@ -227,6 +237,7 @@
                 $.post("<?php echo U('Admin/Task/shot_edit');?>",{name:e.data},function (data) {
                     check(data,'');
                 });
+                location.reload();
             },
             onCancel:function (e) {
                 e.close();

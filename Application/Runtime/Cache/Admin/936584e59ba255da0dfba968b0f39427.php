@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="/qaweb/Public/ztree/css/demo.css" type="text/css">
     <link rel="stylesheet" href="/qaweb/Public/ztree/css/awesomeStyle/awesome.css" type="text/css">
     <script type="text/javascript" src="/qaweb/Public/assets/js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/qaweb/Public/ztree/js/jquery.ztree.core.js"></script>
-    <script type="text/javascript" src="/qaweb/Public/ztree/js/jquery.ztree.excheck.js"></script>
-    <script type="text/javascript" src="/qaweb/Public/ztree/js/jquery.ztree.exedit.js"></script>
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="icon" type="image/png" href="/qaweb/Public/assets/i/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="/qaweb/Public/assets/i/app-icon72x72@2x.png">
@@ -53,7 +50,7 @@
         <div class="am-cf am-padding am-padding-bottom-0" id="content-body">
             <div class="am-g">
                 <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Taskcase</strong></div><br/>
-                <button type='button' style="float:right;" ov_id="<?php echo ($group_id); ?>" class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger'  onclick='add(this)'> <span class='am-icon-pencil-square-o'></span>Edit Item</button>
+                <button type='button' style="float:right;" ov_id="<?php echo ($group_id); ?>" class='am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger'  onclick='add(this)'> <span class='am-icon-pencil-square-o'></span>Add Item</button>
             </div>
         </div>
         <br/>
@@ -92,6 +89,11 @@
         <div class="am-modal-bd">
           <label style="display:inline;">Item:</label>
           <input type="text" class="am-modal-prompt-input" id="add_item" style="width:300px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+          <p>  
+	    	 <label>请选择一个文件：</label><br /><br />  
+		     <input type="file" id="file" style="margin:auto;" /><br />  
+		     <input type="button" value="导入item文件" onclick="readAsText()" />  
+		  </p>  
         </div>
 
         <div class="am-modal-footer">
@@ -106,8 +108,6 @@
 <script >
 function add(obj) {
 	var group_id=$(obj).attr('ov_id');
-	console.log(group_id);
-    $("#add_item").val("");
     $("#add_item_modal").modal({
         relatedTarget:this,
         onConfirm:function(e){
@@ -126,15 +126,58 @@ function add(obj) {
 }
 </script>
 
-    <div id="rMenu">
-        <ul>
-            <li id="reassign" onclick="reassign();">Reassign</li>
-            <li id="all_result" onclick="set_result();">Batch set result</li>
-        </ul>
-    </div>
-
+<script type="text/javascript">  
+var result=document.getElementById("result");  
+var file=document.getElementById("file");  
+  
+//判断浏览器是否支持FileReader接口  
+if(typeof FileReader == 'undefined'){  
+    result.InnerHTML="<p>你的浏览器不支持FileReader接口！</p>";  
+    //使选择控件不可操作  
+    file.setAttribute("disabled","disabled");  
+}  
+  
+function readAsDataURL(){  
+    //检验是否为图像文件  
+    var file = document.getElementById("file").files[0];  
+    if(!/image\/\w+/.test(file.type)){  
+        alert("看清楚，这个需要图片！");  
+        return false;  
+    }  
+    var reader = new FileReader();  
+    //将文件以Data URL形式读入页面  
+    reader.readAsDataURL(file);  
+    reader.onload=function(e){  
+        var result=document.getElementById("result");  
+        //显示文件  
+        result.innerHTML='<img src="' + this.result +'" alt="" />';  
+    }  
+}  
+  
+function readAsBinaryString(){  
+    var file = document.getElementById("file").files[0];  
+    var reader = new FileReader();  
+    //将文件以二进制形式读入页面  
+    reader.readAsBinaryString(file);  
+    reader.onload=function(f){  
+        var result=document.getElementById("result");  
+        //显示文件  
+        result.innerHTML=this.result;  
+    }  
+}  
+  
+function readAsText(){  
+    var file = document.getElementById("file").files[0];  
+    var reader = new FileReader();  
+    //将文件以文本形式读入页面  
+    reader.readAsText(file);  
+    reader.onload=function(f){  
+        var result=document.getElementById("result");  
+        //显示文件  
+        result.innerHTML=this.result;  
+    }  
+}  
+</script> 
 <script src="/qaweb/Public/assets/js/amazeui.min.js"></script>
-
-
 </body>
 </HTML>

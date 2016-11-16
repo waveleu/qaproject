@@ -42,9 +42,12 @@
 		var zNodes =[{id:0,pId:0,name:'root',open:true,isParent:true}];
 		$.each(<?php echo ($class); ?>,function (k,v) {
 			if(v.id<1000000)
-				var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:true,isParent:true};
+				if(v.pid==0)
+					var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:true,isParent:true};
+				else
+					var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:false,isParent:true};
 			else
-				var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:false,isParent:true};
+				var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:false,isParent:false};
 			zNodes.push(temp);
 		});
 		$.each(<?php echo ($data); ?>,function (k,v) {
