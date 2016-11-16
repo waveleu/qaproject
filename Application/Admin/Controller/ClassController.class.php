@@ -9,7 +9,7 @@ class ClassController extends AuthController {
 		if($pNode['isParent']!='true'){
 			$result=false;
 		}else{
-			foreach ($sNodes as $k=>$v){
+			foreach($sNodes as $k=>$v){
 				if($v['isParent']=='true'){
 					M('class')->where(array('id'=>$v['id']))->save(array('pid'=>$pNode['id']));
 				}else{

@@ -37,13 +37,18 @@
             list-style: none outside none;
             background-color: #DFDFDF;
         }
-		.blo{
-			display:block;
-		}
-		.non{
-			display:none;
-		}
-
+        .am-modal-bd{
+            width:90%;
+            margin:0 auto;
+        }
+        .am-modal-bd label{
+            width:20%;
+            display:inline-block;
+            text-align:right;
+        }
+        .am-modal-bd input{
+            width:60%;
+        }
     </style>
     <script type="text/javascript">
         var setting = {
@@ -271,25 +276,25 @@
     <div class="am-modal-dialog">
         <div class="am-modal-hd">Edit TaskCase</div>
         <div class="am-modal-bd">
-            <label style="display:inline;">Result:</label>
-            <div class="am-form-group-inline" style="display:inline;">
-                <select data-am-selected="{btnWidth: '39%', btnStyle: 'secondary',searchBox: 1}" placeholder="Please select..." id="edit_result" style="border:1px solid #9C9898;">
+            <label>Result:</label>
+            <div class="am-form-group-inline" style="display:inline;margin-left:5px;">
+                <select data-am-selected="{btnWidth: '60%', btnStyle: 'secondary',searchBox: 1}" placeholder="Please select..." id="edit_result" style="border:1px solid #9C9898;">
                     <option value=""></option>
                     {foreach name="result_list" item="v"}
                     <option value={$v}>{$v}</option>
                     {/foreach}
                 </select>
             </div><br/><br/>
-            <label style="display:inline;">BugID:</label>
-            <input type="text" class="am-modal-prompt-input" id="edit_BugID" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
-            <label style="display:inline;">Driver:</label>
-            <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
-            <label style="display:inline;">Status:</label>
-            <input type="text" class="am-modal-prompt-input" id="edit_driver" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
-            <label style="display:inline;margin-left:-32px;">Comments:</label>
-            <input type="text" class="am-modal-prompt-input"  id="edit_comments" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
-            <label style="display:inline;margin-left:13px;">Item:</label>
-            <input type="text" class="am-modal-prompt-input"  id="edit_item" style="width:202px;text-align:left;display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label>BugID:</label>
+            <input type="text" class="am-modal-prompt-input" id="edit_BugID" style="display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label>Driver:</label>
+            <input type="text" class="am-modal-prompt-input" id="edit_driver" style="display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label>Status:</label>
+            <input type="text" class="am-modal-prompt-input" id="edit_driver" style="display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label>Comments:</label>
+            <input type="text" class="am-modal-prompt-input"  id="edit_comments" style="display:inline;border:1px solid #9C9898;"><br/><br/>
+            <label>Item:</label>
+            <input type="text" class="am-modal-prompt-input"  id="edit_item" style="display:inline;border:1px solid #9C9898;"><br/><br/>
         </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>
