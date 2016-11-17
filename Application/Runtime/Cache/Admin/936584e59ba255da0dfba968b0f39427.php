@@ -1,5 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit();?>
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <HTML>
 <HEAD>
     <TITLE> Case</TITLE>
@@ -40,7 +39,6 @@
 		.non{
 			display:none;
 		}
-
     </style>
 </HEAD>
 <body>
@@ -81,8 +79,6 @@
                 </div>
             </div>
         </div>
-
-
 <div class="am-modal am-modal-confirm" id="add_item_modal" style="top:-20%;" tabindex="<?php echo ($v[id]); ?>">
     <div class="am-modal-dialog">
         <div class="am-modal-hd">Edit Item</div>
@@ -93,18 +89,15 @@
 	    	 <label>请选择一个文件：</label><br /><br />  
 		     <input type="file" id="file" style="margin:auto;" /><br />  
 		     <input type="button" value="导入item文件" onclick="readAsText()" />  
-		  </p>  
+		  </p> 
+		  <div id='result'></div> 
         </div>
-
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #9C9898;">OK</span>
             <span class="am-modal-btn" data-am-modal-cancel style="width: 50%;border:1px solid #9C9898;">Cancel</span>
         </div>
     </div>
 </div>
-
-
-
 <script >
 function add(obj) {
 	var group_id=$(obj).attr('ov_id');
@@ -112,7 +105,6 @@ function add(obj) {
         relatedTarget:this,
         onConfirm:function(e){
                 var arr=e.data;
-                console.log(arr);
                 $.post("<?php echo U('Admin/Task/index');?>",{'item':arr,'group':group_id},function (data) {
                 	location.reload();
                 });
@@ -125,7 +117,6 @@ function add(obj) {
     });
 }
 </script>
-
 <script type="text/javascript">  
 var result=document.getElementById("result");  
 var file=document.getElementById("file");  
@@ -173,8 +164,12 @@ function readAsText(){
     reader.readAsText(file);  
     reader.onload=function(f){  
         var result=document.getElementById("result");  
-        //显示文件  
-        result.innerHTML=this.result;  
+        //显示文件
+        result.innerHTML=this.result;
+        var group_id_txt=<?php echo ($group_id); ?>;
+        $.post("<?php echo U('Admin/Task/index');?>",{'item':this.result,'group':group_id_txt},function (data) {
+        	location.reload();
+        });
     }  
 }  
 </script> 

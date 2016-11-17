@@ -3,7 +3,7 @@ namespace Admin\Controller;
 use Think\Controller;
 class TaskController extends AuthController {
 	/**
-	 * Task鎿嶄綔
+	 * Task操作
 	 */
 	public function index(){
 		$filter=I('param.');
@@ -54,7 +54,7 @@ class TaskController extends AuthController {
 	} 
 	
 	/**
-	 * TaskShot鎿嶄綔
+	 * TaskShot操作
 	 */
     public function shot_index(){
     	$data=D('TaskShot')->getData();
@@ -73,7 +73,6 @@ class TaskController extends AuthController {
     	$result=D('TaskShot')->where(array('id'=>$id))->delete();
     	$this->ajaxReturn($id.':'.$result);
     }
-
     public function case_index(){
     	$filter=I('param.');
     	if($filter['ajax']==true){
@@ -155,7 +154,7 @@ class TaskController extends AuthController {
 	public function mytask(){
 	   $filter=I('param.');
 	   unset($filter['p']);
-	   //鏍规嵁鐢ㄦ埛鎵�灞炵敤鎴风粍鏌ョ湅
+	   //根据用户所属用户组查看
 	   $filter['owner']=$_SESSION['user']['username'];
 	   $owner= $filter['owner'];
 	   $uid=D('Users')->where(array('username'=>$owner))->getField('id');

@@ -46,7 +46,7 @@ class TestcaseController extends AuthController {
     	$id['id']=I('id');
     	$data=M('testcase')->where($id)->find();
     	if(I('flag')!=true)
-    	     $this->ajaxReturn($data);
+    	   $this->ajaxReturn($data);
     	else{
 	       $customer_list=M('customer')->select();
 	       $project_list=M('project')->select();

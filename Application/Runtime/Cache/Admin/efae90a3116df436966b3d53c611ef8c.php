@@ -30,13 +30,11 @@
                     enable: true
                 }
             },
-
             callback: {
                 onClick:onClick,
                 onCheck: zTreeOnCheck
             }
         };
-
         var zNodes =[{id:0,pId:0,name:'root',open:true,isParent:true}];
         $.each(<?php echo ($class); ?>,function (k,v) {
         	if(v.id<1000000)
@@ -52,29 +50,23 @@
             var temp={id:v.id+1000000-1000000,pId:v.pid,name:""+v.CaseName,open:true,isParent:false};
             zNodes.push(temp);
         })
-
-
         function onClick(event, treeId, treeNode) {
             if(treeNode.checked){
                 zTree.checkNode(treeNode,false);
             }else{
                 zTree.checkNode(treeNode,true);
             }
-
         }
         
         function zTreeOnCheck(event, treeId, treeNode) {
         	
         };
         //对应功能区
-
         var zTree;
         $(document).ready(function(){
             $.fn.zTree.init($("#treeDemo"), setting, zNodes);
             zTree = $.fn.zTree.getZTreeObj("treeDemo");
-
         });
-
     </SCRIPT>
     <style type="text/css">
         div#rMenu {position:absolute; visibility:hidden; top:0;text-align: left;padding: 2px;}
@@ -161,7 +153,6 @@
     var nodeid=-1;
     $(document).ready(function () {
         zTree.setting.check.chkboxType = { "Y" : "ps", "N" : "ps" };
-
     });
     function check(id,cids) {
         $('#tree_btn').show();
@@ -187,7 +178,6 @@
             });
         }
     }
-
     function edit() {
         if(nodeid!=-1){
             var nodes=zTree.getCheckedNodes();
@@ -201,9 +191,7 @@
                 location.href="<?php echo U('Admin/Task/shot_index');?>";
             });
         }
-
     }
-
     function cancel() {
         if(nodeid!=-1){
             var arr =eval('<?php echo json_encode($list);?>');
@@ -243,7 +231,6 @@
                 e.close();
             }
         });
-
     }
 </script>
 
