@@ -384,3 +384,6 @@ ul.ztree.zTreeDragUL {
   filter: alpha(opacity=0);
   position: absolute;
 }
+.roots_open,.center_open,.bottom_open{
+   padding-top:5px;
+}
