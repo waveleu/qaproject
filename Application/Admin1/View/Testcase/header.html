@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <TITLE> ZTREE DEMO - awesome 风格</TITLE>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- Include font-awesome here, CDN is ok, or locally installed by bower to your project -->
+
+    <link rel="stylesheet" href="ZTREEBASE/css/demo.css" type="text/css">
+    <link rel="stylesheet" href="ZTREEBASE/css/awesomeStyle/awesome.css" type="text/css">
+    <script type="text/javascript" src="ASSETS/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="ZTREEBASE/js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="ZTREEBASE/js/jquery.ztree.excheck.js"></script>
+    <script type="text/javascript" src="ZTREEBASE/js/jquery.ztree.exedit.js"></script>
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="ASSETS/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="ASSETS/i/app-icon72x72@2x.png">
+    <link rel="stylesheet" href="ASSETS/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="ASSETS/css/admin.css">
+    <SCRIPT type="text/javascript">
+        <!--
+        var setting = {
+            view: {
+                dblClickExpand: false
+            },
+            /*check: {
+             enable: true,
+             chkboxType:{ "Y" : "s", "N" : "ps" }
+             },*/
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            edit: {
+                enable: true,
+                showRemoveBtn: showRemoveBtn,
+                showRenameBtn: showRenameBtn
+            },
+            callback: {
+                beforeDrag: beforeDrag,
+                onRightClick: OnRightClick,
+                beforeEditName: beforeEditName,
+                beforeRemove: beforeRemove,
+                onDrop:onDrop,
+                onClick:onClick,
+            }
+        };
+
+        var zNodes =[{id:0,pId:0,name:'root',open:true,isParent:true}];
+        $.each({$class},function (k,v) {
+            if(v.id<10)
+                var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:true,isParent:true};
+            else
+                var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:false,isParent:true};
+            zNodes.push(temp);
+        })
+        $.each({$data},function (k,v) {
+            var temp={id:v.id+1000-1000,pId:v.pid,name:""+v.CaseName,open:false,isParent:false};
+            zNodes.push(temp);
+        })
+
+        function beforeDrag(treeId, treeNodes) {
+            return true;
+        }
+        function onDrop(event, treeId, treeNodes, targetNode, moveType, isCopy) {
+            $.post("{:U('Admin/Class/drop_edit')}", {pid:targetNode,id:treeNodes}, function (data) {
+                location.href="{:U('Admin/testcase/index')}";
+            });
+        }
+        function beforeEditName(treeId, treeNode) {
+            $.post("{:U('Admin/Testcase/edit')}", {id:treeNode.id},function (data) {
+                $("#edit_page").empty().html(data);
+            });
+
+        }
+        function beforeRemove(treeId, treeNode) {
+            $("#del_modal").modal({
+                relatedTarget:this,
+                onConfirm:function () {
+                    $.post("{:U('Admin/testcase/del')}",{id:treeNode.id},function (data) {
+                        location.href="{:U('Admin/testcase/index')}";
+                    })
+                },
+                onCancel:function (e) {
+                    e.close();
+                }
+            });
+        }
+        function showRemoveBtn(treeId, treeNode) {
+            return (treeNode.id>10000);
+        }
+        function showRenameBtn(treeId, treeNode) {
+            return (treeNode.id>10000);
+        }
+
+        //右击菜单及取消
+        function OnRightClick(event, treeId, treeNode) {
+            if(treeNode.isParent==true){
+                if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
+                    zTree.cancelSelectedNode();
+                    showRMenu("root", event.clientX, event.clientY);
+                } else if (treeNode && !treeNode.noR) {
+                    zTree.selectNode(treeNode);
+                    showRMenu("node", event.clientX, event.clientY);
+                }
+            }
+
+        }
+        function showRMenu(type, x, y) {
+            $("#rMenu ul").show();
+            if (type=="root") {
+                $("#m_del").hide();
+                $("#m_check").hide();
+                $("#m_unCheck").hide();
+            } else {
+                $("#m_del").show();
+                $("#m_check").show();
+                $("#m_unCheck").show();
+            }
+            rMenu.css({"top":y+"px", "left":x+"px", "visibility":"visible"});
+
+            $("body").bind("mousedown", onBodyMouseDown);
+        }
+        function hideRMenu() {
+            if (rMenu) rMenu.css({"visibility": "hidden"});
+            $("body").unbind("mousedown", onBodyMouseDown);
+        }
+        function onBodyMouseDown(event){
+            if (!(event.target.id == "rMenu" || $(event.target).parents("#rMenu").length>0)) {
+                rMenu.css({"visibility" : "hidden"});
+            }
+        }
+        function onClick(event, treeId, treeNode) {
+            if(treeNode.id>10000) {
+                location.href=("{:U('Admin/Testcase/edit',array('id'=>vid))}").replace('vid',treeNode.id);
+                //reset();
+                /*$.post("{:U('Admin/Testcase/edit')}", {id:treeNode.id},function (data) {
+                 $.each(data,function (k,v) {
+                 var name="#"+k;
+                 $(name).val(v);
+                 });
+                 $("#Priority").append(data.Priority);
+                 $("#Automated").append(data.Automated);
+                 $("#Project").append(data.Project);
+                 $("#OS").append(data.OS);
+                 $("#Board").append(data.Board);
+                 $("#From").append(data.From);
+                 $("#Customer").append(data.Customer);
+                 alert($("#Priority").val());
+                 var tmp=$(data).find("#edit_page");
+                 $("#edit_page").empty().html(tmp);
+                 });*/
+
+            }
+        }
+
+        //对应功能区
+        function add_class() {
+            var nodes=zTree.getSelectedNodes()[0];
+            $("#edit_add_class").modal({
+                relatedTarget:this,
+                onConfirm:function (e) {
+                    $.post("{:U('Admin/Class/add')}", {pid:nodes.id,name:e.data}, function (data) {
+                        $("#edit_page").empty().html(data);
+                    });
+                },
+                onCancel:function (e) {
+                    e.close();
+                }
+            });
+        }
+        function edit_class() {
+            var nodes=zTree.getSelectedNodes()[0];
+            $("#edit_add_class").modal({
+                relatedTarget:this,
+                onConfirm:function (e) {
+                    $.post("{:U('Admin/class/edit')}", {id:nodes.id,name:e.data},function () {
+                        $("#edit_page").empty().html(data);
+                    });
+                },
+                onCancel:function (e) {
+                    e.close();
+                }
+            });
+        }
+        function del_class() {
+            var nodes=zTree.getCheckedNodes();
+
+            $("#del_class").modal({
+                relatedTarget:this,
+                onConfirm:function (e) {
+                    $.post("{:U('Admin/class/del')}", {nodes:nodes}, function (data) {
+                        location.href="{:U('Admin/testcase/index')}";
+                    });
+                },
+                onCancel:function (e) {
+                    e.close();
+                }
+            });
+        }
+        function add_case() {
+            var pid=zTree.getSelectedNodes()[0].id;
+            $.post("{:U('Admin/Testcase/add')}", {id:pid},function () {
+                $("#edit_page").empty().html(data);
+            });
+        }
+        function reset() {
+            $(':input','#post-form')
+                    .not(':button, :submit, :reset, :hidden')
+                    .val('');
+            //
+
+        }
+
+        var zTree, rMenu;
+        $(document).ready(function(){
+            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+            zTree = $.fn.zTree.getZTreeObj("treeDemo");
+            rMenu = $("#rMenu");
+            //$("#edit_page").hide();
+        });
+
+    </SCRIPT>
+    <style type="text/css">
+        div#rMenu {position:absolute; visibility:hidden; top:0;text-align: left;padding: 2px;}
+        div#rMenu ul li{
+            margin: 1px 0;
+            padding: 0 5px;
+            cursor: pointer;
+            list-style: none outside none;
+            background-color: #DFDFDF;
+        }
+    </style>
+</HEAD>
+<BODY>
+<div class="am-cf admin-main am-padding-top-0">
+    <!-- content start -->
+
+    <div class="admin-content">
+        <div class="am-cf am-padding am-padding-bottom-0" id="content-body">
+            <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Table</strong> / <small>TestCase</small></div>
+        </div>
