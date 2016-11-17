@@ -288,7 +288,7 @@
 			<br>
 
 			<div class="am-g">
-				<div class="am-u-md-3" style="width:22%;">
+				<div class="am-u-md-3" style="width:25%;">
 					<div class="container" style="width:100%;">
 						<div class="zTreeDemoBackground left" style="width:100%;">
 							<ul id="treeDemo" class="ztree" style="width:100%;height: auto; border: hidden;overflow: auto;" ></ul>
