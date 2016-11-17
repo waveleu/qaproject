@@ -1,0 +1,189 @@
+<!doctype html>
+<html class="no-js" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Amaze UI Admin table Examples</title>
+    <meta name="description" content="这是一个 table 页面">
+    <meta name="keywords" content="table">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="ASSETS/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="ASSETS/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="ASSETS/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="ASSETS/css/admin.css">
+
+</head>
+<body>
+
+<div class="am-cf admin-main am-padding-top-0">
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0 ">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">User</strong></div>
+
+            </div>
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-fr" onclick="add_user(this)"><span class="am-icon-pencil-square-o"></span> New User/Admin</button>
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                            <tr>
+                                <th class="table-title">Username</th><th class="table-title">Email</th><th class="table-type">Auth Group</th>
+                                <th class="table-author am-hide-sm-only am-fr">Operation</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach name="data" item="v"}
+                            <tr>
+                                <td>{$v[username]}</td>
+                                <td>{$v[email]}</td>
+                                <td>{$v[title]}</td>
+                                <td>
+                                    <div class="am-btn-toolbar am-fr">
+                                        <div class="am-btn-group am-btn-group-xs">
+                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary" uid="{$v[id]}" onclick="edit_user(this)"><span class="am-icon-pencil-square-o" ></span> Edit</button>
+                                                <div class="am-modal am-modal-confirm" tabindex="{$v[id]}" style="top:-15%;">
+                                                    <div class="am-modal-dialog">
+                                                        <div class="am-modal-hd">Edit User Info</div>
+                                                        <div class="am-modal-bd">
+                                                           <label style="display:inline;">Username:</label>
+                                                           <input type="text" value="" class="am-modal-prompt-input" style="width:60%;display:inline;border:1px solid #9C9898;" value={$v[username]}><br/><br/>
+                                                           <label style="display:inline;">Password:</label>
+                                                           <input type="password" class="am-modal-prompt-input" style="width:60%;display:inline;border:1px solid #9C9898;" value={$v[password]}><br/><br/>
+                                                           <label style="display:inline;margin-left:27px;">Email:</label>
+                                                           <input type="email" value="" class="am-modal-prompt-input" style="width:60%;display:inline;border:1px solid #9C9898;" value={$v[email]}><br/><br/>
+
+                                                           <label>Auth Group</label> 
+                                                                 <table style="width:60%;margin:12px auto;">
+                                                                     <tr>
+                                                                         {volist name="group_info" id="vsub" key="k" }
+                                                                         {in name="vsub['title']" value="$v[title]"}
+                                                                            <td align="left"><label class="am-checkbox" style="text-align:left;"><input type="checkbox" style="text-align:left;" data-am-ucheck checked value="{$vsub['id']}">{$vsub['title']}</label></td>
+                                                                         {else/}
+                                                                             <td align="left"><label class="am-checkbox" style="text-align:left;"><input type="checkbox" style="text-align:left;" data-am-ucheck value="{$vsub['id']}">{$vsub['title']}</label></td>
+                                                                         {/in}
+                                                                         {/volist}
+                                                                     </tr>
+                                                                 </table>
+                                                        </div>
+                                                        <div class="am-modal-footer">
+                                                            <span class="am-modal-btn" data-am-modal-cancel style="width: 50%;border:1px solid #cccccc;">OK</span>
+                                                            <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">Cancel</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" ruleId="{$v[id]}" onclick="delete_user(this)"><span class="am-icon-trash-o"></span> Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- content end -->
+</div>
+<div class="am-modal am-modal-confirm" tabindex="add_user" id="add_user" style="top:-15%;">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">New User/Admin</div>
+        <div class="am-modal-bd">
+           <label style="display:inline;">Username:</label>
+           <input type="text" value="" class="am-modal-prompt-input" style="width:60%;display:inline;border:1px solid #9C9898;"><br/><br/>
+           <label style="display:inline;">Password:</label>
+           <input type="password" class="am-modal-prompt-input" style="width:60%;display:inline;border:1px solid #9C9898;"><br/><br/>
+           <label style="display:inline;margin-left:27px;">Email:</label>
+           <input type="email" value="" class="am-modal-prompt-input" style="width:60%;display:inline;border:1px solid #9C9898;"><br/><br/>         
+            <label>Select Auth Group</label>
+            <table style="width:60%;margin:12px auto;">
+                <tr>
+                    {volist name="group_info" id="vsub" key="k" }
+                    <td align="left"><label class="am-checkbox" style="text-align:left;"><input type="checkbox"  data-am-ucheck value="{$vsub['id']}" style="text-align:left;">{$vsub['title']}</label></td>
+                    {/volist}
+                </tr>
+            </table>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel style="width: 50%;border:1px solid #cccccc;">OK</span>
+            <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">Cancel</span>
+        </div>
+    </div>
+</div>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="ASSETS/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="ASSETS/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="ASSETS/js/amazeui.min.js"></script>
+<script src="ASSETS/js/app.js"></script>
+
+
+<script>
+
+    //新增权限组
+    function edit_user(obj){
+        var id=$(obj).attr('uid');
+        var str=(".am-modal[tabindex='id']").replace("id",id);
+        $(str).modal({
+            relatedTarget: this,
+            onConfirm: function(e) {
+                var username=e.data['0'];
+                var password=e.data['1'];
+                var email=   e.data['2'];
+                var group_ids=$(str+" input[type=checkbox]:checked").map(function(){return this.value}).get().join(',');
+                $.post("{:U('Admin/Rule/edit_user')}",{id:id,username:username,email:email,group_ids:group_ids,password:password},function () {
+                    window.location.href="{:U('Admin/Rule/admin_user_list')}";
+                    });
+            },
+            onCancel: function(e) {
+                e.close();
+            }
+        });
+
+    }
+
+    function add_user(obj){
+
+        $("#add_user").modal({
+            relatedTarget: this,
+            onConfirm: function(e) {
+                var group_ids=$("#add_user input[type=checkbox]:checked").map(function(){return this.value}).get().join(',');
+                var username=e.data['0'];
+                var password=e.data['1'];
+                var email=   e.data['2'];
+                $.post("{:U('Admin/Rule/add_user')}",{username:username,email:email,group_ids:group_ids,password:password},function (data) {
+                    window.location.href="{:U('Admin/Rule/admin_user_list')}";
+                });
+            },
+            onCancel: function(e) {
+                e.close();
+            }
+        });
+
+    }
+
+    //删除用户并解绑
+    function delete_user(obj) {
+        var id=$(obj).attr('ruleId');
+        if(confirm('Delete This User ?')){
+            $.post("{:U('Admin/Rule/delete_user')}",{id:id},function (data) {
+                window.location.href="{:U('Admin/Rule/admin_user_list')}";
+            })
+        }
+    }
+
+</script>
+</body>
+</html>

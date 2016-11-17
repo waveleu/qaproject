@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<TITLE> TestCase Index</TITLE>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- Include font-awesome here, CDN is ok, or locally installed by bower to your project -->
+
+<link rel="stylesheet" href="ZTREEBASE/css/demo.css" type="text/css">
+<link rel="stylesheet" href="ZTREEBASE/css/awesomeStyle/awesome.css" type="text/css">
+<script type="text/javascript" src="ASSETS/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="ZTREEBASE/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="ZTREEBASE/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="ZTREEBASE/js/jquery.ztree.exedit.js"></script>
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="ASSETS/i/favicon.png">
+<link rel="stylesheet" href="ASSETS/css/amazeui.min.css"/>
+<link rel="stylesheet" href="ASSETS/css/admin.css">
+</HEAD>
+<BODY>
+<div class="am-g">
+    <div class="am-u-md-12">
+        <hr>
+        <form class="am-form" action="{:U('admin/Testcase/save')}" method="post" enctype="multipart/form-data">
+            <input type="hidden" class="am-form-field " name='pid' value={$pid} >
+            <!--新增Case表单-->
+            <div class="am-form-group am-form-horizontal am-form-error">
+                <label for='CaseName' class="am-u-sm-2 am-form-label">CaseName</label>
+                <div class="am-u-sm-8">
+                    <input type="text" class="am-form-field " name='CaseName'  id="CaseName" >
+                </div>
+                <br>
+            </div>
+            <div class="am-form-group am-form-horizontal am-form-error">
+                <label for='TestSteps' class="am-u-sm-2 am-form-label">TestSteps</label>
+                <div class="am-u-sm-8">
+                    <input type="text" class="am-form-field " name='TestSteps'  id="TestSteps" >
+                </div>
+                <br>
+            </div>
+    
+            <div class="am-form-group am-form-horizontal am-form-error">
+                <label for='Priority' class="am-u-sm-2 am-form-label">Priority</label>
+                <div class="am-u-sm-8">
+                    <select data-am-selected id="Priority" placeholder="Please Select" name="Priority">
+                        <option value=""></option>
+                        <option value="P0">P0</option>
+                        <option value="P1">P1</option>
+                        <option value="P3">P2</option>
+                        <option value="P4">P4</option>
+                    </select>
+                </div>
+                <br>
+            </div>
+    
+            <div class="am-form-group am-form-horizontal am-form-error">
+                <label for='Automated' class="am-u-sm-2 am-form-label">Automated</label>
+                <div class="am-u-sm-8" id="Automated">
+                    <select data-am-selected  name="Automated">
+                        <option value="Yes" selected>Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <br>
+            </div>
+    
+            <div class="am-form-group am-form-horizontal am-form-error">
+                <label for='Exception' class="am-u-sm-2 am-form-label">Exception</label>
+                <div class="am-u-sm-10" id="Exception">
+                    <select multiple data-am-selected placeholder="Choose Project" id="Project" name="Project[]">
+                        <!--<option value=""></option>-->
+                        {foreach name="project_list" item="v"}
+                            <option value={$v[id]}>{$v[id]}</option>
+                        {/foreach}
+                    </select>
+                    <select multiple data-am-selected placeholder="Choose Board" id="Board" name="Board[]">
+                        <option value=""></option>
+                        {foreach name="board_list" item="v"}
+                            <option value={$v[Name]}>{$v[Name]}</option>
+                        {/foreach}
+                    </select>
+                    <select multiple data-am-selected placeholder="Choose OS" id="OS" name="OS[]">
+                        <option value=""></option>
+                        {foreach name="os_list" item="v"}
+                            <option value={$v[OS]} title={$v[Comments]}>{$v[OS]}</option>
+                        {/foreach}
+                    </select>
+                </div>
+                <br>
+            </div>
+    
+            <div class="am-form-group am-form-horizontal am-form-error">
+                <label for='ScripLocation' class="am-u-sm-2 am-form-label">ScripLocation</label>
+                <div class="am-u-sm-8">
+                    <input type="text" class="am-form-field " id='ScripLocation'  name="ScripLocation" >
+                </div>
+                <br>
+            </div>
+    
+            <div class="am-form-group am-form-horizontal am-form-error">
+                <label for='Enviroment' class="am-u-sm-2 am-form-label">Enviroment</label>
+                <div class="am-u-sm-8">
+                    <input type="text" class="am-form-field " id='Enviroment'  name="Enviroment" >
+                </div>
+                <br>
+            </div>
+    
+            <div class="am-form-group am-form-horizontal am-form-error">
+                <label for='ExpectedResults' class="am-u-sm-2 am-form-label">ExpectedResults</label>
+                <div class="am-u-sm-8">
+                    <input type="text" class="am-form-field " id='ExpectedResults'  name="ExpectedResults" >
+                </div>
+                <br>
+            </div>
+    
+            <div class="am-form-group am-form-horizontal am-form-error">
+                <label for='From' class="am-u-sm-2 am-form-label">From</label>
+                <div class="am-u-sm-8" id="From" >
+                    <select data-am-selected placeholder="Choose From" name="From">
+                        <option value=""></option>
+                        <option value="a">Internal</option>
+                        <option value="b">Benchmark</option>
+                        <option value="a">Customer Case</option>
+                        <option value="a">Customer Issue</option>
+                    </select>
+                    <select data-am-selected placeholder="Choose Customer"  id="Customer" name="Customer">
+                        <option value=""></option>
+                        {foreach name="customer_list" item="v"}
+                            <option value={$v[Name]}>{$v[Name]}</option>
+                        {/foreach}
+                    </select>
+                </div>
+                <br>
+            </div>
+    
+    
+            <div class="am-form-group am-form-horizontal am-form-error">
+                <label for='BugID' class="am-u-sm-2 am-form-label">BugID</label>
+                <div class="am-u-sm-8">
+                    <input type="text" class="am-form-field " id='BugID' name="BugID">
+                </div>
+                <br>
+            </div>
+            <div class="am-form-group am-form-horizontal am-form-error">
+                <label for='Comments' class="am-u-sm-2 am-form-label">Comments</label>
+                <div class="am-u-sm-8">
+                    <input type="text" class="am-form-field " id='Comments' name="Comments">
+                </div>
+                <br>
+            </div>
+            <div class="am-btn-group  am-u-md-offset-5 ">
+                <button class="am-btn am-btn-primary am-radius" type="submit">提交</button>
+                <button class="am-btn am-btn-danger am-radius" type="button">重置</button>
+            </div>
+        </form >
+    </div>
+</div>
+</BODY>
+</HTML>
