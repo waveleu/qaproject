@@ -38,18 +38,36 @@ class TaskModel extends BaseModel{
 			$str_total='total: '.sprintf('%04s',$case_count);
 			foreach ($result_type as $key=>$vc){
 			    $tmp=D('TaskCase')->where(array('tid'=>$v['id']))->where(array('result'=>$vc))->count();
-			    if($vc=='pass')
+			    switch ($vc){
+			        case "pass":
 			        $str_pass='pass: <span style="background-color: #0a0">'.sprintf('%03s',$tmp).'</span>';
-			    else if($vc=='fail'){
+			        break;
+			        case "fail":
 			        $str_fail='fail: <span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
-			    }	
-			    else if($vc=='timeout'){
+			        break;
+			        case "timeout":
 			        $str_timeout='timeout: <span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
-			    }else if($vc=='Not Run'){
+			        break;
+			        case "Notrun":
 			        $str_Notrun='Notrun: <span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
-			    }
-			    else if($vc=='N/A'){ 
+			        break;
+			        case "N/A": 
 			        $str_NA='N/A: <span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
+			        break;
+			    }
+			}
+			foreach (array(Waiting,Running,finished) as $key=>$vc){
+			    $tmp=D('TaskCase')->where(array('tid'=>$v['id']))->where(array('Status'=>$vc))->count();
+			    switch ($vc){
+			        case "Waiting":
+			            $str_Waiting=$tmp;
+			            break;
+			        case "Running":
+			            $str_Running=$tmp;
+			            break;
+			        case "finished":
+			            $str_finished=$tmp;
+			            break;
 			    }
 			}
 			$list[$k]['total']=$str_total;
@@ -58,7 +76,8 @@ class TaskModel extends BaseModel{
 			$list[$k]['timeout']=$str_timeout;
 			$list[$k]['NA']=$str_NA;
 			$list[$k]['Notrun']=$str_Notrun;
-			$list[$k]['progress']=sprintf('%.1f',(floatval(preg_replace('/\D/s', '', $str_pass))/floatval(preg_replace('/\D/s', '', $str_total)))*100).'%';
+			//$list[$k]['progress']=sprintf('%.1f',(floatval(preg_replace('/\D/s', '', $str_pass))/floatval(preg_replace('/\D/s', '', $str_total)))*100).'%';
+			$list[$k]['progress']=sprintf('%.1f',(1-floatval($str_Waiting)/floatval(preg_replace('/\D/s', '', $str_total)))*100).'%';
 		}
 		//var_dump($list);
 		$run_info=D('TestRun')->where(array('id'=>$filter['pid']))->find();
