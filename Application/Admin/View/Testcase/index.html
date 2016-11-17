@@ -42,7 +42,10 @@
 		var zNodes =[{id:0,pId:0,name:'root',open:true,isParent:true}];
 		$.each({$class},function (k,v) {
 			if(v.id<1000000)
-				var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:true,isParent:true};
+				if(v.pid==0)
+					var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:true,isParent:true};
+				else
+					var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:false,isParent:true};
 			else
 				var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:false,isParent:true};
 			zNodes.push(temp);
@@ -124,6 +127,7 @@
 		function onClick(event, treeId, treeNode) {
 			if(treeNode.id>1000000) {
 				$.post("{:U('Admin/Testcase/edit')}",{id:treeNode.id/10000000},function (data) {
+					console.log(data);
 					$("#edit_page").empty().append('<table class="am-table am-table-hover am-table-bordered" id="show_table">').append('</table>');
 					$.each(data,function (k,v) {
 						$("#show_table").append('<tr style="height: 40px"><td style="width:180px;text-align:right;">'+k+'</td><td style="width:250px;text-align:center;">'+v+'</td></tr>');

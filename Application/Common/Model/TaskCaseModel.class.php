@@ -33,7 +33,6 @@ class TaskCaseModel extends BaseModel{
 				    $sort_rule=$v; 
 				    unset($filter['sort']);
 				}else{
-				    $arr['TaskCase.'.$k]="";
 					$arr['TaskCase.'.$k]=$v;
 				}
 			}				
@@ -58,31 +57,50 @@ class TaskCaseModel extends BaseModel{
 	        $list[$k]['board_name']=$tmp['Name'];
 	        $list[$k]['project_name']=D('Project')->table('go_project Project,go_test_run Run,go_task Task')->
 	        where(array('Project.id=Run.pid ','Run.id'=>$v['pid']))->getField('Project.name');
-	        $case_count=D('TaskCase')->where(array('tid'=>$v['id']))->count();
+	        $case_count=D('TaskCase')->where(array('tid'=>$v['tid']))->count();
 	        $str_total='<span style="background-color: #ccc">'.sprintf('%04s',$case_count).'</span>';;
-	        foreach ($result_type as $key=>$vc){
-	            $tmp=D('TaskCase')->where(array('tid'=>$v['id']))->where(array('result'=>$vc))->count();
-	            if($vc=='pass')
-	                $str_pass='<span style="background-color: #0a0">'.sprintf('%03s',$tmp).'</span>';
-	            else if($vc=='fail'){
-	                $str_fail='<span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
-	            }
-	            else if($vc=='timeout'){
-	                $str_timeout='<span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
-	            }else if($vc=='Not Run'){
-	                $str_Notrun='<span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
-	            }
-	            else if($vc=='N/A'){
-	                $str_NA='<span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
-	            }
-	        }
+    		foreach ($result_type as $key=>$vc){
+			    $tmp=D('TaskCase')->where(array('tid'=>$v['tid']))->where(array('result'=>$vc))->count();
+			    switch ($vc){
+			        case "pass":
+			        $str_pass='pass: <span style="background-color: #0a0">'.sprintf('%03s',$tmp).'</span>';
+			        break;
+			        case "fail":
+			        $str_fail='fail: <span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
+			        break;
+			        case "timeout":
+			        $str_timeout='timeout: <span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
+			        break;
+			        case "Notrun":
+			        $str_Notrun='Notrun: <span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
+			        break;
+			        case "N/A": 
+			        $str_NA='N/A: <span style="background-color: #f44">'.sprintf('%03s',$tmp).'</span>';
+			        break;
+			    }
+			}
+			foreach (array(Waiting,Running,finished) as $key=>$vc){
+			    $tmp=D('TaskCase')->where(array('tid'=>$v['tid']))->where(array('Status'=>$vc))->count();
+			    switch ($vc){
+			        case "Waiting":
+			            $str_Waiting=$tmp;
+			            break;
+			        case "Running":
+			            $str_Running=$tmp;
+			            break;
+			        case "finished":
+			            $str_finished=$tmp;
+			            break;
+			    }
+			}
 	        $list[$k]['total']=$str_total;
 	        $list[$k]['pass']=$str_pass;
 	        $list[$k]['fail']=$str_fail;
 	        $list[$k]['timeout']=$str_timeout;
 	        $list[$k]['NA']=$str_NA;
 	        $list[$k]['Notrun']=$str_Notrun;
-	        $list[$k]['progress']=sprintf('%.1f',(floatval(preg_replace('/\D/s', '', $str_pass))/floatval(preg_replace('/\D/s', '', $str_total)))*100).'%';
+            //$list[$k]['progress']=sprintf('%.1f',(floatval(preg_replace('/\D/s', '', $str_pass))/floatval(preg_replace('/\D/s', '', $str_total)))*100).'%';
+			$list[$k]['progress']=sprintf('%.1f',(floatval(preg_replace('/\D/', '', $str_total))-floatval($str_Waiting))/floatval(preg_replace('/\D/', '', $str_total))*100).'%';		
 		}
 		$data=array();
 		$cname_list=array();

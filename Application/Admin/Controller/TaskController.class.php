@@ -3,7 +3,7 @@ namespace Admin\Controller;
 use Think\Controller;
 class TaskController extends AuthController {
 	/**
-	 * Task²Ù×÷
+	 * Taskï¿½ï¿½ï¿½ï¿½
 	 */
 	public function index(){
 		$filter=I('param.');
@@ -54,7 +54,7 @@ class TaskController extends AuthController {
 	} 
 	
 	/**
-	 * TaskShot²Ù×÷
+	 * TaskShotï¿½ï¿½ï¿½ï¿½
 	 */
     public function shot_index(){
     	$data=D('TaskShot')->getData();
@@ -101,7 +101,7 @@ class TaskController extends AuthController {
     	    D('Item')->saveData($filter['item'],$filter['group']);
             $item_num=M('case')->where(array('group'=>$filter['group']))->count();
             M('task_case')->where(array('id'=>$filter['group']))->setField('item',$item_num);
-    	}else{
+    	}else if($filter['tid']!=''&&$filter['pid']!=''){
     		$data=D('TaskCase')->getData($filter);
     		$tree=D('Testcase')->getTree();
     		$testrun_list=D('TestRun')->getField('id,name',true);
@@ -154,7 +154,7 @@ class TaskController extends AuthController {
 	public function mytask(){
 	   $filter=I('param.');
 	   unset($filter['p']);
-	   //¸ù¾ÝÓÃ»§ËùÊôÓÃ»§×é²é¿´
+	   //ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½é¿´
 	   $filter['owner']=$_SESSION['user']['username'];
 	   $owner= $filter['owner'];
 	   $uid=D('Users')->where(array('username'=>$owner))->getField('id');

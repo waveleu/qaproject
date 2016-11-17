@@ -16,11 +16,10 @@ class TestRunModel extends BaseModel{
         }
         unset($filter['sort']);
         $data=$this->getPage('TestRun',20,$filter,$sort_rule);
-        
         foreach ($data['list'] as $k=>$v){
             $total=$this->table('go_task Task,go_task_case TaskCase')->where(array('TaskCase.tid=Task.id ','Task.pid'=>$v['id']))->count();
-            $pass_count=$this->table('go_task Task,go_task_case TaskCase')->where(array('TaskCase.tid=Task.id ','Task.pid'=>$v['id'],'TaskCase.result'=>'pass'))->count();
-            $data['list'][$k]['progress']=sprintf('%.1f',($pass_count/$total)*100).'%';
+            $pass_Waiting=$this->table('go_task Task,go_task_case TaskCase')->where(array('TaskCase.tid=Task.id ','Task.pid'=>$v['id'],'TaskCase.Status'=>'Waiting'))->count();
+            $data['list'][$k]['progress']=sprintf('%.1f',($total-$pass_Waiting)/$total*100).'%';
             $temp=M('project')->where(array('id'=>$v['pid']))->find();
             $data['list'][$k]['project']=$temp['name'];
         }
