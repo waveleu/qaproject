@@ -248,7 +248,7 @@
 		});
 	</SCRIPT>
 	<style type="text/css">
-		div#rMenu {position:absolute; visibility:hidden; top:0;text-align: left;padding: 2px;}
+		div#rMenu {width:140px;position:absolute; visibility:hidden; top:0;text-align: left;padding: 2px;}
 		div#rMenu ul li{
 			margin: 1px 0;
 			padding: 0 5px;
@@ -291,7 +291,7 @@
 				<div class="am-u-md-3" style="width:25%;">
 					<div class="container" style="width:100%;">
 						<div class="zTreeDemoBackground left" style="width:100%;">
-							<ul id="treeDemo" class="ztree" style="width:100%;height: auto; border: hidden;overflow: auto;" ></ul>
+						  <ul id="treeDemo" class="ztree" style="width:100%;height: auto; border: hidden;overflow: auto;" ></ul>
 						</div>
 					</div>
 				</div>

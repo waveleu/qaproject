@@ -20,6 +20,9 @@
             border:1px solid #9C9898;
             margin-left:-5px;
         }
+		.line a:hover{
+			text-decoration:underline;
+		}
 </style>
 
 <!DOCTYPE html>
@@ -143,7 +146,7 @@
         <div class="container" id="edit_page">
                 <div class="am-g">
                     <div class="am-u-md-12">
-                        <table class="am-table am-table-striped am-table-hover table-main">
+                        <table class="am-table am-table-striped am-table-hover table-main line">
                             <thead>
                             <tr>
                                 <th class="table-title"><a href="javascript:reorder('name');">name</a></th>
@@ -160,7 +163,7 @@
                             </thead>
                             <tbody>
                             <?php if(is_array($list)): foreach($list as $key=>$v): ?><tr>
-                                <td><a href="javascript:toTaskCase('<?php echo ($v[id]); ?>','<?php echo ($v[pid]); ?>');"><?php echo ($v[name]); ?></a></td>
+                                <td><a href="javascript:toTaskCase('<?php echo ($v[id]); ?>','<?php echo ($v[pid]); ?>');" class="line"><?php echo ($v[name]); ?></a></td>
                                 <td><?php echo ($v[project_name]); ?></td>
                                 <td><?php echo ($v[driver]); ?></td>
                                 <td><?php echo ($v[suit]); ?></td>
