@@ -42,7 +42,6 @@ class TestcaseController extends AuthController {
     //编辑类别
     public function edit()
     {
-        
     	$id['id']=I('id');
     	$data=M('testcase')->where($id)->find();
     	if(I('flag')!=true)

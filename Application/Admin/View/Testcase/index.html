@@ -127,7 +127,6 @@
 		function onClick(event, treeId, treeNode) {
 			if(treeNode.id>1000000) {
 				$.post("{:U('Admin/Testcase/edit')}",{id:treeNode.id/10000000},function (data) {
-					console.log(data);
 					$("#edit_page").empty().append('<table class="am-table am-table-hover am-table-bordered" id="show_table">').append('</table>');
 					$.each(data,function (k,v) {
 						$("#show_table").append('<tr style="height: 40px"><td style="width:180px;text-align:right;">'+k+'</td><td style="width:250px;text-align:center;">'+v+'</td></tr>');
