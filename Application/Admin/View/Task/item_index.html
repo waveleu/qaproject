@@ -39,9 +39,6 @@
 		.non{
 			display:none;
 		}
-		.line a:hover{
-			text-decoration:underline;
-		}
     </style>
 </HEAD>
 <body>
@@ -60,7 +57,7 @@
            <div class="container" id="edit_page">
               <div class="am-g">
                 <div class="am-u-md-12">   
-                         <table class="am-table am-table-striped am-table-hover table-main line">
+                         <table class="am-table am-table-striped am-table-hover table-main">
                             <thead>
                             <tr>
                                 <th class="table-title"><a href="javascript:reorder('name');">CaseName</a></th>

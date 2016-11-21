@@ -77,7 +77,7 @@ class TaskModel extends BaseModel{
 			$list[$k]['NA']=$str_NA;
 			$list[$k]['Notrun']=$str_Notrun;
 			//$list[$k]['progress']=sprintf('%.1f',(floatval(preg_replace('/\D/s', '', $str_pass))/floatval(preg_replace('/\D/s', '', $str_total)))*100).'%';
-			$list[$k]['progress']=sprintf('%.1f',(1-floatval($str_Waiting)/floatval(preg_replace('/\D/s', '', $str_total)))*100).'%';
+			$list[$k]['progress']=sprintf('%.1f',(floatval(preg_replace('/\D/', '', $str_total))-floatval($str_Waiting))/floatval(preg_replace('/\D/', '', $str_total))*100).'%';		
 		}
 		//var_dump($list);
 		$run_info=D('TestRun')->where(array('id'=>$filter['pid']))->find();

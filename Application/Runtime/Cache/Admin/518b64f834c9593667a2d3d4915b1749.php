@@ -49,9 +49,6 @@
         .am-modal-bd input{
             width:60%;
         }
-		.line a:hover{
-			text-decoration:underline;
-		}
     </style>
     <script type="text/javascript">
         var setting = {
@@ -175,7 +172,7 @@
            <div class="container" id="edit_page">
               <div class="am-g">
                 <div class="am-u-md-12">   
-                         <table class="am-table am-table-striped am-table-hover table-main line">
+                         <table class="am-table am-table-striped am-table-hover table-main">
                             <thead>
                             <tr>
                                 <th class="table-title"><a href="javascript:reorder('name');">TaskName</a></th>
@@ -209,11 +206,11 @@
                         <div class="am-u-md-10" id="edit_table">
                             <div class="am-tabs am-margin" data-am-tabs>
                                 <ul class="am-tabs-nav am-nav am-nav-tabs">
-                                    <?php if(is_array($cname_list)): $i = 0; $__LIST__ = $cname_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?><li class="line"><a href="<?php echo '#'.$v; ?>"><?php echo ($v); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+                                    <?php if(is_array($cname_list)): $i = 0; $__LIST__ = $cname_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?><li><a href="<?php echo '#'.$v; ?>"><?php echo ($v); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
                                 </ul>
                                 <?php if(is_array($data)): foreach($data as $class_name=>$v_list): ?><div class="am-tabs-bd">
                                     <div class="am-tab-panel am-fade am-in am-active" id="<?php echo ($class_name); ?>">
-                                        <table class="am-table am-table-striped am-table-hover table-main line">
+                                        <table class="am-table am-table-striped am-table-hover table-main" >
                                             <thead>
                                             <tr>
                                                 <th class="table-title"><a href="javascript:reorder('casename');">CaseName</a></th>

@@ -20,9 +20,6 @@
             border:1px solid #9C9898;
             margin-left:-5px;
         }
-		.line a:hover{
-			text-decoration:underline;
-		}
 </style>
 {include file="header" /}
 <div class="admin-content">
@@ -58,7 +55,7 @@
         <div class="container" id="edit_page">
                 <div class="am-g">
                     <div class="am-u-md-12">
-                        <table class="am-table am-table-striped am-table-hover table-main line">
+                        <table class="am-table am-table-striped am-table-hover table-main">
                             <thead>
                             <tr>
                                 <th class="table-title"><a href="javascript:reorder('name');">name</a></th>
@@ -76,7 +73,7 @@
                             <tbody>
                             {foreach name="list" item="v"}
                             <tr>
-                                <td><a href="javascript:toTaskCase('{$v[id]}','{$v[pid]}');" class="line">{$v[name]}</a></td>
+                                <td><a href="javascript:toTaskCase('{$v[id]}','{$v[pid]}');">{$v[name]}</a></td>
                                 <td>{$v[project_name]}</td>
                                 <td>{$v[driver]}</td>
                                 <td>{$v[suit]}</td>
@@ -105,7 +102,7 @@
                                       <label>Type:</label> 
                                       <div class="am-form-group-inline" style="display:inline;margin-left:2px;">
                                             <select data-am-selected="{btnWidth: '59.9%', btnStyle: 'secondary'}" placeholder="Please select..." ov_id={$v[id]} onchange="edit_type(this)" id="edit_type" style="border:1px solid #9C9898;">
-                                                <option value="CModel">CModel</option>
+                                                <option value="CModel" selected>CModel</option>
                                                 <option value="Chip">Chip</option>
                                                 <option value="FPGA">FPGA</option>
                                             </select>
@@ -115,7 +112,11 @@
                                             <select data-am-selected="{btnWidth: '59.9%', btnStyle: 'secondary'}" placeholder="Please select..." id="edit_pid" style="border:1px solid #9C9898;">
                                                 <option value=""></option>
                                                 {foreach name="run_list" item="vc" key="k"} 
+                                                {if condition="$k==$v[pid]"}
+                                                <option value={$k} selected>{$vc}</option>
+                                                {else/}
                                                 <option value={$k}>{$vc}</option>
+                                                {/if}
                                                 {/foreach}
                                             </select>
                                       </div><br/><br/>
@@ -124,7 +125,11 @@
                                           <select data-am-selected="{btnWidth: '19%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="edit_platform">
                                             <option value=""></option>
                                             {foreach name="board_list" item="vc"}
-                                            <option value={$vc['Name']}>{$vc[Name]}</option>
+                                            {if condition="$vc[Name]==$v[board]"}
+                                            <option value={$vc[Name]} selected>{$vc[Name]}</option>
+                                            {else/}
+                                            <option value={$vc[Name]}>{$vc[Name]}</option>
+                                            {/if}
                                             {/foreach}
                                           </select>
                                           <select data-am-selected="{btnWidth: '19%', btnStyle: 'secondary'}"  onchange="edit_os(this)" ov_id={$v[id]} class="am-fr" placeholder="Please select OS..." id="edit_os">
@@ -146,15 +151,21 @@
                                         <select data-am-selected="{btnWidth: '29.5%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="edit_platform2">
                                             <option value=""></option>
                                             {foreach name="board_list" item="vc"}
-                                            {if condition="$vc[Type]==CModel"}
-                                            <option value={$vc['Name']}>{$vc[Name]}</option>
+                                            {if condition="$vc[Name]==$v[board]"}
+                                            <option value={$vc[Name]} selected>{$vc[Name]}</option>
+                                            {else/}
+                                            <option value={$vc[Name]}>{$vc[Name]}</option>
                                             {/if}
                                             {/foreach}
                                         </select>
                                         <select data-am-selected="{btnWidth: '29.5%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="edit_version2">
                                           <option value=""></option>
                                           {foreach name="scm" item="vscm"}
+                                          {if condition="$vscm==$v[Version]"}
+                                          <option value={$vscm} selected>{$vscm}</option>
+                                          {else/}
                                           <option value={$vscm}>{$vscm}</option>
+                                          {/if}
                                           {/foreach}
                                         </select>
                                         <br/><br/>
@@ -209,7 +220,7 @@
           <label>Type:</label>
           <div class="am-form-group-inline" style="display:inline;margin-left:2px;">
               <select data-am-selected="{btnWidth: '59.9%', btnStyle: 'secondary'}" placeholder="Please select..." onchange="add_type(this)" id="add_type" style="border:1px solid #9C9898;">
-                  <option value="CModel">CModel</option>
+                  <option value="CModel" selected>CModel</option>
                   <option value="Chip">Chip</option>
                   <option value="FPGA">FPGA</option>
               </select>
@@ -228,8 +239,7 @@
               <select data-am-selected="{btnWidth: '18%', btnStyle: 'secondary',searchBox: 1}" placeholder="Please select..." id="add_platform">
                 <option value=""></option>
                 {foreach name="board_list" item="vc"}
-                <option value={$vc['Name']}>{$vc[Name]}</option>
-                {else if condition="$vc[Type]==CModel"}
+                <option value={$vc['Name']} >{$vc[Name]}</option>
                 {/foreach}
              </select>
              <select data-am-selected="{btnWidth: '20%', btnStyle: 'secondary'}"  onchange="add_os(this)" ov_id={$v[id]} placeholder="Please select OS..." id="add_os">
@@ -251,10 +261,8 @@
              <select data-am-selected="{btnWidth: '29.5%', btnStyle: 'secondary',searchBox: 1}"   class="am-fr" placeholder="Please select..." id="add_platform2">
                <option value=""></option>
                {foreach name="board_list" item="vc"}
-                 {if condition="$vc[Type]==CModel"}
                <option value={$vc['Name']}>{$vc[Name]}</option>
-                 {/if}
-                 {/foreach}
+               {/foreach}
              </select>
           <select data-am-selected="{btnWidth: '30%', btnStyle: 'secondary'}"    class="am-fr" placeholder="Please select OS..." id="add_version2">
             <option value=""></option>
