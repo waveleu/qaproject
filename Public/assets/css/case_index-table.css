@@ -1,0 +1,36 @@
+@charset "utf-8";
+/* CSS Document */
+.table1{
+	width:100%;
+	margin-bottom:1rem;
+	border-spacing:0;
+	border-collapse:separate;
+	font-size:0.7em;
+}
+.line th{
+	border-bottom:2px solid #ddd;
+}
+table thead>tr,table>tbody>tr{
+	width:100%;
+}
+table .th1{
+	width:10%;
+}
+table thead>tr>th{
+	padding:7px 2%;
+}
+table .th7{
+	padding-left:3%;
+}
+tbody>tr>td{
+	width:10%;
+	padding:7px 3%;
+}
+tbody .item{
+	width:14%;
+	padding-left:8%;
+}
+tbody .oper{
+	width:120px;
+	padding-left:0px;
+}
