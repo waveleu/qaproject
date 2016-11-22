@@ -16,7 +16,7 @@
         height:80%;
         margin-top:40px;
         position:absolute;
-    }
+    }*/
 </style>
 <body>
 <header class="am-topbar am-topbar-inverse admin-header" style="background-color: #BF2126">
