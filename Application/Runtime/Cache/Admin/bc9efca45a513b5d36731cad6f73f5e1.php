@@ -28,9 +28,6 @@
             -ms-appearance: none;
             appearance: none;
         }
-		.line a:hover{
-			text-decoration:underline;
-		}
     </style>
 </head>
 <body>
@@ -43,7 +40,7 @@
         <div class="am-g">
             <div class="am-u-sm-12">
                 <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary am-text-danger am-fr"  onclick="add()"><span class="am-icon-pencil-square-o"></span> new Test Run</button>
-                <table class="am-table am-table-striped am-table-hover table-main line">
+                <table class="am-table am-table-striped am-table-hover table-main">
                     <thead>
                     <tr>
                         <th class="table-title"><a href="javascript:reorder('name');">Name</a></th>
@@ -56,7 +53,7 @@
                     </thead>
                     <tbody>
                     <?php if(is_array($list)): foreach($list as $key=>$v): ?><tr>
-                        <td><a href="javascript:editTask('<?php echo ($v[id]); ?>');" class="line"><?php echo ($v[name]); ?></a></td>
+                        <td><a href="javascript:editTask('<?php echo ($v[id]); ?>');"><?php echo ($v[name]); ?></a></td>
                         <td><?php echo ($v[progress]); ?></td>
                         <td><?php echo ($v[project]); ?></td>
                         <td><?php echo ($v[start_time]); ?></td>

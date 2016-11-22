@@ -77,9 +77,6 @@
             list-style: none outside none;
             background-color: #DFDFDF;
         }
-		.line a:hover{
-			text-decoration:underline;
-		}
     </style>
 </HEAD>
 <BODY>
@@ -118,7 +115,7 @@
                         </thead>
                         <tbody>
                         <?php if(is_array($list)): foreach($list as $key=>$v): if($v[name]!='user_defined'): ?><tr>
-                            <td class="line"><a href="javascript:check('<?php echo ($v[id]); ?>','<?php echo ($v[cids]); ?>')" id="<?php echo ($v[id]); ?>"><?php echo ($v[name]); ?></a></td>
+                            <td><a href="javascript:check('<?php echo ($v[id]); ?>','<?php echo ($v[cids]); ?>')" id="<?php echo ($v[id]); ?>"><?php echo ($v[name]); ?></a></td>
                             <td>
                                 <div class="am-btn-toolbar am-fr">
                                     <div class="am-btn-group am-btn-group-xs">

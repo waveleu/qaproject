@@ -20,9 +20,6 @@
             border:1px solid #9C9898;
             margin-left:-5px;
         }
-		.line a:hover{
-			text-decoration:underline;
-		}
 </style>
 {include file="header" /}
 <div class="admin-content">
@@ -58,7 +55,7 @@
         <div class="container" id="edit_page">
                 <div class="am-g">
                     <div class="am-u-md-12">
-                        <table class="am-table am-table-striped am-table-hover table-main line">
+                        <table class="am-table am-table-striped am-table-hover table-main">
                             <thead>
                             <tr>
                                 <th class="table-title"><a href="javascript:reorder('name');">name</a></th>
@@ -76,7 +73,7 @@
                             <tbody>
                             {foreach name="list" item="v"}
                             <tr>
-                                <td class="line"><a href="javascript:toTaskCase('{$v[id]}','{$v[pid]}');">{$v[name]}</a></td>
+                                <td><a href="javascript:toTaskCase('{$v[id]}','{$v[pid]}');">{$v[name]}</a></td>
                                 <td>{$v[project_name]}</td>
                                 <td>{$v[driver]}</td>
                                 <td>{$v[suit]}</td>
