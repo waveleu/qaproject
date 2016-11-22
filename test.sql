@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-11-18 02:16:35
+-- Generation Time: 2016-11-21 07:36:16
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -353,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `go_case` (
   `group` int(11) NOT NULL,
   `item` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
 
 --
 -- 转存表中的数据 `go_case`
@@ -388,7 +388,8 @@ INSERT INTO `go_case` (`id`, `group`, `item`) VALUES
 (40, 161, 65),
 (41, 161, 66),
 (42, 50, 67),
-(43, 50, 68);
+(43, 50, 68),
+(44, 223, 69);
 
 -- --------------------------------------------------------
 
@@ -520,7 +521,7 @@ CREATE TABLE IF NOT EXISTS `go_item` (
   `name` varchar(255) DEFAULT NULL,
   `unit` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=69 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=70 ;
 
 --
 -- 转存表中的数据 `go_item`
@@ -555,7 +556,20 @@ INSERT INTO `go_item` (`id`, `name`, `unit`) VALUES
 (65, '55', '99'),
 (66, '22', '88'),
 (67, '55', '99'),
-(68, '22', '88');
+(68, '22', '88'),
+(69, '111', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `go_item_result`
+--
+
+CREATE TABLE IF NOT EXISTS `go_item_result` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `result` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -644,7 +658,7 @@ INSERT INTO `go_platform` (`id`, `Board`, `OS`, `BSP`, `Version`, `name`, `x86x6
 (2, 'Chip,b2', 'WinCE', 'bsp4', '7.20', 'p2', 'x86'),
 (3, 'FPGA,b1', 'LoliPop', 'bsp2', '5.11', 'p3', 'x64'),
 (5, 'Chip,b2', 'KitKat', 'bsp2', '6.08', 'p4', 'x86'),
-(23, 'CModel,v620_v2', NULL, NULL, NULL, NULL, 'x86');
+(23, 'CModel,v620_v2', 'LoliPop', 'bsp2', '5.33', 'p5', 'x86');
 
 -- --------------------------------------------------------
 
@@ -757,7 +771,7 @@ INSERT INTO `go_task` (`id`, `name`, `board`, `owner`, `pid`, `suit`, `start_tim
 (7, 'shuai', 'b1', 'user3', 3, 't5', '2016-07-01', '2016-07-31', '', '', '', ''),
 (11, 'task3', 'b3', 'user3', 3, 't5', '2016-07-06', '2016-07-31', 'null', 'dev82446.5.3021_p5.0.0_81855', '', 'CModel'),
 (12, 'dfdf', 'b1', 'user1', 3, 't2', '2016-07-10', '2016-07-26', 'null', 'dev82446.5.3021_p5.0.0_81855', '', 'CModel'),
-(14, 'task4', '2', 'user3', 3, 't7', '2016-07-07', '2016-07-31', '', '', '', ''),
+(14, 'task4', 'b4', 'user3', 3, 't7', '2016-07-07', '2016-07-31', '', '', '', ''),
 (40, '55555111', 'b5', 'user1', 5, 't5', '2016-11-09', '2016-11-18', 'null', 'dev82446.5.3021_p5.0.0_81855', '54644', 'CModel');
 
 -- --------------------------------------------------------
@@ -786,10 +800,6 @@ CREATE TABLE IF NOT EXISTS `go_task_case` (
 --
 
 INSERT INTO `go_task_case` (`id`, `cid`, `tid`, `BugID`, `driver`, `result`, `comments`, `start_time`, `end_time`, `Status`, `item`) VALUES
-(31, 14, 7, 0, NULL, 'Notrun', '', '0000-00-00', '0000-00-00', 'Waiting', 0),
-(33, 19, 7, 0, NULL, 'Notrun', '', '0000-00-00', '0000-00-00', 'Waiting', 0),
-(35, 13, 7, 0, NULL, 'Notrun', '', '2016-07-14', '0000-00-00', 'Waiting', 0),
-(41, 15, 11, 0, NULL, 'Notrun', '', '2016-07-06', '2016-07-31', 'Waiting', 0),
 (44, 2, 12, NULL, NULL, 'Notrun', NULL, '2016-07-10', '2016-07-26', 'Waiting', 0),
 (50, 21, 14, 0, NULL, 'Notrun', '', '2016-07-07', '2016-07-31', 'Waiting', 2),
 (66, 21, 18, NULL, NULL, 'Notrun', NULL, '2016-07-02', '2016-07-31', 'Waiting', 0),
@@ -820,9 +830,8 @@ INSERT INTO `go_task_case` (`id`, `cid`, `tid`, `BugID`, `driver`, `result`, `co
 (226, 5, 40, NULL, NULL, 'pass', NULL, '2016-11-09', '2016-11-18', 'Waiting', 0),
 (225, 28, 40, NULL, NULL, 'fail', NULL, '2016-11-09', '2016-11-18', 'Waiting', 3),
 (224, 27, 40, NULL, NULL, 'fail', NULL, '2016-11-09', '2016-11-18', 'Waiting', 0),
-(223, 2, 40, 0, '', 'Notrun', '', '2016-11-09', '2016-11-18', 'Waiting', 9),
-(228, 9, 40, NULL, NULL, 'Notrun', NULL, '2016-11-09', '2016-11-18', 'Waiting', 4),
-(235, 0, 42, NULL, NULL, 'pass', NULL, '0000-00-00', '0000-00-00', 'Waiting', 0);
+(223, 2, 40, 0, '', 'Notrun', '', '2016-11-09', '2016-11-18', 'Waiting', 10),
+(228, 9, 40, NULL, NULL, 'Notrun', NULL, '2016-11-09', '2016-11-18', 'Waiting', 4);
 
 -- --------------------------------------------------------
 
