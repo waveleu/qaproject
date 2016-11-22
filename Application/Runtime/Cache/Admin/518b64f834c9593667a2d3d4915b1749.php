@@ -15,6 +15,7 @@
     <link rel="apple-touch-icon-precomposed" href="/qaweb/Public/assets/i/app-icon72x72@2x.png">
     <link rel="stylesheet" href="/qaweb/Public/assets/css/amazeui.min.css"/>
     <link rel="stylesheet" href="/qaweb/Public/assets/css/admin.css">
+    <link rel="stylesheet" href="/qaweb/Public/assets/css/case_index-table.css">
     <style>
         .am-form-group{
             display: block;
@@ -203,14 +204,14 @@
                             </tbody>
                         </table>
                        
-                        <div class="am-u-md-10" id="edit_table">
+                        <div class="am-u-md-12" id="edit_table">
                             <div class="am-tabs am-margin" data-am-tabs>
                                 <ul class="am-tabs-nav am-nav am-nav-tabs">
                                     <?php if(is_array($cname_list)): $i = 0; $__LIST__ = $cname_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?><li><a href="<?php echo '#'.$v; ?>"><?php echo ($v); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
                                 </ul>
                                 <?php if(is_array($data)): foreach($data as $class_name=>$v_list): ?><div class="am-tabs-bd">
                                     <div class="am-tab-panel am-fade am-in am-active" id="<?php echo ($class_name); ?>">
-                                        <table class="am-table am-table-striped am-table-hover table-main" >
+                                       <!--<table class="am-table am-table-striped am-table-hover am-table-compact table-main line">
                                             <thead>
                                             <tr>
                                                 <th class="table-title"><a href="javascript:reorder('casename');">CaseName</a></th>
@@ -242,6 +243,98 @@
                                                     </div>
                                                 </td>
                                             </tr><?php endforeach; endif; ?>
+                                            </tbody>
+                                        </table>-->
+                                        <table class="am-table-bordered am-table-striped table1 line">
+                                          <thead>
+                                            <tr>
+                                                <th class="table-title"><a href="javascript:reorder('casename');">CaseName</a></th>
+                                                <th class="table-title"><a href="javascript:reorder('result');">Result</a></th>
+                                                <th class="table-title"><a href="javascript:reorder('BugID');">BugID</a></th>
+                                                <th class="table-title"><a href="javascript:reorder('driver');">Driver</a></th>
+                                                <th class="table-title"><a href="#">Status</a></th>
+                                                <th class="table-title"><a href="javascript:reorder('comments');">Comments</a></th>
+                                                <th class="table-title oper"><a href="#">Item</a></th>
+                                                <th class="table-author am-hide-sm-only"></span>Operation</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                <td title=<?php echo ($v[info]); ?> rowspan="4">1</td>
+                                                <?php
+ if($v['result']=='fail') echo "<td style='background-color: red' rowspan='4'>".$v['result']."</td>"; elseif($v['result']=='pass') echo "<td style='background-color: green' rowspan='4' >".$v['result']."</td>"; else echo "<td rowspan='4'>".$v['result']."</td>"; ?>
+                                                <td rowspan='4'>2</td>
+                                                <td rowspan='4'>3</td>
+                                                <td rowspan='4'>4</td>
+                                                <td rowspan='4'>5</td>
+                                                <td class="pos"><a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');">01</a></td>
+                                                <td rowspan='4' class='oper'>
+                                                    <div class="am-btn-toolbar">
+                                                        <div class="am-btn-group am-btn-group-xs">
+                                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary" task_id=<?php echo ($v[id]); ?>   onclick="edit(this)"><span class="am-icon-pencil-square"></span> Edit</button>
+                                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" task_id=<?php echo ($v[id]); ?> onclick="del(this)"><span class="am-icon-trash-o" ></span> Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td class="pos">
+                                                  <a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');">02</a>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td class="pos">
+                                                  <a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');">03</a>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td class="pos">
+                                                  <a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');">04</a>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td title=<?php echo ($v[info]); ?> rowspan="6">1</td>
+                                                <?php
+ if($v['result']=='fail') echo "<td style='background-color: red' rowspan='6'>".$v['result']."</td>"; elseif($v['result']=='pass') echo "<td style='background-color: green' rowspan='6' >".$v['result']."</td>"; else echo "<td rowspan='6'>".$v['result']."</td>"; ?>
+                                                <td rowspan='6'>2</td>
+                                                <td rowspan='6'>3</td>
+                                                <td rowspan='6'>4</td>
+                                                <td rowspan='6'>5</td>
+                                                <td><a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');">01</a></td>
+                                                <td rowspan='6' class='oper'>
+                                                    <div class="am-btn-toolbar">
+                                                        <div class="am-btn-group am-btn-group-xs">
+                                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary" task_id=<?php echo ($v[id]); ?>   onclick="edit(this)"><span class="am-icon-pencil-square"></span> Edit</button>
+                                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" task_id=<?php echo ($v[id]); ?> onclick="del(this)"><span class="am-icon-trash-o" ></span> Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');">02</a>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');">03</a>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');">04</a>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');">05</a>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');">06</a>
+                                                </td>
+                                              </tr>
                                             </tbody>
                                         </table>
                                     </div>
