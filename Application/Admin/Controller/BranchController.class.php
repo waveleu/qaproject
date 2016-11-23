@@ -29,7 +29,7 @@ class BranchController extends AuthController{
 	
 	public function del(){
 		$id=I('id');
-		$result=M('branch')->delete($id);
+		$result=M('branch')->where(array('id'=>$id))->delete();
 		$this->ajaxReturn($result,'json');
 	}
 	

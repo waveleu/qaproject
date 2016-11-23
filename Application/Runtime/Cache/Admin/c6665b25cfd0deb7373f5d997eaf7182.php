@@ -131,7 +131,7 @@
     }
     function del(obj) {
         var id=$(obj).attr('branch_id');
-        if(confirm('Delete This Branch？')){
+        if(confirm('Delete This Branch ?')){
             $.post("<?php echo U('Admin/Branch/del');?>",{id:id},function (data) {
 
                 window.location.href="<?php echo U('Admin/Branch/index');?>";

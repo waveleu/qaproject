@@ -200,7 +200,6 @@
                 e.close();
             }
         });
-
     }
     function del(obj) {
         var id=$(obj).attr('board_id');
@@ -215,7 +214,6 @@
                 e.close();
             }
         });
-
     }
     function add() {
         $('#add_board_modal').modal({
@@ -237,8 +235,6 @@
             }
         });
     }
-
-
 </script>
 </body>
 </html>

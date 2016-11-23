@@ -35,8 +35,7 @@
         .am-modal-bd{
             width:70%;
             margin:0 auto;
-            height:300px;
-            overflow-y: auto;
+            height:430px;
         }
         .am-modal-bd input{
             border:1px solid #9C9898;
@@ -91,7 +90,7 @@
                             </div>
                         </td>
                     </tr>
-                    <div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" style="top:-20%;">
+                    <div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" style="top:-10%;">
                         <div class="am-modal-dialog">
                             <div class="am-modal-hd">Edit Board Type</div>
                             <div class="am-modal-bd edit">
@@ -136,7 +135,8 @@
 
 
 //add new board
-<div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_board_modal" style="top:-15%;">
+<div class="am-modal am-modal-confirm" tabindex="add_board_modal" id="add_board_modal" style="top:-10%
+;">
     <div class="am-modal-dialog">
         <div class="am-modal-hd">New Board Type</div>
         <div class="am-modal-bd">

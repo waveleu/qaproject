@@ -101,12 +101,13 @@
                 <label style="padding-top:10px;">Version:&nbsp;</label>
               </td>
               <td style="text-align:left;padding-top:10px;">
-                <div class="am-form-group-inline" style="width:80%;">
+                <!--<div class="am-form-group-inline" style="width:80%;">
                   <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary'}"  id="add_version" class="am-fr" placeholder="Please select...">
                     <option value=""></option>
                     <?php if(is_array($version_list)): foreach($version_list as $key=>$vc): ?><option value="<?php echo ($vc); ?>"><?php echo ($vc); ?></option><?php endforeach; endif; ?>
                   </select>
-                </div>
+                </div>-->
+                <input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:80%;border:1px solid #9C9898;" id="add_build">
               </td>
             </tr>
             <tr>
