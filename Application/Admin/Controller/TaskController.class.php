@@ -104,6 +104,12 @@ class TaskController extends AuthController {
     	}else if($filter['tid']!=''&&$filter['pid']!=''){
     		$data=D('TaskCase')->getData($filter);
     		$tree=D('Testcase')->getTree();
+    		$case=M('case')->select();
+    		foreach ($case as $k=>$vc){
+    		    $tmp=M('item')->where(array('id'=>$vc['item']))->find();
+    		    $case[$k]['name']=$tmp['name'];
+    		    $case[$k]['unit']=$tmp['unit'];
+    		}
     		$testrun_list=D('TestRun')->getField('id,name',true);
     		$task_list=array();
     		$project_list=D('Project')->getField('id,name',true);
@@ -115,6 +121,7 @@ class TaskController extends AuthController {
     		$data['result_list']=M('result_type')->where('id>0')->getField('name',true);
     		$this->assign($tree);
     		$this->assign($data);
+    		$this->assign('case',$case);
     		$this->display(); 
     	}
     	 
