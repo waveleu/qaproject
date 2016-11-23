@@ -210,7 +210,7 @@
                                 </ul>
                                 <?php if(is_array($data)): foreach($data as $class_name=>$v_list): ?><div class="am-tabs-bd">
                                     <div class="am-tab-panel am-fade am-in am-active" id="<?php echo ($class_name); ?>">
-                                       <table class="am-table am-table-striped am-table-hover table-main am-table-compact am-table-bordered line">
+                                       <table class="am-table am-table-striped am-table-hover table-main am-table-compact am-table-bordered line table1">
                                             <thead>
                                             <tr>
                                                 <th class="table-title"><a href="javascript:reorder('casename');">CaseName</a></th>
@@ -236,7 +236,7 @@
                                                 <td><a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');"><?php echo ($vc[name]); ?></a></td>
                                                 <td><a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');"><?php echo ($vc[item]); ?></a></td>
                                                 <td>
-                                                    <div class="am-btn-toolbar">
+                                                    <div class="am-btn-toolbar pos">
                                                         <div class="am-btn-group am-btn-group-xs">
                                                             <button class="am-btn am-btn-default am-btn-xs am-text-secondary" task_id=<?php echo ($v[id]); ?>   onclick="edit(this)"><span class="am-icon-pencil-square"></span> Edit</button>
                                                             <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" task_id=<?php echo ($v[id]); ?> onclick="del(this)"><span class="am-icon-trash-o" ></span> Delete</button>

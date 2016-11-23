@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-.table1{
+/*.table1{
 	width: 100%;
 	margin-bottom: 1rem;
 	border-spacing: 0;
@@ -17,7 +17,7 @@ table thead>tr>th{
 .table1 tr{
 	bgcolor:#f9f9f9;
 }
-/*.line th{
+.line th{
 	border-bottom:2px solid #ddd;
 }
 table thead>tr,table>tbody>tr{
@@ -43,7 +43,7 @@ tbody .item{
 tbody .oper{
 	width:120px;
 	padding-left:0px;
-}*/
+}
 
 .table1>thead>tr>th{
 	width:5%;
@@ -66,4 +66,16 @@ tbody .oper{
 }
 .pos{
 	padding-top:0px;
+}*/
+.table1{
+	text-align:center;
+	border: none;
+}
+.table1>thead>tr>th{
+	border: none;
+	text-align:center;
+	pading-left: 2%;	
+}
+.pos{
+	padding-left:20%;
 }
