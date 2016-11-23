@@ -1,20 +1,20 @@
-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+
+<!DOCTYPE html>
 <HTML>
 <HEAD>
     <TITLE> Case</TITLE>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="/qaweb/Public/ztree/css/demo.css" type="text/css">
-    <link rel="stylesheet" href="/qaweb/Public/ztree/css/awesomeStyle/awesome.css" type="text/css">
-    <script type="text/javascript" src="/qaweb/Public/assets/js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/qaweb/Public/ztree/js/jquery.ztree.core.js"></script>
-    <script type="text/javascript" src="/qaweb/Public/ztree/js/jquery.ztree.excheck.js"></script>
-    <script type="text/javascript" src="/qaweb/Public/ztree/js/jquery.ztree.exedit.js"></script>
+    <link rel="stylesheet" href="ZTREEBASE/css/demo.css" type="text/css">
+    <link rel="stylesheet" href="ZTREEBASE/css/awesomeStyle/awesome.css" type="text/css">
+    <script type="text/javascript" src="ASSETS/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="ZTREEBASE/js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="ZTREEBASE/js/jquery.ztree.excheck.js"></script>
+    <script type="text/javascript" src="ZTREEBASE/js/jquery.ztree.exedit.js"></script>
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="icon" type="image/png" href="/qaweb/Public/assets/i/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="/qaweb/Public/assets/i/app-icon72x72@2x.png">
-    <link rel="stylesheet" href="/qaweb/Public/assets/css/amazeui.min.css"/>
-    <link rel="stylesheet" href="/qaweb/Public/assets/css/admin.css">
-    <link rel="stylesheet" href="/qaweb/Public/assets/css/case_index-table.css">
+    <link rel="icon" type="image/png" href="ASSETS/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="ASSETS/i/app-icon72x72@2x.png">
+    <link rel="stylesheet" href="ASSETS/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="ASSETS/css/admin.css">
     <style>
         .am-form-group{
             display: block;
@@ -73,14 +73,14 @@
         };
 
         var zNodes =[{id:0,pId:0,name:'root',open:true,isParent:true}];
-        $.each(<?php echo ($class); ?>,function (k,v) {
+        $.each({$class},function (k,v) {
             if(v.id<10)
                 var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:true,isParent:true};
             else
                 var temp={id:v.id,pId:v.pid,name:""+v.name+"("+v.count+")",open:false,isParent:true};
             zNodes.push(temp);
         })
-        $.each(<?php echo ($tree_data); ?>,function (k,v) {
+        $.each({$tree_data},function (k,v) {
             var temp={id:v.id+1000-1000,pId:v.pid,name:""+v.CaseName,open:false,isParent:false};
             zNodes.push(temp);
         });
@@ -145,8 +145,8 @@
                         arr.push(v.id/10000);
                 });
                 var cids=arr.join(',');
-                $.post("<?php echo U('Admin/Task/case_reassign');?>",{cids:cids,tid:tid},function (data) {
-                    $.post("<?php echo U('Admin/Task/case_index');?>",{ajax:true,tid:tid},function (data) {
+                $.post("{:U('Admin/Task/case_reassign')}",{cids:cids,tid:tid},function (data) {
+                    $.post("{:U('Admin/Task/case_index')}",{ajax:true,tid:tid},function (data) {
                         $("#edit_page").empty().html(data);
                         tree_fresh();
                     });
@@ -163,7 +163,7 @@
     <div class="admin-content" id="content">
         <div class="am-cf am-padding am-padding-bottom-0" id="content-body">
             <div class="am-g">
-                <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Task</strong> / <?php echo ($task_info[name]); ?></div><br/>
+                <div class="am-fl am-cf" id="html_title"><strong class="am-text-primary am-text-lg">Task</strong> / {$task_info[name]}</div><br/>
             </div>
         </div>
         <br/>
@@ -188,29 +188,36 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php if(is_array($list)): foreach($list as $key=>$v): if($key==0): ?><tr>
-                                <td><?php echo ($v[taskname]); ?></td>
-                                <td><?php echo ($v[project_name]); ?></td>
-                                <td><?php echo ($v[board_name]); ?></td>
-                                <td><?php echo ($v['progress']); ?></td>
-                                <td><?php echo ($v['pass']); ?></td>
-                                <td><?php echo ($v['fail']); ?></td>
-                                <td><?php echo ($v['NA']); ?></td> 
-                                <td><?php echo ($v['timeout']); ?></td>
-                                <td><?php echo ($v['Notrun']); ?></td>
-                                <td><?php echo ($v['total']); ?></td>
-                            </tr><?php endif; endforeach; endif; ?>
+                            {foreach name="list" item="v"}
+                            {if condition="$key==0"}
+                            <tr>
+                                <td>{$v[taskname]}</td>
+                                <td>{$v[project_name]}</td>
+                                <td>{$v[board_name]}</td>
+                                <td>{$v['progress']}</td>
+                                <td>{$v['pass']}</td>
+                                <td>{$v['fail']}</td>
+                                <td>{$v['NA']}</td> 
+                                <td>{$v['timeout']}</td>
+                                <td>{$v['Notrun']}</td>
+                                <td>{$v['total']}</td>
+                            </tr>
+                            {/if}
+                            {/foreach}
                             </tbody>
                         </table>
                        
-                        <div class="am-u-md-12" id="edit_table">
+                        <div class="am-u-md-10" id="edit_table">
                             <div class="am-tabs am-margin" data-am-tabs>
                                 <ul class="am-tabs-nav am-nav am-nav-tabs">
-                                    <?php if(is_array($cname_list)): $i = 0; $__LIST__ = $cname_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?><li><a href="<?php echo '#'.$v; ?>"><?php echo ($v); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+                                    {volist name="cname_list" id="v"}
+                                        <li><a href="<?php echo '#'.$v; ?>">{$v}</a></li>
+                                    {/volist}
                                 </ul>
-                                <?php if(is_array($data)): foreach($data as $class_name=>$v_list): ?><div class="am-tabs-bd">
-                                    <div class="am-tab-panel am-fade am-in am-active" id="<?php echo ($class_name); ?>">
-                                       <table class="am-table am-table-striped am-table-hover table-main am-table-compact am-table-bordered line">
+                                {foreach name="data" item="v_list" key="class_name"}
+                                <div class="am-tabs-bd">
+                                    <div class="am-tab-panel am-fade am-in am-active" id="{$class_name}">
+                                        <table class="am-table am-table-striped am-table-hover table-main" >
                                             <thead>
                                             <tr>
                                                 <th class="table-title"><a href="javascript:reorder('casename');">CaseName</a></th>
@@ -219,36 +226,42 @@
                                                 <th class="table-title"><a href="javascript:reorder('driver');">Driver</a></th>
                                                 <th class="table-title"><a href="#">Status</a></th>
                                                 <th class="table-title"><a href="javascript:reorder('comments');">Comments</a></th>
-                                                <th class="table-title"><a href="#">item_name</a></th>
-                                                <th class="table-title"><a href="#">item_unit</a></th>
+                                                <th class="table-title"><a href="#">Item</a></th>
                                                 <th class="table-author am-hide-sm-only"></span>Operation</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <?php if(is_array($v_list)): foreach($v_list as $k=>$v): if(is_array($case)): foreach($case as $key=>$vc): if($v[id]==$vc[group]): ?><tr ov_id=<?php echo ($k); ?>>
-                                                <td title=<?php echo ($v[info]); ?>><?php echo ($v[casename]); ?></td>
+                                            {foreach name="v_list" item="v"}
+                                            <tr>
+                                                <td title={$v[info]}>{$v[casename]}</td>
                                                 <?php
- echo "<td>".$v['result']."</td>"; ?>
-                                                <td><?php echo ($v[BugID]); ?></td>
-                                                <td><?php echo ($v[driver]); ?></td>
-                                                <td><?php echo ($v[Status]); ?></td>
-                                                <td><?php echo ($v[comments]); ?></td>
-                                                <td><a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');"><?php echo ($vc[name]); ?></a></td>
-                                                <td><a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');"><?php echo ($vc[item]); ?></a></td>
+                                                    if($v['result']=='fail')
+                                                        echo "<td style='background-color: red'>".$v['result']."</td>";
+                                                    elseif($v['result']=='pass')
+                                                        echo "<td style='background-color: green'>".$v['result']."</td>";
+                                                    else
+                                                        echo "<td>".$v['result']."</td>";
+                                                ?>
+                                                <td>{$v[BugID]}</td>
+                                                <td>{$v[driver]}</td>
+                                                <td>{$v[Status]}</td>
+                                                <td>{$v[comments]}</td>
+                                                <td><a href="javascript:toCaseItem('{$v[id]}');">{$v[item]}</a></td>
                                                 <td>
                                                     <div class="am-btn-toolbar">
                                                         <div class="am-btn-group am-btn-group-xs">
-                                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary" task_id=<?php echo ($v[id]); ?>   onclick="edit(this)"><span class="am-icon-pencil-square"></span> Edit</button>
-                                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" task_id=<?php echo ($v[id]); ?> onclick="del(this)"><span class="am-icon-trash-o" ></span> Delete</button>
+                                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary" task_id={$v[id]}   onclick="edit(this)"><span class="am-icon-pencil-square"></span> Edit</button>
+                                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" task_id={$v[id]} onclick="del(this)"><span class="am-icon-trash-o" ></span> Delete</button>
                                                         </div>
                                                     </div>
                                                 </td>
-                                            </tr><?php endif; endforeach; endif; endforeach; endif; ?>
+                                            </tr>
+                                            {/foreach}
                                             </tbody>
                                         </table>
-                                        
                                     </div>
-                                </div><?php endforeach; endif; ?>
+                                </div>
+                                {/foreach}
                             </div>
                         </div>
                     </div>
@@ -267,7 +280,9 @@
             <div class="am-form-group-inline" style="display:inline;margin-left:5px;">
                 <select data-am-selected="{btnWidth: '60%', btnStyle: 'secondary',searchBox: 1}" placeholder="Please select..." id="edit_result" style="border:1px solid #9C9898;">
                     <option value=""></option>
-                    <?php if(is_array($result_list)): foreach($result_list as $key=>$v): ?><option value=<?php echo ($v); ?>><?php echo ($v); ?></option><?php endforeach; endif; ?>
+                    {foreach name="result_list" item="v"}
+                    <option value={$v}>{$v}</option>
+                    {/foreach}
                 </select>
             </div><br/><br/>
             <label>BugID:</label>
@@ -303,8 +318,9 @@
     function del(obj) {
         var id=$(obj).attr('task_id');
         if(confirm('Do you want delete this TaskCase ?')){
-            $.post("<?php echo U('Admin/Task/case_del');?>",{id:id},function () {
+            $.post("{:U('Admin/Task/case_del')}",{id:id},function () {
                 location.reload();
+                //task_show($("#search_tid"));
             });
         }
     }
@@ -312,12 +328,23 @@
     //编辑相应taskcase
     function edit(obj) {
         var id=$(obj).attr('task_id');
+       /* $.each(taskcase_info,function (k,v) {
+            if(v['id']==id){
+                $("#edit_id").val(id).hide();
+                $("#edit_result").find("option[value="+v.result+"]").attr('selected',true);
+                $("#edit_BugID").val(v.BugID);
+                $("#edit_comments").val(v.comments);
+                $("#edit_driver").val(v.driver);
+
+                return false;
+            }
+        }); */
 
         $("#edit_case_modal").modal({
             relatedTarget:this,
             onConfirm:function(e){
                 var arr={id:id,driver:e.data['1'],BugID:e.data['0'],Status:e.data['2'],comments:e.data['3'],item:e.data['4'],result:$("#edit_result").val()};
-                $.post("<?php echo U('Admin/Task/case_edit');?>",arr,function (data) {
+                $.post("{:U('Admin/Task/case_edit')}",arr,function (data) {
                     location.reload();
                     //task_show($("#search_tid"));
                 });
@@ -333,9 +360,9 @@
         var tid=$("#search_tid").val();
         var result=$("#search_result").val();
         if(tid!=null&&tid!="") {
-            location.href=("<?php echo U('Admin/Task/case_index',array('tid'=>vid,'result'=>'nowresult'));?>").replace('vid',tid).replace('nowresult',result);
+            location.href=("{:U('Admin/Task/case_index',array('tid'=>vid,'result'=>'nowresult'))}").replace('vid',tid).replace('nowresult',result);
             if(result==0){
-                location.href=("<?php echo U('Admin/Task/case_index',array('tid'=>vid));?>").replace('vid',tid);
+                location.href=("{:U('Admin/Task/case_index',array('tid'=>vid))}").replace('vid',tid);
             }
         }
         else
@@ -357,7 +384,7 @@
     	else if(search_type=='CaseName')
             var arr={ajax:true,tid:$("#search_tid").val(),CaseName:$("#search_name").val()};
     	else var arr={ajax:true,tid:$("#search_tid").val(),driver:$("#search_name").val()};
-         $.post("<?php echo U('Admin/Task/case_index');?>",arr,function (data) {
+         $.post("{:U('Admin/Task/case_index')}",arr,function (data) {
             page_fresh(data);
         });
     }
@@ -372,11 +399,34 @@
 
     function reorder(name) {
         var arr={ajax:true,tid:$("#search_tid").val(),BugID:$("#search_name").val(),sort:name};
-        $.post("<?php echo U('Admin/Task/case_index');?>",arr,function (data) {
+        $.post("{:U('Admin/Task/case_index')}",arr,function (data) {
             //location.reload();
             page_fresh(data);
         });
     }
+    //树对应刷新
+    /* function tree_fresh(){
+        var arr={$cid_list};
+        zTree.checkAllNodes(false);
+        if(arr!=null){
+            var class_count={};
+            $.each(arr,function (k,v) {
+                var node=zTree.getNodesByParam('id',v['cid']+"0000");
+                zTree.checkNode(node['0'],true,true);
+                var pid=node['0']['pId'];
+                if(class_count[pid]==null){
+                    class_count[pid]=1;
+                }else{
+                    class_count[pid]+=1;
+                }
+            });
+            $.each(class_count,function (k,v) {
+                var node=zTree.getNodesByParam('id',k);
+                node['0'].name+='('+v+')';
+                zTree.updateNode(node['0']);
+            });
+        }
+    } */
 
     //异步刷新页面
     function page_fresh(data) {
@@ -384,27 +434,12 @@
         //tree_fresh();
     }
     function toCaseItem(id) {
-        var str=("<?php echo U('Admin/Task/case_index',array('case_item'=>'true','id'=>taskcase_id));?>").replace('taskcase_id',id);
+        var str=("{:U('Admin/Task/case_index',array('case_item'=>'true','id'=>taskcase_id))}").replace('taskcase_id',id);
         location.href=str;
     }
-    
-    /* $(document).ready(function(){
-    	var max_id=$("#edit_table tbody tr:last").attr('ov_id');
-    	var rows;
-    	console.log(max_id);
-    	for(var i=0;i<max_id-0+1;i++){
-    		rows=$("#edit_table tbody tr[ov_id="+i+"]").length;
-    		console.log(rows);
-    		$("#edit_table tbody tr[ov_id="+i+"]").each(function(index,element){
-   				if(index==0){
-   				$(this).find('td:lt(6)').attr("rowspan",rows);
-   				}else if(index>0){$(this).find('td:lt(6)').remove();}
-   			});
-    	}
- 	 }); */
 </script>
 
-<script src="/qaweb/Public/assets/js/amazeui.min.js"></script>
+<script src="ASSETS/js/amazeui.min.js"></script>
 
 
 </body>
