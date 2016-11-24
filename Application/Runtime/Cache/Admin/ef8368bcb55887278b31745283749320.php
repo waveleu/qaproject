@@ -189,6 +189,13 @@
                                       <label>Type:</label> 
                                       <div class="am-form-group-inline" style="display:inline;margin-left:2px;">
                                             <select data-am-selected="{btnWidth: '59.9%', btnStyle: 'secondary'}" placeholder="Please select..." ov_id=<?php echo ($v[id]); ?> onchange="edit_type(this)" id="edit_type" style="border:1px solid #9C9898;">
+                                                <option value="CModel" selected>Quality</option>
+                                                <option value="FPGA">Performance</option>
+                                            </select>
+                                      </div><br/><br/>
+                                      <label>Env:</label> 
+                                      <div class="am-form-group-inline" style="display:inline;margin-left:2px;">
+                                            <select data-am-selected="{btnWidth: '59.9%', btnStyle: 'secondary'}" placeholder="Please select..." ov_id=<?php echo ($v[id]); ?> onchange="edit_env(this)" id="edit_env" style="border:1px solid #9C9898;">
                                                 <option value="CModel" selected>CModel</option>
                                                 <option value="Chip">Chip</option>
                                                 <option value="FPGA">FPGA</option>
@@ -283,6 +290,13 @@
           <label>Type:</label>
           <div class="am-form-group-inline" style="display:inline;margin-left:2px;">
               <select data-am-selected="{btnWidth: '59.9%', btnStyle: 'secondary'}" placeholder="Please select..." onchange="add_type(this)" id="add_type" style="border:1px solid #9C9898;">
+                  <option value="Quality" selected>Quality</option>
+                  <option value="Performance">Performance</option>
+              </select>
+          </div><br/><br/>
+          <label>Env:</label>
+          <div class="am-form-group-inline" style="display:inline;margin-left:2px;">
+              <select data-am-selected="{btnWidth: '59.9%', btnStyle: 'secondary'}" placeholder="Please select..." onchange="add_env(this)" id="add_env" style="border:1px solid #9C9898;">
                   <option value="CModel" selected>CModel</option>
                   <option value="Chip">Chip</option>
                   <option value="FPGA">FPGA</option>
@@ -297,7 +311,7 @@
           </div><br/><br/>
           <label>Board:</label>
           <div class="am-form-group-inline" id="Chip_selected_add" style="display:inline;">
-              <select data-am-selected="{btnWidth: '18%', btnStyle: 'secondary',searchBox: 1}" placeholder="Please select..." id="add_platform">
+             <select data-am-selected="{btnWidth: '18%', btnStyle: 'secondary',searchBox: 1}" placeholder="Please select..." id="add_platform">
                 <option value=""></option>
                 <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): ?><option value=<?php echo ($vc['Name']); ?> ><?php echo ($vc[Name]); ?></option><?php endforeach; endif; ?>
              </select>
@@ -350,8 +364,8 @@
 </div><?php endforeach; endif; ?>
 <script>
   $(document).ready(function(){
-    var type=$("#edit_type").val();
-        var type2=$("#add_type").val();
+    var type=$("#edit_env").val();
+        var type2=$("#add_env").val();
         if(type=="CModel"){
           $('#Chip_selected').css("display","none");
           $('#CModel_selected').css("display","inline");
@@ -385,7 +399,7 @@
             onConfirm:function(e){
               board_val=$("#"+id+" #edit_platform").val()?$("#"+id+" #edit_platform").val():$("#"+id+" #edit_platform2").val();
               version_val=$("#"+id+" #edit_version").val()?$("#"+id+" #edit_version").val():$("#"+id+" #edit_version2").val();
-                var arr={id:id,name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:board_val,Type:$("#"+id+" #edit_type").val(),owner:$("#"+id+" #edit_owner").val(),pid:$("#"+id+" #edit_pid").val(),OS:$('#edit_os').val(),Version:version_val};
+                var arr={id:id,name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:board_val,Type:$("#"+id+" #edit_env").val(),owner:$("#"+id+" #edit_owner").val(),pid:$("#"+id+" #edit_pid").val(),OS:$('#edit_os').val(),Version:version_val};
                 $.post("<?php echo U('Admin/Task/add');?>",arr,function (data) {
                     window.location.reload();
                 });
@@ -403,7 +417,7 @@
         $("#add_user").val("");
         $("#add_suit").val('');
         $("#add_pid").val("");
-        $("#add_type").val("");
+        $("#add_env").val("");
         $("#add_os").val("");
         $("#add_version").val("");   
         $("#add_driver").val("");   
@@ -416,7 +430,7 @@
                 board_val=$("#add_platform").val()?$("#add_platform").val():$("#add_platform2").val();
                 version_val=$("#add_version").val()?$("#add_version").val():$("#add_version2").val();
                 if(pid!=null&&pid!=""&&pid!=0){
-                    var arr={name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:board_val,owner:$('#add_user').val(),Type:$('#add_type').val(),suit:$('#add_suit').val(),pid:$("#add_pid").val(),OS:$('#add_os').val(),Version:version_val};
+                    var arr={name:e.data['0'],driver:e.data['1'],start_time:e.data['2'],end_time:e.data['3'],board:board_val,owner:$('#add_user').val(),Type:$('#add_env').val(),suit:$('#add_suit').val(),pid:$("#add_pid").val(),OS:$('#add_os').val(),Version:version_val};
                     $.post("<?php echo U('Admin/Task/add');?>",arr,function (data) {
                         location.href=("<?php echo U('Admin/Task/case_index',array('tid'=>ttid));?>").replace('ttid',data);
                     });
@@ -470,7 +484,7 @@
             });
         });
     }
-    function edit_type(obj) {
+    function edit_env(obj) {
         var type=$(obj).val();
         var id=$(obj).attr('ov_id');
         if(type=="CModel"){
@@ -481,7 +495,7 @@
           $('#'+id+' #CModel_selected').css("display","none");
         }
     }
-    function add_type(obj) {
+    function add_env(obj) {
         var type=$(obj).val();
         if(type=="CModel"){
           $('#Chip_selected_add').css("display","none");

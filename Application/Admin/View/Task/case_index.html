@@ -234,7 +234,7 @@
                                             <tbody>
                                             {foreach name="v_list" item="v" key="k"}
                                             {foreach name='case' item="vc"}
-                                            {if condition="$v[id]==$vc[group]"}
+                                            {if condition="$v[id]==$vc[group_id]"}
                                             <tr ov_id={$k}>
                                                 <td title={$v[info]}>{$v[casename]}</td>
                                                 <?php
@@ -245,7 +245,7 @@
                                                 <td>{$v[Status]}</td>
                                                 <td>{$v[comments]}</td>
                                                 <td><a href="javascript:toCaseItem('{$v[id]}');">{$vc[name]}</a></td>
-                                                <td><a href="javascript:toCaseItem('{$v[id]}');">{$vc[item]}</a></td>
+                                                <td><a href="javascript:toCaseItem('{$v[id]}');">{$vc[unit]}</a></td>
                                                 <td>
                                                     <div class="am-btn-toolbar pos">
                                                         <div class="am-btn-group am-btn-group-xs">

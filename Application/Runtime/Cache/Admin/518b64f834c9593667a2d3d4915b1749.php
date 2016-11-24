@@ -225,7 +225,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <?php if(is_array($v_list)): foreach($v_list as $k=>$v): if(is_array($case)): foreach($case as $key=>$vc): if($v[id]==$vc[group]): ?><tr ov_id=<?php echo ($k); ?>>
+                                            <?php if(is_array($v_list)): foreach($v_list as $k=>$v): if(is_array($case)): foreach($case as $key=>$vc): if($v[id]==$vc[group_id]): ?><tr ov_id=<?php echo ($k); ?>>
                                                 <td title=<?php echo ($v[info]); ?>><?php echo ($v[casename]); ?></td>
                                                 <?php
  echo "<td>".$v['result']."</td>"; ?>
@@ -234,7 +234,7 @@
                                                 <td><?php echo ($v[Status]); ?></td>
                                                 <td><?php echo ($v[comments]); ?></td>
                                                 <td><a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');"><?php echo ($vc[name]); ?></a></td>
-                                                <td><a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');"><?php echo ($vc[item]); ?></a></td>
+                                                <td><a href="javascript:toCaseItem('<?php echo ($v[id]); ?>');"><?php echo ($vc[unit]); ?></a></td>
                                                 <td>
                                                     <div class="am-btn-toolbar pos">
                                                         <div class="am-btn-group am-btn-group-xs">

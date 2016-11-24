@@ -97,10 +97,9 @@
                                 <?php if(is_array($v)): $i = 0; $__LIST__ = $v;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vsub): $mod = ($i % 2 );++$i; if($key!=id): if($key==Type): ?><label><?php echo ($key); ?></label>
                                             <div class="am-form-group-inline am-cf" >
                                                 <select data-am-selected="{btnWidth: '80%', btnStyle: 'secondary'}"   class="am-fr" placeholder="Please select..." onchange="edit_select(this)" id="<?php echo ($v[id]); ?>" name="<?php echo ($v[id]); ?>">
-                                                    <option value=""></option>
-                                                    <option value="Chip" >Chip</option>
-                                                    <option value="FPGA">FPGA</option>            
-                                                    <option value="CModel">CModel</option>
+                                                    <?php if($vsub==Chip): ?><option value="Chip" selected>Chip</option><?php endif; ?>
+                                                    <?php if($vsub==FPGA): ?><option value="FPGA" selected>FPGA</option><?php endif; ?>
+                                                    <?php if($vsub==CModel): ?><option value="CModel" selected>CModel</option><?php endif; ?>
                                                 </select>
                                             </div>
                                         <?php else: ?>
@@ -196,7 +195,6 @@
             onConfirm:function (e) {
                 var Type=$(str+' option:selected').val();
                 var customer=$('#Customer option:selected').val();
-                //$.post("<?php echo U('Admin/Board/edit');?>",{id:id,Name:e.data[0],Customer:customer,Chip_Info:e.data[1],'2D_Core':e.data[2],'3D_Core':e.data[3],'2D_VG_Core':e.data[4]},
                 $.post("<?php echo U('Admin/Board/edit');?>",{id:id,Name:e.data[0],Customer:customer,'Type':Type,'2D_Core':e.data[1],'3D_Core':e.data[2],'2D_VG_Core':e.data[3],'Bitfile':e.data[4],'CModel_Location-P4':e.data[5],'CModel_Location-Build':e.data[6]},      
                     function () {
                         window.location.reload();
@@ -222,7 +220,6 @@
                 var customer=$('#Customer_add option:selected').val();
                 var Type=$('#new_select option:selected').val();
                 $.post("<?php echo U('Admin/Board/add');?>",
-                        //{Name:e.data[0],Customer:customer,Chip_Info:e.data[1],'2D_Core':e.data[2],'3D_Core':e.data[3],'2D_VG_Core':e.data[4]},
                         {Name:e.data[0],Customer:customer,'Type':Type,'2D_Core':e.data[1],'3D_Core':e.data[2],'2D_VG_Core':e.data[3],'Bitfile':e.data[4],'CModel_Location-P4':e.data[5],'CModel_Location-Build':e.data[6]},
                         function (data) {
                             window.location.reload();

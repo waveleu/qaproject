@@ -101,13 +101,7 @@
                 <label style="padding-top:10px;">Version:&nbsp;</label>
               </td>
               <td style="text-align:left;padding-top:10px;">
-                <!--<div class="am-form-group-inline" style="width:80%;">
-                  <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary'}"  id="add_version" class="am-fr" placeholder="Please select...">
-                    <option value=""></option>
-                    <?php if(is_array($version_list)): foreach($version_list as $key=>$vc): ?><option value="<?php echo ($vc); ?>"><?php echo ($vc); ?></option><?php endforeach; endif; ?>
-                  </select>
-                </div>-->
-                <input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:80%;border:1px solid #9C9898;" id="add_build">
+                <input type="text" class="am-modal-prompt-input" style="text-align:left;margin-left:0px;width:80%;border:1px solid #9C9898;" id="add_version">
               </td>
             </tr>
             <tr>
@@ -116,7 +110,7 @@
               </td>
               <td style="text-align:left;padding-top:10px;">
                 <div class="am-form-group-inline" style="width:80%;">
-                <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary'}"  onchange="add_os(this)" class="am-fr" placeholder="Please select OS..." id="add_branch" style="display:inline;">
+                <select data-am-selected="{btnWidth: '100%', btnStyle: 'secondary'}"  onchange="add_os(this)" class="am-fr" placeholder="Please select Branch..." id="add_branch" style="display:inline;">
                     <option value=""></option>
                     <?php if(is_array($branch_list)): foreach($branch_list as $key=>$vc): ?><option value="<?php echo ($vc); ?>"><?php echo ($vc); ?></option><?php endforeach; endif; ?>
                 </select>
@@ -186,17 +180,6 @@
         </div>      
     </div>
 </div>
-
-
-
-
-
-<!--[if lt IE 9]>
-<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="/qaweb/Public/assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="/qaweb/Public/assets/js/jquery.min.js"></script>
 <!--<![endif]-->
@@ -210,11 +193,9 @@
         $.each(project_info,function (k,v) {
             if(v.id==id){
                 $("#add_name").val(v.name);
-                //$("#add_version").val(v.Version);
-                $("#add_version").find('option[value="'+v.Version+'"]').attr('selected',true);
+                $("#add_version").val(v.Version);
                 $("#add_branch").find('option[value="'+v.Branch+'"]').attr('selected',true);
-                $("#add_branch").val(v.Branch);
-                $("#add_status").val(v['Status']);
+                $("#add_status").find('option[value="'+v.Status+'"]').attr('selected',true);
                 $("#add_build").val(v.Build_Location);
                 $("#add_firstb").val(v.First_Build_No);
                 $("#add_release").val(v.Release_Build_No);
@@ -249,7 +230,8 @@
     function add() {
         $("#add_name").val("");
         $("#add_version").val("");
-        $("#add_branch").val("");
+        $("#add_branch").find('option').attr('selected',false);
+        $("#add_status").find('option').attr('selected',false);
         $("#add_status").val("");
         $("#add_build").val("");
         $("#add_firstb").val("");

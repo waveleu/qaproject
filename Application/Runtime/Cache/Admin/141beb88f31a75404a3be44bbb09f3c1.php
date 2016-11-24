@@ -173,7 +173,6 @@
 		function edit_class() {
 			var n=zTree.getSelectedNodes()[0];
 			var str=n.name.split('(');
-			//$("#edit_add_class .am-modal-bd").append('Input Classfication Name<input type="text" class="am-modal-prompt-input" value='+str[0]+'>');
 			$("#edit_add_class").modal({
 				relatedTarget:this,
 				onConfirm:function (e) {

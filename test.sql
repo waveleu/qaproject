@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-11-18 02:16:35
+-- Generation Time: 2016-11-24 02:46:10
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -255,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `go_board` (
   KEY `Type` (`Type`),
   KEY `Type_2` (`Type`),
   KEY `Customer` (`Customer`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
 
 --
 -- 转存表中的数据 `go_board`
@@ -350,45 +350,20 @@ INSERT INTO `go_bsp` (`id`, `Name`, `Customer`, `Comments`, `Date`) VALUES
 
 CREATE TABLE IF NOT EXISTS `go_case` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `group` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
   `item` int(11) NOT NULL,
+  `item_result` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=127 ;
 
 --
 -- 转存表中的数据 `go_case`
 --
 
-INSERT INTO `go_case` (`id`, `group`, `item`) VALUES
-(1, 37, 1),
-(2, 37, 2),
-(3, 44, 3),
-(4, 44, 4),
-(5, 91, 5),
-(6, 37, 6),
-(10, 223, 35),
-(11, 223, 36),
-(12, 79, 37),
-(13, 79, 38),
-(24, 223, 49),
-(25, 223, 50),
-(26, 223, 51),
-(27, 0, 52),
-(28, 225, 53),
-(29, 223, 54),
-(30, 225, 55),
-(32, 228, 57),
-(33, 223, 58),
-(34, 223, 59),
-(35, 225, 60),
-(36, 228, 61),
-(37, 223, 62),
-(38, 228, 63),
-(39, 228, 64),
-(40, 161, 65),
-(41, 161, 66),
-(42, 50, 67),
-(43, 50, 68);
+INSERT INTO `go_case` (`id`, `group_id`, `item`, `item_result`) VALUES
+(124, 15, 136, 'null'),
+(125, 15, 137, 'null'),
+(126, 15, 138, 'null');
 
 -- --------------------------------------------------------
 
@@ -403,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `go_class` (
   `name` varchar(255) DEFAULT NULL,
   `format` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1020 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
 
 --
 -- 转存表中的数据 `go_class`
@@ -415,9 +390,8 @@ INSERT INTO `go_class` (`id`, `pid`, `level`, `name`, `format`) VALUES
 (11, '1', 2, 's1', 'df'),
 (12, '1', 2, 's2', 'df'),
 (13, '1', 2, 's3', 'asd'),
-(21, '2', 2, 's1', 'adfd'),
-(22, '2', 2, 's2', NULL),
-(23, '2', 2, 's3', NULL);
+(22, '2', 2, 'VIP8000', NULL),
+(23, '2', 2, 'VIP7000', NULL);
 
 -- --------------------------------------------------------
 
@@ -520,42 +494,28 @@ CREATE TABLE IF NOT EXISTS `go_item` (
   `name` varchar(255) DEFAULT NULL,
   `unit` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=69 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=139 ;
 
 --
 -- 转存表中的数据 `go_item`
 --
 
 INSERT INTO `go_item` (`id`, `name`, `unit`) VALUES
-(1, 'hhhhhhhh', 'ms'),
-(2, 'ggggggg', 'ns'),
-(3, 'gsdfgdfg', 'df'),
-(4, 'dfgdsfgdg', 'gd'),
-(5, 'rtr', 'f'),
-(6, 'sfdsdfsd', 'fsdf'),
-(35, '11', '2'),
-(36, '55', '4'),
-(37, '22', '11'),
-(38, '55', '66'),
-(49, '11', '22'),
-(50, '33', '44'),
-(51, '55', '66'),
-(52, '11', '22'),
-(53, '11', '22'),
-(54, '33', '55'),
-(55, '33', '66'),
-(57, '22', '55'),
-(58, '22', '77'),
-(59, '33', '99'),
-(60, '11', '55'),
-(61, '22', '66'),
-(62, '33', '66'),
-(63, '55', '99'),
-(64, '22', '88'),
-(65, '55', '99'),
-(66, '22', '88'),
-(67, '55', '99'),
-(68, '22', '88');
+(136, 'hehehe', 'ms'),
+(137, 'hehehe', 'ms'),
+(138, 'hehehe', 'ms');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `go_item_result`
+--
+
+CREATE TABLE IF NOT EXISTS `go_item_result` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `result` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -644,7 +604,7 @@ INSERT INTO `go_platform` (`id`, `Board`, `OS`, `BSP`, `Version`, `name`, `x86x6
 (2, 'Chip,b2', 'WinCE', 'bsp4', '7.20', 'p2', 'x86'),
 (3, 'FPGA,b1', 'LoliPop', 'bsp2', '5.11', 'p3', 'x64'),
 (5, 'Chip,b2', 'KitKat', 'bsp2', '6.08', 'p4', 'x86'),
-(23, 'CModel,v620_v2', NULL, NULL, NULL, NULL, 'x86');
+(23, 'CModel,v620_v2', 'LoliPop', 'bsp2', '5.33', 'p5', 'x86');
 
 -- --------------------------------------------------------
 
@@ -747,18 +707,14 @@ CREATE TABLE IF NOT EXISTS `go_task` (
   `driver` varchar(255) NOT NULL,
   `Type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
 
 --
 -- 转存表中的数据 `go_task`
 --
 
 INSERT INTO `go_task` (`id`, `name`, `board`, `owner`, `pid`, `suit`, `start_time`, `end_time`, `OS`, `Version`, `driver`, `Type`) VALUES
-(7, 'shuai', 'b1', 'user3', 3, 't5', '2016-07-01', '2016-07-31', '', '', '', ''),
-(11, 'task3', 'b3', 'user3', 3, 't5', '2016-07-06', '2016-07-31', 'null', 'dev82446.5.3021_p5.0.0_81855', '', 'CModel'),
-(12, 'dfdf', 'b1', 'user1', 3, 't2', '2016-07-10', '2016-07-26', 'null', 'dev82446.5.3021_p5.0.0_81855', '', 'CModel'),
-(14, 'task4', '2', 'user3', 3, 't7', '2016-07-07', '2016-07-31', '', '', '', ''),
-(40, '55555111', 'b5', 'user1', 5, 't5', '2016-11-09', '2016-11-18', 'null', 'dev82446.5.3021_p5.0.0_81855', '54644', 'CModel');
+(41, 'task1', 'b2', 'user1', 5, 't1', '0000-00-00', '0000-00-00', 'null', 'dev82446.5.3021_p5.0.0_81855', 'adriver', 'CModel');
 
 -- --------------------------------------------------------
 
@@ -779,50 +735,17 @@ CREATE TABLE IF NOT EXISTS `go_task_case` (
   `Status` varchar(255) NOT NULL DEFAULT 'Waiting',
   `item` int(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=243 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
 -- 转存表中的数据 `go_task_case`
 --
 
 INSERT INTO `go_task_case` (`id`, `cid`, `tid`, `BugID`, `driver`, `result`, `comments`, `start_time`, `end_time`, `Status`, `item`) VALUES
-(31, 14, 7, 0, NULL, 'Notrun', '', '0000-00-00', '0000-00-00', 'Waiting', 0),
-(33, 19, 7, 0, NULL, 'Notrun', '', '0000-00-00', '0000-00-00', 'Waiting', 0),
-(35, 13, 7, 0, NULL, 'Notrun', '', '2016-07-14', '0000-00-00', 'Waiting', 0),
-(41, 15, 11, 0, NULL, 'Notrun', '', '2016-07-06', '2016-07-31', 'Waiting', 0),
-(44, 2, 12, NULL, NULL, 'Notrun', NULL, '2016-07-10', '2016-07-26', 'Waiting', 0),
-(50, 21, 14, 0, NULL, 'Notrun', '', '2016-07-07', '2016-07-31', 'Waiting', 2),
-(66, 21, 18, NULL, NULL, 'Notrun', NULL, '2016-07-02', '2016-07-31', 'Waiting', 0),
-(67, 25, 18, NULL, NULL, 'Notrun', NULL, '2016-07-02', '2016-07-31', 'Waiting', 0),
-(68, 23, 18, NULL, NULL, 'Notrun', NULL, '2016-07-02', '2016-07-31', 'Waiting', 0),
-(69, 26, 18, NULL, NULL, 'Notrun', NULL, '2016-07-02', '2016-07-31', 'Waiting', 0),
-(74, 21, 20, NULL, NULL, 'Notrun', NULL, '2016-07-02', '2016-07-31', 'Waiting', 0),
-(75, 25, 20, NULL, NULL, 'pass', NULL, '2016-07-02', '2016-07-31', 'Waiting', 0),
-(76, 23, 20, NULL, NULL, 'Notrun', NULL, '2016-07-02', '2016-07-31', 'Waiting', 0),
-(77, 26, 20, NULL, NULL, 'Notrun', NULL, '2016-07-02', '2016-07-31', 'Waiting', 0),
-(227, 8, 40, NULL, NULL, 'pass', NULL, '2016-11-09', '2016-11-18', 'Waiting', 0),
-(124, 14, 11, 0, NULL, 'Notrun', '22', '2016-07-20', '2016-07-07', 'Waiting', 0),
-(125, 19, 11, 0, NULL, 'Notrun', '', '2016-07-06', '2016-07-31', 'Waiting', 0),
-(138, 13, 11, 2222, NULL, 'Notrun', '22', '2016-07-20', '2016-07-07', 'Waiting', 0),
-(139, 20, 11, 2222, NULL, 'Notrun', '22', '2016-07-20', '2016-07-07', 'Waiting', 0),
-(142, 30, 14, NULL, NULL, 'Notrun', NULL, '2016-07-20', NULL, 'Waiting', 0),
-(143, 40, 14, NULL, NULL, 'Notrun', NULL, '2016-07-20', NULL, 'Waiting', 0),
-(158, 2, 7, 0, NULL, 'Notrun', '', '2016-07-22', '2016-07-08', 'Waiting', 0),
-(159, 9, 7, 0, NULL, 'Notrun', '', '2016-07-08', '2016-07-29', 'Waiting', 0),
-(160, 28, 7, 0, NULL, 'Notrun', '', '2016-07-22', '2016-07-23', 'Waiting', 0),
-(161, 5, 7, NULL, NULL, 'Notrun', NULL, '2016-07-22', NULL, 'Waiting', 2),
-(162, 8, 7, NULL, NULL, 'Notrun', NULL, '2016-07-22', NULL, 'Waiting', 0),
-(163, 27, 7, NULL, NULL, 'Notrun', NULL, '2016-07-22', NULL, 'Waiting', 0),
-(166, 11, 7, 0, NULL, 'Notrun', '', '2016-07-02', '0000-00-00', 'Waiting', 0),
-(167, 16, 7, NULL, NULL, 'Notrun', NULL, '2016-07-22', NULL, 'Waiting', 0),
-(168, 21, 7, NULL, NULL, 'Notrun', NULL, '2016-07-22', NULL, 'Waiting', 0),
-(169, 15, 7, NULL, NULL, 'Notrun', NULL, '2016-07-22', NULL, 'Waiting', 0),
-(226, 5, 40, NULL, NULL, 'pass', NULL, '2016-11-09', '2016-11-18', 'Waiting', 0),
-(225, 28, 40, NULL, NULL, 'fail', NULL, '2016-11-09', '2016-11-18', 'Waiting', 3),
-(224, 27, 40, NULL, NULL, 'fail', NULL, '2016-11-09', '2016-11-18', 'Waiting', 0),
-(223, 2, 40, 0, '', 'Notrun', '', '2016-11-09', '2016-11-18', 'Waiting', 9),
-(228, 9, 40, NULL, NULL, 'Notrun', NULL, '2016-11-09', '2016-11-18', 'Waiting', 4),
-(235, 0, 42, NULL, NULL, 'pass', NULL, '0000-00-00', '0000-00-00', 'Waiting', 0);
+(16, 84, 41, NULL, NULL, 'Notrun', NULL, '0000-00-00', '0000-00-00', 'Waiting', 0),
+(17, 85, 41, NULL, NULL, 'Notrun', NULL, '0000-00-00', '0000-00-00', 'Waiting', 0),
+(18, 86, 41, NULL, NULL, 'Notrun', NULL, '0000-00-00', '0000-00-00', 'Waiting', 0),
+(15, 93, 41, 0, '555', 'Notrun', 'none', NULL, NULL, 'finished', 0);
 
 -- --------------------------------------------------------
 
@@ -836,18 +759,16 @@ CREATE TABLE IF NOT EXISTS `go_task_shot` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
 -- 转存表中的数据 `go_task_shot`
 --
 
 INSERT INTO `go_task_shot` (`id`, `cids`, `name`) VALUES
-(19, '2,27,28,4,5,7,8,9', 't8'),
-(2, '12,17,2,28,9', 't2'),
-(3, '21,27,4,5,7,8', 't3'),
-(9, '2,27,28,5,8,9', 't5'),
-(20, '13,20', '222');
+(23, '85,86', 't3'),
+(22, '84,85', 't2'),
+(21, '84,85,86,89', 't1');
 
 -- --------------------------------------------------------
 
@@ -874,29 +795,17 @@ CREATE TABLE IF NOT EXISTS `go_testcase` (
   `Comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `CaseName` (`CaseName`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=57 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=94 ;
 
 --
 -- 转存表中的数据 `go_testcase`
 --
 
 INSERT INTO `go_testcase` (`id`, `CaseName`, `pid`, `Priority`, `Automated`, `ScripLocation`, `Enviroment`, `TestSteps`, `ExpectedResults`, `From`, `Customer`, `BugID`, `Project`, `OS`, `Board`, `Comments`) VALUES
-(2, 'es11', 11, 'P0', 'No', 'filedir1', 'en1', '123', 'good', 'Customer Case', 'Marvell', 1, 'pro3,pro4', 'LoliPop,KitKat,Ubuntu', 'b3,b4', 'hahah'),
-(4, 'es20 x64', 13, '2', 'no', 'filedir1', 'en2', '', 'perfect', '', '', 1, NULL, 'Linux', 'FSL IMX6DQ R2', ''),
-(5, 'es20 cts', 12, '2', 'no', 'filedir1', 'en2', '', 'perfect', '', '', 3, NULL, 'Linux', 'FSL IMX6DQ R2', ''),
-(7, 'poenci 1.2', 13, '2', 'no', 'filedir1', 'en2', '', 'perfect', '', '', 2, NULL, 'LolliPop 5.1', 'FSL IMX6DQ R2', ''),
-(8, 'haluts', 12, '2', 'no', 'filedir1', 'en2', '', 'perfect', '', '', 2, NULL, 'LolliPop 5.1', 'FSL IMX6DQ R2', ''),
-(9, 'cetk', 11, '2', 'no', 'filedir1', 'en1', '', 'perfect', '', '', 2, NULL, 'LoliPop', 'b3', ''),
-(11, 'mtmp', 21, '2', 'no', 'filedir1', 'en3', '', 'perfect', '', '', 2, NULL, 'KitKat', 'FSL IMX6DQ R2', ''),
-(12, 'egl', 22, '2', 'yes', 'filedir1', 'en3', '', 'perfect', '', '', 3, NULL, 'KitKat', 'FSL IMX6DQ R2', ''),
-(13, 'egl11', 23, '2', 'yes', 'filedir1', 'en3', '', 'good', '', '', 4, NULL, 'KitKat', 'FSL IMX6DQ R2', ''),
-(16, 'egl4', 21, '4', 'yes', 'dfdf', 'df', '', '', '', '', 0, NULL, '', '', ''),
-(17, 'egl2', 22, '2', 'yes', 'filedir1', 'en3', '', 'bad', '', '', 4, NULL, 'KitKat', 'FSL IMX6DQ R2', 'dfda'),
-(20, 'egl233', 23, '2', 'yes', 'filedir1', 'en3', '', 'bad', '', '', 4, NULL, 'KitKat', 'FSL IMX6DQ R2', 'dfda'),
-(21, 'eg33', 21, '2', 'yes', 'filedir1', 'en3', '', 'bad', '', '', 4, NULL, 'KitKat', 'FSL IMX6DQ R2', 'dfda'),
-(27, 'eg44', 12, '2', 'yes', 'filedir1', 'en3', '', 'bad', '', '', 4, NULL, 'KitKat', 'FSL IMX6DQ R2', 'dfda'),
-(28, 'egl212', 11, '2', 'No', 'filedir1', 'en3', '', 'bad', '', '', 4, NULL, 'KitKat,KitKat', 'FSL IMX6DQ R2', 'dfda'),
-(56, 'defog', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(84, '12', 23, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(85, 'es12', 23, 'P0', 'Yes', 'location', NULL, '22', 'sdf', 'Marvel', 'Marvell', 0, 'pro1,pro4', 'LoliPop,KitKat', 'b1,b2', 'none'),
+(86, 'es13', 23, 'P0', 'Yes', 'location', NULL, '22', '88', 'Internal', 'Nvida', 0, 'pro1', 'KitKat', 'b1,b2', 'none'),
+(93, 'es1', 23, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -911,7 +820,7 @@ CREATE TABLE IF NOT EXISTS `go_test_run` (
   `start_time` date DEFAULT NULL,
   `end_time` date DEFAULT NULL,
   PRIMARY KEY (`id`,`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `go_test_run`

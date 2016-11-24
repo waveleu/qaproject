@@ -6,10 +6,10 @@ use Common\Model\BaseModel;
  */
 class ItemModel extends BaseModel{
 	public function getData($filter=""){
-		$case_list=M('case')->where(array('group'=>$filter))->select();
+		$case_list=M('case')->where(array('group_id'=>$filter))->select();
 		foreach($case_list as $k=>$v){
 		    $item_info=M('item')->where(array('id'=>$v['item']))->find();
-		    $taskcase_info=M('task_case')->where(array('id'=>$v['group']))->find();
+		    $taskcase_info=M('task_case')->where(array('id'=>$v['group_id']))->find();
 		    $testcase_info=M('testcase')->where(array('id'=>$taskcase_info['cid']))->find();
 		    $case_list[$k]['item_name']=$item_info['name'];
 		    $case_list[$k]['item_unit']=$item_info['unit'];
@@ -24,7 +24,7 @@ class ItemModel extends BaseModel{
 	        list($name,$unit)=explode(' ',$value);
 	        $tmp=array('name'=>$name,'unit'=>$unit);
 	        $item_id=M('item')->add($tmp);
-	        $temp=array('group'=>$group_id,'item'=>$item_id);
+	        $temp=array('group_id'=>$group_id,'item'=>$item_id);
 	        M('case')->add($temp);
 	    };
 	    return $result;
