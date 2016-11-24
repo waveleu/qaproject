@@ -29,7 +29,30 @@ class BspController extends AuthController {
 	}
 	public function del(){
 		$id=I('id');
-		$result=M('bsp')->delete($id);
+		$result=M('bsp')->where(array('id'=>$id))->delete();
 		$this->ajaxReturn($result,'json');
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

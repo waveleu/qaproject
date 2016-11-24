@@ -404,9 +404,6 @@
     	}
  	 }); 
 </script>
-
 <script src="/qaweb/Public/assets/js/amazeui.min.js"></script>
-
-
 </body>
 </HTML>

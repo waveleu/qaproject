@@ -155,6 +155,7 @@
             relatedTarget: this,
             onConfirm:function (e) {
                 var customer=$(str+' option:selected').val();
+                //console.log(e.data[2]);
                  $.post("<?php echo U('Admin/Bsp/edit');?>",
                         {id:id,Name:e.data[0],Customer:customer,Comments:e.data[1],Date:e.data[2]},
                         function () {

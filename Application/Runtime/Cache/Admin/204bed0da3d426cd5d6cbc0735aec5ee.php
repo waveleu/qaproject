@@ -97,9 +97,15 @@
                                 <?php if(is_array($v)): $i = 0; $__LIST__ = $v;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vsub): $mod = ($i % 2 );++$i; if($key!=id): if($key==Type): ?><label><?php echo ($key); ?></label>
                                             <div class="am-form-group-inline am-cf" >
                                                 <select data-am-selected="{btnWidth: '80%', btnStyle: 'secondary'}"   class="am-fr" placeholder="Please select..." onchange="edit_select(this)" id="<?php echo ($v[id]); ?>" name="<?php echo ($v[id]); ?>">
-                                                    <?php if($vsub==Chip): ?><option value="Chip" selected>Chip</option><?php endif; ?>
-                                                    <?php if($vsub==FPGA): ?><option value="FPGA" selected>FPGA</option><?php endif; ?>
-                                                    <?php if($vsub==CModel): ?><option value="CModel" selected>CModel</option><?php endif; ?>
+                                                    <?php if($vsub==Chip): ?><option value="Chip" selected>Chip</option>
+                                                    <option value="CModel">CModel</option>
+                                                    <option value="FPGA">FPGA</option><?php endif; ?>
+                                                    <?php if($vsub==FPGA): ?><option value="Chip" >Chip</option>
+                                                    <option value="CModel" >CModel</option>
+                                                    <option value="FPGA" selected>FPGA</option><?php endif; ?>
+                                                    <?php if($vsub==CModel): ?><option value="Chip" >Chip</option>        
+                                                    <option value="CModel" selected>CModel</option>
+                                                    <option value="FPGA">FPGA</option><?php endif; ?>
                                                 </select>
                                             </div>
                                         <?php else: ?>

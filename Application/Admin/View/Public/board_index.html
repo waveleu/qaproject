@@ -103,12 +103,18 @@
                                                 <select data-am-selected="{btnWidth: '80%', btnStyle: 'secondary'}"   class="am-fr" placeholder="Please select..." onchange="edit_select(this)" id="{$v[id]}" name="{$v[id]}">
                                                     {if condition="$vsub==Chip"}
                                                     <option value="Chip" selected>Chip</option>
+                                                    <option value="CModel">CModel</option>
+                                                    <option value="FPGA">FPGA</option>
                                                     {/if}
                                                     {if condition="$vsub==FPGA"}
+                                                    <option value="Chip" >Chip</option>
+                                                    <option value="CModel" >CModel</option>
                                                     <option value="FPGA" selected>FPGA</option>
                                                     {/if}
-                                                    {if condition="$vsub==CModel"}            
+                                                    {if condition="$vsub==CModel"}    
+                                                    <option value="Chip" >Chip</option>        
                                                     <option value="CModel" selected>CModel</option>
+                                                    <option value="FPGA">FPGA</option>
                                                     {/if}
                                                 </select>
                                             </div>
