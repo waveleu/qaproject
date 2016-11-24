@@ -25,8 +25,7 @@ class BranchController extends AuthController{
 		$result=M('branch')->add($map);
 		$this->ajaxReturn($result,'json');
 	}
-	
-	
+		
 	public function del(){
 		$id=I('id');
 		$result=M('branch')->where(array('id'=>$id))->delete();

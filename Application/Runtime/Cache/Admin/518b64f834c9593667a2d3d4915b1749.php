@@ -210,7 +210,7 @@
                                 </ul>
                                 <?php if(is_array($data)): foreach($data as $class_name=>$v_list): ?><div class="am-tabs-bd">
                                     <div class="am-tab-panel am-fade am-in am-active" id="<?php echo ($class_name); ?>">
-                                       <table class="am-table am-table-striped am-table-hover table-main am-table-compact am-table-bordered line table1">
+                                       <table class="am-table am-table-striped table-main am-table-compact am-table-bordered line table1">
                                             <thead>
                                             <tr>
                                                 <th class="table-title"><a href="javascript:reorder('casename');">CaseName</a></th>
@@ -221,7 +221,7 @@
                                                 <th class="table-title"><a href="javascript:reorder('comments');">Comments</a></th>
                                                 <th class="table-title"><a href="#">item_name</a></th>
                                                 <th class="table-title"><a href="#">item_unit</a></th>
-                                                <th class="table-author am-hide-sm-only"></span>Operation</th>
+                                                <th class="table-author am-hide-sm-only">Operation</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -388,7 +388,7 @@
         location.href=str;
     }
     
-    /* $(document).ready(function(){
+     $(document).ready(function(){
     	var max_id=$("#edit_table tbody tr:last").attr('ov_id');
     	var rows;
     	console.log(max_id);
@@ -398,10 +398,11 @@
     		$("#edit_table tbody tr[ov_id="+i+"]").each(function(index,element){
    				if(index==0){
    				$(this).find('td:lt(6)').attr("rowspan",rows);
+				$(this).css("margin-top","");
    				}else if(index>0){$(this).find('td:lt(6)').remove();}
    			});
     	}
- 	 }); */
+ 	 }); 
 </script>
 
 <script src="/qaweb/Public/assets/js/amazeui.min.js"></script>
