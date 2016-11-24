@@ -56,9 +56,9 @@
 											<button class="am-btn am-btn-default am-btn-xs am-text-secondary" ov_id="{$v[id]}" ov_os="{$v[OS]}" onclick="edit_version(this)"><span class="am-icon-pencil-square"></span> Delete Version</button>
 											<div class="am-modal am-modal-confirm" tabindex="{$v[id]}" style="top:-30%;">
 												<div class="am-modal-dialog">
-													<div class="am-modal-hd">Edit Version</div>
+													<div class="am-modal-hd">Delete Version</div>
 													<div class="am-modal-bd">
-														Please choose the Version to be edit
+														Please choose the Version to be delete
 														<table style="margin:12px 20px;">
 															{volist name="v['version_list']" id="vsub" key="k" }
 															{if condition="$k%4==1"}<tr>{/if}

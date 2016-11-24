@@ -81,15 +81,6 @@
     </div>
     <!-- content end -->
 </div>
-
-
-
-<!--[if lt IE 9]>
-<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="/qaweb/Public/assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="/qaweb/Public/assets/js/jquery.min.js"></script>
 <!--<![endif]-->
@@ -97,21 +88,7 @@
 <script src="/qaweb/Public/assets/js/app.js"></script>
 <script>
 $(document).ready(function(){
-    /*$(".change").click(function(){
-        $(".new").toggleClass("am-icon-angle-down");//箭头变化
-    });
-
-    var isHiden=false;
-    if(isHiden){
-        $(".hide-1").click(function(){
-           $(".hide-2").css("left","200px");//显示
-        });
-    }else{
-        $(".hide").click(function(){
-           $('.hide-1').css("left","-200px");//隐藏
-        });
-    }
-    isHiden = !isHiden;*/
+   
 });
 </script>
 </body>

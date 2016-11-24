@@ -89,7 +89,7 @@
                             <div class="am-modal-bd">
                                <label>name:</label>
                                <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[name]); ?>" style="display:inline;border:1px solid #9C9898;"><br/><br/>
-                                <label>Board:</label> 
+                                <label>Board Type:</label> 
                                 <div class="am-form-group-inline" style="display:inline;">
                                     <select data-am-selected="{btnWidth: '60%', btnStyle: 'secondary'}" class="am-fr" placeholder="Please select..." id='edit_board'>
                                         <!-- <?php if(is_array($board_list)): foreach($board_list as $key=>$vc): if(explode(',',$vc)[0]==Chip): if($vc==$v[Board]): ?><option value=<?php echo ($vc); ?> selected><?php echo ($vc); ?></option>
@@ -155,7 +155,7 @@
         <div class="am-modal-bd">
            <label>name:</label>
            <input type="text" class="am-modal-prompt-input" value="<?php echo ($v[name]); ?>" style="display:inline;border:1px solid #9C9898;"><br/><br/>
-            <label>Board:</label> 
+            <label>Board Type:</label> 
             <div class="am-form-group-inline" style="display:inline;">
                 <select data-am-selected="{btnWidth: '60%', btnStyle: 'secondary'}" placeholder="Please select..." id='add_board'>
                     <option value=""></option>

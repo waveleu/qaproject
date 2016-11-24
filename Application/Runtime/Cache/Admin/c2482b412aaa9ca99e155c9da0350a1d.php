@@ -55,9 +55,9 @@
 											<button class="am-btn am-btn-default am-btn-xs am-text-secondary" ov_id="<?php echo ($v[id]); ?>" ov_os="<?php echo ($v[OS]); ?>" onclick="edit_version(this)"><span class="am-icon-pencil-square"></span> Delete Version</button>
 											<div class="am-modal am-modal-confirm" tabindex="<?php echo ($v[id]); ?>" style="top:-30%;">
 												<div class="am-modal-dialog">
-													<div class="am-modal-hd">Edit Version</div>
+													<div class="am-modal-hd">Delete Version</div>
 													<div class="am-modal-bd">
-														Please choose the Version to be edit
+														Please choose the Version to be delete
 														<table style="margin:12px 20px;">
 															<?php if(is_array($v['version_list'])): $k = 0; $__LIST__ = $v['version_list'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vsub): $mod = ($k % 2 );++$k; if($k%4==1): ?><tr><?php endif; ?>
 															<td><label class="am-checkbox" style="text-align:left;"><input type="checkbox" value=<?php echo ($vsub); ?> data-am-ucheck style="text-align:left;"> <?php echo ($vsub); ?> </label></td>
@@ -104,7 +104,7 @@
 				<div class="am-modal-dialog">
 					<div class="am-modal-hd">Rename OS</div>
 					<div class="am-modal-bd">
-                     <label style="display:inline;">New Name:</label>
+                     <label style="display:inline;">Name:</label>
                      <input type="text" class="am-modal-prompt-input" style="width:60%;display:inline; color:#000;border:1px solid #9C9898;"> 
                     </div>
 					<div class="am-modal-footer">

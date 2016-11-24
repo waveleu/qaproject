@@ -87,8 +87,19 @@
                                 <div class="am-modal-bd" style="text-align:left;">
                                   <label>Name:</label>
                                   <input type="text" class="am-modal-prompt-input" value="{$v[Name]}" style="display:inline;border:1px solid #9C9898;"><br/><br/>
-                                   <label>Customer:</label> 
-                                   <input type="text" class="am-modal-prompt-input" value="{$v[Customer]}" style="display:inline;border:1px solid #9C9898;"><br/><br/>
+                                   <label>Customer:</label>
+						          <div class="am-form-group-inline" style="display:inline;">
+						            <select data-am-selected="{btnWidth: '60%', btnStyle: 'secondary'}"   class="am-fr" placeholder="Please select...">
+						               <option value=""></option>
+						             {foreach name="customer_list" item="vc"}
+						             {if condition="$v[Customer]=$vc"}
+						               <option value={$vc} selected>{$vc}</option>
+						             {else/}
+						             <option value={$vc} selected>{$vc}</option>
+						             {/if}
+						             {/foreach}
+						            </select>
+						          </div><br/><br/>
                                    <label>Comments:</label> 
                                    <input type="text" class="am-modal-prompt-input" value="{$v[Comments]}" style="display:inline;border:1px solid #9C9898;"><br/><br/>
                                     <label>Date:</label>
