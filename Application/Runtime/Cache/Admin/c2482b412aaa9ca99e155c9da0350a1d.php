@@ -159,7 +159,6 @@
 				e.close();
 			}
 		});
-
 	}
 	function edit_version(obj) {
 		var os=$(obj).attr('ov_os');

@@ -92,11 +92,11 @@
         </div>
         <div class="am-modal-footer">
           <span class="am-modal-btn" data-am-modal-confirm style="width: 50%;border:1px solid #cccccc;">OK</span>
-          <span class="am-modal-btn" data-am-modal-cancel style="width: 50%;border:1px solid #cccccc;"">Cancel</span>
+          <span class="am-modal-btn" data-am-modal-cancel style="width: 50%;border:1px solid #cccccc;">Cancel</span>
         </div>
     </div>
 </div>
-</div>
+
 
 
 
@@ -152,7 +152,6 @@
             }
         });
     }
-
 </script>
 </body>
 </html>
