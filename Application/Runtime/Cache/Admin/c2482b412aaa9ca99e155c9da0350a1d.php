@@ -182,6 +182,7 @@
 	function rename(obj) {
 		var id=$(obj).attr('ov_id');
 		var os=$(obj).attr('ov_os');
+		$("#rename_os_modal input").val(os);
 		$('#rename_os_modal').modal({
 			relatedTarget: this,
 			onConfirm:function (e) {

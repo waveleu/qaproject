@@ -215,6 +215,13 @@
         $(str).modal({
             relatedTarget: this,
             onConfirm:function (e) {
+            	$("tbody tr").each(function(){
+            		if(e.data==$(this).children("td:first").text()){
+            			if(alert(e.data+' has already existed')){
+            	           window.location.reload();
+            	        }
+            		};
+            	});
             	var bit=$(str+" #edit_bit option:selected").val();
                 var os=$(str+" #edit_os option:selected").val();
                 var version=$(str+" #edit_version option:selected").val();
@@ -245,6 +252,13 @@
         $('#add_board_modal').modal({
             relatedTarget: this,
             onConfirm:function (e) {
+            	$("tbody tr").each(function(){
+            		if(e.data==$(this).children("td:first").text()){
+            			if(alert(e.data+' has already existed')){
+            	           window.location.reload();
+            	        }
+            		};
+            	});
             	var bit=$("#add_bit option:selected").val();
                 var os=$("#os_add option:selected").val();
                 var version=$("#add_version option:selected").val();
